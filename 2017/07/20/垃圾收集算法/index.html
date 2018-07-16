@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next pisces use-motion" lang="zh-Hans">
+<html class="theme-next mist use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -74,7 +74,7 @@
 
 
 
-  <link rel="alternate" href="/myBlog/atom.xml" title="zhangzhang" type="application/atom+xml" />
+  <link rel="alternate" href="/myBlog/atom.xml" title="Meng" type="application/atom+xml" />
 
 
 
@@ -86,7 +86,7 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="JVM内存分配">
 <meta property="og:url" content="https://zhangzhang18.github.io/myBlog/2017/07/20/垃圾收集算法/index.html">
-<meta property="og:site_name" content="zhangzhang">
+<meta property="og:site_name" content="Meng">
 <meta property="og:description" content="1.标记-清除算法最基础的收集算法。分为两个阶段：标记出所有需要回收的对象，标记完成后统一回收所有被标记的对象。不足：效率，空间，标记清除后会产生大量不连续的内存碎片。 2.复制算法解决效率问题。将可用的内存按容量分为大小相等的两块，每次只使用一块。当一块用完了，将还存活的对象复制到另一块，然后再把已使用过的内存空间一次清理掉。 3.标记整理算法复制算法有较多复制操作，效率问题。根据老年代的特点，">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2018-07-16T03:24:53.542Z">
@@ -100,7 +100,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/myBlog/',
-    scheme: 'Pisces',
+    scheme: 'Mist',
     version: '5.1.4',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
@@ -143,7 +143,7 @@
 
 
 
-  <title>JVM内存分配 | zhangzhang</title>
+  <title>JVM内存分配 | Meng</title>
   
 
 
@@ -183,7 +183,7 @@
     <div class="custom-logo-site-title">
       <a href="/myBlog/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">zhangzhang</span>
+        <span class="site-title">Meng</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -244,6 +244,36 @@
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/myBlog/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-lifenote">
+          <a href="/myBlog/lifenote" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heart"></i> <br />
+            
+            记录生活
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-image">
+          <a href="/myBlog/photo" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-image"></i> <br />
+            
+            照片
           </a>
         </li>
       
@@ -319,11 +349,11 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="meng">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/myBlog/images/avatar.gif">
+      <meta itemprop="image" content="/myBlog/images/header.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zhangzhang">
+      <meta itemprop="name" content="Meng">
     </span>
 
     
@@ -395,18 +425,12 @@
              </span>
           
 
-          
-            <span class="post-meta-divider">|</span>
-            <span class="page-pv"><i class="fa fa-file-o"></i>
-            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
-            </span>
-          
+
 
           
-            <div class="post-wordcount">
               
                 
-                <span class="post-meta-item-icon">
+                <span class="post-meta-item-icon">|
                   <i class="fa fa-file-word-o"></i>
                 </span>
                 
@@ -420,7 +444,7 @@
               
 
               
-            </div>
+
           
 
           
@@ -580,6 +604,11 @@
           
 
   
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zODEwNS8xNDYzNQ=="></div>
+    </div>
+
+  
 
 
 
@@ -615,6 +644,10 @@
       <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/myBlog/images/header.jpg"
+                alt="meng" />
             
               <p class="site-author-name" itemprop="name">meng</p>
               <p class="site-description motion-element" itemprop="description"></p>
@@ -665,7 +698,10 @@
               </a>
             </div>
           
-
+<div id="music163player">
+    <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=280 height=86 src="//music.163.com/outchain/player?type=2&id=28949390&auto=0&height=66">
+    </iframe>
+</div>
           
 
           
@@ -689,7 +725,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-标记-清除算法"><span class="nav-number">1.</span> <span class="nav-text">1.标记-清除算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-复制算法"><span class="nav-number">2.</span> <span class="nav-text">2.复制算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-标记整理算法"><span class="nav-number">3.</span> <span class="nav-text">3.标记整理算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-分代收集算法"><span class="nav-number">4.</span> <span class="nav-text">4.分代收集算法</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-标记-清除算法"><span class="nav-text">1.标记-清除算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-复制算法"><span class="nav-text">2.复制算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-标记整理算法"><span class="nav-text">3.标记整理算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-分代收集算法"><span class="nav-text">4.分代收集算法</span></a></li></ol></div>
             
 
           </div>
@@ -848,13 +884,6 @@
   
   
 
-
-  <script type="text/javascript" src="/myBlog/js/src/affix.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/myBlog/js/src/schemes/pisces.js?v=5.1.4"></script>
-
-
-
   
   <script type="text/javascript" src="/myBlog/js/src/scrollspy.js?v=5.1.4"></script>
 <script type="text/javascript" src="/myBlog/js/src/post-details.js?v=5.1.4"></script>
@@ -888,6 +917,17 @@
 
 
 
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
   
 
 
@@ -1363,6 +1403,5 @@
 
   
 
-  undefined
-<script src="/myBlog/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":"hijiki","position":"left","bottom":-30,"mobileShow":false,"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+<script src="/myBlog/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/myBlog/live2dw/assets/koharu.model.json"},"display":{"position":"left","width":50,"height":100},"mobile":{"show":true},"log":false});</script></body>
 </html>
