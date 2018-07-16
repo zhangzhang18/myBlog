@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="zhangzhang">
 <meta property="og:description" content="1.标记-清除算法最基础的收集算法。分为两个阶段：标记出所有需要回收的对象，标记完成后统一回收所有被标记的对象。不足：效率，空间，标记清除后会产生大量不连续的内存碎片。 2.复制算法解决效率问题。将可用的内存按容量分为大小相等的两块，每次只使用一块。当一块用完了，将还存活的对象复制到另一块，然后再把已使用过的内存空间一次清理掉。 3.标记整理算法复制算法有较多复制操作，效率问题。根据老年代的特点，">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-13T03:15:20.890Z">
+<meta property="og:updated_time" content="2018-07-16T03:24:53.542Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JVM内存分配">
 <meta name="twitter:description" content="1.标记-清除算法最基础的收集算法。分为两个阶段：标记出所有需要回收的对象，标记完成后统一回收所有被标记的对象。不足：效率，空间，标记清除后会产生大量不连续的内存碎片。 2.复制算法解决效率问题。将可用的内存按容量分为大小相等的两块，每次只使用一块。当一块用完了，将还存活的对象复制到另一块，然后再把已使用过的内存空间一次清理掉。 3.标记整理算法复制算法有较多复制操作，效率问题。根据老年代的特点，">
@@ -450,6 +450,17 @@
     
     
     
+	<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #555;font-size:14px;">-------------The End-------------</div>
+    
+</div>
+
+
+  
+</div>
 <div>
       
         
@@ -466,9 +477,9 @@
       
         <div class="post-tags">
           
-            <a href="/myBlog/tags/JAVA/" rel="tag"># JAVA</a>
+            <a href="/myBlog/tags/JAVA/" <i class="fa fa-tag"></i> JAVA</a>
           
-            <a href="/myBlog/tags/JVM/" rel="tag"># JVM</a>
+            <a href="/myBlog/tags/JVM/" <i class="fa fa-tag"></i> JVM</a>
           
         </div>
       
@@ -520,10 +531,42 @@
 
     <div class="post-spread">
       
-        <!-- Go to www.addthis.com/dashboard to customize your tools -->
-<div class="addthis_inline_share_toolbox">
-  <script type = "text/javascript" src = "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b48879eb5551feb" async = "async" ></script>
-</div>
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
 
       
     </div>
@@ -745,6 +788,8 @@
   
 
 
+  
+
 
 
 
@@ -783,6 +828,11 @@
   
   
     <script type="text/javascript" src="/myBlog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/myBlog/lib/canvas-nest/canvas-nest.min.js"></script>
   
 
 
@@ -1313,5 +1363,6 @@
 
   
 
-</body>
+  undefined
+<script src="/myBlog/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":"hijiki","position":"left","bottom":-30,"mobileShow":false,"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>
