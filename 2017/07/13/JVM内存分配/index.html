@@ -72,7 +72,9 @@
 
   
   
-  <link href="/myBlog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+    
+  
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
 
 
 
@@ -132,7 +134,7 @@
 
 
 
-  <link rel="alternate" href="/myBlog/atom.xml" title="Meng" type="application/atom+xml" />
+  <link rel="alternate" href="/myBlog/atom.xml" title="萌" type="application/atom+xml" />
 
 
 
@@ -144,13 +146,15 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="JVM内存分配">
 <meta property="og:url" content="https://zhangzhang18.github.io/myBlog/2017/07/13/JVM内存分配/index.html">
-<meta property="og:site_name" content="Meng">
+<meta property="og:site_name" content="萌">
 <meta property="og:description" content="1.程序计数器（PCR）可以看做当前线程所执行的字节码的行号指示器。为了线程切换后能够恢复到正确执行位置，每条线程都需要独立的程序计数器。 2.栈（JVM stack）线程私有，生命周期与线程相同。描述的事Java方法执行的内存模型：每个方法执行的同时都会创建一个栈帧用于存储局部变量表，操作数栈，动态链接方法出口。每个方法执行到完成，对应着一个栈帧在虚拟机栈中入栈到出栈的过程。 3.本地方法栈（N">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-17T05:27:51.803Z">
+<meta property="og:image" content="http://oz2tkq0zj.bkt.clouddn.com/17-11-9/52323298.jpg">
+<meta property="og:updated_time" content="2018-07-17T09:25:07.751Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JVM内存分配">
 <meta name="twitter:description" content="1.程序计数器（PCR）可以看做当前线程所执行的字节码的行号指示器。为了线程切换后能够恢复到正确执行位置，每条线程都需要独立的程序计数器。 2.栈（JVM stack）线程私有，生命周期与线程相同。描述的事Java方法执行的内存模型：每个方法执行的同时都会创建一个栈帧用于存储局部变量表，操作数栈，动态链接方法出口。每个方法执行到完成，对应着一个栈帧在虚拟机栈中入栈到出栈的过程。 3.本地方法栈（N">
+<meta name="twitter:image" content="http://oz2tkq0zj.bkt.clouddn.com/17-11-9/52323298.jpg">
 
 
 
@@ -201,7 +205,7 @@
 
 
 
-  <title>JVM内存分配 | Meng</title>
+  <title>JVM内存分配 | 萌</title>
   
 
 
@@ -221,6 +225,10 @@
 
 
 
+  <script type="text/javascript" src="https://unpkg.com/minigrid@3.1.1/dist/minigrid.min.js"></script>
+  <link rel="stylesheet" href="../photos/photos.css">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+  <script type="text/javascript" src="../photos/photo.js"></script>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -241,12 +249,12 @@
     <div class="custom-logo-site-title">
       <a href="/myBlog/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Meng</span>
+        <span class="site-title">萌</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
       
-        <p class="site-subtitle"></p>
+        <p class="site-subtitle">冲啊\(0^v^0)/</p>
       
   </div>
 
@@ -405,13 +413,13 @@
     <link itemprop="mainEntityOfPage" href="https://zhangzhang18.github.io/myBlog/myBlog/2017/07/13/JVM内存分配/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="meng">
+      <meta itemprop="name" content="萌">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/myBlog/images/header.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Meng">
+      <meta itemprop="name" content="萌">
     </span>
 
     
@@ -518,6 +526,22 @@
 
       
       
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+          
+          
+            <div class="post-gallery-row">
+              <a class="post-gallery-img fancybox"
+                 href="http://oz2tkq0zj.bkt.clouddn.com/17-11-9/52323298.jpg" rel="gallery_cjjqgvtnf0000xkvlsgskq3pz"
+                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
+                <img src="http://oz2tkq0zj.bkt.clouddn.com/17-11-9/52323298.jpg" itemprop="contentUrl"/>
+              </a>
+            
+          
+
+          
+          </div>
+        </div>
+      
 
       
         <h2 id="1-程序计数器（PCR）"><a href="#1-程序计数器（PCR）" class="headerlink" title="1.程序计数器（PCR）"></a>1.程序计数器（PCR）</h2><p>可以看做当前线程所执行的字节码的行号指示器。<br>为了线程切换后能够恢复到正确执行位置，每条线程都需要独立的程序计数器。</p>
@@ -592,8 +616,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/myBlog/2017/07/20/垃圾收集算法/" rel="prev" title="JVM内存分配">
-                JVM内存分配 <i class="fa fa-chevron-right"></i>
+              <a href="/myBlog/2017/07/20/垃圾收集算法/" rel="prev" title="垃圾收集算法">
+                垃圾收集算法 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -705,9 +729,9 @@
             
               <img class="site-author-image" itemprop="image"
                 src="/myBlog/images/header.jpg"
-                alt="meng" />
+                alt="萌" />
             
-              <p class="site-author-name" itemprop="name">meng</p>
+              <p class="site-author-name" itemprop="name">萌</p>
               <p class="site-description motion-element" itemprop="description"></p>
           </div>
 
@@ -829,7 +853,7 @@
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">meng</span>
+  <span class="author" itemprop="copyrightHolder">萌</span>
 
   
 </div>
@@ -928,7 +952,7 @@
 
   
   
-    <script type="text/javascript" src="/myBlog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazyload@2.0.0-beta.2/lazyload.js"></script>
   
 
   
@@ -943,7 +967,7 @@
 
   
   
-    <script type="text/javascript" src="/myBlog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.js"></script>
   
 
   
