@@ -22,7 +22,7 @@ photo = {
       li += '<div class="card" style=" width:100%;margin:auto">' +
         '<div class="ImageInCard" style="width:100%;">' +
         '<a data-fancybox="gallery" href="https://raw.githubusercontent.com/zhangzhang18/photos/master/images/' + imgNameWithPattern + '?raw=true" data-caption="' + imgName + '">' +
-        '<img src="https://raw.githubusercontent.com/zhangzhang18/photos/master/images/' + imgNameWithPattern + '?raw=true"/>' +
+        '<img src="https://raw.githubusercontent.com/zhangzhang18/photos/master/images/' + imgNameWithPattern + '?raw=true" style="width: 100%"/>' +
         '</a>' +
         '</div>' +
         // '<div class="TextInCard">' + imgName + '</div>' +
