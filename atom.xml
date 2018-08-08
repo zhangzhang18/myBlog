@@ -6,7 +6,7 @@
   <link href="/myBlog/atom.xml" rel="self"/>
   
   <link href="https://zhangzhang18.github.io/myBlog/"/>
-  <updated>2018-07-23T01:37:20.244Z</updated>
+  <updated>2018-08-08T06:10:42.863Z</updated>
   <id>https://zhangzhang18.github.io/myBlog/</id>
   
   <author>
@@ -17,30 +17,88 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title></title>
-    <link href="https://zhangzhang18.github.io/myBlog/2018/07/19/%E9%9D%A2%E8%AF%95%E5%B8%B8%E7%94%A8%E6%89%8B%E5%86%99%E4%BB%A3%E7%A0%81/"/>
-    <id>https://zhangzhang18.github.io/myBlog/2018/07/19/面试常用手写代码/</id>
-    <published>2018-07-19T09:09:01.912Z</published>
-    <updated>2018-07-23T01:37:20.244Z</updated>
+    <title>面试常用手写代码</title>
+    <link href="https://zhangzhang18.github.io/myBlog/2017/10/12/%E9%9D%A2%E8%AF%95%E5%B8%B8%E7%94%A8%E6%89%8B%E5%86%99%E4%BB%A3%E7%A0%81/"/>
+    <id>https://zhangzhang18.github.io/myBlog/2017/10/12/面试常用手写代码/</id>
+    <published>2017-10-12T13:07:31.000Z</published>
+    <updated>2018-08-08T06:10:42.863Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h2><p>volatile 的一个语义禁止指令重排优化。<br>synchronized关键字<br>当两个线程同事进入第一的if判断语句后，线程1获取锁，线程2阻塞在1处，线程1</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">public class Singleton &#123;</span><br><span class="line">  private volatile static Singleton instance=null;</span><br><span class="line">  private Singleton()&#123;&#125;</span><br><span class="line">  public static Singleton getInstance()&#123;</span><br><span class="line">      if (instance==null)&#123;</span><br><span class="line">          synchronized(Singleton.class)&#123;//1</span><br><span class="line">              if(instance==null)&#123;//2</span><br><span class="line">                  instance=new Singleton();//3</span><br><span class="line">              &#125;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      return instance;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public enum Singleton &#123;</span><br><span class="line">    INSTANCE;</span><br><span class="line">    public void whateverMethod() &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
     
     <summary type="html">
     
+      
+      
+        &lt;h2 id=&quot;单例模式&quot;&gt;&lt;a href=&quot;#单例模式&quot; class=&quot;headerlink&quot; title=&quot;单例模式&quot;&gt;&lt;/a&gt;单例模式&lt;/h2&gt;&lt;p&gt;volatile 的一个语义禁止指令重排优化。&lt;br&gt;synchronized关键字&lt;br&gt;当两个线程同事进入第一的if判断
+      
+    
     </summary>
     
+      <category term="NoteBook" scheme="https://zhangzhang18.github.io/myBlog/categories/NoteBook/"/>
+    
+    
+      <category term="JAVA" scheme="https://zhangzhang18.github.io/myBlog/tags/JAVA/"/>
+    
+      <category term="面试" scheme="https://zhangzhang18.github.io/myBlog/tags/%E9%9D%A2%E8%AF%95/"/>
     
   </entry>
   
   <entry>
-    <title></title>
-    <link href="https://zhangzhang18.github.io/myBlog/2018/07/19/Java%E5%9F%BA%E7%A1%80%E9%9D%A2%E8%AF%95/"/>
-    <id>https://zhangzhang18.github.io/myBlog/2018/07/19/Java基础面试/</id>
-    <published>2018-07-19T08:30:33.917Z</published>
-    <updated>2018-07-23T01:37:20.242Z</updated>
+    <title>synchronized关键字</title>
+    <link href="https://zhangzhang18.github.io/myBlog/2017/10/01/synchronized/"/>
+    <id>https://zhangzhang18.github.io/myBlog/2017/10/01/synchronized/</id>
+    <published>2017-10-01T02:47:54.000Z</published>
+    <updated>2018-08-08T06:02:54.214Z</updated>
+    
+    <content type="html"><![CDATA[<p>synchronized是一种同步锁<br>同一时刻只能有一个线程能获取到锁</p><ol><li>修饰代码块：同步代码块，作用域是{}里面的代码，作用的对象是调用这个代码块的对象。</li><li>修饰方法：同步方法，作用范围是整个方法，作用对象是调用这个方法的对象。</li><li>修饰静态的方法：作用范围是整个方法，作用对象是这个类的所有对象。</li><li>修饰类：作用范围是synchronized后面括号括起来的部分，作用的对象是这个类的所有对象。</li></ol><hr><p>1.synchronized 代码块<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public void run() &#123;</span><br><span class="line">   synchronized(obj) &#123;</span><br><span class="line">   //一次只能有一个线程进入</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>synchronized锁住的是括号里的对象，不是代码。<br>当synchronized锁住一个对象时，别的线程也想拿到这个对象的锁，必须等待这个线程执行完释放锁，才能再次给这个对象加锁。</p><blockquote><p>example</p></blockquote><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">public class SyncThread implements Runnable &#123;</span><br><span class="line"></span><br><span class="line">    private static int count;</span><br><span class="line"></span><br><span class="line">    public SyncThread() &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void run() &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            String lock=new String();</span><br><span class="line">            synchronized (this) &#123;//1 synchronized (lock) 2//synchronized (SyncThread.class)3</span><br><span class="line">                System.out.println(Thread.currentThread().getName()+&quot;:a begin&quot;);</span><br><span class="line">                Thread.sleep(500);</span><br><span class="line">                System.out.println(Thread.currentThread().getName()+&quot;:a   end&quot;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; catch (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//1,2,3</span><br><span class="line">    public static void main(String[] arg)&#123;</span><br><span class="line"></span><br><span class="line">        SyncThread a = new SyncThread();</span><br><span class="line">        Thread t1 = new Thread(a);</span><br><span class="line">        Thread t2 = new Thread(a);</span><br><span class="line">        t1.start();</span><br><span class="line">        t2.start();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">//3</span><br><span class="line">    public static void main(String[] arg)&#123;</span><br><span class="line"></span><br><span class="line">        SyncThread a = new SyncThread();</span><br><span class="line">        SyncThread b = new SyncThread();</span><br><span class="line">        Thread t1 = new Thread(a);</span><br><span class="line">        Thread t2 = new Thread(b);</span><br><span class="line">        t1.start();</span><br><span class="line">        t2.start();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure><p>1,3输出</p><ul><li>t1—:a begin</li><li>t1—:a   end</li><li>t2—:a begin</li><li>t2—:a   end</li></ul><p>2输出</p><ul><li>t2—:a begin</li><li>t1—:a begin</li><li>t1—:a   end</li><li>t2—:a   end</li></ul><p>1是对类的当前实例加锁<br>2是对锁特定的实例加锁<br>3是对该类的所有对象都加了锁，该类所有的对象同一把锁。</p><p>1.synchronized 方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public synchronized void syncAdd() &#123;</span><br><span class="line">   //4</span><br><span class="line">&#125;</span><br><span class="line">public static synchronized void syncAdd() &#123;</span><br><span class="line">   //5</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><blockquote><p>example</p></blockquote><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">public class SyncThread &#123;</span><br><span class="line"></span><br><span class="line">    public SyncThread() &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public synchronized void isSyncA() &#123;</span><br><span class="line">        int i = 5;</span><br><span class="line">        while( i-- &gt; 0)&#123;</span><br><span class="line">            System.out.println(&quot;funA-&quot;+Thread.currentThread().getName() + &quot; : &quot; + i);</span><br><span class="line">            try &#123;</span><br><span class="line">                Thread.sleep(500);</span><br><span class="line">            &#125;</span><br><span class="line">            catch (InterruptedException ie)&#123;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    public  synchronized void isSyncB()&#123;</span><br><span class="line">        int i = 5;</span><br><span class="line">        while( i-- &gt; 0)&#123;</span><br><span class="line">            System.out.println(&quot;funB-&quot;+Thread.currentThread().getName() + &quot; : &quot; + i);</span><br><span class="line">            try &#123;</span><br><span class="line">                Thread.sleep(500);</span><br><span class="line">            &#125;catch (InterruptedException ie)&#123;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    public static synchronized void cSync()&#123;</span><br><span class="line">        int i = 5;</span><br><span class="line">        while( i-- &gt; 0) &#123;</span><br><span class="line">            System.out.println(&quot;cSync&quot;+Thread.currentThread().getName() + &quot; : &quot; + i);</span><br><span class="line">            try&#123;</span><br><span class="line">                Thread.sleep(500);</span><br><span class="line">            &#125;catch (InterruptedException ie)&#123;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>main</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] arg)&#123;</span><br><span class="line">//4</span><br><span class="line">       SyncThread a = new SyncThread();</span><br><span class="line">       Thread t1 = new Thread(new Runnable() &#123;</span><br><span class="line">           @Override</span><br><span class="line">           public void run() &#123;</span><br><span class="line">               a.isSyncA();</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;,&quot;t1&quot;);</span><br><span class="line"></span><br><span class="line">       Thread t2 =new Thread(new Runnable() &#123;</span><br><span class="line">           @Override</span><br><span class="line">           public void run() &#123;</span><br><span class="line">               a.isSyncB();</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;,&quot;t2&quot;);</span><br><span class="line"></span><br><span class="line">        t1.start();</span><br><span class="line">        t2.start();</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure><p>输出</p><ul><li>funA-t1 : 4</li><li>funA-t1 : 3</li><li>funA-t1 : 2</li><li>funA-t1 : 1</li><li>funA-t1 : 0</li><li>funB-t2 : 4</li><li>funB-t2 : 3</li><li>funB-t2 : 2</li><li>funB-t2 : 1</li><li>funB-t2 : 0</li></ul><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] arg)&#123;</span><br><span class="line"> //5</span><br><span class="line">       SyncThread a = new SyncThread();</span><br><span class="line">       Thread t1 = new Thread(new Runnable() &#123;</span><br><span class="line">           @Override</span><br><span class="line">           public void run() &#123;</span><br><span class="line">               SyncThread.cSync();</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;,&quot;t1&quot;);</span><br><span class="line"></span><br><span class="line">       Thread t2 =new Thread(new Runnable() &#123;</span><br><span class="line">           @Override</span><br><span class="line">           public void run() &#123;</span><br><span class="line">               SyncThread.cSync();</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;,&quot;t2&quot;);</span><br><span class="line"></span><br><span class="line">        t1.start();</span><br><span class="line">        t2.start();</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure><ul><li>cSynct1 : 4</li><li>cSynct1 : 3</li><li>cSynct1 : 2</li><li>cSynct1 : 1</li><li>cSynct1 : 0</li><li>cSynct2 : 4</li><li>cSynct2 : 3</li><li>cSynct2 : 2</li><li>cSynct2 : 1</li><li>cSynct2 : 0</li></ul><p>4是对象锁<br>3,5得到的锁是类的锁</p><p>4是防止多线程同时访问这个对象的synchronized方法，（如果这个对象有多个synchronized方法，只要有一个线程访问了一个synchronized方法，其他的线程不能访问这个对象的任一synchronized方法），不同对象的synchronized方法互不影响。</p><p>5是防止多线程中不同实例对象同时访问方法，它对类的所有实例起作用。</p><hr><p>synchronized的实现原理 </p><p>1,synchronized代码块 monitorenter //进入同步方法 monitorexit //退出同步方法 2,synchronized方法 ACC_SYNCHRONIZED指明该方法为同步方法</p><p>参考</p>]]></content>
     
     <summary type="html">
     
+      
+      
+        &lt;p&gt;synchronized是一种同步锁&lt;br&gt;同一时刻只能有一个线程能获取到锁&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;修饰代码块：同步代码块，作用域是{}里面的代码，作用的对象是调用这个代码块的对象。&lt;/li&gt;
+&lt;li&gt;修饰方法：同步方法，作用范围是整个方法，作用对象是调用这个方法的对象
+      
+    
     </summary>
     
+      <category term="NoteBook" scheme="https://zhangzhang18.github.io/myBlog/categories/NoteBook/"/>
+    
+    
+      <category term="JAVA" scheme="https://zhangzhang18.github.io/myBlog/tags/JAVA/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Volatile关键字</title>
+    <link href="https://zhangzhang18.github.io/myBlog/2017/08/01/Volatile%E5%85%B3%E9%94%AE%E5%AD%97/"/>
+    <id>https://zhangzhang18.github.io/myBlog/2017/08/01/Volatile关键字/</id>
+    <published>2017-08-01T02:56:41.000Z</published>
+    <updated>2018-08-08T06:03:15.773Z</updated>
+    
+    <content type="html"><![CDATA[<p>Volatile 能够保证可见性。</p><blockquote><p> volatile的两大特性：禁止重排序、内存可见性。</p></blockquote><p>并发编程中三大概念：原子性，有序性，可见性。</p><hr><h3 id="1-原子性"><a href="#1-原子性" class="headerlink" title="1.原子性"></a>1.原子性</h3><p>一个操作或者多个操作，要么全部执行并且执行过程中不会被任何一个因素打扰，要么就不会执行。<br>Java中，对于基本数据类型的变量读取和赋值操作是原子的。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">x=10;   //1</span><br><span class="line">y=x;    //2</span><br><span class="line">x++;    //3</span><br><span class="line">x=x+1;  //4</span><br></pre></td></tr></table></figure><p>只有1是原子的操作。</p><p>2是两个操作，先读取x的值，在把x的值写入工作内存，这两个操作都是原子操作，放在一起就不是原子操作了。</p><p>3和4都是先读取x的值，在进行加一的操作，写入新的值。</p><p>只有简单的读取、赋值（变量之间赋值不是）才是原子操作。</p><p>可以通过synchronized和Lock解决原子性问题。</p><h3 id="2-可见性"><a href="#2-可见性" class="headerlink" title="2.可见性"></a>2.可见性</h3><p>线程之间的可见性，一个线程修改这个变量的值，其他的线程能够立即看到修改的值。</p><p>Java中，volatile关键字来保证可见性。<br>被volatile修饰的变量，变量修改的值会立即更新到主存，当其他线程需要读取的时候。就会读取主存的值。</p><p>普通变量被修改的时候，什么时候写入主存是不确定的。当其他线程读取的时候可能还是原来的值，因此无法保证可见性。</p><p>synchronized和Lock也能保证可见性，能够保证同一时刻只有一个线程获取锁，并且在释放锁之前会将变量修改刷新到主存中。</p><h3 id="3-有序性"><a href="#3-有序性" class="headerlink" title="3.有序性"></a>3.有序性</h3><p>程序执行的顺序按照代码先后执行。</p><p>指令重排序不会影响单个线程的执行，会影响到线程并发执行的正确性。</p><p>Java中允许编译器和处理器对指令进行重排序，volatile、synchronized和Lock都可以保证有序性，</p><hr><p>volatile实现原理</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;Volatile 能够保证可见性。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt; volatile的两大特性：禁止重排序、内存可见性。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;并发编程中三大概念：原子性，有序性，可见性。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&quot;1-原子性&quot;&gt;&lt;a 
+      
+    
+    </summary>
+    
+      <category term="NoteBook" scheme="https://zhangzhang18.github.io/myBlog/categories/NoteBook/"/>
+    
+    
+      <category term="JAVA" scheme="https://zhangzhang18.github.io/myBlog/tags/JAVA/"/>
     
   </entry>
   
