@@ -159,15 +159,18 @@
 
 
 
+<meta name="description" content="Redis一个基于内存的高性能的key-value数据库。  数据结构：String字符串，Hash字典，List列表，Set集合，SortedSet有序集合。   使用Redis有哪些好处？    (1) 速度快，因为数据存在内存中，类似于HashMap，HashMap的优势就是查找和操作的时间复杂度都是O(1) (2) 支持丰富数据类型，支持string，list，set，sorted set">
 <meta name="keywords" content="萌">
-<meta property="og:type" content="website">
-<meta property="og:title" content="照片">
-<meta property="og:url" content="https://zhangzhang18.github.io/myBlog/photo/index.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redis归纳">
+<meta property="og:url" content="https://zhangzhang18.github.io/myBlog/2017/08/18/Redis归纳/index.html">
 <meta property="og:site_name" content="萌">
+<meta property="og:description" content="Redis一个基于内存的高性能的key-value数据库。  数据结构：String字符串，Hash字典，List列表，Set集合，SortedSet有序集合。   使用Redis有哪些好处？    (1) 速度快，因为数据存在内存中，类似于HashMap，HashMap的优势就是查找和操作的时间复杂度都是O(1) (2) 支持丰富数据类型，支持string，list，set，sorted set">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-18T06:29:09.621Z">
+<meta property="og:updated_time" content="2018-08-10T05:59:20.708Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="照片">
+<meta name="twitter:title" content="Redis归纳">
+<meta name="twitter:description" content="Redis一个基于内存的高性能的key-value数据库。  数据结构：String字符串，Hash字典，List列表，Set集合，SortedSet有序集合。   使用Redis有哪些好处？    (1) 速度快，因为数据存在内存中，类似于HashMap，HashMap的优势就是查找和操作的时间复杂度都是O(1) (2) 支持丰富数据类型，支持string，list，set，sorted set">
 
 
 
@@ -197,7 +200,7 @@
 
 
 
-  <link rel="canonical" href="https://zhangzhang18.github.io/myBlog/photo/"/>
+  <link rel="canonical" href="https://zhangzhang18.github.io/myBlog/2017/08/18/Redis归纳/"/>
 
 
 
@@ -218,7 +221,7 @@
 
 
 
-  <title>照片 | 萌</title>
+  <title>Redis归纳 | 萌</title>
   
 
 
@@ -411,33 +414,265 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://zhangzhang18.github.io/myBlog/myBlog/2017/08/18/Redis归纳/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="萌">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/myBlog/images/header.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="萌">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-	<h1 class="post-title" itemprop="name headline">照片</h1>
-
-
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
-              <div class="ImageGrid"></div>
+          <h1 class="post-title" itemprop="name headline">Redis归纳</h1>
         
-      </div>
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-18T16:31:47+08:00">
+                2017-08-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/myBlog/2017/08/18/Redis归纳/" class="leancloud_visitors" data-flag-title="Redis归纳">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count">|</span>
+             </span>
+          
+
+
+
+          
+              
+                
+                <span class="post-meta-item-icon">|
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  746
+                </span>
+              
+
+              
+
+              
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <h2 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h2><p>一个基于内存的高性能的key-value数据库。</p>
+<blockquote>
+<p>数据结构：String字符串，Hash字典，List列表，Set集合，SortedSet有序集合。</p>
+</blockquote>
+<ol>
+<li>使用Redis有哪些好处？</li>
+</ol>
+<blockquote>
+<ul>
+<li>(1) 速度快，因为数据存在内存中，类似于HashMap，HashMap的优势就是查找和操作的时间复杂度都是O(1)</li>
+<li>(2) 支持丰富数据类型，支持string，list，set，sorted set，hash</li>
+<li>(3) 支持事务，操作都是原子性，所谓的原子性就是对数据的更改要么全部执行，要么全部不执行</li>
+<li>(4) 丰富的特性：可用于缓存，消息，按key设置过期时间，过期后将会自动删除</li>
+</ul>
+</blockquote>
+<p>2.为什么redis需要把所有数据放到内存中?　</p>
+<blockquote>
+<p>　Redis为了达到最快的读写速度将数据都读到内存中，并通过异步的方式将数据写入磁盘。所以redis具有快速和数据持久化的特征。如果不将数据放在内存中，磁盘I/O速度为严重影响redis的性能。在内存越来越便宜的今天，redis将会越来越受欢迎。<br>　　　如果设置了最大使用的内存，则数据已有记录数达到内存限值后不能继续插入新值。</p>
+</blockquote>
+<p>3.Redis是单进程单线程的为什么也那么快？</p>
+<blockquote>
+<p>　Redis快的主要原因是：</p>
+<ul>
+<li>完全基于内存</li>
+<li>数据结构简单，对数据操作也简单</li>
+<li>使用多路 I/O 复用模型</li>
+</ul>
+<p>采用单线程，避免了不必要的上下文切换和竞争条件，也不存在多进程或者多线程导致的切换而消耗 CPU，不用去考虑各种锁的问题，不存在加锁释放锁操作，没有因为可能出现死锁而导致的性能消耗；</p>
+<p>这里“多路”指的是多个网络连接，“复用”指的是复用同一个线程。采用多路 I/O 复用技术可以让单个线程高效的处理多个连接请求（尽量减少网络 IO 的时间消耗），且 Redis 在内存中操作数据的速度非常快，也就是说内存内的操作不会成为影响Redis性能的瓶颈，主要由以上几点造就了 Redis 具有很高的吞吐量。</p>
+</blockquote>
+<p>4.Redis锁的使用。</p>
+<figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> Redisson redisson = RedissonManager.getRedisson();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">String</span> LOCK_FLAG = <span class="string">"mylock_"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 根据name对进行上锁操作，redissonLock 阻塞的，采用的机制发布/订阅</span></span><br><span class="line"><span class="comment">     * @param key</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> lock(<span class="keyword">String</span> <span class="built_in">key</span>)&#123;</span><br><span class="line">        <span class="keyword">String</span> lockKey = LOCK_FLAG + <span class="built_in">key</span>;</span><br><span class="line">        RLock lock = redisson.getLock(lockKey);</span><br><span class="line">        <span class="comment">//lock提供带timeout参数，timeout结束强制解锁，防止死锁 ：1分钟</span></span><br><span class="line">        lock.lock(<span class="number">1</span>, TimeUnit.MINUTES);</span><br><span class="line">        logger.info(<span class="string">"lock key:&#123;&#125;"</span>,lockKey);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 根据name对进行解锁操作</span></span><br><span class="line"><span class="comment">     * @param key</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> unlock(<span class="keyword">String</span> <span class="built_in">key</span>)&#123;</span><br><span class="line">        <span class="keyword">String</span> lockKey = LOCK_FLAG + <span class="built_in">key</span>;</span><br><span class="line">        RLock lock = redisson.getLock(lockKey);</span><br><span class="line">        <span class="comment">//如果锁被当前线程持有，则释放</span></span><br><span class="line">        <span class="keyword">if</span>(lock.isHeldByCurrentThread())&#123;</span><br><span class="line">            lock.unlock();</span><br><span class="line">            logger.info(<span class="string">"unlock key:&#123;&#125;"</span>,lockKey);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
       
     </div>
     
     
     
+	<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+
+  
+</div>
+<div>
+
+</div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+        <div class="post-widgets">
+        
+          <div class="wp_rating">
+            <div id="wpac-rating"></div>
+          </div>
+        
+
+        
+
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/myBlog/2017/08/01/Volatile关键字/" rel="next" title="Volatile关键字">
+                <i class="fa fa-chevron-left"></i> Volatile关键字
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/myBlog/2017/10/01/synchronized/" rel="prev" title="synchronized关键字">
+                synchronized关键字 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
   </div>
 
 
@@ -475,8 +710,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -572,6 +816,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis"><span class="nav-text">Redis</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -1227,6 +1487,23 @@
 
   
   
+  <script type="text/javascript">
+  wpac_init = window.wpac_init || [];
+  wpac_init.push({widget: 'Rating', id: 12653,
+    el: 'wpac-rating',
+    color: 'fc6423'
+  });
+  (function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = '//embed.widgetpack.com/widget.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+  })();
+  </script>
+
 
   
 

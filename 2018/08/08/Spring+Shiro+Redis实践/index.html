@@ -159,15 +159,23 @@
 
 
 
+<meta name="description" content="Apache Shiro是Java的一个安全框架。使用Spring+Shiro+Redis完成登录注册，权限认证的功能。 Subject本质上就是当前访问用户的抽象描述。所有   参考张开涛《跟我学Shiro教程》">
 <meta name="keywords" content="萌">
-<meta property="og:type" content="website">
-<meta property="og:title" content="照片">
-<meta property="og:url" content="https://zhangzhang18.github.io/myBlog/photo/index.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring+Shiro+Redis实践">
+<meta property="og:url" content="https://zhangzhang18.github.io/myBlog/2018/08/08/Spring+Shiro+Redis实践/index.html">
 <meta property="og:site_name" content="萌">
+<meta property="og:description" content="Apache Shiro是Java的一个安全框架。使用Spring+Shiro+Redis完成登录注册，权限认证的功能。 Subject本质上就是当前访问用户的抽象描述。所有   参考张开涛《跟我学Shiro教程》">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-18T06:29:09.621Z">
+<meta property="og:image" content="https://zhangzhang18.github.io/myBlog/2018/08/08/Spring+Shiro+Redis实践/shiro-core.png">
+<meta property="og:image" content="https://zhangzhang18.github.io/myBlog/2018/08/08/Spring+Shiro+Redis实践/shiro.png">
+<meta property="og:image" content="https://zhangzhang18.github.io/myBlog/2018/08/08/Spring+Shiro+Redis实践/shiro-action.png">
+<meta property="og:image" content="https://zhangzhang18.github.io/myBlog/2018/08/08/Spring+Shiro+Redis实践/shiro-diagram.png">
+<meta property="og:updated_time" content="2018-08-08T07:17:27.486Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="照片">
+<meta name="twitter:title" content="Spring+Shiro+Redis实践">
+<meta name="twitter:description" content="Apache Shiro是Java的一个安全框架。使用Spring+Shiro+Redis完成登录注册，权限认证的功能。 Subject本质上就是当前访问用户的抽象描述。所有   参考张开涛《跟我学Shiro教程》">
+<meta name="twitter:image" content="https://zhangzhang18.github.io/myBlog/2018/08/08/Spring+Shiro+Redis实践/shiro-core.png">
 
 
 
@@ -197,7 +205,7 @@
 
 
 
-  <link rel="canonical" href="https://zhangzhang18.github.io/myBlog/photo/"/>
+  <link rel="canonical" href="https://zhangzhang18.github.io/myBlog/2018/08/08/Spring+Shiro+Redis实践/"/>
 
 
 
@@ -218,7 +226,7 @@
 
 
 
-  <title>照片 | 萌</title>
+  <title>Spring+Shiro+Redis实践 | 萌</title>
   
 
 
@@ -411,33 +419,234 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://zhangzhang18.github.io/myBlog/myBlog/2018/08/08/Spring+Shiro+Redis实践/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="萌">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/myBlog/images/header.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="萌">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-	<h1 class="post-title" itemprop="name headline">照片</h1>
-
-
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
-              <div class="ImageGrid"></div>
+          <h1 class="post-title" itemprop="name headline">Spring+Shiro+Redis实践</h1>
         
-      </div>
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-08T14:32:27+08:00">
+                2018-08-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/myBlog/2018/08/08/Spring+Shiro+Redis实践/" class="leancloud_visitors" data-flag-title="Spring+Shiro+Redis实践">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count">|</span>
+             </span>
+          
+
+
+
+          
+              
+                
+                <span class="post-meta-item-icon">|
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  58
+                </span>
+              
+
+              
+
+              
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <p>Apache Shiro是Java的一个安全框架。<br>使用Spring+Shiro+Redis完成登录注册，权限认证的功能。<br><img src="/myBlog/2018/08/08/Spring+Shiro+Redis实践/shiro-core.png" alt="core"></p>
+<p>Subject本质上就是当前访问用户的抽象描述。所有</p>
+<p><img src="/myBlog/2018/08/08/Spring+Shiro+Redis实践/shiro.png" alt="shiro"></p>
+<p><img src="/myBlog/2018/08/08/Spring+Shiro+Redis实践/shiro-action.png" alt="action"><br><img src="/myBlog/2018/08/08/Spring+Shiro+Redis实践/shiro-diagram.png" alt="diagram"></p>
+<p><a href="http://jinnianshilongnian.iteye.com/blog/2018398" target="_blank" rel="noopener">参考张开涛《跟我学Shiro教程》</a></p>
+
       
     </div>
     
     
     
+	<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+
+  
+</div>
+<div>
+
+</div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+        <div class="post-widgets">
+        
+          <div class="wp_rating">
+            <div id="wpac-rating"></div>
+          </div>
+        
+
+        
+
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/myBlog/2017/10/12/面试常用手写代码/" rel="next" title="面试常用手写代码">
+                <i class="fa fa-chevron-left"></i> 面试常用手写代码
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
   </div>
 
 
@@ -1227,6 +1436,23 @@
 
   
   
+  <script type="text/javascript">
+  wpac_init = window.wpac_init || [];
+  wpac_init.push({widget: 'Rating', id: 12653,
+    el: 'wpac-rating',
+    color: 'fc6423'
+  });
+  (function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = '//embed.widgetpack.com/widget.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+  })();
+  </script>
+
 
   
 
