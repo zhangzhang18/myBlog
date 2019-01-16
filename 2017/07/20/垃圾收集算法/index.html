@@ -159,18 +159,18 @@
 
 
 
-<meta name="description" content="1.标记-清除算法最基础的收集算法。分为两个阶段：标记出所有需要回收的对象，标记完成后统一回收所有被标记的对象。不足：效率，空间，标记清除后会产生大量不连续的内存碎片。 2.复制算法解决效率问题。将可用的内存按容量分为大小相等的两块，每次只使用一块。当一块用完了，将还存活的对象复制到另一块，然后再把已使用过的内存空间一次清理掉。 3.标记整理算法复制算法有较多复制操作，效率问题。根据老年代的特点，">
+<meta name="description" content="1.标记-清除算法最基础的收集算法。分为两个阶段：标记出所有需要回收的对象，标记完成后统一回收所有被标记的对象。不足：效率，空间，标记清除后会产生大量不连续的内存碎片。">
 <meta name="keywords" content="JAVA,JVM">
 <meta property="og:type" content="article">
 <meta property="og:title" content="垃圾收集算法">
 <meta property="og:url" content="https://zhangzhang18.github.io/myBlog/2017/07/20/垃圾收集算法/index.html">
 <meta property="og:site_name" content="萌">
-<meta property="og:description" content="1.标记-清除算法最基础的收集算法。分为两个阶段：标记出所有需要回收的对象，标记完成后统一回收所有被标记的对象。不足：效率，空间，标记清除后会产生大量不连续的内存碎片。 2.复制算法解决效率问题。将可用的内存按容量分为大小相等的两块，每次只使用一块。当一块用完了，将还存活的对象复制到另一块，然后再把已使用过的内存空间一次清理掉。 3.标记整理算法复制算法有较多复制操作，效率问题。根据老年代的特点，">
+<meta property="og:description" content="1.标记-清除算法最基础的收集算法。分为两个阶段：标记出所有需要回收的对象，标记完成后统一回收所有被标记的对象。不足：效率，空间，标记清除后会产生大量不连续的内存碎片。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-17T09:00:13.304Z">
+<meta property="og:updated_time" content="2019-01-16T07:30:18.226Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="垃圾收集算法">
-<meta name="twitter:description" content="1.标记-清除算法最基础的收集算法。分为两个阶段：标记出所有需要回收的对象，标记完成后统一回收所有被标记的对象。不足：效率，空间，标记清除后会产生大量不连续的内存碎片。 2.复制算法解决效率问题。将可用的内存按容量分为大小相等的两块，每次只使用一块。当一块用完了，将还存活的对象复制到另一块，然后再把已使用过的内存空间一次清理掉。 3.标记整理算法复制算法有较多复制操作，效率问题。根据老年代的特点，">
+<meta name="twitter:description" content="1.标记-清除算法最基础的收集算法。分为两个阶段：标记出所有需要回收的对象，标记完成后统一回收所有被标记的对象。不足：效率，空间，标记清除后会产生大量不连续的内存碎片。">
 
 
 
@@ -544,7 +544,7 @@
       
 
       
-        <h2 id="1-标记-清除算法"><a href="#1-标记-清除算法" class="headerlink" title="1.标记-清除算法"></a>1.标记-清除算法</h2><p>最基础的收集算法。<br>分为两个阶段：标记出所有需要回收的对象，标记完成后统一回收所有被标记的对象。<br>不足：效率，空间，标记清除后会产生大量不连续的内存碎片。</p>
+        <h2 id="1-标记-清除算法"><a href="#1-标记-清除算法" class="headerlink" title="1.标记-清除算法"></a>1.标记-清除算法</h2><p>最基础的收集算法。<br>分为两个阶段：标记出所有需要回收的对象，标记完成后统一回收所有被标记的对象。<br>不足：效率，空间，标记清除后会产生大量不连续的内存碎片。<br><a id="more"></a></p>
 <h2 id="2-复制算法"><a href="#2-复制算法" class="headerlink" title="2.复制算法"></a>2.复制算法</h2><p>解决效率问题。<br>将可用的内存按容量分为大小相等的两块，每次只使用一块。当一块用完了，将还存活的对象复制到另一块，然后再把已使用过的内存空间一次清理掉。</p>
 <h2 id="3-标记整理算法"><a href="#3-标记整理算法" class="headerlink" title="3.标记整理算法"></a>3.标记整理算法</h2><p>复制算法有较多复制操作，效率问题。<br>根据老年代的特点，标记过程与标记-清除算法一样，后续操作让所有存活对象都像一端移动，然后直接清理掉边界以外的内存。</p>
 <h2 id="4-分代收集算法"><a href="#4-分代收集算法" class="headerlink" title="4.分代收集算法"></a>4.分代收集算法</h2><p>在新生代中有大批对象死去，少量存活：复制算法。复制成本少。<br>老年代中对象存活率高，没有额外的空间对他进行担保：就必须使用 标记-清理 或 标记-整理 算法回收。</p>
@@ -617,7 +617,7 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/myBlog/2017/08/01/volatile关键字/" rel="prev" title="Volatile关键字">
+              <a href="/myBlog/2017/08/01/volatile/" rel="prev" title="Volatile关键字">
                 Volatile关键字 <i class="fa fa-chevron-right"></i>
               </a>
             

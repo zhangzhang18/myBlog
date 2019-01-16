@@ -159,18 +159,20 @@
 
 
 
-<meta name="description" content="Volatile 能够保证可见性。   volatile的两大特性：禁止重排序、内存可见性。  并发编程中三大概念：原子性，有序性，可见性。  1.原子性一个操作或者多个操作，要么全部执行并且执行过程中不会被任何一个因素打扰，要么就不会执行。Java中，对于基本数据类型的变量读取和赋值操作是原子的。 1234x=10;   //1y=x;    //2x++;    //3x=x+1;  //4">
+<meta name="description" content="Volatile 能够保证可见性。   volatile的两大特性：禁止重排序、内存可见性。  并发编程中三大概念：原子性，有序性，可见性。">
 <meta name="keywords" content="JAVA,基础,多线程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Volatile关键字">
-<meta property="og:url" content="https://zhangzhang18.github.io/myBlog/2017/08/01/volatile关键字/index.html">
+<meta property="og:url" content="https://zhangzhang18.github.io/myBlog/2017/08/01/volatile/index.html">
 <meta property="og:site_name" content="萌">
-<meta property="og:description" content="Volatile 能够保证可见性。   volatile的两大特性：禁止重排序、内存可见性。  并发编程中三大概念：原子性，有序性，可见性。  1.原子性一个操作或者多个操作，要么全部执行并且执行过程中不会被任何一个因素打扰，要么就不会执行。Java中，对于基本数据类型的变量读取和赋值操作是原子的。 1234x=10;   //1y=x;    //2x++;    //3x=x+1;  //4">
+<meta property="og:description" content="Volatile 能够保证可见性。   volatile的两大特性：禁止重排序、内存可见性。  并发编程中三大概念：原子性，有序性，可见性。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-16T06:36:50.345Z">
+<meta property="og:image" content="https://zhangzhang18.github.io/myBlog/2017/08/01/volatile/vol.jpg">
+<meta property="og:updated_time" content="2019-01-16T07:30:41.130Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Volatile关键字">
-<meta name="twitter:description" content="Volatile 能够保证可见性。   volatile的两大特性：禁止重排序、内存可见性。  并发编程中三大概念：原子性，有序性，可见性。  1.原子性一个操作或者多个操作，要么全部执行并且执行过程中不会被任何一个因素打扰，要么就不会执行。Java中，对于基本数据类型的变量读取和赋值操作是原子的。 1234x=10;   //1y=x;    //2x++;    //3x=x+1;  //4">
+<meta name="twitter:description" content="Volatile 能够保证可见性。   volatile的两大特性：禁止重排序、内存可见性。  并发编程中三大概念：原子性，有序性，可见性。">
+<meta name="twitter:image" content="https://zhangzhang18.github.io/myBlog/2017/08/01/volatile/vol.jpg">
 
 
 
@@ -200,7 +202,7 @@
 
 
 
-  <link rel="canonical" href="https://zhangzhang18.github.io/myBlog/2017/08/01/volatile关键字/"/>
+  <link rel="canonical" href="https://zhangzhang18.github.io/myBlog/2017/08/01/volatile/"/>
 
 
 
@@ -426,7 +428,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://zhangzhang18.github.io/myBlog/myBlog/2017/08/01/volatile关键字/">
+    <link itemprop="mainEntityOfPage" href="https://zhangzhang18.github.io/myBlog/myBlog/2017/08/01/volatile/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="萌">
@@ -495,7 +497,7 @@
 
           
           
-             <span id="/myBlog/2017/08/01/volatile关键字/" class="leancloud_visitors" data-flag-title="Volatile关键字">
+             <span id="/myBlog/2017/08/01/volatile/" class="leancloud_visitors" data-flag-title="Volatile关键字">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -544,11 +546,12 @@
       
 
       
-        <p>Volatile 能够保证可见性。</p>
+        <p><img src="/myBlog/2017/08/01/volatile/vol.jpg" alt="volatile"></p>
+<p>Volatile 能够保证可见性。</p>
 <blockquote>
 <p> volatile的两大特性：禁止重排序、内存可见性。</p>
 </blockquote>
-<p>并发编程中三大概念：原子性，有序性，可见性。</p>
+<p>并发编程中三大概念：原子性，有序性，可见性。<br><a id="more"></a></p>
 <hr>
 <h3 id="1-原子性"><a href="#1-原子性" class="headerlink" title="1.原子性"></a>1.原子性</h3><p>一个操作或者多个操作，要么全部执行并且执行过程中不会被任何一个因素打扰，要么就不会执行。<br>Java中，对于基本数据类型的变量读取和赋值操作是原子的。</p>
 <figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">x=<span class="number">10</span>;   <span class="comment">//1</span></span><br><span class="line">y=x;    <span class="comment">//2</span></span><br><span class="line">x++;    <span class="comment">//3</span></span><br><span class="line">x=x+<span class="number">1</span>;  <span class="comment">//4</span></span><br></pre></td></tr></table></figure>

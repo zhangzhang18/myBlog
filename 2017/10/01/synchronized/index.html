@@ -159,18 +159,20 @@
 
 
 
-<meta name="description" content="synchronized是一种同步锁同一时刻只能有一个线程能获取到锁  修饰代码块：同步代码块，作用域是{}里面的代码，作用的对象是调用这个代码块的对象。 修饰方法：同步方法，作用范围是整个方法，作用对象是调用这个方法的对象。 修饰静态的方法：作用范围是整个方法，作用对象是这个类的所有对象。 修饰类：作用范围是synchronized后面括号括起来的部分，作用的对象是这个类的所有对象。   1.s">
+<meta name="description" content="synchronized是一种同步锁同一时刻只能有一个线程能获取到锁  修饰代码块：同步代码块，作用域是{}里面的代码，作用的对象是调用这个代码块的对象。 修饰方法：同步方法，作用范围是整个方法，作用对象是调用这个方法的对象。 修饰静态的方法：作用范围是整个方法，作用对象是这个类的所有对象。 修饰类：作用范围是synchronized后面括号括起来的部分，作用的对象是这个类的所有对象。">
 <meta name="keywords" content="JAVA,基础,多线程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="synchronized关键字">
 <meta property="og:url" content="https://zhangzhang18.github.io/myBlog/2017/10/01/synchronized/index.html">
 <meta property="og:site_name" content="萌">
-<meta property="og:description" content="synchronized是一种同步锁同一时刻只能有一个线程能获取到锁  修饰代码块：同步代码块，作用域是{}里面的代码，作用的对象是调用这个代码块的对象。 修饰方法：同步方法，作用范围是整个方法，作用对象是调用这个方法的对象。 修饰静态的方法：作用范围是整个方法，作用对象是这个类的所有对象。 修饰类：作用范围是synchronized后面括号括起来的部分，作用的对象是这个类的所有对象。   1.s">
+<meta property="og:description" content="synchronized是一种同步锁同一时刻只能有一个线程能获取到锁  修饰代码块：同步代码块，作用域是{}里面的代码，作用的对象是调用这个代码块的对象。 修饰方法：同步方法，作用范围是整个方法，作用对象是调用这个方法的对象。 修饰静态的方法：作用范围是整个方法，作用对象是这个类的所有对象。 修饰类：作用范围是synchronized后面括号括起来的部分，作用的对象是这个类的所有对象。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-16T06:35:54.580Z">
+<meta property="og:image" content="https://zhangzhang18.github.io/myBlog/2017/10/01/synchronized/syn.jpg">
+<meta property="og:updated_time" content="2019-01-16T07:30:41.120Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="synchronized关键字">
-<meta name="twitter:description" content="synchronized是一种同步锁同一时刻只能有一个线程能获取到锁  修饰代码块：同步代码块，作用域是{}里面的代码，作用的对象是调用这个代码块的对象。 修饰方法：同步方法，作用范围是整个方法，作用对象是调用这个方法的对象。 修饰静态的方法：作用范围是整个方法，作用对象是这个类的所有对象。 修饰类：作用范围是synchronized后面括号括起来的部分，作用的对象是这个类的所有对象。   1.s">
+<meta name="twitter:description" content="synchronized是一种同步锁同一时刻只能有一个线程能获取到锁  修饰代码块：同步代码块，作用域是{}里面的代码，作用的对象是调用这个代码块的对象。 修饰方法：同步方法，作用范围是整个方法，作用对象是调用这个方法的对象。 修饰静态的方法：作用范围是整个方法，作用对象是这个类的所有对象。 修饰类：作用范围是synchronized后面括号括起来的部分，作用的对象是这个类的所有对象。">
+<meta name="twitter:image" content="https://zhangzhang18.github.io/myBlog/2017/10/01/synchronized/syn.jpg">
 
 
 
@@ -544,12 +546,13 @@
       
 
       
-        <p>synchronized是一种同步锁<br>同一时刻只能有一个线程能获取到锁</p>
+        <p><img src="/myBlog/2017/10/01/synchronized/syn.jpg" alt="synchronized"><br>synchronized是一种同步锁<br>同一时刻只能有一个线程能获取到锁</p>
 <ol>
 <li>修饰代码块：同步代码块，作用域是{}里面的代码，作用的对象是调用这个代码块的对象。</li>
 <li>修饰方法：同步方法，作用范围是整个方法，作用对象是调用这个方法的对象。</li>
 <li>修饰静态的方法：作用范围是整个方法，作用对象是这个类的所有对象。</li>
-<li>修饰类：作用范围是synchronized后面括号括起来的部分，作用的对象是这个类的所有对象。</li>
+<li>修饰类：作用范围是synchronized后面括号括起来的部分，作用的对象是这个类的所有对象。<a id="more"></a>
+</li>
 </ol>
 <hr>
 <p>1.synchronized 代码块<br><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">   <span class="keyword">synchronized</span>(obj) &#123;</span><br><span class="line">   <span class="comment">//一次只能有一个线程进入</span></span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
@@ -674,7 +677,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/myBlog/2017/08/01/volatile关键字/" rel="next" title="Volatile关键字">
+              <a href="/myBlog/2017/08/01/volatile/" rel="next" title="Volatile关键字">
                 <i class="fa fa-chevron-left"></i> Volatile关键字
               </a>
             

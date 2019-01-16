@@ -159,19 +159,19 @@
 
 
 
-<meta name="description" content="1.程序计数器（PCR）可以看做当前线程所执行的字节码的行号指示器。为了线程切换后能够恢复到正确执行位置，每条线程都需要独立的程序计数器。 2.栈（JVM stack）线程私有，生命周期与线程相同。描述的事Java方法执行的内存模型：每个方法执行的同时都会创建一个栈帧用于存储局部变量表，操作数栈，动态链接方法出口。每个方法执行到完成，对应着一个栈帧在虚拟机栈中入栈到出栈的过程。 3.本地方法栈（N">
+<meta name="description" content="1.程序计数器（PCR）可以看做当前线程所执行的字节码的行号指示器。为了线程切换后能够恢复到正确执行位置，每条线程都需要独立的程序计数器。">
 <meta name="keywords" content="JAVA,JVM">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JVM内存分配">
 <meta property="og:url" content="https://zhangzhang18.github.io/myBlog/2017/07/13/JVM内存分配/index.html">
 <meta property="og:site_name" content="萌">
-<meta property="og:description" content="1.程序计数器（PCR）可以看做当前线程所执行的字节码的行号指示器。为了线程切换后能够恢复到正确执行位置，每条线程都需要独立的程序计数器。 2.栈（JVM stack）线程私有，生命周期与线程相同。描述的事Java方法执行的内存模型：每个方法执行的同时都会创建一个栈帧用于存储局部变量表，操作数栈，动态链接方法出口。每个方法执行到完成，对应着一个栈帧在虚拟机栈中入栈到出栈的过程。 3.本地方法栈（N">
+<meta property="og:description" content="1.程序计数器（PCR）可以看做当前线程所执行的字节码的行号指示器。为了线程切换后能够恢复到正确执行位置，每条线程都需要独立的程序计数器。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://oz2tkq0zj.bkt.clouddn.com/17-11-9/52323298.jpg">
-<meta property="og:updated_time" content="2018-07-17T09:25:07.751Z">
+<meta property="og:updated_time" content="2019-01-16T07:31:01.215Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JVM内存分配">
-<meta name="twitter:description" content="1.程序计数器（PCR）可以看做当前线程所执行的字节码的行号指示器。为了线程切换后能够恢复到正确执行位置，每条线程都需要独立的程序计数器。 2.栈（JVM stack）线程私有，生命周期与线程相同。描述的事Java方法执行的内存模型：每个方法执行的同时都会创建一个栈帧用于存储局部变量表，操作数栈，动态链接方法出口。每个方法执行到完成，对应着一个栈帧在虚拟机栈中入栈到出栈的过程。 3.本地方法栈（N">
+<meta name="twitter:description" content="1.程序计数器（PCR）可以看做当前线程所执行的字节码的行号指示器。为了线程切换后能够恢复到正确执行位置，每条线程都需要独立的程序计数器。">
 <meta name="twitter:image" content="http://oz2tkq0zj.bkt.clouddn.com/17-11-9/52323298.jpg">
 
 
@@ -549,7 +549,7 @@
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="http://oz2tkq0zj.bkt.clouddn.com/17-11-9/52323298.jpg" rel="gallery_cjqytor9c00063cvlmd7ya4kv"
+                 href="http://oz2tkq0zj.bkt.clouddn.com/17-11-9/52323298.jpg" rel="gallery_cjqyvbad10002bgvlmv192fjw"
                  itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
                 <img src="http://oz2tkq0zj.bkt.clouddn.com/17-11-9/52323298.jpg" itemprop="contentUrl"/>
               </a>
@@ -562,7 +562,7 @@
       
 
       
-        <h2 id="1-程序计数器（PCR）"><a href="#1-程序计数器（PCR）" class="headerlink" title="1.程序计数器（PCR）"></a>1.程序计数器（PCR）</h2><p>可以看做当前线程所执行的字节码的行号指示器。<br>为了线程切换后能够恢复到正确执行位置，每条线程都需要独立的程序计数器。</p>
+        <h2 id="1-程序计数器（PCR）"><a href="#1-程序计数器（PCR）" class="headerlink" title="1.程序计数器（PCR）"></a>1.程序计数器（PCR）</h2><p>可以看做当前线程所执行的字节码的行号指示器。<br>为了线程切换后能够恢复到正确执行位置，每条线程都需要独立的程序计数器。<br><a id="more"></a></p>
 <h2 id="2-栈（JVM-stack）"><a href="#2-栈（JVM-stack）" class="headerlink" title="2.栈（JVM stack）"></a>2.栈（JVM stack）</h2><p>线程私有，生命周期与线程相同。<br>描述的事Java方法执行的内存模型：每个方法执行的同时都会创建一个栈帧用于存储局部变量表，操作数栈，动态链接方法出口。<br>每个方法执行到完成，对应着一个栈帧在虚拟机栈中入栈到出栈的过程。</p>
 <h2 id="3-本地方法栈（Native-Method-Stack）"><a href="#3-本地方法栈（Native-Method-Stack）" class="headerlink" title="3.本地方法栈（Native Method Stack）"></a>3.本地方法栈（Native Method Stack）</h2><p>与JVM栈相似，本地方法栈是用的是虚拟机的native方法</p>
 <h2 id="4-堆（heap"><a href="#4-堆（heap" class="headerlink" title="4.堆（heap)"></a>4.堆（heap)</h2><p>是Java虚拟机管理内存中最大的一块。<br>是被所有线程共享的一块内存区域，次内存区域唯一目的是存放对象实例，几乎所有的对象及数组都要在这里分配内存。<br>是垃圾回收器管理的主要区域，因此很多时候也被称作“GC堆”。<br>现在收集器采用分代收集算法，所以Java堆还可以细分为：新生代，老年代；</p>
