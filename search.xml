@@ -2,8 +2,26 @@
 <search>
   <entry>
     <title><![CDATA[ZooKeeper]]></title>
-    <url>%2FmyBlog%2F2019%2F01%2F16%2FZooKeeper%2F</url>
+    <url>%2FmyBlog%2F2018%2F12%2F26%2FZooKeeper%2F</url>
     <content type="text"></content>
+      <categories>
+        <category>NoteBook</category>
+      </categories>
+      <tags>
+        <tag>分布式</tag>
+        <tag>ZK</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Elasticsearch]]></title>
+    <url>%2FmyBlog%2F2018%2F12%2F06%2FElasticsearch%2F</url>
+    <content type="text"></content>
+      <categories>
+        <category>NoteBook</category>
+      </categories>
+      <tags>
+        <tag>ES</tag>
+      </tags>
   </entry>
   <entry>
     <title><![CDATA[分布式锁]]></title>
@@ -13,14 +31,21 @@
         <category>NoteBook</category>
       </categories>
       <tags>
-        <tag>JAVA</tag>
         <tag>分布式</tag>
+        <tag>JAVA</tag>
       </tags>
   </entry>
   <entry>
     <title><![CDATA[Dubbo]]></title>
     <url>%2FmyBlog%2F2018%2F10%2F15%2FDubbo%2F</url>
     <content type="text"></content>
+      <categories>
+        <category>NoteBook</category>
+      </categories>
+      <tags>
+        <tag>分布式</tag>
+        <tag>Dubbo</tag>
+      </tags>
   </entry>
   <entry>
     <title><![CDATA[Redis归纳]]></title>
@@ -42,13 +67,8 @@
       </categories>
       <tags>
         <tag>JAVA</tag>
-        <tag>框架</tag>
+        <tag>Spring</tag>
       </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Elasticsearch]]></title>
-    <url>%2FmyBlog%2F2018%2F01%2F16%2FElasticsearch%2F</url>
-    <content type="text"></content>
   </entry>
   <entry>
     <title><![CDATA[Spring]]></title>
@@ -58,7 +78,6 @@
         <category>NoteBook</category>
       </categories>
       <tags>
-        <tag>JAVA</tag>
         <tag>Spring</tag>
       </tags>
   </entry>
@@ -153,6 +172,13 @@
     <title><![CDATA[事物]]></title>
     <url>%2FmyBlog%2F2017%2F03%2F16%2F%E4%BA%8B%E7%89%A9%2F</url>
     <content type="text"></content>
+      <categories>
+        <category>NoteBook</category>
+      </categories>
+      <tags>
+        <tag>JAVA</tag>
+        <tag>基础</tag>
+      </tags>
   </entry>
   <entry>
     <title><![CDATA[常用Linux命令]]></title>
