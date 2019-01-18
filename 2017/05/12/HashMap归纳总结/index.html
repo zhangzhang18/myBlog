@@ -159,22 +159,24 @@
 
 
 
-<meta name="description" content="总结ArrayList和LinkedList （1）ArrayList以数组形式实现，顺序插入、查找快，插入、删除较慢 （2）LinkedList以链表形式实现，顺序插入、查找较慢，插入、删除方便">
+<meta name="description" content="总结ArrayList和LinkedListHashMap  （1）ArrayList以数组形式实现，顺序插入、查找快，插入、删除较慢 （2）LinkedList以链表形式实现，顺序插入、查找较慢，插入、删除方便">
 <meta name="keywords" content="JAVA,基础,集合">
 <meta property="og:type" content="article">
 <meta property="og:title" content="HashMap归纳总结">
 <meta property="og:url" content="https://zhangzhang18.github.io/myBlog/2017/05/12/HashMap归纳总结/index.html">
 <meta property="og:site_name" content="萌">
-<meta property="og:description" content="总结ArrayList和LinkedList （1）ArrayList以数组形式实现，顺序插入、查找快，插入、删除较慢 （2）LinkedList以链表形式实现，顺序插入、查找较慢，插入、删除方便">
+<meta property="og:description" content="总结ArrayList和LinkedListHashMap  （1）ArrayList以数组形式实现，顺序插入、查找快，插入、删除较慢 （2）LinkedList以链表形式实现，顺序插入、查找较慢，插入、删除方便">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://zhangzhang18.github.io/myBlog/2017/05/12/HashMap归纳总结/hashMap.jpg">
+<meta property="og:image" content="https://zhangzhang18.github.io/myBlog/2017/05/12/HashMap归纳总结/base.jpg">
 <meta property="og:image" content="https://zhangzhang18.github.io/myBlog/2017/05/12/HashMap归纳总结/ConcurrentHashMap.png">
 <meta property="og:image" content="https://zhangzhang18.github.io/myBlog/2017/05/12/HashMap归纳总结/HashMap.jpg">
 <meta property="og:image" content="https://zhangzhang18.github.io/myBlog/2017/05/12/HashMap归纳总结/ConcurrentHashMap.jpg">
-<meta property="og:updated_time" content="2019-01-16T07:31:13.218Z">
+<meta property="og:updated_time" content="2019-01-16T09:53:40.452Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HashMap归纳总结">
-<meta name="twitter:description" content="总结ArrayList和LinkedList （1）ArrayList以数组形式实现，顺序插入、查找快，插入、删除较慢 （2）LinkedList以链表形式实现，顺序插入、查找较慢，插入、删除方便">
-<meta name="twitter:image" content="https://zhangzhang18.github.io/myBlog/2017/05/12/HashMap归纳总结/ConcurrentHashMap.png">
+<meta name="twitter:description" content="总结ArrayList和LinkedListHashMap  （1）ArrayList以数组形式实现，顺序插入、查找快，插入、删除较慢 （2）LinkedList以链表形式实现，顺序插入、查找较慢，插入、删除方便">
+<meta name="twitter:image" content="https://zhangzhang18.github.io/myBlog/2017/05/12/HashMap归纳总结/hashMap.jpg">
 
 
 
@@ -523,7 +525,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  696
+                  705
                 </span>
               
 
@@ -548,13 +550,14 @@
       
 
       
-        <h2 id="总结ArrayList和LinkedList"><a href="#总结ArrayList和LinkedList" class="headerlink" title="总结ArrayList和LinkedList"></a>总结ArrayList和LinkedList</h2><blockquote>
+        <h2 id="总结ArrayList和LinkedList"><a href="#总结ArrayList和LinkedList" class="headerlink" title="总结ArrayList和LinkedList"></a>总结ArrayList和LinkedList</h2><p>HashMap<br><img src="/myBlog/2017/05/12/HashMap归纳总结/hashMap.jpg" alt="hashMap"></p>
+<blockquote>
 <p>（1）ArrayList以数组形式实现，顺序插入、查找快，插入、删除较慢</p>
 <p>（2）LinkedList以链表形式实现，顺序插入、查找较慢，插入、删除方便<br><a id="more"></a></p>
 </blockquote>
 <hr>
 <h2 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h2><ol>
-<li>了解HashMap吗？</li>
+<li><strong>了解HashMap吗？</strong></li>
 </ol>
 <blockquote>
 <ul>
@@ -566,8 +569,9 @@
 <li>HashMap的Entry是一个单向链表</li>
 </ul>
 </blockquote>
+<p><img src="/myBlog/2017/05/12/HashMap归纳总结/base.jpg" alt="base"></p>
 <ol start="2">
-<li>知道HashMap的工作原理吗？</li>
+<li><strong>知道HashMap的工作原理吗？</strong></li>
 </ol>
 <blockquote>
 <ul>
@@ -577,7 +581,7 @@
 </ul>
 </blockquote>
 <ol start="3">
-<li>当两个对象的hashCode相同的时候，怎么获取值对象？</li>
+<li><strong>当两个对象的hashCode相同的时候，怎么获取值对象？</strong></li>
 </ol>
 <blockquote>
 <ul>
@@ -586,19 +590,19 @@
 </ul>
 </blockquote>
 <ol start="4">
-<li>如果HashMap的大小超过了负载因子(load factor)定义的容量，怎么办？</li>
+<li><strong>如果HashMap的大小超过了负载因子(load factor)定义的容量，怎么办？</strong></li>
 </ol>
 <blockquote>
 <p>默认的负载因子大小为<strong>0.75</strong>，初始容量是16，,也就是说，当一个map填满了<strong>75%</strong>的bucket时候，就会发生resize。简单的说就是把bucket扩充为2倍，之后重新计算index，把节点再放到新的bucket中。</p>
 </blockquote>
 <ol start="5">
-<li>重新调整HashMap大小存在什么问题？</li>
+<li><strong>重新调整HashMap大小存在什么问题？</strong></li>
 </ol>
 <blockquote>
 <p>在多线程的情况下，整个HashMap中的元素都需要重新算一遍。rehash，成本非常大。<br>链表中节点的转移可能会出现死循环的情况。</p>
 </blockquote>
 <ol start="6">
-<li>HashMap与HashTable的区别：</li>
+<li><strong>HashMap与HashTable的区别：</strong></li>
 </ol>
 <blockquote>
 <ul>
@@ -607,7 +611,7 @@
 </ul>
 </blockquote>
 <ol start="7">
-<li>HashMap同步？</li>
+<li><strong>HashMap同步？</strong></li>
 </ol>
 <blockquote>
 <p>Map m = Collections.synchronizeMap(hashMap);</p>
@@ -619,7 +623,8 @@
 <p>HashTable是使用synchronized来锁住整张Hash表来实现线程安全。</p>
 <p>一个 ConcurrentHashMap 由一个个 Segment 组成，Segment代表”部分“或”一段“的意思，所以很多地方都会将其描述为分段锁。<br>Segment 内部是由 数组+链表 组成的。</p>
 <p><img src="/myBlog/2017/05/12/HashMap归纳总结/ConcurrentHashMap.jpg" alt="ConcurrentHashMap"></p>
-<p><a href="https://note.youdao.com/" target="_blank" rel="noopener">HashMap的工作原理</a></p>
+<p><a href="https://mp.weixin.qq.com/s/SyKckwLfV2ypJOzTFA7R_g" target="_blank" rel="noopener">https://mp.weixin.qq.com/s/SyKckwLfV2ypJOzTFA7R_g</a></p>
+<p><a href="https://mp.weixin.qq.com/s/__ZnkPAF6ucUqN8CVSVQeA" target="_blank" rel="noopener">https://mp.weixin.qq.com/s/__ZnkPAF6ucUqN8CVSVQeA</a></p>
 
       
     </div>
@@ -678,6 +683,10 @@
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
+            
+              <a href="/myBlog/2017/03/16/事物/" rel="next" title="事物">
+                <i class="fa fa-chevron-left"></i> 事物
+              </a>
             
           </div>
 
@@ -811,7 +820,7 @@
               
                 <a href="/myBlog/archives/">
               
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -834,7 +843,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/myBlog/tags/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

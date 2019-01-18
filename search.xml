@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[ZooKeeper]]></title>
+    <url>%2FmyBlog%2F2019%2F01%2F16%2FZooKeeper%2F</url>
+    <content type="text"></content>
+  </entry>
+  <entry>
     <title><![CDATA[分布式锁]]></title>
     <url>%2FmyBlog%2F2018%2F11%2F10%2F%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81%2F</url>
     <content type="text"><![CDATA[什么是锁为了实现多个线程在同一时刻同一代码块只能有一个线程可执行，需要在某个地方做标记，这个标记必须满足所有的线程可见，标记不存在的时候设置标记，后续的线程发现已标记则等待拥有标记的线程结束，同步代码块取消标记后，在尝试设置标记，这个标记可以理解为锁。 什么是分布式锁单体单机部署的系统被演化成分布式集群系统后，系统可能会有多份并且部署在不同的机器上，这些资源已经不是在线程之间共享了，而是属于进程之间共享的资源。指在分布式的部署环境下，通过锁机制来让多客户端互斥的对共享资源进行访问。分布式的 CAP 理论： 任何一个分布式系统都无法同时满足一致性（Consistency）、可用性（Availability）和分区容错性（Partition tolerance），最多只能同时满足两项。 分布式锁要满足哪些要求呢 互斥性：在任意时刻，只有一个客户端能持有锁。 不会发生死锁：即使有一个客户端在持有锁的期间崩溃而没有主动解锁，也能保证后续其他客户端能加锁。 容错性：获取或释放锁的机制必须高可用且性能佳 解铃还须系铃人：加锁和解锁必须是同一个客户端，客户端自己不能把别人加的锁给解了。 分布式锁实现方式为了保证数据的最终一致性，需要很多的技术方案来支持，比如分布式事务、分布式锁等。有的时候，我们需要保证一个方法在同一时间内只能被同一个线程执行。 基于数据库实现分布式锁；基于缓存（Redis等）实现分布式锁；基于Zookeeper实现分布式锁； 基于数据库思路：在数据库中创建一个表，表中包含方法名等字段，并在方法名字段上创建唯一索引，想要执行某个方法，就使用这个方法名向表中插入数据，成功插入则获取锁，执行完成后删除对应的行数据释放锁。 基于Redis1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162import java.util.Collections;import redis.clients.jedis.Jedis;import redis.clients.jedis.JedisPool;public class XttblogLock &#123; private static final String LOCK_SUCCESS = "OK"; private static final String SET_IF_NOT_EXIST = "NX"; private static final String SET_WITH_EXPIRE_TIME = "PX"; private static final Long RELEASE_SUCCESS = 1L; private static void validParam(JedisPool jedisPool, String lockKey, String requestId, int expireTime) &#123; if (null == jedisPool) &#123; throw new IllegalArgumentException("jedisPool obj is null"); &#125; if (null == lockKey || "".equals(lockKey)) &#123; throw new IllegalArgumentException("lock key is blank"); &#125; if (null == requestId || "".equals(requestId)) &#123; throw new IllegalArgumentException("requestId is blank"); &#125; if (expireTime &lt; 0) &#123; throw new IllegalArgumentException("expireTime is not allowed less zero"); &#125; &#125; public static boolean tryLock(JedisPool jedisPool, String lockKey, String requestId, int expireTime) &#123; validParam(jedisPool, lockKey, requestId, expireTime); Jedis jedis = null; try &#123; jedis = jedisPool.getResource(); String result = jedis.set(lockKey, requestId, SET_IF_NOT_EXIST, SET_WITH_EXPIRE_TIME, expireTime); if (LOCK_SUCCESS.equals(result)) &#123; return true; &#125; &#125; catch (Exception e) &#123; throw e; &#125; finally &#123; if (null != jedis) &#123; jedis.close(); &#125; &#125; return false; &#125; public static boolean unLock(JedisPool jedisPool, String lockKey, String requestId) &#123; validParam(jedisPool, lockKey, requestId, 1); String script = "if redis.call('get', KEYS[1]) == ARGV[1] then return redis.call('del', KEYS[1]) else return 0 end"; Jedis jedis = null; try &#123; jedis = jedisPool.getResource(); Object result = jedis.eval(script, Collections.singletonList(lockKey),Collections.singletonList(requestId)); if (RELEASE_SUCCESS.equals(result)) &#123; return true; &#125; &#125; catch (Exception e) &#123; throw e; &#125; finally &#123; if (null != jedis) &#123; jedis.close(); &#125; &#125; return false; &#125;&#125; 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657import java.util.concurrent.TimeUnit;import org.redisson.Redisson;import org.redisson.core.RLock;import org.slf4j.Logger;import org.slf4j.LoggerFactory;public class RedissonLockUtil &#123; private static final Logger logger = LoggerFactory.getLogger(RedissonLockUtil.class); private static Redisson redisson = RedissonManager.getRedisson(); private static final String LOCK_FLAG = "recruitlock_"; /** * 根据name对进行上锁操作，redissonLock 阻塞的，采用的机制发布/订阅 * @param key */ public static void lock(String key)&#123; String lockKey = LOCK_FLAG + key; RLock lock = redisson.getLock(lockKey); //lock提供带timeout参数，timeout结束强制解锁，防止死锁 ：1分钟 lock.lock(1, TimeUnit.MINUTES); logger.info("lock key:&#123;&#125;",lockKey); &#125; /** * 根据name对进行解锁操作 * @param key */ public static void unlock(String key)&#123; String lockKey = LOCK_FLAG + key; RLock lock = redisson.getLock(lockKey); if (lock.isHeldByCurrentThread()) &#123; lock.unlock(); logger.info("unlock , key:&#123;&#125;"+lockKey); &#125; &#125; /** * @param key * @param millisToWait 等待获取锁的时间--单位：秒 */ public static boolean tryLock(String key, long millisToWait) &#123; String lockKey = LOCK_FLAG + key; logger.info("get redis lock start , key:&#123;&#125;"+lockKey); RLock lock = redisson.getLock(lockKey); logger.info("get redis lock end , key:"+lockKey); try &#123; return lock.tryLock(millisToWait,5000, TimeUnit.MILLISECONDS); &#125; catch (Exception e) &#123; logger.error("try lock error,key is:&#123;&#125;", lockKey, e); &#125; logger.info("get redis lock false , key:"+lockKey); return false; &#125;&#125; 错误示例12345Long result = jedis.setnx(lockKey, requestId); if (result == 1) &#123; // 若在这里程序突然崩溃，则无法设置过期时间，将发生死锁 jedis.expire(lockKey, expireTime); &#125; https://www.cnblogs.com/seesun2012/p/9214653.html http://www.cnblogs.com/linjiqin/p/8003838.html https://www.xttblog.com/?p=3171]]></content>
@@ -11,6 +16,11 @@
         <tag>JAVA</tag>
         <tag>分布式</tag>
       </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Dubbo]]></title>
+    <url>%2FmyBlog%2F2018%2F10%2F15%2FDubbo%2F</url>
+    <content type="text"></content>
   </entry>
   <entry>
     <title><![CDATA[Redis归纳]]></title>
@@ -36,9 +46,38 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[Elasticsearch]]></title>
+    <url>%2FmyBlog%2F2018%2F01%2F16%2FElasticsearch%2F</url>
+    <content type="text"></content>
+  </entry>
+  <entry>
+    <title><![CDATA[Spring]]></title>
+    <url>%2FmyBlog%2F2018%2F01%2F16%2FSpring%2F</url>
+    <content type="text"><![CDATA[1.Spring框架简介Spring框架是基于Java平台的，它为开发Java应用提供了全方位的基础设施支持，并且它很好地处理了这些基础设施，所以你只需要关注你的应用本身即可。 Spring可以使用POJO（普通的Java对象，plain old java objects）创建应用，并且可以将企业服务非侵入式地应用到POJO。这项功能适用于Java SE编程模型以及全部或部分的Java EE。 2.Spring模块结构 2.1 IOC 控制反转 IoC也称为依赖注入（DI）是为了解决对象之间的耦合度过高的问题 钟表拥有多个独立的齿轮，这些齿轮相互啮合在一起，齿轮相互啮合在一起，协同工作，共同完成某项任务。如果有一个齿轮出了问题，就可能会影响到整个齿轮组的正常运转。与软件系统中对象之间的耦合关系非常相似 软件专家Michael Mattson提出了IOC理论，用来实现对象之间的“解耦”。 借助于“第三方”实现具有依赖关系的对象之间的解耦，这个“第三方”也就是IOC容器。 哪些方面的控制被反转了呢 获得依赖对象的过程被反转了 所谓依赖注入，就是由IOC容器在运行期间，动态地将某种依赖关系注入到对象之中。 所以，依赖注入(DI)和控制反转(IOC)是从不同的角度的描述的同一件事情，就是指通过引入IOC容器，利用依赖关系注入的方式，实现对象之间的解耦。 把依赖注入应用到软件系统中，再来描述一下这个过程： 对象A依赖于对象B,当对象 A需要用到对象B的时候，IOC容器就会立即创建一个对象B送给对象A。 IOC容器就是一个对象制造工厂，你需要什么，它会给你送去，你直接使用就行了，而再也不用去关心你所用的东西是如何制成的，也不用关心最后是怎么被销毁的，这一切全部由IOC容器包办。 2.1.1 相关Java基础知识IOC流程 反射：Java语言允许通过程序化的方式间接对class操作，Class文件由类加载器转载后，JVM形成一份描述Class结构的元信息，通过元信息对象可以获取到构造函数，属性和方法等。 通过这个元信息对象间接的调用Class对象的功能。 几个重要的反射类： ClassLoader，Class，Constructor，和Method ClassLoader：类装载器，把一个类装入到JVM。需要经过： 1.装载 2.链接 校验 准备 解析 3.初始化 2.1.2 举个例子123456789101112131415161718192021public class SpringBeanFactory &#123; private static BeanFactory beanFactory; private static Logger logger = LoggerFactory.getLogger(SpringBeanFactory.class); public static BeanFactory getBeanFactory() &#123; if (beanFactory == null) &#123; synchronized (BeanFactory.class) &#123; try &#123; String path = Config.getConfigFolder(); if (beanFactory == null) &#123; beanFactory = new FileSystemXmlApplicationContext("/" + path + "aplication-spring-dubbo.xml"); &#125; &#125; catch (Exception e) &#123; logger.error("初始化SpringDubbo Error", e); &#125; &#125; &#125; return beanFactory; &#125;&#125; https://www.cnblogs.com/wang-meng/p/5597490.html]]></content>
+      <categories>
+        <category>NoteBook</category>
+      </categories>
+      <tags>
+        <tag>JAVA</tag>
+        <tag>Spring</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Java类加载]]></title>
+    <url>%2FmyBlog%2F2018%2F01%2F16%2FJava%E7%B1%BB%E5%8A%A0%E8%BD%BD%2F</url>
+    <content type="text"></content>
+      <categories>
+        <category>NoteBook</category>
+      </categories>
+      <tags>
+        <tag>JAVA</tag>
+        <tag>JVM</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[面试常用手写代码]]></title>
     <url>%2FmyBlog%2F2017%2F10%2F12%2F%E9%9D%A2%E8%AF%95%E5%B8%B8%E7%94%A8%E6%89%8B%E5%86%99%E4%BB%A3%E7%A0%81%2F</url>
-    <content type="text"><![CDATA[快速排序 123456789101112131415161718192021222324252627int a[10],n;void quickSort(int left,int right)&#123; int i,j,t,temp; if(left &gt;right)&#123; return; &#125; temp=a[left]; i=left; j=right; while(i!=j)&#123; while(a[j]&gt;=temp&amp;&amp;i&lt;j)&#123; j--; &#125; while(a[i]&gt;=temp&amp;&amp;i&lt;j)&#123; i++; &#125; if(i&lt;j)&#123; t=a[i]; a[i]=a[j]; a[j]=t; &#125; &#125; a[left]=a[i]; a[i]=temp; quicpSort(left,i-1); quickSort(i+1,right);&#125; 单例模式volatile 的一个语义禁止指令重排优化。synchronized关键字当两个线程同事进入第一的if判断语句后，线程1获取锁，线程2阻塞在1处，线程1 123456789101112131415161718192021public class Singleton &#123; private volatile static Singleton instance=null; private Singleton()&#123;&#125; public static Singleton getInstance()&#123; if (instance==null)&#123; synchronized(Singleton.class)&#123;//1 if(instance==null)&#123;//2 instance=new Singleton();//3 &#125; &#125; &#125; return instance; &#125;&#125;public enum Singleton &#123; INSTANCE; public void whateverMethod() &#123; &#125;&#125; 判断链表是否有环123456789101112131415161718typedef struct node&#123; char data ; node * next ; &#125;Node; bool exitLoop(Node *head) &#123; Node *fast, *slow ; slow = fast = head ; while (slow != NULL &amp;&amp; fast -&gt; next != NULL) &#123; slow = slow -&gt; next ; fast = fast -&gt; next -&gt; next ; if (slow == fast) return true ; &#125; return false ; &#125; 单链表反转123456789101112public Node reverse(Node node) &#123; Node prev = null; Node now = node; while (now != null) &#123; Node next = now.next; now.next = prev; prev = now; now = next; &#125; return prev; &#125;]]></content>
+    <content type="text"><![CDATA[快速排序123456789101112131415161718192021222324252627int a[10],n;void quickSort(int left,int right)&#123; int i,j,t,temp; if(left &gt;right)&#123; return; &#125; temp=a[left]; i=left; j=right; while(i!=j)&#123; while(a[j]&gt;=temp&amp;&amp;i&lt;j)&#123; j--; &#125; while(a[i]&gt;=temp&amp;&amp;i&lt;j)&#123; i++; &#125; if(i&lt;j)&#123; t=a[i]; a[i]=a[j]; a[j]=t; &#125; &#125; a[left]=a[i]; a[i]=temp; quicpSort(left,i-1); quickSort(i+1,right);&#125; 单例模式volatile 的一个语义禁止指令重排优化。synchronized关键字锁住类进入Synchronized 临界区以后，还要再做一次判空。因为当两个线程同时访问的时候，线程A构建完对象，线程B也已经通过了最初的判空验证，不做第二次判空的话，线程B还是会再次构建instance对象。 123456789101112131415public class Singleton &#123; private volatile static Singleton instance=null; private Singleton()&#123;&#125; public static Singleton getInstance()&#123; //检查实例，如果不存在，就进入同步代码块 if (instance==null)&#123;// 双重检测机制 synchronized(Singleton.class)&#123;//1 同步锁 if(instance==null)&#123;//2 双重检测机制 instance=new Singleton();//3 &#125; &#125; &#125; return instance; &#125;&#125; 1234567//enum JVM会组织反射获取枚举类的私有构造方法public enum Singleton &#123; INSTANCE; public void whateverMethod() &#123; &#125;&#125; 判断链表是否有环123456789101112131415161718typedef struct node&#123; char data ; node * next ; &#125;Node; bool exitLoop(Node *head) &#123; Node *fast, *slow ; slow = fast = head ; while (slow != NULL &amp;&amp; fast -&gt; next != NULL) &#123; slow = slow -&gt; next ; fast = fast -&gt; next -&gt; next ; if (slow == fast) return true ; &#125; return false ; &#125; 单链表反转123456789101112public Node reverse(Node node) &#123; Node prev = null; Node now = node; while (now != null) &#123; Node next = now.next; now.next = prev; prev = now; now = next; &#125; return prev; &#125;]]></content>
       <categories>
         <category>NoteBook</category>
       </categories>
@@ -63,7 +102,7 @@
   <entry>
     <title><![CDATA[Volatile关键字]]></title>
     <url>%2FmyBlog%2F2017%2F08%2F01%2Fvolatile%2F</url>
-    <content type="text"><![CDATA[Volatile 能够保证可见性。 volatile的两大特性：禁止重排序、内存可见性。 并发编程中三大概念：原子性，有序性，可见性。 1.原子性一个操作或者多个操作，要么全部执行并且执行过程中不会被任何一个因素打扰，要么就不会执行。Java中，对于基本数据类型的变量读取和赋值操作是原子的。 1234x=10; //1y=x; //2x++; //3x=x+1; //4 只有1是原子的操作。 2是两个操作，先读取x的值，在把x的值写入工作内存，这两个操作都是原子操作，放在一起就不是原子操作了。 3和4都是先读取x的值，在进行加一的操作，写入新的值。 只有简单的读取、赋值（变量之间赋值不是）才是原子操作。 可以通过synchronized和Lock解决原子性问题。 2.可见性线程之间的可见性，一个线程修改这个变量的值，其他的线程能够立即看到修改的值。 Java中，volatile关键字来保证可见性。被volatile修饰的变量，变量修改的值会立即更新到主存，当其他线程需要读取的时候。就会读取主存的值。 普通变量被修改的时候，什么时候写入主存是不确定的。当其他线程读取的时候可能还是原来的值，因此无法保证可见性。 synchronized和Lock也能保证可见性，能够保证同一时刻只有一个线程获取锁，并且在释放锁之前会将变量修改刷新到主存中。 3.有序性程序执行的顺序按照代码先后执行。 指令重排序不会影响单个线程的执行，会影响到线程并发执行的正确性。 Java中允许编译器和处理器对指令进行重排序，volatile、synchronized和Lock都可以保证有序性， volatile实现原理]]></content>
+    <content type="text"><![CDATA[Volatile 能够保证可见性。 volatile的两大特性：禁止重排序、内存可见性。 1）保证了不同线程对这个变量进行操作时的可见性，即一个线程修改了某个变量的值，这新值对其他线程来说是立即可见的。 2）禁止进行指令重排序。 并发编程中三大概念：原子性，有序性，可见性。 1.原子性一个操作或者多个操作，要么全部执行并且执行过程中不会被任何一个因素打扰，要么就不会执行。Java中，对于基本数据类型的变量读取和赋值操作是原子的。 1234x=10; //1y=x; //2x++; //3x=x+1; //4 只有1是原子的操作。 2是两个操作，先读取x的值，在把x的值写入工作内存，这两个操作都是原子操作，放在一起就不是原子操作了。 3和4都是先读取x的值，在进行加一的操作，写入新的值。 只有简单的读取、赋值（变量之间赋值不是）才是原子操作。 可以通过synchronized和Lock解决原子性问题。 2.可见性线程之间的可见性，一个线程修改这个变量的值，其他的线程能够立即看到修改的值。 Java中，volatile关键字来保证可见性。被volatile修饰的变量，变量修改的值会立即更新到主存，当其他线程需要读取的时候。就会读取主存的值。 普通变量被修改的时候，什么时候写入主存是不确定的。当其他线程读取的时候可能还是原来的值，因此无法保证可见性。 synchronized和Lock也能保证可见性，能够保证同一时刻只有一个线程获取锁，并且在释放锁之前会将变量修改刷新到主存中。 3.有序性程序执行的顺序按照代码先后执行。 指令重排序不会影响单个线程的执行，会影响到线程并发执行的正确性。 Java中允许编译器和处理器对指令进行重排序，volatile、synchronized和Lock都可以保证有序性， 应用场景1.状态标记量 2.double checkvolatile实现原理]]></content>
       <categories>
         <category>NoteBook</category>
       </categories>
@@ -88,7 +127,7 @@
   <entry>
     <title><![CDATA[JVM内存分配]]></title>
     <url>%2FmyBlog%2F2017%2F07%2F13%2FJVM%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%2F</url>
-    <content type="text"><![CDATA[1.程序计数器（PCR）可以看做当前线程所执行的字节码的行号指示器。为了线程切换后能够恢复到正确执行位置，每条线程都需要独立的程序计数器。 2.栈（JVM stack）线程私有，生命周期与线程相同。描述的事Java方法执行的内存模型：每个方法执行的同时都会创建一个栈帧用于存储局部变量表，操作数栈，动态链接方法出口。每个方法执行到完成，对应着一个栈帧在虚拟机栈中入栈到出栈的过程。 3.本地方法栈（Native Method Stack）与JVM栈相似，本地方法栈是用的是虚拟机的native方法 4.堆（heap)是Java虚拟机管理内存中最大的一块。是被所有线程共享的一块内存区域，次内存区域唯一目的是存放对象实例，几乎所有的对象及数组都要在这里分配内存。是垃圾回收器管理的主要区域，因此很多时候也被称作“GC堆”。现在收集器采用分代收集算法，所以Java堆还可以细分为：新生代，老年代； 5.方法区（Method）域Java堆一样。是各个线程共享的内存区域，用于存储虚拟机加载的类信息，常量，静态变量，即时编译器编译后的代码等数据。 6.运行时常量池（Runtime Constant Pool）是方法区的一部分。Class文件不仅有类的版本，字段，方法，接口描述信息外，还有一项信息是常量池，用于存放编译期生成的各种字面量和符号引用。 7.直接内存（Direct Memory）不是虚拟机运行数据区的一部分。NIO（New Input/Output）类，引入一种基于通道（Channel）与缓冲区（Buffer）的I/O方式，可以使用Native函数库直接分配堆外内存。通过一个Java堆DirectByteBuffer对象作为这块内存的引用进行操作。显著提高性能，因为避免了Java堆和Native堆来回复制数据。 栈区：每次方法的执行都会有一次栈帧的生成，并且其中有局部变量表。堆区：每次new出来的对象都保存在这儿。本地方法栈：通过C/C++调用系统接口的一些方法。方法区：类的信息 静态变量都在这儿，还有程序计数器]]></content>
+    <content type="text"><![CDATA[线程私有的： 程序计数器 虚拟机栈 本地方法栈 线程共享的： 堆 方法区 直接内存 1.程序计数器（PCR）可以看做当前线程所执行的字节码的行号指示器。为了线程切换后能够恢复到正确执行位置，每条线程都需要独立的程序计数器。 2.栈（JVM stack）线程私有，生命周期与线程相同。描述的事Java方法执行的内存模型：每个方法执行的同时都会创建一个栈帧用于存储局部变量表，操作数栈，动态链接方法出口。每个方法执行到完成，对应着一个栈帧在虚拟机栈中入栈到出栈的过程。 3.本地方法栈（Native Method Stack）与JVM栈相似，本地方法栈是用的是虚拟机的native方法 4.堆（heap)是Java虚拟机管理内存中最大的一块。是被所有线程共享的一块内存区域，次内存区域唯一目的是存放对象实例，几乎所有的对象及数组都要在这里分配内存。是垃圾回收器管理的主要区域，因此很多时候也被称作“GC堆”。现在收集器采用分代收集算法，所以Java堆还可以细分为：新生代，老年代； 5.方法区（Method）域Java堆一样。是各个线程共享的内存区域，用于存储虚拟机加载的类信息，常量，静态变量，即时编译器编译后的代码等数据。 6.运行时常量池（Runtime Constant Pool）是方法区的一部分。Class文件不仅有类的版本，字段，方法，接口描述信息外，还有一项信息是常量池，用于存放编译期生成的各种字面量和符号引用。 7.直接内存（Direct Memory）不是虚拟机运行数据区的一部分。NIO（New Input/Output）类，引入一种基于通道（Channel）与缓冲区（Buffer）的I/O方式，可以使用Native函数库直接分配堆外内存。通过一个Java堆DirectByteBuffer对象作为这块内存的引用进行操作。显著提高性能，因为避免了Java堆和Native堆来回复制数据。 栈区：每次方法的执行都会有一次栈帧的生成，并且其中有局部变量表。堆区：每次new出来的对象都保存在这儿。本地方法栈：通过C/C++调用系统接口的一些方法。方法区：类的信息 静态变量都在这儿，还有程序计数器]]></content>
       <categories>
         <category>NoteBook</category>
       </categories>
@@ -100,7 +139,7 @@
   <entry>
     <title><![CDATA[HashMap归纳总结]]></title>
     <url>%2FmyBlog%2F2017%2F05%2F12%2FHashMap%E5%BD%92%E7%BA%B3%E6%80%BB%E7%BB%93%2F</url>
-    <content type="text"><![CDATA[总结ArrayList和LinkedList （1）ArrayList以数组形式实现，顺序插入、查找快，插入、删除较慢 （2）LinkedList以链表形式实现，顺序插入、查找较慢，插入、删除方便 HashMap 了解HashMap吗？ HashMap是一种键值对（Key-Value）形式的存储结构。 key和value都允许为null。 当key重复的时候会覆盖，value允许重复。 是无序的，不会按照put的顺序排序。 是非线程安全的。 HashMap的Entry是一个单向链表 知道HashMap的工作原理吗？ 内部是一个数组，数组元素Node是实现了Map.Entry(hash,key,value,next)，next非null的时候指向定位相同的另一个Entry。 使用put()传递键和值，先对键调用hashCode()方法，通过hashCode确定bucket位置存储Entry对象。当发生碰撞的时候，使用散列法处理碰撞节点，将旧的Entry的引用赋值给新的Entry的next上，就是一个链表，冲突的节点从链表头部插入，这样插入新的Entry就不需要遍历链表。 通过get()获取对象。 当两个对象的hashCode相同的时候，怎么获取值对象？ get方法先比较hashCode值，如果hashCode相等，就是用equal()方法比较。 == 号与equals()方法的区别:== 基本数据类型比较的是值，对象比较的是对象的地址值。equals()继承自Object类。在所有没有重写equals()方法的类中，equals()内部是==，也是比较的地址值。然而，Java提供的所有类中，绝大多数类都重写了equals()方法，重写后的equals()方法一般都是比较两个对象的值 如果HashMap的大小超过了负载因子(load factor)定义的容量，怎么办？ 默认的负载因子大小为0.75，初始容量是16，,也就是说，当一个map填满了75%的bucket时候，就会发生resize。简单的说就是把bucket扩充为2倍，之后重新计算index，把节点再放到新的bucket中。 重新调整HashMap大小存在什么问题？ 在多线程的情况下，整个HashMap中的元素都需要重新算一遍。rehash，成本非常大。链表中节点的转移可能会出现死循环的情况。 HashMap与HashTable的区别： HashTable不接受为null的键值(key)和值(value) Hashtable是线程安全的也是synchronized在单线程环境下它比HashMap要慢。 HashMap同步？ Map m = Collections.synchronizeMap(hashMap); ConcurrentHashMap 需要线程安全，那么就使用ConcurrentHashMap。 HashTable是使用synchronized来锁住整张Hash表来实现线程安全。 一个 ConcurrentHashMap 由一个个 Segment 组成，Segment代表”部分“或”一段“的意思，所以很多地方都会将其描述为分段锁。Segment 内部是由 数组+链表 组成的。 HashMap的工作原理]]></content>
+    <content type="text"><![CDATA[总结ArrayList和LinkedListHashMap （1）ArrayList以数组形式实现，顺序插入、查找快，插入、删除较慢 （2）LinkedList以链表形式实现，顺序插入、查找较慢，插入、删除方便 HashMap 了解HashMap吗？ HashMap是一种键值对（Key-Value）形式的存储结构。 key和value都允许为null。 当key重复的时候会覆盖，value允许重复。 是无序的，不会按照put的顺序排序。 是非线程安全的。 HashMap的Entry是一个单向链表 知道HashMap的工作原理吗？ 内部是一个数组，数组元素Node是实现了Map.Entry(hash,key,value,next)，next非null的时候指向定位相同的另一个Entry。 使用put()传递键和值，先对键调用hashCode()方法，通过hashCode确定bucket位置存储Entry对象。当发生碰撞的时候，使用散列法处理碰撞节点，将旧的Entry的引用赋值给新的Entry的next上，就是一个链表，冲突的节点从链表头部插入，这样插入新的Entry就不需要遍历链表。 通过get()获取对象。 当两个对象的hashCode相同的时候，怎么获取值对象？ get方法先比较hashCode值，如果hashCode相等，就是用equal()方法比较。 == 号与equals()方法的区别:== 基本数据类型比较的是值，对象比较的是对象的地址值。equals()继承自Object类。在所有没有重写equals()方法的类中，equals()内部是==，也是比较的地址值。然而，Java提供的所有类中，绝大多数类都重写了equals()方法，重写后的equals()方法一般都是比较两个对象的值 如果HashMap的大小超过了负载因子(load factor)定义的容量，怎么办？ 默认的负载因子大小为0.75，初始容量是16，,也就是说，当一个map填满了75%的bucket时候，就会发生resize。简单的说就是把bucket扩充为2倍，之后重新计算index，把节点再放到新的bucket中。 重新调整HashMap大小存在什么问题？ 在多线程的情况下，整个HashMap中的元素都需要重新算一遍。rehash，成本非常大。链表中节点的转移可能会出现死循环的情况。 HashMap与HashTable的区别： HashTable不接受为null的键值(key)和值(value) Hashtable是线程安全的也是synchronized在单线程环境下它比HashMap要慢。 HashMap同步？ Map m = Collections.synchronizeMap(hashMap); ConcurrentHashMap 需要线程安全，那么就使用ConcurrentHashMap。 HashTable是使用synchronized来锁住整张Hash表来实现线程安全。 一个 ConcurrentHashMap 由一个个 Segment 组成，Segment代表”部分“或”一段“的意思，所以很多地方都会将其描述为分段锁。Segment 内部是由 数组+链表 组成的。 https://mp.weixin.qq.com/s/SyKckwLfV2ypJOzTFA7R_g https://mp.weixin.qq.com/s/__ZnkPAF6ucUqN8CVSVQeA]]></content>
       <categories>
         <category>NoteBook</category>
       </categories>
@@ -108,6 +147,22 @@
         <tag>JAVA</tag>
         <tag>基础</tag>
         <tag>集合</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[事物]]></title>
+    <url>%2FmyBlog%2F2017%2F03%2F16%2F%E4%BA%8B%E7%89%A9%2F</url>
+    <content type="text"></content>
+  </entry>
+  <entry>
+    <title><![CDATA[常用Linux命令]]></title>
+    <url>%2FmyBlog%2F2017%2F01%2F16%2F%E5%B8%B8%E7%94%A8Linux%E5%91%BD%E4%BB%A4%2F</url>
+    <content type="text"><![CDATA[常用指令ls &ensp;&ensp;&ensp;&ensp; 显示文件或目录 -l 列出文件详细信息l(list) -a 列出当前目录下所有文件及目录，包括隐藏的a(all) mkdir &ensp;&ensp;&ensp;&ensp; 创建目录 -p 创建目录，若无父目录，则创建p(parent) cd &ensp;&ensp;&ensp;&ensp; 切换目录 touch &ensp;&ensp;&ensp;&ensp; 创建空文件 echo &ensp;&ensp;&ensp;&ensp; 创建带有内容的文件。 cat &ensp;&ensp;&ensp;&ensp; 查看文件内容 cp &ensp;&ensp;&ensp;&ensp; 拷贝 cp [选项]… [-T] 源 目的 mv &ensp;&ensp;&ensp;&ensp; 移动或重命名 rm &ensp;&ensp;&ensp;&ensp; 删除文件 -r 递归删除，可删除子目录及文件 -f 强制删除 find &ensp;&ensp;&ensp;&ensp; 在文件系统中搜索某文件 wc &ensp;&ensp;&ensp;&ensp; 统计文本中行数、字数、字符数 grep &ensp;&ensp;&ensp;&ensp; 在文本文件中查找某个字符串 rmdir &ensp;&ensp;&ensp;&ensp; 删除空目录 tree &ensp;&ensp;&ensp;&ensp; 树形结构显示目录，需要安装tree包 pwd &ensp;&ensp;&ensp;&ensp; 显示当前目录 ln &ensp;&ensp;&ensp;&ensp; 创建链接文件 more、less &ensp;&ensp;&ensp;&ensp; 分页显示文本文件内容 head、tail &ensp;&ensp;&ensp;&ensp; 显示文件头、尾内容 ctrl+alt+F1 &ensp;&ensp;&ensp;&ensp; 命令行全屏模式 ## 打包压缩相关命令 gzip： bzip2： tar: 打包压缩 -c 归档文件 -x 压缩文件 -z gzip压缩文件 -j bzip2压缩文件 -v 显示压缩或解压缩过程 v(view) -f 使用档名 例：tar -cvf /home/abc.tar /home/abc 只打包，不压缩 tar -zcvf /home/abc.tar.gz /home/abc 打包，并用gzip压缩 tar -jcvf /home/abc.tar.bz2 /home/abc 打包，并用bzip2压缩 当然，如果想解压缩，就直接替换上面的命令 tar -cvf / tar -zcvf / tar -jcvf 中的“c” 换成“x” 就可以了。 ## 系统管理命令 stat &ensp;&ensp;&ensp;&ensp; 显示指定文件的详细信息，比ls更详细 who &ensp;&ensp;&ensp;&ensp; 显示在线登陆用户 whoami &ensp;&ensp;&ensp;&ensp; 显示当前操作用户 hostname &ensp;&ensp;&ensp;&ensp; 显示主机名 uname &ensp;&ensp;&ensp;&ensp; 显示系统信息 top &ensp;&ensp;&ensp;&ensp; 动态显示当前耗费资源最多进程信息 ps &ensp;&ensp;&ensp;&ensp; 显示瞬间进程状态 ps -aux du &ensp;&ensp;&ensp;&ensp; 查看目录大小 du -h /home带有单位显示目录信息 df &ensp;&ensp;&ensp;&ensp; 查看磁盘大小 df -h 带有单位显示磁盘信息 ifconfig &ensp;&ensp;&ensp;&ensp; 查看网络情况 ping &ensp;&ensp;&ensp;&ensp; 测试网络连通 netstat &ensp;&ensp;&ensp;&ensp; 显示网络状态信息 man &ensp;&ensp;&ensp;&ensp; 命令不会用了，找男人 如：man ls clear &ensp;&ensp;&ensp;&ensp; 清屏 alias &ensp;&ensp;&ensp;&ensp; 对命令重命名 如：alias showmeit=”ps -aux” ，另外解除使用unaliax showmeit kill &ensp;&ensp;&ensp;&ensp; 杀死进程，可以先用ps 或 top命令查看进程的id，然后再用kill命令杀死进程。]]></content>
+      <categories>
+        <category>NoteBook</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
       </tags>
   </entry>
 </search>

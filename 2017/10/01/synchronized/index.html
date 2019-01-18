@@ -168,7 +168,7 @@
 <meta property="og:description" content="synchronized是一种同步锁同一时刻只能有一个线程能获取到锁  修饰代码块：同步代码块，作用域是{}里面的代码，作用的对象是调用这个代码块的对象。 修饰方法：同步方法，作用范围是整个方法，作用对象是调用这个方法的对象。 修饰静态的方法：作用范围是整个方法，作用对象是这个类的所有对象。 修饰类：作用范围是synchronized后面括号括起来的部分，作用的对象是这个类的所有对象。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://zhangzhang18.github.io/myBlog/2017/10/01/synchronized/syn.jpg">
-<meta property="og:updated_time" content="2019-01-16T07:30:41.120Z">
+<meta property="og:updated_time" content="2019-01-16T09:22:40.673Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="synchronized关键字">
 <meta name="twitter:description" content="synchronized是一种同步锁同一时刻只能有一个线程能获取到锁  修饰代码块：同步代码块，作用域是{}里面的代码，作用的对象是调用这个代码块的对象。 修饰方法：同步方法，作用范围是整个方法，作用对象是调用这个方法的对象。 修饰静态的方法：作用范围是整个方法，作用对象是这个类的所有对象。 修饰类：作用范围是synchronized后面括号括起来的部分，作用的对象是这个类的所有对象。">
@@ -555,7 +555,7 @@
 </li>
 </ol>
 <hr>
-<p>1.synchronized 代码块<br><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">   <span class="keyword">synchronized</span>(obj) &#123;</span><br><span class="line">   <span class="comment">//一次只能有一个线程进入</span></span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>1.<strong>synchronized 代码块</strong><br><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">   <span class="keyword">synchronized</span>(obj) &#123;</span><br><span class="line">   <span class="comment">//一次只能有一个线程进入</span></span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>synchronized锁住的是括号里的对象，不是代码。<br>当synchronized锁住一个对象时，别的线程也想拿到这个对象的锁，必须等待这个线程执行完释放锁，才能再次给这个对象加锁。</p>
 <blockquote>
 <p>example</p>
@@ -578,7 +578,7 @@
 <li>t2—:a   end</li>
 </ul>
 <p>1是对类的当前实例加锁<br>2是对锁特定的实例加锁<br>3是对该类的所有对象都加了锁，该类所有的对象同一把锁。</p>
-<p>1.synchronized 方法<br><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="function"><span class="keyword">void</span> <span class="title">syncAdd</span><span class="params">()</span> </span>&#123;</span><br><span class="line">   <span class="comment">//4</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> <span class="function"><span class="keyword">void</span> <span class="title">syncAdd</span><span class="params">()</span> </span>&#123;</span><br><span class="line">   <span class="comment">//5</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>1.<strong>synchronized 方法</strong><br><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="function"><span class="keyword">void</span> <span class="title">syncAdd</span><span class="params">()</span> </span>&#123;</span><br><span class="line">   <span class="comment">//4</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> <span class="function"><span class="keyword">void</span> <span class="title">syncAdd</span><span class="params">()</span> </span>&#123;</span><br><span class="line">   <span class="comment">//5</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <blockquote>
 <p>example</p>
 </blockquote>
@@ -804,7 +804,7 @@
               
                 <a href="/myBlog/archives/">
               
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -827,7 +827,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/myBlog/tags/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
