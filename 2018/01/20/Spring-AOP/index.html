@@ -146,7 +146,7 @@
 
 
 
-  <meta name="keywords" content="分布式,JAVA," />
+  <meta name="keywords" content="Spring," />
 
 
 
@@ -159,21 +159,18 @@
 
 
 
-<meta name="description" content="什么是锁为了实现多个线程在同一时刻同一代码块只能有一个线程可执行，需要在某个地方做标记，这个标记必须满足所有的线程可见，标记不存在的时候设置标记，后续的线程发现已标记则等待拥有标记的线程结束，同步代码块取消标记后，在尝试设置标记，这个标记可以理解为锁。 什么是分布式锁单体单机部署的系统被演化成分布式集群系统后，系统可能会有多份并且部署在不同的机器上，这些资源已经不是在线程之间共享了，而是属于进程">
-<meta name="keywords" content="分布式,JAVA">
+<meta name="description" content="3.AOP面向切面编程">
+<meta name="keywords" content="Spring">
 <meta property="og:type" content="article">
-<meta property="og:title" content="分布式锁">
-<meta property="og:url" content="https://zhangzhang18.github.io/myBlog/2018/11/10/分布式锁/index.html">
+<meta property="og:title" content="Spring-AOP">
+<meta property="og:url" content="https://zhangzhang18.github.io/myBlog/2018/01/20/Spring-AOP/index.html">
 <meta property="og:site_name" content="萌">
-<meta property="og:description" content="什么是锁为了实现多个线程在同一时刻同一代码块只能有一个线程可执行，需要在某个地方做标记，这个标记必须满足所有的线程可见，标记不存在的时候设置标记，后续的线程发现已标记则等待拥有标记的线程结束，同步代码块取消标记后，在尝试设置标记，这个标记可以理解为锁。 什么是分布式锁单体单机部署的系统被演化成分布式集群系统后，系统可能会有多份并且部署在不同的机器上，这些资源已经不是在线程之间共享了，而是属于进程">
+<meta property="og:description" content="3.AOP面向切面编程">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://zhangzhang18.github.io/myBlog/2018/11/10/分布式锁/suo.jpg">
-<meta property="og:image" content="https://zhangzhang18.github.io/myBlog/2018/11/10/分布式锁/bye.jpg">
-<meta property="og:updated_time" content="2019-01-21T07:41:29.978Z">
+<meta property="og:updated_time" content="2019-01-21T07:03:15.221Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="分布式锁">
-<meta name="twitter:description" content="什么是锁为了实现多个线程在同一时刻同一代码块只能有一个线程可执行，需要在某个地方做标记，这个标记必须满足所有的线程可见，标记不存在的时候设置标记，后续的线程发现已标记则等待拥有标记的线程结束，同步代码块取消标记后，在尝试设置标记，这个标记可以理解为锁。 什么是分布式锁单体单机部署的系统被演化成分布式集群系统后，系统可能会有多份并且部署在不同的机器上，这些资源已经不是在线程之间共享了，而是属于进程">
-<meta name="twitter:image" content="https://zhangzhang18.github.io/myBlog/2018/11/10/分布式锁/suo.jpg">
+<meta name="twitter:title" content="Spring-AOP">
+<meta name="twitter:description" content="3.AOP面向切面编程">
 
 
 
@@ -203,7 +200,7 @@
 
 
 
-  <link rel="canonical" href="https://zhangzhang18.github.io/myBlog/2018/11/10/分布式锁/"/>
+  <link rel="canonical" href="https://zhangzhang18.github.io/myBlog/2018/01/20/Spring-AOP/"/>
 
 
 
@@ -224,7 +221,7 @@
 
 
 
-  <title>分布式锁 | 萌</title>
+  <title>Spring-AOP | 萌</title>
   
 
 
@@ -429,7 +426,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://zhangzhang18.github.io/myBlog/myBlog/2018/11/10/分布式锁/">
+    <link itemprop="mainEntityOfPage" href="https://zhangzhang18.github.io/myBlog/myBlog/2018/01/20/Spring-AOP/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="萌">
@@ -446,7 +443,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">分布式锁</h1>
+          <h1 class="post-title" itemprop="name headline">Spring-AOP</h1>
         
 
         <div class="post-meta">
@@ -458,8 +455,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-10T15:14:43+08:00">
-                2018-11-10
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-20T17:27:23+08:00">
+                2018-01-20
               </time>
             
 
@@ -498,7 +495,7 @@
 
           
           
-             <span id="/myBlog/2018/11/10/分布式锁/" class="leancloud_visitors" data-flag-title="分布式锁">
+             <span id="/myBlog/2018/01/20/Spring-AOP/" class="leancloud_visitors" data-flag-title="Spring-AOP">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -522,7 +519,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,248
+                  8
                 </span>
               
 
@@ -547,31 +544,7 @@
       
 
       
-        <p><img src="/myBlog/2018/11/10/分布式锁/suo.jpg" alt="image"></p>
-<h3 id="什么是锁"><a href="#什么是锁" class="headerlink" title="什么是锁"></a>什么是锁</h3><p>为了实现多个线程在同一时刻同一代码块只能有一个线程可执行，需要在某个地方做标记，这个标记必须满足所有的线程可见，标记不存在的时候设置标记，后续的线程发现已标记则等待拥有标记的线程结束，同步代码块取消标记后，在尝试设置标记，这个标记可以理解为锁。</p>
-<h3 id="什么是分布式锁"><a href="#什么是分布式锁" class="headerlink" title="什么是分布式锁"></a>什么是分布式锁</h3><p>单体单机部署的系统被演化成分布式集群系统后，系统可能会有多份并且部署在不同的机器上，这些资源已经不是在线程之间共享了，而是属于进程之间共享的资源。<br>指在分布式的部署环境下，通过锁机制来让多客户端互斥的对共享资源进行访问。<br><a id="more"></a><br>分布式的 CAP 理论：</p>
-<blockquote>
-<p>任何一个分布式系统都无法同时满足一致性（Consistency）、可用性（Availability）和分区容错性（Partition tolerance），最多只能同时满足两项。</p>
-</blockquote>
-<h3 id="分布式锁要满足哪些要求呢"><a href="#分布式锁要满足哪些要求呢" class="headerlink" title="分布式锁要满足哪些要求呢"></a>分布式锁要满足哪些要求呢</h3><ul>
-<li>互斥性：在任意时刻，只有一个客户端能持有锁。</li>
-<li>不会发生死锁：即使有一个客户端在持有锁的期间崩溃而没有主动解锁，也能保证后续其他客户端能加锁。</li>
-<li>容错性：获取或释放锁的机制必须高可用且性能佳</li>
-<li>解铃还须系铃人：加锁和解锁必须是同一个客户端，客户端自己不能把别人加的锁给解了。</li>
-</ul>
-<h3 id="分布式锁实现方式"><a href="#分布式锁实现方式" class="headerlink" title="分布式锁实现方式"></a>分布式锁实现方式</h3><p>为了保证数据的最终一致性，需要很多的技术方案来支持，比如分布式事务、分布式锁等。有的时候，我们需要保证一个方法在同一时间内只能被同一个线程执行。</p>
-<blockquote>
-<p>基于数据库实现分布式锁；<br>基于缓存（Redis等）实现分布式锁；<br>基于Zookeeper实现分布式锁；</p>
-</blockquote>
-<h4 id="基于数据库"><a href="#基于数据库" class="headerlink" title="基于数据库"></a>基于数据库</h4><p>思路：在数据库中创建一个表，表中包含方法名等字段，并在方法名字段上创建唯一索引，想要执行某个方法，就使用这个方法名向表中插入数据，成功插入则获取锁，执行完成后删除对应的行数据释放锁。</p>
-<h4 id="基于Redis"><a href="#基于Redis" class="headerlink" title="基于Redis"></a>基于Redis</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Collections;</span><br><span class="line"><span class="keyword">import</span> redis.clients.jedis.Jedis;</span><br><span class="line"><span class="keyword">import</span> redis.clients.jedis.JedisPool;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">XttblogLock</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String LOCK_SUCCESS = <span class="string">"OK"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String SET_IF_NOT_EXIST = <span class="string">"NX"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String SET_WITH_EXPIRE_TIME = <span class="string">"PX"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Long RELEASE_SUCCESS = <span class="number">1L</span>;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">validParam</span><span class="params">(JedisPool jedisPool, String lockKey, String requestId, <span class="keyword">int</span> expireTime)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">null</span> == jedisPool) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"jedisPool obj is null"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">null</span> == lockKey || <span class="string">""</span>.equals(lockKey)) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"lock key  is blank"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">null</span> == requestId || <span class="string">""</span>.equals(requestId)) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"requestId is blank"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (expireTime &lt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"expireTime is not allowed less zero"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">tryLock</span><span class="params">(JedisPool jedisPool, String lockKey, String requestId, <span class="keyword">int</span> expireTime)</span> </span>&#123;</span><br><span class="line">        validParam(jedisPool, lockKey, requestId, expireTime);</span><br><span class="line">        Jedis jedis = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            jedis = jedisPool.getResource();</span><br><span class="line">            String result = jedis.set(lockKey, requestId, SET_IF_NOT_EXIST, SET_WITH_EXPIRE_TIME, expireTime);</span><br><span class="line">            <span class="keyword">if</span> (LOCK_SUCCESS.equals(result)) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> e;</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="keyword">null</span> != jedis) &#123;</span><br><span class="line">                jedis.close();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">unLock</span><span class="params">(JedisPool jedisPool, String lockKey, String requestId)</span> </span>&#123;</span><br><span class="line">        validParam(jedisPool, lockKey, requestId, <span class="number">1</span>);</span><br><span class="line">        String script = <span class="string">"if redis.call('get', KEYS[1]) == ARGV[1] then return redis.call('del', KEYS[1]) else return 0 end"</span>;</span><br><span class="line">        Jedis jedis = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            jedis = jedisPool.getResource();</span><br><span class="line">            Object result = jedis.eval(script, Collections.singletonList(lockKey),Collections.singletonList(requestId));</span><br><span class="line">            <span class="keyword">if</span> (RELEASE_SUCCESS.equals(result)) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> e;</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="keyword">null</span> != jedis) &#123;</span><br><span class="line">                jedis.close();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.concurrent.TimeUnit;</span><br><span class="line"><span class="keyword">import</span> org.redisson.Redisson;</span><br><span class="line"><span class="keyword">import</span> org.redisson.core.RLock;</span><br><span class="line"><span class="keyword">import</span> org.slf4j.Logger;</span><br><span class="line"><span class="keyword">import</span> org.slf4j.LoggerFactory;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RedissonLockUtil</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Logger logger = LoggerFactory.getLogger(RedissonLockUtil.class);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Redisson redisson = RedissonManager.getRedisson();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String LOCK_FLAG = <span class="string">"recruitlock_"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 根据name对进行上锁操作，redissonLock 阻塞的，采用的机制发布/订阅</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> key</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">lock</span><span class="params">(String key)</span></span>&#123;</span><br><span class="line">        String lockKey = LOCK_FLAG + key;</span><br><span class="line">        RLock lock = redisson.getLock(lockKey);</span><br><span class="line">        <span class="comment">//lock提供带timeout参数，timeout结束强制解锁，防止死锁 ：1分钟</span></span><br><span class="line">        lock.lock(<span class="number">1</span>, TimeUnit.MINUTES);</span><br><span class="line">        logger.info(<span class="string">"lock key:&#123;&#125;"</span>,lockKey);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 根据name对进行解锁操作</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> key</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">unlock</span><span class="params">(String key)</span></span>&#123;</span><br><span class="line">        String lockKey = LOCK_FLAG + key;</span><br><span class="line">        RLock lock = redisson.getLock(lockKey);</span><br><span class="line">        <span class="keyword">if</span> (lock.isHeldByCurrentThread())</span><br><span class="line">        &#123;</span><br><span class="line">            lock.unlock();</span><br><span class="line">            logger.info(<span class="string">"unlock , key:&#123;&#125;"</span>+lockKey);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> key</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> millisToWait 等待获取锁的时间--单位：秒</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">tryLock</span><span class="params">(String key, <span class="keyword">long</span> millisToWait)</span> </span>&#123;</span><br><span class="line">        String lockKey = LOCK_FLAG + key;</span><br><span class="line">        logger.info(<span class="string">"get redis lock start , key:&#123;&#125;"</span>+lockKey);</span><br><span class="line">        RLock lock = redisson.getLock(lockKey);</span><br><span class="line">        logger.info(<span class="string">"get redis lock end , key:"</span>+lockKey);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">return</span>  lock.tryLock(millisToWait,<span class="number">5000</span>, TimeUnit.MILLISECONDS);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            logger.error(<span class="string">"try lock error,key is:&#123;&#125;"</span>, lockKey, e);</span><br><span class="line">        &#125;</span><br><span class="line">        logger.info(<span class="string">"get redis lock false , key:"</span>+lockKey);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>错误示例<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Long</span> result = jedis.setnx(lockKey, requestId);</span><br><span class="line"> <span class="keyword">if</span> (result == <span class="number">1</span>) &#123;</span><br><span class="line">     <span class="comment">// 若在这里程序突然崩溃，则无法设置过期时间，将发生死锁</span></span><br><span class="line">     jedis.expire(lockKey, expireTime);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></p>
-<p><a href="https://www.cnblogs.com/seesun2012/p/9214653.html" target="_blank" rel="noopener">https://www.cnblogs.com/seesun2012/p/9214653.html</a></p>
-<p><a href="http://www.cnblogs.com/linjiqin/p/8003838.html" target="_blank" rel="noopener">http://www.cnblogs.com/linjiqin/p/8003838.html</a></p>
-<p><a href="https://www.xttblog.com/?p=3171" target="_blank" rel="noopener">https://www.xttblog.com/?p=3171</a></p>
-<p><img src="/myBlog/2018/11/10/分布式锁/bye.jpg" alt="image"></p>
-
+        <h1 id="3-AOP面向切面编程"><a href="#3-AOP面向切面编程" class="headerlink" title="3.AOP面向切面编程"></a>3.AOP面向切面编程</h1>
       
     </div>
     
@@ -601,9 +574,7 @@
       
         <div class="post-tags">
           
-            <a href="/myBlog/tags/分布式/" <i class="fa fa-tag"></i> 分布式</a>
-          
-            <a href="/myBlog/tags/JAVA/" <i class="fa fa-tag"></i> JAVA</a>
+            <a href="/myBlog/tags/Spring/" <i class="fa fa-tag"></i> Spring</a>
           
         </div>
       
@@ -628,8 +599,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/myBlog/2018/10/15/Dubbo/" rel="next" title="Dubbo">
-                <i class="fa fa-chevron-left"></i> Dubbo
+              <a href="/myBlog/2018/01/16/Spring-IOC/" rel="next" title="Spring-IOC">
+                <i class="fa fa-chevron-left"></i> Spring-IOC
               </a>
             
           </div>
@@ -638,8 +609,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/myBlog/2018/12/06/Elasticsearch/" rel="prev" title="Elasticsearch">
-                Elasticsearch <i class="fa fa-chevron-right"></i>
+              <a href="/myBlog/2018/08/08/Spring+Shiro+Redis实践/" rel="prev" title="Spring+Shiro+Redis实践">
+                Spring+Shiro+Redis实践 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -819,7 +790,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是锁"><span class="nav-text">什么是锁</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是分布式锁"><span class="nav-text">什么是分布式锁</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分布式锁要满足哪些要求呢"><span class="nav-text">分布式锁要满足哪些要求呢</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分布式锁实现方式"><span class="nav-text">分布式锁实现方式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基于数据库"><span class="nav-text">基于数据库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基于Redis"><span class="nav-text">基于Redis</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#3-AOP面向切面编程"><span class="nav-text">3.AOP面向切面编程</span></a></li></ol></div>
             
 
           </div>
