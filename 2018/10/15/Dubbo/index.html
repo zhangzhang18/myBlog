@@ -159,15 +159,20 @@
 
 
 
+<meta name="description" content="Dubbo 一般的mvc项目 包含 Controller、Servicei、ServiceImpl、dao三层使用doubbo我们可以把项目拆分：Controller 作为 “消费着” 一个项目ServiceImpl +dao 作为 “提供者” 一个项目 Service “接口” 可以作为一个项目 节点角色说明： *  Provider: 暴露服务的服务提供方 *  Consumer: 调用远程服">
 <meta name="keywords" content="分布式,Dubbo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Dubbo">
 <meta property="og:url" content="https://zhangzhang18.github.io/myBlog/2018/10/15/Dubbo/index.html">
 <meta property="og:site_name" content="萌">
+<meta property="og:description" content="Dubbo 一般的mvc项目 包含 Controller、Servicei、ServiceImpl、dao三层使用doubbo我们可以把项目拆分：Controller 作为 “消费着” 一个项目ServiceImpl +dao 作为 “提供者” 一个项目 Service “接口” 可以作为一个项目 节点角色说明： *  Provider: 暴露服务的服务提供方 *  Consumer: 调用远程服">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-18T10:58:34.675Z">
+<meta property="og:image" content="https://zhangzhang18.github.io/myBlog/2018/10/15/Dubbo/dubbo.jpg">
+<meta property="og:updated_time" content="2019-02-18T10:16:04.399Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Dubbo">
+<meta name="twitter:description" content="Dubbo 一般的mvc项目 包含 Controller、Servicei、ServiceImpl、dao三层使用doubbo我们可以把项目拆分：Controller 作为 “消费着” 一个项目ServiceImpl +dao 作为 “提供者” 一个项目 Service “接口” 可以作为一个项目 节点角色说明： *  Provider: 暴露服务的服务提供方 *  Consumer: 调用远程服">
+<meta name="twitter:image" content="https://zhangzhang18.github.io/myBlog/2018/10/15/Dubbo/dubbo.jpg">
 
 
 
@@ -516,7 +521,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  0
+                  878
                 </span>
               
 
@@ -541,7 +546,29 @@
       
 
       
-        
+        <p><a href="http://dubbo.apache.org/zh-cn/docs/user/quick-start.html" target="_blank" rel="noopener">Dubbo</a></p>
+<p>一般的mvc项目 包含 Controller、Servicei、ServiceImpl、dao三层<br>使用doubbo我们可以把项目拆分：<br>Controller 作为 “消费着” 一个项目<br>ServiceImpl +dao 作为 “提供者” 一个项目</p>
+<p>Service “接口” 可以作为一个项目</p>
+<p><strong>节点角色说明：</strong></p>
+<pre><code>*  Provider: 暴露服务的服务提供方
+*  Consumer: 调用远程服务的服务消费方。
+*  Registry: 服务注册与发现的注册中心。
+*  Monitor: 统计服务的调用次调和调用时间的监控中心。
+*  Container: 服务运行容器。
+</code></pre><a id="more"></a>
+<p><img src="/myBlog/2018/10/15/Dubbo/dubbo.jpg" alt="Dubbo"></p>
+<p><strong>调用关系说明：</strong></p>
+<pre><code>* 服务容器负责启动，加载，运行服务提供者。
+* 服务提供者在启动时，向注册中心注册自己提供的服务。
+*服务消费者在启动时，向注册中心订阅自己所需的服务。
+* 注册中心返回服务提供者地址列表给消费者，如果有变更，注册中心将基于长连接推送变更数据给消费者。
+* 服务消费者，从提供者地址列表中，基于软负载均衡算法，选一台提供者进行调用，如果调用失败，再选另一台调用。
+* 服务消费者和提供者，在内存中累计调用次数和调用时间，定时每分钟发送一次统计数据到监控中心。
+</code></pre><p>用 Spring 配置声明暴露服务<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;<span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:dubbo</span>=<span class="string">"http://code.alibabatech.com/schema/dubbo"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://www.springframework.org/schema/beans        http://www.springframework.org/schema/beans/spring-beans.xsd        http://code.alibabatech.com/schema/dubbo        http://code.alibabatech.com/schema/dubbo/dubbo.xsd"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- 提供方应用信息，用于计算依赖关系 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dubbo:application</span> <span class="attr">name</span>=<span class="string">"hello-world-app"</span>  /&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- 使用multicast广播注册中心暴露服务地址 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dubbo:registry</span> <span class="attr">address</span>=<span class="string">"multicast://224.5.6.7:1234"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- 用dubbo协议在20880端口暴露服务 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dubbo:protocol</span> <span class="attr">name</span>=<span class="string">"dubbo"</span> <span class="attr">port</span>=<span class="string">"20880"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- 声明需要暴露的服务接口 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dubbo:service</span> <span class="attr">interface</span>=<span class="string">"com.alibaba.dubbo.demo.DemoService"</span> <span class="attr">ref</span>=<span class="string">"demoService"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- 和本地bean一样实现服务 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"demoService"</span> <span class="attr">class</span>=<span class="string">"com.alibaba.dubbo.demo.provider.DemoServiceImpl"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>加载Spring配置Provider.java<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.context.support.ClassPathXmlApplicationContext;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Provider</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        ClassPathXmlApplicationContext context = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="keyword">new</span> String[]&#123;<span class="string">"http://10.20.160.198/wiki/display/dubbo/provider.xml"</span>&#125;);</span><br><span class="line">        context.start();</span><br><span class="line"></span><br><span class="line">        System.in.read(); <span class="comment">// 按任意键退出</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>服务消费者<br>通过Spring配置引用远程服务<br>consumer.xml<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;<span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span></span></span><br><span class="line"><span class="tag"><span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag"><span class="attr">xmlns:dubbo</span>=<span class="string">"http://code.alibabatech.com/schema/dubbo"</span></span></span><br><span class="line"><span class="tag"><span class="attr">xsi:schemaLocation</span>=<span class="string">"http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 消费方应用名，用于计算依赖关系，不是匹配条件，不要与提供方一样 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dubbo:application</span> <span class="attr">name</span>=<span class="string">"consumer-of-helloworld-app"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 使用multicast广播注册中心暴露发现服务地址 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dubbo:registry</span> <span class="attr">address</span>=<span class="string">"multicast://224.5.6.7:1234"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 生成远程服务代理，可以和本地bean一样使用demoService --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dubbo:reference</span> <span class="attr">id</span>=<span class="string">"demoService"</span> <span class="attr">interface</span>=<span class="string">"com.alibaba.dubbo.demo.DemoService"</span> /&gt;</span><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>加载Spring配置，并调用远程服务<br>Consumer.java<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.context.support.ClassPathXmlApplicationContext;</span><br><span class="line"><span class="keyword">import</span> com.alibaba.dubbo.demo.DemoService;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Consumer</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        ClassPathXmlApplicationContext context = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="keyword">new</span> String[] &#123;<span class="string">"http://10.20.160.198/wiki/display/dubbo/consumer.xml"</span>&#125;);</span><br><span class="line">        context.start();</span><br><span class="line"></span><br><span class="line">        DemoService demoService = (DemoService)context.getBean(<span class="string">"demoService"</span>); <span class="comment">// 获取远程服务代理</span></span><br><span class="line">        String hello = demoService.sayHello(<span class="string">"world"</span>); <span class="comment">// 执行远程方法</span></span><br><span class="line"></span><br><span class="line">        System.out.println( hello ); <span class="comment">// 显示调用结果</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
       
     </div>
     
@@ -693,7 +720,7 @@
               
                 <a href="/myBlog/archives/">
               
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -716,7 +743,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/myBlog/tags/index.html">
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

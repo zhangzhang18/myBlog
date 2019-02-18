@@ -172,7 +172,7 @@
 <meta property="og:image" content="https://zhangzhang18.github.io/myBlog/2017/05/12/HashMap归纳总结/ConcurrentHashMap.png">
 <meta property="og:image" content="https://zhangzhang18.github.io/myBlog/2017/05/12/HashMap归纳总结/HashMap.jpg">
 <meta property="og:image" content="https://zhangzhang18.github.io/myBlog/2017/05/12/HashMap归纳总结/ConcurrentHashMap.jpg">
-<meta property="og:updated_time" content="2019-01-16T09:53:40.452Z">
+<meta property="og:updated_time" content="2019-02-18T03:54:09.341Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HashMap归纳总结">
 <meta name="twitter:description" content="总结ArrayList和LinkedListHashMap  （1）ArrayList以数组形式实现，顺序插入、查找快，插入、删除较慢 （2）LinkedList以链表形式实现，顺序插入、查找较慢，插入、删除方便">
@@ -525,7 +525,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  705
+                  731
                 </span>
               
 
@@ -567,6 +567,7 @@
 <li>是无序的，不会按照put的顺序排序。</li>
 <li>是非线程安全的。</li>
 <li>HashMap的Entry是一个单向链表</li>
+<li>默认初始长度是16</li>
 </ul>
 </blockquote>
 <p><img src="/myBlog/2017/05/12/HashMap归纳总结/base.jpg" alt="base"></p>
@@ -616,6 +617,10 @@
 <blockquote>
 <p>Map m = Collections.synchronizeMap(hashMap);</p>
 </blockquote>
+<ol start="8">
+<li>高并发下的HashMap</li>
+</ol>
+<p>Rehash是HashMap在扩容时的一个步骤</p>
 <p><img src="/myBlog/2017/05/12/HashMap归纳总结/ConcurrentHashMap.png" alt="ConcurrentHashMap"></p>
 <h2 id=""><a href="#" class="headerlink" title=""></a><img src="/myBlog/2017/05/12/HashMap归纳总结/HashMap.jpg" alt="HashMap"></h2><h2 id="ConcurrentHashMap"><a href="#ConcurrentHashMap" class="headerlink" title="ConcurrentHashMap"></a>ConcurrentHashMap</h2><blockquote>
 <p>需要线程安全，那么就使用ConcurrentHashMap。</p>
@@ -788,7 +793,7 @@
               
                 <a href="/myBlog/archives/">
               
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -811,7 +816,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/myBlog/tags/index.html">
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
