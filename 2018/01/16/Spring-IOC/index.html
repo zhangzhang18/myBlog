@@ -169,7 +169,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://zhangzhang18.github.io/myBlog/2018/01/16/Spring-IOC/core.jpg">
 <meta property="og:image" content="https://zhangzhang18.github.io/myBlog/2018/01/16/Spring-IOC/ioc.png">
-<meta property="og:updated_time" content="2019-01-21T07:43:29.619Z">
+<meta property="og:updated_time" content="2019-01-21T08:46:13.488Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring-IOC">
 <meta name="twitter:description" content="1.Spring框架简介Spring框架是基于Java平台的，它为开发Java应用提供了全方位的基础设施支持，并且它很好地处理了这些基础设施，所以你只需要关注你的应用本身即可。 Spring可以使用POJO（普通的Java对象，plain old java objects）创建应用，并且可以将企业服务非侵入式地应用到POJO。这项功能适用于Java SE编程模型以及全部或部分的Java EE。">
@@ -522,7 +522,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,132
+                  1,155
                 </span>
               
 
@@ -573,50 +573,18 @@
 <blockquote>
 <p>ClassLoader，Class，Constructor，和Method </p>
 </blockquote>
-<p>ClassLoader：类装载器，把一个类装入到JVM。<br>需要经过：</p>
-<ul>
-<li>1.装载</li>
-<li>2.链接 校验 准备  解析</li>
-<li>3.初始化<h3 id="2-1-2-IOC容器中转配Bean"><a href="#2-1-2-IOC容器中转配Bean" class="headerlink" title="2.1.2 IOC容器中转配Bean"></a>2.1.2 IOC容器中转配Bean</h3><ol>
+<p>ClassLoader：类装载器，把一个类装入到JVM。<br>   需要经过：</p>
+<pre><code>- 1.装载
+- 2.链接 校验 准备  解析
+- 3.初始化
+</code></pre><h3 id="2-1-2-IOC容器中转配Bean"><a href="#2-1-2-IOC容器中转配Bean" class="headerlink" title="2.1.2 IOC容器中转配Bean"></a>2.1.2 IOC容器中转配Bean</h3><ol>
 <li><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> <span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"org.springframework.web.servlet.view.InternalResourceViewResolver"</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"prefix"</span> <span class="attr">value</span>=<span class="string">"/WEB-INF/views/"</span> /&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"suffix"</span> <span class="attr">value</span>=<span class="string">".jsp"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
 </li>
-</ol>
-</li>
-</ul>
-<ol start="2">
 <li><p><strong>Spring 支持两种依赖注入方式：属性注入和构造函数注入，还支持工厂方法注入方式。</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SpringBeanFactory</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> BeanFactory beanFactory;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Logger logger = LoggerFactory.getLogger(SpringBeanFactory.class);</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> BeanFactory <span class="title">getBeanFactory</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (beanFactory == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">synchronized</span> (BeanFactory.class) &#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    String path = Config.getConfigFolder();</span><br><span class="line">                    <span class="keyword">if</span> (beanFactory == <span class="keyword">null</span>) &#123;</span><br><span class="line">                        beanFactory = <span class="keyword">new</span> FileSystemXmlApplicationContext(<span class="string">"/"</span> + path + <span class="string">"aplication-spring-dubbo.xml"</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                    logger.error(<span class="string">"初始化SpringDubbo Error"</span>, e);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> beanFactory;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>自动装配 - autowire=”自动装配类型”</strong></p>
-</li>
-</ol>
-<ul>
-<li>byName：根据名称自动匹配</li>
-<li>byType：根据类型自动匹配</li>
-<li>constructor：与byType类似，它只针对构造函数注入的</li>
-<li>autodetect：</li>
-</ul>
-<ol start="4">
-<li><strong>bean作用域 - scope=”作用域”</strong></li>
-</ol>
-<ul>
-<li>singleton：在IOC容器中只存在一个实例，以单例的方式存在,默认值</li>
-<li>prototype：每次从容器调用Bean时，都返回一个新的实例</li>
-<li>request：每次HTTP请求都会创建一个新的Bean，只适用于WebApplicationContext环境</li>
-<li>session：同一个HTTP Session共享一个Bean，只适用于WebApplicationContext环境</li>
-<li>global-session：</li>
-</ul>
-<ol start="5">
-<li><strong>基于注解定义Bean</strong></li>
-</ol>
-<p>@component可以替代下面三种注解，为了清晰化，建议使用特定的注解</p>
-<ul>
-<li>@Repository：DAO层实现类</li>
-<li>@Service：Service实现类</li>
-<li>@Controller：Service实现类<br>扫描包以应用注解的Bean<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">"com.test.company.*"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SpringBeanFactory</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> BeanFactory beanFactory;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Logger logger = LoggerFactory.getLogger(SpringBeanFactory.class);</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> BeanFactory <span class="title">getBeanFactory</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (beanFactory == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">synchronized</span> (BeanFactory.class) &#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    String path = Config.getConfigFolder();</span><br><span class="line">                    <span class="keyword">if</span> (beanFactory == <span class="keyword">null</span>) &#123;</span><br><span class="line">                        beanFactory = <span class="keyword">new</span> FileSystemXmlApplicationContext(<span class="string">"/"</span> + path + <span class="string">"aplication-spring-dubbo.xml"</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                    logger.error(<span class="string">"初始化SpringDubbo Error"</span>, e);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> beanFactory;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">```   </span><br><span class="line"><span class="number">3</span>. **自动装配 - autowire=<span class="string">"自动装配类型"</span>**</span><br><span class="line">   - byName：根据名称自动匹配</span><br><span class="line">   - byType：根据类型自动匹配</span><br><span class="line">   - constructor：与byType类似，它只针对构造函数注入的</span><br><span class="line">   - autodetect：</span><br><span class="line"><span class="number">4</span>. **bean作用域 - scope=<span class="string">"作用域"</span>**</span><br><span class="line">   - singleton：在IOC容器中只存在一个实例，以单例的方式存在,默认值</span><br><span class="line">   - prototype：每次从容器调用Bean时，都返回一个新的实例</span><br><span class="line">   - request：每次HTTP请求都会创建一个新的Bean，只适用于WebApplicationContext环境</span><br><span class="line">   - session：同一个HTTP Session共享一个Bean，只适用于WebApplicationContext环境</span><br><span class="line">   - global-session：</span><br><span class="line"></span><br><span class="line"><span class="number">5</span>. **基于注解定义Bean**</span><br><span class="line"></span><br><span class="line"><span class="meta">@component</span>可以替代下面三种注解，为了清晰化，建议使用特定的注解</span><br><span class="line">   - <span class="meta">@Repository</span>：DAO层实现类</span><br><span class="line">   - <span class="meta">@Service</span>：Service实现类</span><br><span class="line">   - <span class="meta">@Controller</span>：Service实现类</span><br><span class="line">扫描包以应用注解的Bean</span><br><span class="line">```xml</span><br><span class="line">&lt;context:component-scan base-<span class="keyword">package</span>=<span class="string">"com.test.company.*"</span> /&gt;</span><br></pre></td></tr></table></figure>
 <p>Spring使用@Autowired注解实现Bean依赖注入<br>@Autowired默认按照byType匹配在容器中查找Bean<br>若想希望找不到Bean也不报NoSuchBeanDefinitionException异常，可以使用@Autowired(require=false)<br>@Qualifier注解可以限定Bean的名字</p>
+</li>
+</ol>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Qualifier(<span class="meta-string">"userDaop"</span>)</span></span><br><span class="line"><span class="keyword">private</span> UserDao userDao;</span><br></pre></td></tr></table></figure>
 <p><a href="https://www.cnblogs.com/wang-meng/p/5597490.html" target="_blank" rel="noopener">https://www.cnblogs.com/wang-meng/p/5597490.html</a></p>
 
@@ -778,7 +746,7 @@
               
                 <a href="/myBlog/archives/">
               
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

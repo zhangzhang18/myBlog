@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[AB测技术]]></title>
+    <url>%2FmyBlog%2F2019%2F02%2F13%2FAB%E6%B5%8B%E6%8A%80%E6%9C%AF%2F</url>
+    <content type="text"><![CDATA[简单来说，就是为同一个目标制定两个方案（比如两个页面）]]></content>
+      <categories>
+        <category>NoteBook</category>
+      </categories>
+  </entry>
+  <entry>
     <title><![CDATA[ZooKeeper]]></title>
     <url>%2FmyBlog%2F2018%2F12%2F26%2FZooKeeper%2F</url>
     <content type="text"></content>
@@ -71,9 +79,21 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[Spring-事物]]></title>
+    <url>%2FmyBlog%2F2018%2F03%2F16%2FSpring-%E4%BA%8B%E7%89%A9%2F</url>
+    <content type="text"><![CDATA[原子性：要么全部执行成功，要么全部执行失败 一致性：在事务开始之前和事务结束以后，数据库的完整性没有被破坏 隔离性：并发的食物是互相隔离的，一个事物执行不被其他事物影响 持久性：事物一旦提交，对数据库的改变是永久性的 脏读：指在一个事务处理过程里读取了另一个未提交的事务中的数据。 不可重复读：一个事务范围内多次查询却返回了不同的数据值，这是由于在查询间隔，被另一个事务修改并提交了。 幻读：同样的事务操作，在前后两个时间段内执行对同一个数据项的读取，可能出现不一致的结果。幻读和不可重复读都是读取了另一条已经提交的事务 MySQL数据库提供的四种隔离级别： ① Serializable (串行化)：可避免脏读、不可重复读、幻读的发生。 ② Repeatable read (可重复读)：可避免脏读、不可重复读的发生。 ③ Read committed (读已提交)：可避免脏读的发生。 ④ Read uncommitted (读未提交)：最低级别，任何情况都无法保证。]]></content>
+      <categories>
+        <category>NoteBook</category>
+      </categories>
+      <tags>
+        <tag>JAVA</tag>
+        <tag>基础</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Spring-AOP]]></title>
     <url>%2FmyBlog%2F2018%2F01%2F20%2FSpring-AOP%2F</url>
-    <content type="text"><![CDATA[3.AOP面向切面编程]]></content>
+    <content type="text"><![CDATA[3.AOP面向切面编程 OOP面向对象编程的基本单位是类，AOP的基本单位是方法适用于具有横切逻辑的应用场景，例如性能检测、范文控制、事物管理、及日志管理 AOP希望将分散在各个业务逻辑代码中的相同代码通过横向切割的方式抽取到一个独立独立的模块中。 3.1概念和术语 Aspect(切面):切面通常是指一个类，是通知和切入点的结合 Join point(连接点):程序执行的某个特定位置，例如类初始化前，类初始化后，方法执行前，方法执行后，方法抛出异常时等，Spring只支持方法级别的连接点，即方法执行前，方法执行后，方法抛出异常时 Advice(增强):增强是织入到目标类连接点上的一段程序代码 Pointcut(切点):每个程序类都拥有多个连接点，如一个拥有两个方法的类，这两个方法都是连接点，即连接点是程序类中客观存在的事物 Introduction(引介):允许向现有的类添加新方法或属性 Target object(目标对象):增强逻辑的织入目标类 AOP proxy(代理):一个类被AOP织入增强后，就产出了一个结果类，它是融合了原类和增强逻辑的代理类 Weaving(织入):织入是将增强添加对目标类具体连接点上的过程AOP有三种织入的方式： a、编译期织入，这要求使用特殊的Java编译器。 b、类装载期织入，这要求使用特殊的类装载器。 c、动态代理织入，在运行期为目标类添加增强生成子类的方式。Spring采用动态代理织入，而AspectJ采用编译期织入和类装载期织入。3.1.1实现123456&lt;beans&gt; &lt;aop:aspectj-autoproxy poxy-target-class="true"/&gt; &lt;!-- 声明自动为spring容器中那些配置@aspectJ切面的bean创建代理，织入切面。--&gt; &lt;!--表示使用CGLib动态代理技术织入增强。不过即使proxy-target-class设置为false，如果目标类没有声明接口，则spring将自动使用CGLib动态代理。--&gt; &lt;bean id = "testAspect" class="com.test.company.aop.TestAspect" /&gt;&lt;/beans&gt; 1234567891011121314151617181920212223242526//切面就是切点和通知的组合体@Aspectpublic class TestAspect &#123; /** * 切点 */ @Pointcut("execution(*com.test.company.service.Impl.TestImpl.insert(..))")//Pointcut 使用pointcut定义切点 private void insertPointcut()&#123; &#125; /** * 环绕通知 * @param pjp */ @Around("insertPointcut()") public Object insert(ProceedingJoinPoint pjp) throws Throwable&#123;&#125; /** * 前置通知 */ @Before("execution(*com.test.company.service.Impl.TestImpl.insert(..))")//execution(*insert(..)) 切点表达式“execution”为关键字，“*insert(..)”为操作参数 private void Before()&#123; &#125; /** * 后置通知 * returnVal,切点方法执行后的返回值 */ @AfterReturning(value="execution(*com.test.company.service.Impl.TestImpl.insert(..))",returning = "returnVal") private void AfterReturning(Object returnVal)&#123; &#125; &#125; 通知有5种类型如下： before 目标方法执行前执行，前置通知 after 目标方法执行后执行，后置通知 after returning 目标方法返回时执行 ，后置返回通知 after throwing 目标方法抛出异常时执行 异常通知 around 在目标函数执行中执行，可控制目标函数是否执行，环绕通知 3.1.2 相关Java基础知识 代理模式 为某对象提供一个代理，从而通过代理来访问这个对象。 代理模式有三种角色组成: 抽象角色(卖票)：接口 代理角色(车票代售点)：Proxy 真实角色(火车站)：实现 动态代理代理类在程序运行前就已经存在，那么这种代理方式被成为 静态代理 JDK动态代理 jdk动态代理是由java内部的反射机制来实现的 主要涉及java.lang.reflect 包中：Proxy和InvocationHandler 使用动态代理需要定义一个位于代理类与委托类之间的中介类,中介类需要实现InvocationHandler定义的横切逻辑，通过反射机制调用目标类的方法，动态的将横切逻辑和业务逻辑编织在一起，InvocationHandler接口只定义了一个invoke方法通过”Proxy”类提供的一个newProxyInstance方法用来创建一个对象的代理对象 https://zhuanlan.zhihu.com/p/25522841]]></content>
       <categories>
         <category>NoteBook</category>
       </categories>
@@ -84,7 +104,7 @@
   <entry>
     <title><![CDATA[Spring-IOC]]></title>
     <url>%2FmyBlog%2F2018%2F01%2F16%2FSpring-IOC%2F</url>
-    <content type="text"><![CDATA[1.Spring框架简介Spring框架是基于Java平台的，它为开发Java应用提供了全方位的基础设施支持，并且它很好地处理了这些基础设施，所以你只需要关注你的应用本身即可。 Spring可以使用POJO（普通的Java对象，plain old java objects）创建应用，并且可以将企业服务非侵入式地应用到POJO。这项功能适用于Java SE编程模型以及全部或部分的Java EE。 2.Spring模块结构 2.1 IOC 控制反转 IoC也称为依赖注入（DI）是为了解决对象之间的耦合度过高的问题 钟表拥有多个独立的齿轮，这些齿轮相互啮合在一起，齿轮相互啮合在一起，协同工作，共同完成某项任务。如果有一个齿轮出了问题，就可能会影响到整个齿轮组的正常运转。与软件系统中对象之间的耦合关系非常相似 软件专家Michael Mattson提出了IOC理论，用来实现对象之间的“解耦”。 借助于“第三方”实现具有依赖关系的对象之间的解耦，这个“第三方”也就是IOC容器。 哪些方面的控制被反转了呢 获得依赖对象的过程被反转了 所谓依赖注入，就是由IOC容器在运行期间，动态地将某种依赖关系注入到对象之中。 所以，依赖注入(DI)和控制反转(IOC)是从不同的角度的描述的同一件事情，就是指通过引入IOC容器，利用依赖关系注入的方式，实现对象之间的解耦。 把依赖注入应用到软件系统中，再来描述一下这个过程： 对象A依赖于对象B,当对象 A需要用到对象B的时候，IOC容器就会立即创建一个对象B送给对象A。 IOC容器就是一个对象制造工厂，你需要什么，它会给你送去，你直接使用就行了，而再也不用去关心你所用的东西是如何制成的，也不用关心最后是怎么被销毁的，这一切全部由IOC容器包办。 2.1.1 相关Java基础知识IOC流程 反射：Java语言允许通过程序化的方式间接对class操作，Class文件由类加载器转载后，JVM形成一份描述Class结构的元信息，通过元信息对象可以获取到构造函数，属性和方法等。 通过这个元信息对象间接的调用Class对象的功能。 几个重要的反射类： ClassLoader，Class，Constructor，和Method ClassLoader：类装载器，把一个类装入到JVM。需要经过： 1.装载 2.链接 校验 准备 解析 3.初始化2.1.2 IOC容器中转配Bean 1234 &lt;bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"&gt; &lt;property name="prefix" value="/WEB-INF/views/" /&gt; &lt;property name="suffix" value=".jsp" /&gt;&lt;/bean&gt; Spring 支持两种依赖注入方式：属性注入和构造函数注入，还支持工厂方法注入方式。 123456789101112131415161718192021public class SpringBeanFactory &#123; private static BeanFactory beanFactory; private static Logger logger = LoggerFactory.getLogger(SpringBeanFactory.class); public static BeanFactory getBeanFactory() &#123; if (beanFactory == null) &#123; synchronized (BeanFactory.class) &#123; try &#123; String path = Config.getConfigFolder(); if (beanFactory == null) &#123; beanFactory = new FileSystemXmlApplicationContext("/" + path + "aplication-spring-dubbo.xml"); &#125; &#125; catch (Exception e) &#123; logger.error("初始化SpringDubbo Error", e); &#125; &#125; &#125; return beanFactory; &#125;&#125; 自动装配 - autowire=”自动装配类型” byName：根据名称自动匹配 byType：根据类型自动匹配 constructor：与byType类似，它只针对构造函数注入的 autodetect： bean作用域 - scope=”作用域” singleton：在IOC容器中只存在一个实例，以单例的方式存在,默认值 prototype：每次从容器调用Bean时，都返回一个新的实例 request：每次HTTP请求都会创建一个新的Bean，只适用于WebApplicationContext环境 session：同一个HTTP Session共享一个Bean，只适用于WebApplicationContext环境 global-session： 基于注解定义Bean @component可以替代下面三种注解，为了清晰化，建议使用特定的注解 @Repository：DAO层实现类 @Service：Service实现类 @Controller：Service实现类扫描包以应用注解的Bean1&lt;context:component-scan base-package="com.test.company.*" /&gt; Spring使用@Autowired注解实现Bean依赖注入@Autowired默认按照byType匹配在容器中查找Bean若想希望找不到Bean也不报NoSuchBeanDefinitionException异常，可以使用@Autowired(require=false)@Qualifier注解可以限定Bean的名字 12@Qualifier("userDaop")private UserDao userDao; https://www.cnblogs.com/wang-meng/p/5597490.html]]></content>
+    <content type="text"><![CDATA[1.Spring框架简介Spring框架是基于Java平台的，它为开发Java应用提供了全方位的基础设施支持，并且它很好地处理了这些基础设施，所以你只需要关注你的应用本身即可。 Spring可以使用POJO（普通的Java对象，plain old java objects）创建应用，并且可以将企业服务非侵入式地应用到POJO。这项功能适用于Java SE编程模型以及全部或部分的Java EE。 2.Spring模块结构 2.1 IOC 控制反转 IoC也称为依赖注入（DI）是为了解决对象之间的耦合度过高的问题 钟表拥有多个独立的齿轮，这些齿轮相互啮合在一起，齿轮相互啮合在一起，协同工作，共同完成某项任务。如果有一个齿轮出了问题，就可能会影响到整个齿轮组的正常运转。与软件系统中对象之间的耦合关系非常相似 软件专家Michael Mattson提出了IOC理论，用来实现对象之间的“解耦”。 借助于“第三方”实现具有依赖关系的对象之间的解耦，这个“第三方”也就是IOC容器。 哪些方面的控制被反转了呢 获得依赖对象的过程被反转了 所谓依赖注入，就是由IOC容器在运行期间，动态地将某种依赖关系注入到对象之中。 所以，依赖注入(DI)和控制反转(IOC)是从不同的角度的描述的同一件事情，就是指通过引入IOC容器，利用依赖关系注入的方式，实现对象之间的解耦。 把依赖注入应用到软件系统中，再来描述一下这个过程： 对象A依赖于对象B,当对象 A需要用到对象B的时候，IOC容器就会立即创建一个对象B送给对象A。 IOC容器就是一个对象制造工厂，你需要什么，它会给你送去，你直接使用就行了，而再也不用去关心你所用的东西是如何制成的，也不用关心最后是怎么被销毁的，这一切全部由IOC容器包办。 2.1.1 相关Java基础知识IOC流程 反射：Java语言允许通过程序化的方式间接对class操作，Class文件由类加载器转载后，JVM形成一份描述Class结构的元信息，通过元信息对象可以获取到构造函数，属性和方法等。 通过这个元信息对象间接的调用Class对象的功能。 几个重要的反射类： ClassLoader，Class，Constructor，和Method ClassLoader：类装载器，把一个类装入到JVM。 需要经过： - 1.装载 - 2.链接 校验 准备 解析 - 3.初始化 2.1.2 IOC容器中转配Bean 1234 &lt;bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"&gt; &lt;property name="prefix" value="/WEB-INF/views/" /&gt; &lt;property name="suffix" value=".jsp" /&gt;&lt;/bean&gt; Spring 支持两种依赖注入方式：属性注入和构造函数注入，还支持工厂方法注入方式。 12345678910111213141516171819202122232425262728293031323334353637383940414243public class SpringBeanFactory &#123; private static BeanFactory beanFactory; private static Logger logger = LoggerFactory.getLogger(SpringBeanFactory.class); public static BeanFactory getBeanFactory() &#123; if (beanFactory == null) &#123; synchronized (BeanFactory.class) &#123; try &#123; String path = Config.getConfigFolder(); if (beanFactory == null) &#123; beanFactory = new FileSystemXmlApplicationContext("/" + path + "aplication-spring-dubbo.xml"); &#125; &#125; catch (Exception e) &#123; logger.error("初始化SpringDubbo Error", e); &#125; &#125; &#125; return beanFactory; &#125;&#125;``` 3. **自动装配 - autowire="自动装配类型"** - byName：根据名称自动匹配 - byType：根据类型自动匹配 - constructor：与byType类似，它只针对构造函数注入的 - autodetect：4. **bean作用域 - scope="作用域"** - singleton：在IOC容器中只存在一个实例，以单例的方式存在,默认值 - prototype：每次从容器调用Bean时，都返回一个新的实例 - request：每次HTTP请求都会创建一个新的Bean，只适用于WebApplicationContext环境 - session：同一个HTTP Session共享一个Bean，只适用于WebApplicationContext环境 - global-session：5. **基于注解定义Bean**@component可以替代下面三种注解，为了清晰化，建议使用特定的注解 - @Repository：DAO层实现类 - @Service：Service实现类 - @Controller：Service实现类扫描包以应用注解的Bean```xml&lt;context:component-scan base-package="com.test.company.*" /&gt; Spring使用@Autowired注解实现Bean依赖注入@Autowired默认按照byType匹配在容器中查找Bean若想希望找不到Bean也不报NoSuchBeanDefinitionException异常，可以使用@Autowired(require=false)@Qualifier注解可以限定Bean的名字 12@Qualifier("userDaop")private UserDao userDao; https://www.cnblogs.com/wang-meng/p/5597490.html]]></content>
       <categories>
         <category>NoteBook</category>
       </categories>
@@ -177,18 +197,6 @@
         <tag>JAVA</tag>
         <tag>基础</tag>
         <tag>集合</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[事物]]></title>
-    <url>%2FmyBlog%2F2017%2F03%2F16%2F%E4%BA%8B%E7%89%A9%2F</url>
-    <content type="text"></content>
-      <categories>
-        <category>NoteBook</category>
-      </categories>
-      <tags>
-        <tag>JAVA</tag>
-        <tag>基础</tag>
       </tags>
   </entry>
   <entry>

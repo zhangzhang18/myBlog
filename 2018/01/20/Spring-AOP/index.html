@@ -159,18 +159,18 @@
 
 
 
-<meta name="description" content="3.AOP面向切面编程">
+<meta name="description" content="3.AOP面向切面编程 OOP面向对象编程的基本单位是类，AOP的基本单位是方法适用于具有横切逻辑的应用场景，例如性能检测、范文控制、事物管理、及日志管理  AOP希望将分散在各个业务逻辑代码中的相同代码通过横向切割的方式抽取到一个独立独立的模块中。">
 <meta name="keywords" content="Spring">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spring-AOP">
 <meta property="og:url" content="https://zhangzhang18.github.io/myBlog/2018/01/20/Spring-AOP/index.html">
 <meta property="og:site_name" content="萌">
-<meta property="og:description" content="3.AOP面向切面编程">
+<meta property="og:description" content="3.AOP面向切面编程 OOP面向对象编程的基本单位是类，AOP的基本单位是方法适用于具有横切逻辑的应用场景，例如性能检测、范文控制、事物管理、及日志管理  AOP希望将分散在各个业务逻辑代码中的相同代码通过横向切割的方式抽取到一个独立独立的模块中。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-21T07:03:15.221Z">
+<meta property="og:updated_time" content="2019-02-15T09:47:51.994Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring-AOP">
-<meta name="twitter:description" content="3.AOP面向切面编程">
+<meta name="twitter:description" content="3.AOP面向切面编程 OOP面向对象编程的基本单位是类，AOP的基本单位是方法适用于具有横切逻辑的应用场景，例如性能检测、范文控制、事物管理、及日志管理  AOP希望将分散在各个业务逻辑代码中的相同代码通过横向切割的方式抽取到一个独立独立的模块中。">
 
 
 
@@ -519,7 +519,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  8
+                  1,096
                 </span>
               
 
@@ -544,7 +544,56 @@
       
 
       
-        <h1 id="3-AOP面向切面编程"><a href="#3-AOP面向切面编程" class="headerlink" title="3.AOP面向切面编程"></a>3.AOP面向切面编程</h1>
+        <h1 id="3-AOP面向切面编程"><a href="#3-AOP面向切面编程" class="headerlink" title="3.AOP面向切面编程"></a>3.AOP面向切面编程</h1><blockquote>
+<p>OOP面向对象编程的基本单位是<strong>类</strong>，AOP的基本单位是<strong>方法</strong><br>适用于具有横切逻辑的应用场景，例如性能检测、范文控制、事物管理、及日志管理</p>
+</blockquote>
+<p>AOP希望将分散在各个业务逻辑代码中的相同代码通过横向切割的方式抽取到一个独立独立的模块中。<br><a id="more"></a></p>
+<h2 id="3-1概念和术语"><a href="#3-1概念和术语" class="headerlink" title="3.1概念和术语"></a>3.1概念和术语</h2><ol>
+<li>Aspect(切面):切面通常是指一个类，是通知和切入点的结合</li>
+<li>Join point(连接点):程序执行的某个特定位置，例如类初始化前，类初始化后，方法执行前，方法执行后，方法抛出异常时等，Spring只支持方法级别的连接点，即方法执行前，方法执行后，方法抛出异常时</li>
+<li>Advice(增强):增强是织入到目标类连接点上的一段程序代码</li>
+<li>Pointcut(切点):每个程序类都拥有多个连接点，如一个拥有两个方法的类，这两个方法都是连接点，即连接点是程序类中客观存在的事物</li>
+<li>Introduction(引介):允许向现有的类添加新方法或属性</li>
+<li>Target object(目标对象):增强逻辑的织入目标类</li>
+<li>AOP proxy(代理):一个类被AOP织入增强后，就产出了一个结果类，它是融合了原类和增强逻辑的代理类</li>
+<li>Weaving(织入):织入是将增强添加对目标类具体连接点上的过程<br>AOP有三种织入的方式：<ul>
+<li>a、编译期织入，这要求使用特殊的Java编译器。</li>
+<li>b、类装载期织入，这要求使用特殊的类装载器。</li>
+<li>c、动态代理织入，在运行期为目标类添加增强生成子类的方式。<br>Spring采用动态代理织入，而AspectJ采用编译期织入和类装载期织入。<h3 id="3-1-1实现"><a href="#3-1-1实现" class="headerlink" title="3.1.1实现"></a>3.1.1实现</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">beans</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">aop:aspectj-autoproxy</span>  <span class="attr">poxy-target-class</span>=<span class="string">"true"</span>/&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 声明自动为spring容器中那些配置@aspectJ切面的bean创建代理，织入切面。--&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--表示使用CGLib动态代理技术织入增强。不过即使proxy-target-class设置为false，如果目标类没有声明接口，则spring将自动使用CGLib动态代理。--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span> = <span class="string">"testAspect"</span> <span class="attr">class</span>=<span class="string">"com.test.company.aop.TestAspect"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//切面就是切点和通知的组合体</span></span><br><span class="line"><span class="meta">@Aspect</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestAspect</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 切点</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="meta">@Pointcut</span>(<span class="string">"execution(*com.test.company.service.Impl.TestImpl.insert(..))"</span>)<span class="comment">//Pointcut 使用pointcut定义切点</span></span><br><span class="line">     <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">insertPointcut</span><span class="params">()</span></span>&#123; &#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">      * 环绕通知</span></span><br><span class="line"><span class="comment">      * <span class="doctag">@param</span> pjp</span></span><br><span class="line"><span class="comment">      */</span></span><br><span class="line">    <span class="meta">@Around</span>(<span class="string">"insertPointcut()"</span>)</span><br><span class="line">     <span class="function"><span class="keyword">public</span> Object <span class="title">insert</span><span class="params">(ProceedingJoinPoint pjp)</span> <span class="keyword">throws</span> Throwable</span>&#123;&#125;</span><br><span class="line">     <span class="comment">/**</span></span><br><span class="line"><span class="comment">      * 前置通知</span></span><br><span class="line"><span class="comment">      */</span></span><br><span class="line">    <span class="meta">@Before</span>(<span class="string">"execution(*com.test.company.service.Impl.TestImpl.insert(..))"</span>)<span class="comment">//execution(*insert(..)) 切点表达式“execution”为关键字，“*insert(..)”为操作参数</span></span><br><span class="line">     <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Before</span><span class="params">()</span></span>&#123; &#125;</span><br><span class="line">   <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 后置通知</span></span><br><span class="line"><span class="comment">     * returnVal,切点方法执行后的返回值</span></span><br><span class="line"><span class="comment">     */</span>    </span><br><span class="line">    <span class="meta">@AfterReturning</span>(value=<span class="string">"execution(*com.test.company.service.Impl.TestImpl.insert(..))"</span>,returning = <span class="string">"returnVal"</span>)</span><br><span class="line">     <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">AfterReturning</span><span class="params">(Object returnVal)</span></span>&#123; &#125;        </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>通知有5种类型如下：</p>
+<pre><code>before 目标方法执行前执行，前置通知
+after 目标方法执行后执行，后置通知
+after returning 目标方法返回时执行 ，后置返回通知
+after throwing 目标方法抛出异常时执行 异常通知
+around 在目标函数执行中执行，可控制目标函数是否执行，环绕通知
+</code></pre><h3 id="3-1-2-相关Java基础知识"><a href="#3-1-2-相关Java基础知识" class="headerlink" title="3.1.2 相关Java基础知识"></a>3.1.2 相关Java基础知识</h3><ol>
+<li>代理模式<blockquote>
+<p>为某对象提供一个代理，从而通过代理来访问这个对象。</p>
+</blockquote>
+</li>
+</ol>
+<p>代理模式有三种角色组成:</p>
+<pre><code>抽象角色(卖票)：接口
+代理角色(车票代售点)：Proxy
+真实角色(火车站)：实现
+</code></pre><ol>
+<li>动态代理<br>代理类在程序运行前就已经存在，那么这种代理方式被成为 静态代理</li>
+</ol>
+<ol start="2">
+<li>JDK动态代理 <blockquote>
+<p>jdk动态代理是由java内部的反射机制来实现的</p>
+</blockquote>
+</li>
+</ol>
+<p>主要涉及java.lang.reflect 包中：Proxy和InvocationHandler</p>
+<p>使用动态代理需要定义一个位于代理类与委托类之间的中介类,中介类需要实现InvocationHandler定义的横切逻辑，通过反射机制调用目标类的方法，动态的将横切逻辑和业务逻辑编织在一起，InvocationHandler接口只定义了一个invoke方法<br>通过”Proxy”类提供的一个newProxyInstance方法用来创建一个对象的代理对象</p>
+<p><a href="https://zhuanlan.zhihu.com/p/25522841" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/25522841</a></p>
+
       
     </div>
     
@@ -609,8 +658,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/myBlog/2018/08/08/Spring+Shiro+Redis实践/" rel="prev" title="Spring+Shiro+Redis实践">
-                Spring+Shiro+Redis实践 <i class="fa fa-chevron-right"></i>
+              <a href="/myBlog/2018/03/16/Spring-事物/" rel="prev" title="Spring-事物">
+                Spring-事物 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -703,7 +752,7 @@
               
                 <a href="/myBlog/archives/">
               
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -790,7 +839,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#3-AOP面向切面编程"><span class="nav-text">3.AOP面向切面编程</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#3-AOP面向切面编程"><span class="nav-text">3.AOP面向切面编程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1概念和术语"><span class="nav-text">3.1概念和术语</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-1实现"><span class="nav-text">3.1.1实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-2-相关Java基础知识"><span class="nav-text">3.1.2 相关Java基础知识</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
