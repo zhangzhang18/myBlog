@@ -159,23 +159,23 @@
 
 
 
-<meta name="description" content="总结ArrayList和LinkedListHashMap  （1）ArrayList以数组形式实现，顺序插入、查找快，插入、删除较慢 （2）LinkedList以链表形式实现，顺序插入、查找较慢，插入、删除方便">
+<meta name="description" content="总结ArrayList和LinkedListHashMap">
 <meta name="keywords" content="JAVA,基础,集合">
 <meta property="og:type" content="article">
 <meta property="og:title" content="HashMap归纳总结">
 <meta property="og:url" content="https://zhangzhang18.github.io/myBlog/2017/05/12/HashMap归纳总结/index.html">
 <meta property="og:site_name" content="萌">
-<meta property="og:description" content="总结ArrayList和LinkedListHashMap  （1）ArrayList以数组形式实现，顺序插入、查找快，插入、删除较慢 （2）LinkedList以链表形式实现，顺序插入、查找较慢，插入、删除方便">
+<meta property="og:description" content="总结ArrayList和LinkedListHashMap">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://zhangzhang18.github.io/myBlog/2017/05/12/HashMap归纳总结/hashMap.jpg">
 <meta property="og:image" content="https://zhangzhang18.github.io/myBlog/2017/05/12/HashMap归纳总结/base.jpg">
 <meta property="og:image" content="https://zhangzhang18.github.io/myBlog/2017/05/12/HashMap归纳总结/ConcurrentHashMap.png">
 <meta property="og:image" content="https://zhangzhang18.github.io/myBlog/2017/05/12/HashMap归纳总结/HashMap.jpg">
 <meta property="og:image" content="https://zhangzhang18.github.io/myBlog/2017/05/12/HashMap归纳总结/ConcurrentHashMap.jpg">
-<meta property="og:updated_time" content="2019-02-18T03:54:09.341Z">
+<meta property="og:updated_time" content="2019-02-25T03:04:35.751Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HashMap归纳总结">
-<meta name="twitter:description" content="总结ArrayList和LinkedListHashMap  （1）ArrayList以数组形式实现，顺序插入、查找快，插入、删除较慢 （2）LinkedList以链表形式实现，顺序插入、查找较慢，插入、删除方便">
+<meta name="twitter:description" content="总结ArrayList和LinkedListHashMap">
 <meta name="twitter:image" content="https://zhangzhang18.github.io/myBlog/2017/05/12/HashMap归纳总结/hashMap.jpg">
 
 
@@ -525,7 +525,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  731
+                  885
                 </span>
               
 
@@ -551,10 +551,7 @@
 
       
         <h2 id="总结ArrayList和LinkedList"><a href="#总结ArrayList和LinkedList" class="headerlink" title="总结ArrayList和LinkedList"></a>总结ArrayList和LinkedList</h2><p>HashMap<br><img src="/myBlog/2017/05/12/HashMap归纳总结/hashMap.jpg" alt="hashMap"></p>
-<blockquote>
-<p>（1）ArrayList以数组形式实现，顺序插入、查找快，插入、删除较慢</p>
-<p>（2）LinkedList以链表形式实现，顺序插入、查找较慢，插入、删除方便<br><a id="more"></a></p>
-</blockquote>
+<a id="more"></a>
 <hr>
 <h2 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h2><ol>
 <li><strong>了解HashMap吗？</strong></li>
@@ -620,7 +617,16 @@
 <ol start="8">
 <li>高并发下的HashMap</li>
 </ol>
-<p>Rehash是HashMap在扩容时的一个步骤</p>
+<p>Rehash是HashMap在扩容时的一个步骤，HashMap的容量是有限的。使得HashMap达到一定饱和度时，Key映射位置发生冲突的几率会逐渐提高。<br>这时候，HashMap需要扩展它的长度，也就是进行Resize。</p>
+<p>Resize的条件是:HashMap.Size &gt;= Capacity * LoadFactor。</p>
+<p>Resize要经过两个过程：扩容和ReHash</p>
+<ol>
+<li><p>扩容：创建一个新的Entry空数组，长度是原数组的2倍。</p>
+</li>
+<li><p>ReHash：遍历原Entry数组，把所有的Entry重新Hash到新数组。为什么要重新Hash呢？因为长度扩大以后，Hash的规则也随之改变。</p>
+</li>
+</ol>
+<p>Hash公式：index = HashCode（Key） &amp; （Length - 1）</p>
 <p><img src="/myBlog/2017/05/12/HashMap归纳总结/ConcurrentHashMap.png" alt="ConcurrentHashMap"></p>
 <h2 id=""><a href="#" class="headerlink" title=""></a><img src="/myBlog/2017/05/12/HashMap归纳总结/HashMap.jpg" alt="HashMap"></h2><h2 id="ConcurrentHashMap"><a href="#ConcurrentHashMap" class="headerlink" title="ConcurrentHashMap"></a>ConcurrentHashMap</h2><blockquote>
 <p>需要线程安全，那么就使用ConcurrentHashMap。</p>
@@ -628,8 +634,13 @@
 <p>HashTable是使用synchronized来锁住整张Hash表来实现线程安全。</p>
 <p>一个 ConcurrentHashMap 由一个个 Segment 组成，Segment代表”部分“或”一段“的意思，所以很多地方都会将其描述为分段锁。<br>Segment 内部是由 数组+链表 组成的。</p>
 <p><img src="/myBlog/2017/05/12/HashMap归纳总结/ConcurrentHashMap.jpg" alt="ConcurrentHashMap"></p>
+<blockquote>
+<p>（1）ArrayList以数组形式实现，顺序插入、查找快，插入、删除较慢</p>
+<p>（2）LinkedList以链表形式实现，顺序插入、查找较慢，插入、删除方便</p>
+</blockquote>
 <p><a href="https://mp.weixin.qq.com/s/SyKckwLfV2ypJOzTFA7R_g" target="_blank" rel="noopener">https://mp.weixin.qq.com/s/SyKckwLfV2ypJOzTFA7R_g</a></p>
 <p><a href="https://mp.weixin.qq.com/s/__ZnkPAF6ucUqN8CVSVQeA" target="_blank" rel="noopener">https://mp.weixin.qq.com/s/__ZnkPAF6ucUqN8CVSVQeA</a></p>
+<p><a href="https://juejin.im/post/5a224e1551882535c56cb940" target="_blank" rel="noopener">https://juejin.im/post/5a224e1551882535c56cb940</a></p>
 
       
     </div>
@@ -793,7 +804,7 @@
               
                 <a href="/myBlog/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -973,8 +984,6 @@
   
 
 
-  
-
 
 
 
@@ -1013,11 +1022,6 @@
   
   
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.js"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/myBlog/lib/canvas-nest/canvas-nest.min.js"></script>
   
 
 

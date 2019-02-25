@@ -159,20 +159,20 @@
 
 
 
-<meta name="description" content="什么是锁为了实现多个线程在同一时刻同一代码块只能有一个线程可执行，需要在某个地方做标记，这个标记必须满足所有的线程可见，标记不存在的时候设置标记，后续的线程发现已标记则等待拥有标记的线程结束，同步代码块取消标记后，在尝试设置标记，这个标记可以理解为锁。 什么是分布式锁单体单机部署的系统被演化成分布式集群系统后，系统可能会有多份并且部署在不同的机器上，这些资源已经不是在线程之间共享了，而是属于进程">
+<meta name="description" content="###什么是分布式将系统差分成不同的服务然后将这些服务放在不同服务器减轻单台服务的压力，提高性能和并发量。 什么是锁为了实现多个线程在同一时刻同一代码块只能有一个线程可执行，需要在某个地方做标记，这个标记必须满足所有的线程可见，标记不存在的时候设置标记，后续的线程发现已标记则等待拥有标记的线程结束，同步代码块取消标记后，在尝试设置标记，这个标记可以理解为锁。 什么是分布式锁单体单机部署的系统被演">
 <meta name="keywords" content="分布式,JAVA">
 <meta property="og:type" content="article">
 <meta property="og:title" content="分布式锁">
 <meta property="og:url" content="https://zhangzhang18.github.io/myBlog/2018/11/10/分布式锁/index.html">
 <meta property="og:site_name" content="萌">
-<meta property="og:description" content="什么是锁为了实现多个线程在同一时刻同一代码块只能有一个线程可执行，需要在某个地方做标记，这个标记必须满足所有的线程可见，标记不存在的时候设置标记，后续的线程发现已标记则等待拥有标记的线程结束，同步代码块取消标记后，在尝试设置标记，这个标记可以理解为锁。 什么是分布式锁单体单机部署的系统被演化成分布式集群系统后，系统可能会有多份并且部署在不同的机器上，这些资源已经不是在线程之间共享了，而是属于进程">
+<meta property="og:description" content="###什么是分布式将系统差分成不同的服务然后将这些服务放在不同服务器减轻单台服务的压力，提高性能和并发量。 什么是锁为了实现多个线程在同一时刻同一代码块只能有一个线程可执行，需要在某个地方做标记，这个标记必须满足所有的线程可见，标记不存在的时候设置标记，后续的线程发现已标记则等待拥有标记的线程结束，同步代码块取消标记后，在尝试设置标记，这个标记可以理解为锁。 什么是分布式锁单体单机部署的系统被演">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://zhangzhang18.github.io/myBlog/2018/11/10/分布式锁/suo.jpg">
 <meta property="og:image" content="https://zhangzhang18.github.io/myBlog/2018/11/10/分布式锁/bye.jpg">
-<meta property="og:updated_time" content="2019-01-21T07:41:29.978Z">
+<meta property="og:updated_time" content="2019-02-25T05:43:31.125Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="分布式锁">
-<meta name="twitter:description" content="什么是锁为了实现多个线程在同一时刻同一代码块只能有一个线程可执行，需要在某个地方做标记，这个标记必须满足所有的线程可见，标记不存在的时候设置标记，后续的线程发现已标记则等待拥有标记的线程结束，同步代码块取消标记后，在尝试设置标记，这个标记可以理解为锁。 什么是分布式锁单体单机部署的系统被演化成分布式集群系统后，系统可能会有多份并且部署在不同的机器上，这些资源已经不是在线程之间共享了，而是属于进程">
+<meta name="twitter:description" content="###什么是分布式将系统差分成不同的服务然后将这些服务放在不同服务器减轻单台服务的压力，提高性能和并发量。 什么是锁为了实现多个线程在同一时刻同一代码块只能有一个线程可执行，需要在某个地方做标记，这个标记必须满足所有的线程可见，标记不存在的时候设置标记，后续的线程发现已标记则等待拥有标记的线程结束，同步代码块取消标记后，在尝试设置标记，这个标记可以理解为锁。 什么是分布式锁单体单机部署的系统被演">
 <meta name="twitter:image" content="https://zhangzhang18.github.io/myBlog/2018/11/10/分布式锁/suo.jpg">
 
 
@@ -522,7 +522,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,248
+                  1,301
                 </span>
               
 
@@ -548,6 +548,7 @@
 
       
         <p><img src="/myBlog/2018/11/10/分布式锁/suo.jpg" alt="image"></p>
+<p>###什么是分布式<br>将系统差分成不同的服务然后将这些服务放在不同服务器减轻单台服务的压力，提高性能和并发量。</p>
 <h3 id="什么是锁"><a href="#什么是锁" class="headerlink" title="什么是锁"></a>什么是锁</h3><p>为了实现多个线程在同一时刻同一代码块只能有一个线程可执行，需要在某个地方做标记，这个标记必须满足所有的线程可见，标记不存在的时候设置标记，后续的线程发现已标记则等待拥有标记的线程结束，同步代码块取消标记后，在尝试设置标记，这个标记可以理解为锁。</p>
 <h3 id="什么是分布式锁"><a href="#什么是分布式锁" class="headerlink" title="什么是分布式锁"></a>什么是分布式锁</h3><p>单体单机部署的系统被演化成分布式集群系统后，系统可能会有多份并且部署在不同的机器上，这些资源已经不是在线程之间共享了，而是属于进程之间共享的资源。<br>指在分布式的部署环境下，通过锁机制来让多客户端互斥的对共享资源进行访问。<br><a id="more"></a><br>分布式的 CAP 理论：</p>
 <blockquote>
@@ -570,6 +571,7 @@
 <p><a href="https://www.cnblogs.com/seesun2012/p/9214653.html" target="_blank" rel="noopener">https://www.cnblogs.com/seesun2012/p/9214653.html</a></p>
 <p><a href="http://www.cnblogs.com/linjiqin/p/8003838.html" target="_blank" rel="noopener">http://www.cnblogs.com/linjiqin/p/8003838.html</a></p>
 <p><a href="https://www.xttblog.com/?p=3171" target="_blank" rel="noopener">https://www.xttblog.com/?p=3171</a></p>
+<p><a href="https://juejin.im/post/5c01532ef265da61362232ed" target="_blank" rel="noopener">https://juejin.im/post/5c01532ef265da61362232ed</a></p>
 <p><img src="/myBlog/2018/11/10/分布式锁/bye.jpg" alt="image"></p>
 
       
@@ -732,7 +734,7 @@
               
                 <a href="/myBlog/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -912,8 +914,6 @@
   
 
 
-  
-
 
 
 
@@ -952,11 +952,6 @@
   
   
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.js"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/myBlog/lib/canvas-nest/canvas-nest.min.js"></script>
   
 
 
