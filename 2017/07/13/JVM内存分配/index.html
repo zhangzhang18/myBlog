@@ -159,19 +159,19 @@
 
 
 
-<meta name="description" content="线程私有的：   程序计数器  虚拟机栈  本地方法栈  线程共享的：    堆  方法区  直接内存">
+<meta name="description" content="线程私有的：  程序计数器  虚拟机栈  本地方法栈  线程共享的：    堆  方法区  直接内存">
 <meta name="keywords" content="JAVA,JVM">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JVM内存分配">
 <meta property="og:url" content="https://zhangzhang18.github.io/myBlog/2017/07/13/JVM内存分配/index.html">
 <meta property="og:site_name" content="萌">
-<meta property="og:description" content="线程私有的：   程序计数器  虚拟机栈  本地方法栈  线程共享的：    堆  方法区  直接内存">
+<meta property="og:description" content="线程私有的：  程序计数器  虚拟机栈  本地方法栈  线程共享的：    堆  方法区  直接内存">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://zhangzhang18.github.io/myBlog/2017/07/13/JVM内存分配/jvm.jpg">
-<meta property="og:updated_time" content="2019-01-16T10:09:12.410Z">
+<meta property="og:updated_time" content="2019-03-01T03:30:01.097Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JVM内存分配">
-<meta name="twitter:description" content="线程私有的：   程序计数器  虚拟机栈  本地方法栈  线程共享的：    堆  方法区  直接内存">
+<meta name="twitter:description" content="线程私有的：  程序计数器  虚拟机栈  本地方法栈  线程共享的：    堆  方法区  直接内存">
 <meta name="twitter:image" content="https://zhangzhang18.github.io/myBlog/2017/07/13/JVM内存分配/jvm.jpg">
 
 
@@ -182,7 +182,7 @@
     root: '/myBlog/',
     scheme: 'Gemini',
     version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
@@ -463,7 +463,19 @@
             
 
             
+              <span class="post-meta-divider">|</span>
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-03-01T11:30:01+08:00">
+                2019-03-01
+              </time>
             
           </span>
 
@@ -547,8 +559,7 @@
 
       
         <p><img src="/myBlog/2017/07/13/JVM内存分配/jvm.jpg" alt="jvm"></p>
-<p>线程私有的：</p>
-<blockquote>
+<h1 id="线程私有的："><a href="#线程私有的：" class="headerlink" title="线程私有的："></a>线程私有的：</h1><blockquote>
 <p> 程序计数器  虚拟机栈  本地方法栈</p>
 </blockquote>
 <p>线程共享的：</p>
@@ -588,6 +599,24 @@
 
     
 
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    萌
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://zhangzhang18.github.io/myBlog/2017/07/13/JVM内存分配/" title="JVM内存分配">https://zhangzhang18.github.io/myBlog/2017/07/13/JVM内存分配/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
     
 
     <footer class="post-footer">
@@ -725,7 +754,7 @@
               
                 <a href="/myBlog/archives/">
               
-                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-count">22</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -812,7 +841,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-程序计数器（PCR）"><span class="nav-text">1.程序计数器（PCR）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-栈（JVM-stack）"><span class="nav-text">2.栈（JVM stack）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-本地方法栈（Native-Method-Stack）"><span class="nav-text">3.本地方法栈（Native Method Stack）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-堆（heap"><span class="nav-text">4.堆（heap)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-方法区（Method）"><span class="nav-text">5.方法区（Method）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-运行时常量池（Runtime-Constant-Pool）"><span class="nav-text">6.运行时常量池（Runtime Constant Pool）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-直接内存（Direct-Memory）"><span class="nav-text">7.直接内存（Direct Memory）</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#线程私有的："><span class="nav-text">线程私有的：</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-程序计数器（PCR）"><span class="nav-text">1.程序计数器（PCR）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-栈（JVM-stack）"><span class="nav-text">2.栈（JVM stack）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-本地方法栈（Native-Method-Stack）"><span class="nav-text">3.本地方法栈（Native Method Stack）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-堆（heap"><span class="nav-text">4.堆（heap)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-方法区（Method）"><span class="nav-text">5.方法区（Method）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-运行时常量池（Runtime-Constant-Pool）"><span class="nav-text">6.运行时常量池（Runtime Constant Pool）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-直接内存（Direct-Memory）"><span class="nav-text">7.直接内存（Direct Memory）</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -878,6 +907,8 @@
     
       <div class="back-to-top">
         <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
         
       </div>
     

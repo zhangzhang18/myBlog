@@ -169,7 +169,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://zhangzhang18.github.io/myBlog/2017/10/12/面试常用手写代码/single.jpg">
 <meta property="og:image" content="https://zhangzhang18.github.io/myBlog/2017/10/12/面试常用手写代码/compare.jpg">
-<meta property="og:updated_time" content="2019-02-25T06:35:56.258Z">
+<meta property="og:updated_time" content="2019-03-06T10:25:39.749Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="面试常用手写代码">
 <meta name="twitter:description" content="快速排序123456789101112131415161718192021222324252627int a[10],n;void quickSort(int left,int right)&amp;#123;  int i,j,t,temp;  if(left &amp;gt;right)&amp;#123;    return;  &amp;#125;  temp=a[left];  i=left;  j=right;  w">
@@ -183,7 +183,7 @@
     root: '/myBlog/',
     scheme: 'Gemini',
     version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
@@ -464,7 +464,19 @@
             
 
             
+              <span class="post-meta-divider">|</span>
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-03-06T18:25:39+08:00">
+                2019-03-06
+              </time>
             
           </span>
 
@@ -522,7 +534,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  517
+                  744
                 </span>
               
 
@@ -555,8 +567,13 @@
 <p><img src="/myBlog/2017/10/12/面试常用手写代码/compare.jpg" alt="compare"></p>
 <h2 id="判断链表是否有环"><a href="#判断链表是否有环" class="headerlink" title="判断链表是否有环"></a>判断链表是否有环</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">typedef struct node&#123;  </span><br><span class="line">    char data ;  </span><br><span class="line">    node * next ;  </span><br><span class="line">&#125;Node;  </span><br><span class="line">bool exitLoop(Node *head)  </span><br><span class="line">&#123;  </span><br><span class="line">    Node *fast, *slow ;  </span><br><span class="line">    slow = fast = head ;  </span><br><span class="line">  </span><br><span class="line">    while (slow != NULL &amp;&amp; fast -&gt; next != NULL)  </span><br><span class="line">    &#123;  </span><br><span class="line">        slow = slow -&gt; next ;  </span><br><span class="line">        fast = fast -&gt; next -&gt; next ;  </span><br><span class="line">        if (slow == fast)  </span><br><span class="line">            return true ;  </span><br><span class="line">    &#125;  </span><br><span class="line">    return false ;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="单链表反转"><a href="#单链表反转" class="headerlink" title="单链表反转"></a>单链表反转</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public Node reverse(Node node) &#123;</span><br><span class="line">    Node prev = null;</span><br><span class="line">    Node now = node;</span><br><span class="line">    while (now != null) &#123;</span><br><span class="line">      Node next = now.next;</span><br><span class="line">      now.next = prev;</span><br><span class="line">      prev = now;</span><br><span class="line">      now = next;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return prev;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>###合并两个有序数据，结果任然有序<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">public static int[] merge(int[] a, int[] b) &#123;</span><br><span class="line">    int[] result;</span><br><span class="line">    result = new int[a.length + b.length];</span><br><span class="line">    int i = 0, j = 0, k = 0;</span><br><span class="line">    while (i &lt; a.length &amp;&amp; j &lt; b.length) &#123;</span><br><span class="line">        if (a[i] &lt; b[j]) &#123;</span><br><span class="line">            result[k++] = a[i++];</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            result[k++] = b[j++];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    while (i &lt; a.length) &#123;</span><br><span class="line">        result[k++] = a[i++];</span><br><span class="line">    &#125;</span><br><span class="line">    while (j &lt; b.length) &#123;</span><br><span class="line">        result[k++] = b[j++];</span><br><span class="line">    &#125;</span><br><span class="line">    return result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>###删除重复值<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">public static Node deleteRepeat(Node head) &#123;</span><br><span class="line">    if (null == head || null == head.next) &#123;</span><br><span class="line">        return head;</span><br><span class="line">    &#125;</span><br><span class="line">    Node pre = head;</span><br><span class="line">    Node cur = head.next;</span><br><span class="line"></span><br><span class="line">    while (cur != null) &#123;</span><br><span class="line">        if (cur.val == pre.val) &#123;</span><br><span class="line">            pre.next = cur.next;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            pre = cur;</span><br><span class="line">        &#125;</span><br><span class="line">        if (cur.next==null) &#123;</span><br><span class="line">            return head;</span><br><span class="line">        &#125;</span><br><span class="line">        cur = cur.next;</span><br><span class="line">    &#125;</span><br><span class="line">    return cur;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>###二分查找</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">function binarySearch(arr, key) &#123;</span><br><span class="line">    var low = 0;</span><br><span class="line">    var high = arr.length - 1;</span><br><span class="line"></span><br><span class="line">    while (low &lt;= high) &#123;</span><br><span class="line">        var mid = parseInt((low + high) / 2);</span><br><span class="line">        if (key == arr[mid]) &#123;</span><br><span class="line">            return mid;</span><br><span class="line">        &#125; else if (key &gt; arr[mid]) &#123;</span><br><span class="line">            low = mid+1;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            high = mid - 1;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>##判断两个链表是否相交</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">private boolean isIntersert(Node h1,Node h2)&#123;</span><br><span class="line">    if(h1==null||h2==null)</span><br><span class="line">        return false;</span><br><span class="line">    Node tail =h1;    </span><br><span class="line">    Node tail2 =h2;</span><br><span class="line">    while(tail.next!=null)</span><br><span class="line">        tail=tail.next;</span><br><span class="line">    while(tail2.next!=null)</span><br><span class="line">        tail2=tail2.next;</span><br><span class="line">    return tail==tail2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
       
     </div>
     
@@ -580,6 +597,24 @@
 
     
 
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    萌
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://zhangzhang18.github.io/myBlog/2017/10/12/面试常用手写代码/" title="面试常用手写代码">https://zhangzhang18.github.io/myBlog/2017/10/12/面试常用手写代码/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
     
 
     <footer class="post-footer">
@@ -717,7 +752,7 @@
               
                 <a href="/myBlog/archives/">
               
-                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-count">22</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -870,6 +905,8 @@
     
       <div class="back-to-top">
         <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
         
       </div>
     
