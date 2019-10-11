@@ -44,7 +44,7 @@
     
     
   <script src="true"></script>
-  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+  <link href="/myBlog/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
 
 
 
@@ -126,61 +126,63 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+<link href="/myBlog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+<link href="/myBlog/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
 
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/m.png?v=5.1.4">
+  <link rel="apple-touch-icon" sizes="180x180" href="/myBlog/images/apple-touch-icon-next.png?v=5.1.4">
 
 
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/m.png?v=5.1.4">
+  <link rel="icon" type="image/png" sizes="32x32" href="/myBlog/images/m.png?v=5.1.4">
 
 
-  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+  <link rel="icon" type="image/png" sizes="16x16" href="/myBlog/images/m.png?v=5.1.4">
 
 
-
-
-
-  <meta name="keywords" content="分布式,JAVA," />
+  <link rel="mask-icon" href="/myBlog/images/logo.svg?v=5.1.4" color="#222">
 
 
 
 
 
-  <link rel="alternate" href="/atom.xml" title="萌" type="application/atom+xml" />
+  <meta name="keywords" content="JAVA,分布式," />
+
+
+
+
+
+  <link rel="alternate" href="/myBlog/atom.xml" title="萌" type="application/atom+xml" />
 
 
 
 
 
 
-<meta name="description" content="什么是分布式将系统差分成不同的服务然后将这些服务放在不同服务器减轻单台服务的压力，提高性能和并发量。 什么是锁为了实现多个线程在同一时刻同一代码块只能有一个线程可执行，需要在某个地方做标记，这个标记必须满足所有的线程可见，标记不存在的时候设置标记，后续的线程发现已标记则等待拥有标记的线程结束，同步代码块取消标记后，在尝试设置标记，这个标记可以理解为锁。 什么是分布式锁单体单机部署的系统被演化成分">
-<meta name="keywords" content="分布式,JAVA">
+<meta name="description" content="什么是分布式将系统差分成不同的服务然后将这些服务放在不同服务器减轻单台服务的压力，提高性能和并发量。  并发并行？   顺序执行：你吃饭吃到一半，电话来了，你一直到吃完了以后才去接，这就说明你不支持并发也不支持并行。     并行：你吃饭吃到一半，电话来了，你停了下来接了电话，接完后继续吃饭，这说明你支持并发。     并发：你吃饭吃到一半，电话来了，你一边打电话一边吃饭，这说明你支持并行。">
+<meta name="keywords" content="JAVA,分布式">
 <meta property="og:type" content="article">
 <meta property="og:title" content="分布式锁">
-<meta property="og:url" content="https://zhangzhang18.github.io/2018/11/10/分布式锁/index.html">
+<meta property="og:url" content="https://zhangzhang18.github.io/myBlog/2018/11/10/分布式锁/index.html">
 <meta property="og:site_name" content="萌">
-<meta property="og:description" content="什么是分布式将系统差分成不同的服务然后将这些服务放在不同服务器减轻单台服务的压力，提高性能和并发量。 什么是锁为了实现多个线程在同一时刻同一代码块只能有一个线程可执行，需要在某个地方做标记，这个标记必须满足所有的线程可见，标记不存在的时候设置标记，后续的线程发现已标记则等待拥有标记的线程结束，同步代码块取消标记后，在尝试设置标记，这个标记可以理解为锁。 什么是分布式锁单体单机部署的系统被演化成分">
+<meta property="og:description" content="什么是分布式将系统差分成不同的服务然后将这些服务放在不同服务器减轻单台服务的压力，提高性能和并发量。  并发并行？   顺序执行：你吃饭吃到一半，电话来了，你一直到吃完了以后才去接，这就说明你不支持并发也不支持并行。     并行：你吃饭吃到一半，电话来了，你停了下来接了电话，接完后继续吃饭，这说明你支持并发。     并发：你吃饭吃到一半，电话来了，你一边打电话一边吃饭，这说明你支持并行。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://zhangzhang18.github.io/2018/11/10/分布式锁/suo.jpg">
-<meta property="og:image" content="https://zhangzhang18.github.io/2018/11/10/分布式锁/bye.jpg">
-<meta property="og:updated_time" content="2019-03-09T09:36:25.886Z">
+<meta property="og:image" content="https://zhangzhang18.github.io/myBlog/2018/11/10/分布式锁/suo.jpg">
+<meta property="og:image" content="https://zhangzhang18.github.io/myBlog/2018/11/10/分布式锁/concurrency.jpg">
+<meta property="og:image" content="https://zhangzhang18.github.io/myBlog/2018/11/10/分布式锁/parallel.jpg">
+<meta property="og:image" content="https://zhangzhang18.github.io/myBlog/2018/11/10/分布式锁/bye.jpg">
+<meta property="og:updated_time" content="2019-10-11T09:38:46.479Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="分布式锁">
-<meta name="twitter:description" content="什么是分布式将系统差分成不同的服务然后将这些服务放在不同服务器减轻单台服务的压力，提高性能和并发量。 什么是锁为了实现多个线程在同一时刻同一代码块只能有一个线程可执行，需要在某个地方做标记，这个标记必须满足所有的线程可见，标记不存在的时候设置标记，后续的线程发现已标记则等待拥有标记的线程结束，同步代码块取消标记后，在尝试设置标记，这个标记可以理解为锁。 什么是分布式锁单体单机部署的系统被演化成分">
-<meta name="twitter:image" content="https://zhangzhang18.github.io/2018/11/10/分布式锁/suo.jpg">
+<meta name="twitter:description" content="什么是分布式将系统差分成不同的服务然后将这些服务放在不同服务器减轻单台服务的压力，提高性能和并发量。  并发并行？   顺序执行：你吃饭吃到一半，电话来了，你一直到吃完了以后才去接，这就说明你不支持并发也不支持并行。     并行：你吃饭吃到一半，电话来了，你停了下来接了电话，接完后继续吃饭，这说明你支持并发。     并发：你吃饭吃到一半，电话来了，你一边打电话一边吃饭，这说明你支持并行。">
+<meta name="twitter:image" content="https://zhangzhang18.github.io/myBlog/2018/11/10/分布式锁/suo.jpg">
 
 
 
 <script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
-    root: '/',
+    root: '/myBlog/',
     scheme: 'Gemini',
     version: '5.1.4',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
@@ -203,7 +205,7 @@
 
 
 
-  <link rel="canonical" href="https://zhangzhang18.github.io/2018/11/10/分布式锁/"/>
+  <link rel="canonical" href="https://zhangzhang18.github.io/myBlog/2018/11/10/分布式锁/"/>
 
 
 
@@ -266,7 +268,7 @@
     
 
     <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
+      <a href="/myBlog/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">萌</span>
         <span class="logo-line-after"><i></i></span>
@@ -294,7 +296,7 @@
       
         
         <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
+          <a href="/myBlog/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
@@ -304,7 +306,7 @@
       
         
         <li class="menu-item menu-item-tags">
-          <a href="/tags/" rel="section">
+          <a href="/myBlog/tags/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
@@ -314,7 +316,7 @@
       
         
         <li class="menu-item menu-item-categories">
-          <a href="/categories/" rel="section">
+          <a href="/myBlog/categories/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
@@ -324,7 +326,7 @@
       
         
         <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
+          <a href="/myBlog/archives/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
@@ -334,7 +336,7 @@
       
         
         <li class="menu-item menu-item-about">
-          <a href="/about" rel="section">
+          <a href="/myBlog/about" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
             
@@ -344,7 +346,7 @@
       
         
         <li class="menu-item menu-item-lifenote">
-          <a href="/lifenote" rel="section">
+          <a href="/myBlog/lifenote" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-heart"></i> <br />
             
@@ -354,7 +356,7 @@
       
         
         <li class="menu-item menu-item-photo">
-          <a href="/photo" rel="section">
+          <a href="/myBlog/photo" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-image"></i> <br />
             
@@ -429,12 +431,12 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://zhangzhang18.github.io/2018/11/10/分布式锁/">
+    <link itemprop="mainEntityOfPage" href="https://zhangzhang18.github.io/myBlog/myBlog/2018/11/10/分布式锁/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="萌">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/header.jpg">
+      <meta itemprop="image" content="/myBlog/images/header.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -474,8 +476,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-03-09T17:36:25+08:00">
-                2019-03-09
+              <time title="更新于" itemprop="dateModified" datetime="2019-10-11T17:38:46+08:00">
+                2019-10-11
               </time>
             
           </span>
@@ -493,7 +495,7 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/NoteBook/" itemprop="url" rel="index">
+                  <a href="/myBlog/categories/NoteBook/" itemprop="url" rel="index">
                     <span itemprop="name">NoteBook</span>
                   </a>
                 </span>
@@ -510,7 +512,7 @@
 
           
           
-             <span id="/2018/11/10/分布式锁/" class="leancloud_visitors" data-flag-title="分布式锁">
+             <span id="/myBlog/2018/11/10/分布式锁/" class="leancloud_visitors" data-flag-title="分布式锁">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -534,7 +536,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,301
+                  1,773
                 </span>
               
 
@@ -559,9 +561,31 @@
       
 
       
-        <p><img src="/2018/11/10/分布式锁/suo.jpg" alt="image"></p>
+        <p><img src="/myBlog/2018/11/10/分布式锁/suo.jpg" alt="image"></p>
 <h3 id="什么是分布式"><a href="#什么是分布式" class="headerlink" title="什么是分布式"></a>什么是分布式</h3><p>将系统差分成不同的服务然后将这些服务放在不同服务器减轻单台服务的压力，提高性能和并发量。</p>
-<h3 id="什么是锁"><a href="#什么是锁" class="headerlink" title="什么是锁"></a>什么是锁</h3><p>为了实现多个线程在同一时刻同一代码块只能有一个线程可执行，需要在某个地方做标记，这个标记必须满足所有的线程可见，标记不存在的时候设置标记，后续的线程发现已标记则等待拥有标记的线程结束，同步代码块取消标记后，在尝试设置标记，这个标记可以理解为锁。</p>
+<blockquote>
+<p>并发并行？</p>
+</blockquote>
+<p><img src="/myBlog/2018/11/10/分布式锁/concurrency.jpg" alt="concurrency"><br><img src="/myBlog/2018/11/10/分布式锁/parallel.jpg" alt="parallel"></p>
+<pre><code>顺序执行：你吃饭吃到一半，电话来了，你一直到吃完了以后才去接，这就说明你不支持并发也不支持并行。    
+并行：你吃饭吃到一半，电话来了，你停了下来接了电话，接完后继续吃饭，这说明你支持并发。    
+并发：你吃饭吃到一半，电话来了，你一边打电话一边吃饭，这说明你支持并行。    
+并发强调的是一起出发，并行强调的是一起执行。    
+并发的反义是顺序，并行的反义是串行。
+并发并行并不是互斥概念，只不过并发强调任务的抽象调度，并行强调任务的实际执行。    
+</code></pre><blockquote>
+<p>分布式=高并发=多线程？</p>
+</blockquote>
+<pre><code>分布式：是为了解决单个物理服务器容量和性能瓶颈问题而采用的优化手段。    
+        该领域需要解决的问题极多，在不同技术层面上，包括：分布式文件系统、缓存、数据库、计算等。   
+        水平拓展：当一台机器扛不住流量时，通过添加机器的方式，将流量均分。    
+        垂直拆分：前端有多种需求时，一台机器扛不住，可以将不同需求分发到不同机器上。    
+高并发：反应的是 [同时有多少量]，例如直播服务，同时可能有上万人观看。    
+        高并发可以用分布式技术去解决，将并发流量分到不同物理机器上。    
+        例如使用缓存技术和前端将静态资源放在CDN等；还可以用多线程技术将一台服务器的能力最大化。    
+多线程：是指从软件或硬件上实现多个线程并发执行的技术。    
+        多线程聚焦于如何使用编程语言将CPU能力最大化。    
+</code></pre><h3 id="什么是锁"><a href="#什么是锁" class="headerlink" title="什么是锁"></a>什么是锁</h3><p>为了实现多个线程在同一时刻同一代码块只能有一个线程可执行，需要在某个地方做标记，这个标记必须满足所有的线程可见，标记不存在的时候设置标记，后续的线程发现已标记则等待拥有标记的线程结束，同步代码块取消标记后，在尝试设置标记，这个标记可以理解为锁。</p>
 <h3 id="什么是分布式锁"><a href="#什么是分布式锁" class="headerlink" title="什么是分布式锁"></a>什么是分布式锁</h3><p>单体单机部署的系统被演化成分布式集群系统后，系统可能会有多份并且部署在不同的机器上，这些资源已经不是在线程之间共享了，而是属于进程之间共享的资源。<br>指在分布式的部署环境下，通过锁机制来让多客户端互斥的对共享资源进行访问。<br><a id="more"></a><br>分布式的 CAP 理论：</p>
 <blockquote>
 <p>任何一个分布式系统都无法同时满足一致性（Consistency）、可用性（Availability）和分区容错性（Partition tolerance），最多只能同时满足两项。</p>
@@ -584,7 +608,7 @@
 <p><a href="http://www.cnblogs.com/linjiqin/p/8003838.html" target="_blank" rel="noopener">http://www.cnblogs.com/linjiqin/p/8003838.html</a></p>
 <p><a href="https://www.xttblog.com/?p=3171" target="_blank" rel="noopener">https://www.xttblog.com/?p=3171</a></p>
 <p><a href="https://juejin.im/post/5c01532ef265da61362232ed" target="_blank" rel="noopener">https://juejin.im/post/5c01532ef265da61362232ed</a></p>
-<p><img src="/2018/11/10/分布式锁/bye.jpg" alt="image"></p>
+<p><img src="/myBlog/2018/11/10/分布式锁/bye.jpg" alt="image"></p>
 
       
     </div>
@@ -618,7 +642,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://zhangzhang18.github.io/2018/11/10/分布式锁/" title="分布式锁">https://zhangzhang18.github.io/2018/11/10/分布式锁/</a>
+    <a href="https://zhangzhang18.github.io/myBlog/2018/11/10/分布式锁/" title="分布式锁">https://zhangzhang18.github.io/myBlog/2018/11/10/分布式锁/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -633,9 +657,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/分布式/" <i class="fa fa-tag"></i> 分布式</a>
+            <a href="/myBlog/tags/JAVA/" <i class="fa fa-tag"></i> JAVA</a>
           
-            <a href="/tags/JAVA/" <i class="fa fa-tag"></i> JAVA</a>
+            <a href="/myBlog/tags/分布式/" <i class="fa fa-tag"></i> 分布式</a>
           
         </div>
       
@@ -660,7 +684,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/10/15/Dubbo/" rel="next" title="Dubbo">
+              <a href="/myBlog/2018/10/15/Dubbo/" rel="next" title="Dubbo">
                 <i class="fa fa-chevron-left"></i> Dubbo
               </a>
             
@@ -670,7 +694,7 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/12/06/Elasticsearch/" rel="prev" title="Elasticsearch">
+              <a href="/myBlog/2018/12/06/Elasticsearch/" rel="prev" title="Elasticsearch">
                 Elasticsearch <i class="fa fa-chevron-right"></i>
               </a>
             
@@ -750,7 +774,7 @@
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
               <img class="site-author-image" itemprop="image"
-                src="/images/header.jpg"
+                src="/myBlog/images/header.jpg"
                 alt="萌" />
             
               <p class="site-author-name" itemprop="name">萌</p>
@@ -762,9 +786,9 @@
             
               <div class="site-state-item site-state-posts">
               
-                <a href="/archives/">
+                <a href="/myBlog/archives/">
               
-                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-count">26</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -774,7 +798,7 @@
               
               
               <div class="site-state-item site-state-categories">
-                <a href="/categories/index.html">
+                <a href="/myBlog/categories/index.html">
                   <span class="site-state-item-count">1</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
@@ -786,8 +810,8 @@
               
               
               <div class="site-state-item site-state-tags">
-                <a href="/tags/index.html">
-                  <span class="site-state-item-count">14</span>
+                <a href="/myBlog/tags/index.html">
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -796,7 +820,7 @@
 
           
             <div class="feed-link motion-element">
-              <a href="/atom.xml" rel="alternate">
+              <a href="/myBlog/atom.xml" rel="alternate">
                 <i class="fa fa-rss"></i>
                 RSS
               </a>
@@ -958,12 +982,12 @@
 
   
   
-    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+    <script type="text/javascript" src="/myBlog/lib/jquery/index.js?v=2.1.3"></script>
   
 
   
   
-    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+    <script type="text/javascript" src="/myBlog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
   
 
   
@@ -973,12 +997,12 @@
 
   
   
-    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+    <script type="text/javascript" src="/myBlog/lib/velocity/velocity.min.js?v=1.2.1"></script>
   
 
   
   
-    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+    <script type="text/javascript" src="/myBlog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
   
 
   
@@ -990,32 +1014,32 @@
   
 
 
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/myBlog/js/src/utils.js?v=5.1.4"></script>
 
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
-
-
-
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/myBlog/js/src/motion.js?v=5.1.4"></script>
 
 
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+  
+
+
+  <script type="text/javascript" src="/myBlog/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/myBlog/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/myBlog/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/myBlog/js/src/post-details.js?v=5.1.4"></script>
 
 
 
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/myBlog/js/src/bootstrap.js?v=5.1.4"></script>
 
 
 
@@ -1076,7 +1100,7 @@
     } else if (/json$/i.test(search_path)) {
       isXml = false;
     }
-    var path = "/" + search_path;
+    var path = "/myBlog/" + search_path;
     // monitor main search box;
 
     var onPopupClose = function (e) {
