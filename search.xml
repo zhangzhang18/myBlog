@@ -36,7 +36,7 @@
   <entry>
     <title><![CDATA[Spring-Boot]]></title>
     <url>%2FmyBlog%2F2019%2F03%2F11%2FSpring-Boot%2F</url>
-    <content type="text"><![CDATA[Spring Boot解决得问题 配置、部署、监控变得简单。 Boot只需要很少得配置（@Configuration），项目快速搭建，主流框架无配置集成。核心功能 独立运行Spring项目 内嵌servlet容器 - SpringApplication.run() 提供starter简化maven配置 自动装配Spring 准生产的应用监控 无代码生产和xml配置]]></content>
+    <content type="text"><![CDATA[Spring Boot解决得问题 配置、部署、监控变得简单。 Boot只需要很少得配置（@Configuration），项目快速搭建，主流框架无配置集成。 核心功能 独立运行Spring项目 内嵌servlet容器 - SpringApplication.run() 提供starter简化maven配置 自动装配Spring 准生产的应用监控 无代码生产和xml配置]]></content>
       <categories>
         <category>NoteBook</category>
       </categories>

@@ -95,9 +95,9 @@
     <link href="https://zhangzhang18.github.io/myBlog/2019/03/11/Spring-Boot/"/>
     <id>https://zhangzhang18.github.io/myBlog/2019/03/11/Spring-Boot/</id>
     <published>2019-03-11T01:24:22.000Z</published>
-    <updated>2019-10-11T10:24:49.899Z</updated>
+    <updated>2019-10-11T11:04:37.847Z</updated>
     
-    <content type="html"><![CDATA[<p>Spring Boot解决得问题</p><blockquote><p>配置、部署、监控变得简单。</p></blockquote><h1 id="Boot只需要很少得配置（-Configuration），项目快速搭建，主流框架无配置集成。"><a href="#Boot只需要很少得配置（-Configuration），项目快速搭建，主流框架无配置集成。" class="headerlink" title="Boot只需要很少得配置（@Configuration），项目快速搭建，主流框架无配置集成。"></a>Boot只需要很少得配置（@Configuration），项目快速搭建，主流框架无配置集成。</h1><h2 id="核心功能"><a href="#核心功能" class="headerlink" title="核心功能"></a>核心功能</h2><ol><li>独立运行Spring项目</li><li>内嵌servlet容器 - SpringApplication.run()</li><li>提供starter简化maven配置</li><li>自动装配Spring</li><li>准生产的应用监控</li><li>无代码生产和xml配置</li></ol>]]></content>
+    <content type="html"><![CDATA[<p>Spring Boot解决得问题</p><blockquote><p>配置、部署、监控变得简单。</p></blockquote><blockquote><p>Boot只需要很少得配置（@Configuration），项目快速搭建，主流框架无配置集成。</p></blockquote><h2 id="核心功能"><a href="#核心功能" class="headerlink" title="核心功能"></a>核心功能</h2><ol><li>独立运行Spring项目</li><li>内嵌servlet容器 - SpringApplication.run()</li><li>提供starter简化maven配置</li><li>自动装配Spring</li><li>准生产的应用监控</li><li>无代码生产和xml配置</li></ol>]]></content>
     
     <summary type="html">
     
@@ -107,7 +107,9 @@
 &lt;blockquote&gt;
 &lt;p&gt;配置、部署、监控变得简单。&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h1 id=&quot;Boot只需要很少得配置（-Configuration），项目快速搭建，主流框架无配置集成。&quot;&gt;&lt;a href=&quot;#Bo
+&lt;blockquote&gt;
+&lt;p&gt;Boot只需要很少得配置（@Configuration），项目快速搭建，主流框架无配置集成。&lt;/p&gt;
+&lt;
       
     
     </summary>
@@ -598,6 +600,31 @@
   </entry>
   
   <entry>
+    <title>准备面试</title>
+    <link href="https://zhangzhang18.github.io/myBlog/2017/03/01/%E9%9D%A2%E7%BB%8F%E5%8D%87%E7%BA%A7/"/>
+    <id>https://zhangzhang18.github.io/myBlog/2017/03/01/面经升级/</id>
+    <published>2017-03-01T03:14:08.000Z</published>
+    <updated>2019-10-11T10:55:03.608Z</updated>
+    
+    <content type="html"><![CDATA[<h6 id="spring事务传播特性"><a href="#spring事务传播特性" class="headerlink" title="spring事务传播特性"></a>spring事务传播特性</h6><pre><code>事务传播行为就是多个事务方法相互调用时，事务如何在这些方法间传播。   propagation_requierd：如果当前没有事务，就新建一个事务，如果已存在一个事务中，加入到这个事务中，这是最常见的选择。    propagation_supports：支持当前事务，如果没有当前事务，就以非事务方法执行。    propagation_mandatory：使用当前事务，如果没有当前事务，就抛出异常。     propagation_required_new：新建事务，如果当前存在事务，把当前事务挂起。    propagation_not_supported：以非事务方式执行操作，如果当前存在事务，就把当前事务挂起。     propagation_never：以非事务方式执行操作，如果当前事务存在则抛出异常。     propagation_nested：如果当前存在事务，则在嵌套事务内执行。如果当前没有事务，则执行与propagation_required类似的操作 </code></pre><h6 id="了解Spring使用到的设计模式吗？"><a href="#了解Spring使用到的设计模式吗？" class="headerlink" title="了解Spring使用到的设计模式吗？"></a>了解Spring使用到的设计模式吗？</h6><h6 id="说说对MQ理解"><a href="#说说对MQ理解" class="headerlink" title="说说对MQ理解"></a>说说对MQ理解</h6><pre><code>https://github.com/doocs/advanced-java作用：解耦、消峰、异步、广播如果使用 MQ，A 系统产生一条数据，发送到 MQ 里面去，哪个系统需要数据自己去 MQ 里面消费。如果新系统需要数据，直接从 MQ 里消费即可；如果某个系统不需要这条数据了，就取消对 MQ 消息的消费即可。这样下来，A 系统压根儿不需要去考虑要给谁发送数据，不需要维护这个代码，也不需要考虑人家是否调用成功、失败超时等情况。保证消息消费幂等性（重复消费问题）   1.写库时，先跟进主键确认是否已存在 2.redis的set 处理消息丢失问题 生产者   1.使用事物，如果失败就回滚，重试发送消息，成功便提交事务   2.开启confirm模式，持久化queue元数据，将消息持久化到磁盘，消息被持久化到磁盘，再通知生产者，</code></pre><h6 id="了解MQ-底层吗"><a href="#了解MQ-底层吗" class="headerlink" title="了解MQ 底层吗"></a>了解MQ 底层吗</h6><h6 id="为什么要用缓存"><a href="#为什么要用缓存" class="headerlink" title="为什么要用缓存"></a>为什么要用缓存</h6><pre><code>用缓存，主要有两个用途：高性能、高并发。高性能：就是说对于一些需要复杂操作耗时查出来的结果，且确定后面不怎么变化，但是有很多读请求，那么直接将查询出来的结果放在缓存中，后面直接读缓存就好。高并发：缓存是走内存的，内存天然就支撑高并发。</code></pre><h6 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h6><pre><code>缓存雪崩：缓存挂了，所有请求都打到数据库    缓存雪崩的事前事中事后的解决方案如下。     事前：redis 高可用，主从+哨兵，redis cluster，避免全盘崩溃。     事中：本地 ehcache 缓存 + hystrix 限流&amp;降级，避免 MySQL 被打死。     事后：redis 持久化，一旦重启，自动从磁盘上加载数据，快速恢复缓存数据。缓存穿透：缓存中查不到，每次去数据库里查，也查不到。就会直接把数据库给打死    解决方式：从数据库中只要没查到，就写一个空值到缓存里去              然后设置一个过期时间，这样的话，下次有相同的 key 来访问的时候，在缓存失效之前，都可以直接从缓存中取数据。缓存击穿：就是说某个 key 非常热点，访问非常频繁，处于集中式高并发访问的情况，当这个 key 在失效的瞬间，大量的请求就击穿了缓存，直接请求数据库，就像是在一道屏障上凿开了一个洞。     解决方式：可以将热点数据设置为永远不过期；或者基于 redis or zookeeper 实现互斥锁，等待第一个请求构建完缓存之后，再释放锁，进而其它请求才能通过该 key 访问数据。</code></pre><h6 id="Redis-过期策略"><a href="#Redis-过期策略" class="headerlink" title="Redis 过期策略"></a>Redis 过期策略</h6><pre><code>1.定期删除+惰性删除。所谓定期删除，指的是 redis 默认是每隔 100ms 就随机抽取一些设置了过期时间的 key，检查其是否过期，如果过期就删除。惰性删除，获取 key 的时候，如果此时 key 已经过期，就删除，不会返回任何东西。2.走内存淘汰机制---在内存不足容纳新的数据的的时候    a).noeviction :    新写入数据报错    b).allkeys-lru：   在所有键中，删除最近最少使用的键    c).allkeys-random：在所有键中，随机删除某个键    d).volatile-lru：  在设置过期时间的键中，删除最近最少使用的键    e).volatile-random:在设置过期时间的键中，随机删除某个键    f).volatile-ttl：  在设置过期时间的键中，删除最早过期的键</code></pre><h6 id="Redis-主从架构-哨兵集群实现高可用"><a href="#Redis-主从架构-哨兵集群实现高可用" class="headerlink" title="Redis 主从架构 哨兵集群实现高可用"></a>Redis 主从架构 哨兵集群实现高可用</h6><pre><code>一:主从架构   一主多从： 主负责写，并且将数据复制到从节点，从节点负责读</code></pre><h6 id="mysql-读写分离"><a href="#mysql-读写分离" class="headerlink" title="mysql 读写分离"></a>mysql 读写分离</h6><pre><code>主库将变更写到binlog中，当从库连接到主库后，从库有一个IO线程，将主库的binlog日志copy到自己本地，执行binlog中的日志内容，写入relay log，就是在自己本地再执行一遍sql。从库同步主库的数据过程是串行化的，也就是主库并行的操作，在从库会串行执行。高并发场景下，从库数据就会比主库慢，有延时如果主库突然宕机，数据还没同步到从库时，MySql有两个机制半同步复制和并行复制1:主库写入binlog后，强制立即将数据同步到从库，从库写入relay log后，从库会返回ask给主库，主库接收至少一个从库的ask才会认为写操作完成。2：从库开启多个线程，并行取relay log中不同库的数据，并行重放不同库的日志。</code></pre><h6 id="高并发系统设计"><a href="#高并发系统设计" class="headerlink" title="高并发系统设计"></a>高并发系统设计</h6><pre><code>1.系统拆分 2.缓存 3.MQ 4.分库分表 5.读写分离 6.ElasticSearch</code></pre><h6 id="说说一次-rpc-请求的流程？"><a href="#说说一次-rpc-请求的流程？" class="headerlink" title="说说一次 rpc 请求的流程？"></a>说说一次 rpc 请求的流程？</h6><pre><code>第一步：provider 向注册中心去注册第二步：consumer 从注册中心订阅服务，注册中心会通知 consumer 注册好的服务第三步：consumer 调用 provider第四步：consumer 和 provider 都异步通知监控中心Dubbo 传输协议：Dubbo缺省协议采用单一长连接和NIO异步通讯，</code></pre><p>注册中心挂了可以继续通信吗？</p><pre><code>可以，因为刚开始初始化的时候，消费者会将提供者的地址等信息拉取到本地缓存，所以注册中心挂了可以继续通信。    </code></pre><h6 id="说说对zk的理解？"><a href="#说说对zk的理解？" class="headerlink" title="说说对zk的理解？"></a>说说对zk的理解？</h6><h3 id="注解的理解"><a href="#注解的理解" class="headerlink" title="注解的理解"></a>注解的理解</h3>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h6 id=&quot;spring事务传播特性&quot;&gt;&lt;a href=&quot;#spring事务传播特性&quot; class=&quot;headerlink&quot; title=&quot;spring事务传播特性&quot;&gt;&lt;/a&gt;spring事务传播特性&lt;/h6&gt;&lt;pre&gt;&lt;code&gt;事务传播行为就是多个事务方法相互调用时，事务
+      
+    
+    </summary>
+    
+    
+      <category term="JAVA" scheme="https://zhangzhang18.github.io/myBlog/tags/JAVA/"/>
+    
+      <category term="面试" scheme="https://zhangzhang18.github.io/myBlog/tags/%E9%9D%A2%E8%AF%95/"/>
+    
+  </entry>
+  
+  <entry>
     <title>准备面试基础</title>
     <link href="https://zhangzhang18.github.io/myBlog/2017/03/01/%E9%9D%A2%E7%BB%8F%E5%9F%BA%E7%A1%80/"/>
     <id>https://zhangzhang18.github.io/myBlog/2017/03/01/面经基础/</id>
@@ -618,31 +645,6 @@
 堆：是java虚拟机管理内存最大的一块，存储实例对象和数组，是垃圾回收管理主要区域  
 方法区：存储类信息，常量和静态变量，接口，变量，方法名等描述信息  
 &lt;/code&gt;&lt;/pre&gt;
-    
-    </summary>
-    
-    
-      <category term="JAVA" scheme="https://zhangzhang18.github.io/myBlog/tags/JAVA/"/>
-    
-      <category term="面试" scheme="https://zhangzhang18.github.io/myBlog/tags/%E9%9D%A2%E8%AF%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>准备面试</title>
-    <link href="https://zhangzhang18.github.io/myBlog/2017/03/01/%E9%9D%A2%E7%BB%8F%E5%8D%87%E7%BA%A7/"/>
-    <id>https://zhangzhang18.github.io/myBlog/2017/03/01/面经升级/</id>
-    <published>2017-03-01T03:14:08.000Z</published>
-    <updated>2019-10-11T10:55:03.608Z</updated>
-    
-    <content type="html"><![CDATA[<h6 id="spring事务传播特性"><a href="#spring事务传播特性" class="headerlink" title="spring事务传播特性"></a>spring事务传播特性</h6><pre><code>事务传播行为就是多个事务方法相互调用时，事务如何在这些方法间传播。   propagation_requierd：如果当前没有事务，就新建一个事务，如果已存在一个事务中，加入到这个事务中，这是最常见的选择。    propagation_supports：支持当前事务，如果没有当前事务，就以非事务方法执行。    propagation_mandatory：使用当前事务，如果没有当前事务，就抛出异常。     propagation_required_new：新建事务，如果当前存在事务，把当前事务挂起。    propagation_not_supported：以非事务方式执行操作，如果当前存在事务，就把当前事务挂起。     propagation_never：以非事务方式执行操作，如果当前事务存在则抛出异常。     propagation_nested：如果当前存在事务，则在嵌套事务内执行。如果当前没有事务，则执行与propagation_required类似的操作 </code></pre><h6 id="了解Spring使用到的设计模式吗？"><a href="#了解Spring使用到的设计模式吗？" class="headerlink" title="了解Spring使用到的设计模式吗？"></a>了解Spring使用到的设计模式吗？</h6><h6 id="说说对MQ理解"><a href="#说说对MQ理解" class="headerlink" title="说说对MQ理解"></a>说说对MQ理解</h6><pre><code>https://github.com/doocs/advanced-java作用：解耦、消峰、异步、广播如果使用 MQ，A 系统产生一条数据，发送到 MQ 里面去，哪个系统需要数据自己去 MQ 里面消费。如果新系统需要数据，直接从 MQ 里消费即可；如果某个系统不需要这条数据了，就取消对 MQ 消息的消费即可。这样下来，A 系统压根儿不需要去考虑要给谁发送数据，不需要维护这个代码，也不需要考虑人家是否调用成功、失败超时等情况。保证消息消费幂等性（重复消费问题）   1.写库时，先跟进主键确认是否已存在 2.redis的set 处理消息丢失问题 生产者   1.使用事物，如果失败就回滚，重试发送消息，成功便提交事务   2.开启confirm模式，持久化queue元数据，将消息持久化到磁盘，消息被持久化到磁盘，再通知生产者，</code></pre><h6 id="了解MQ-底层吗"><a href="#了解MQ-底层吗" class="headerlink" title="了解MQ 底层吗"></a>了解MQ 底层吗</h6><h6 id="为什么要用缓存"><a href="#为什么要用缓存" class="headerlink" title="为什么要用缓存"></a>为什么要用缓存</h6><pre><code>用缓存，主要有两个用途：高性能、高并发。高性能：就是说对于一些需要复杂操作耗时查出来的结果，且确定后面不怎么变化，但是有很多读请求，那么直接将查询出来的结果放在缓存中，后面直接读缓存就好。高并发：缓存是走内存的，内存天然就支撑高并发。</code></pre><h6 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h6><pre><code>缓存雪崩：缓存挂了，所有请求都打到数据库    缓存雪崩的事前事中事后的解决方案如下。     事前：redis 高可用，主从+哨兵，redis cluster，避免全盘崩溃。     事中：本地 ehcache 缓存 + hystrix 限流&amp;降级，避免 MySQL 被打死。     事后：redis 持久化，一旦重启，自动从磁盘上加载数据，快速恢复缓存数据。缓存穿透：缓存中查不到，每次去数据库里查，也查不到。就会直接把数据库给打死    解决方式：从数据库中只要没查到，就写一个空值到缓存里去              然后设置一个过期时间，这样的话，下次有相同的 key 来访问的时候，在缓存失效之前，都可以直接从缓存中取数据。缓存击穿：就是说某个 key 非常热点，访问非常频繁，处于集中式高并发访问的情况，当这个 key 在失效的瞬间，大量的请求就击穿了缓存，直接请求数据库，就像是在一道屏障上凿开了一个洞。     解决方式：可以将热点数据设置为永远不过期；或者基于 redis or zookeeper 实现互斥锁，等待第一个请求构建完缓存之后，再释放锁，进而其它请求才能通过该 key 访问数据。</code></pre><h6 id="Redis-过期策略"><a href="#Redis-过期策略" class="headerlink" title="Redis 过期策略"></a>Redis 过期策略</h6><pre><code>1.定期删除+惰性删除。所谓定期删除，指的是 redis 默认是每隔 100ms 就随机抽取一些设置了过期时间的 key，检查其是否过期，如果过期就删除。惰性删除，获取 key 的时候，如果此时 key 已经过期，就删除，不会返回任何东西。2.走内存淘汰机制---在内存不足容纳新的数据的的时候    a).noeviction :    新写入数据报错    b).allkeys-lru：   在所有键中，删除最近最少使用的键    c).allkeys-random：在所有键中，随机删除某个键    d).volatile-lru：  在设置过期时间的键中，删除最近最少使用的键    e).volatile-random:在设置过期时间的键中，随机删除某个键    f).volatile-ttl：  在设置过期时间的键中，删除最早过期的键</code></pre><h6 id="Redis-主从架构-哨兵集群实现高可用"><a href="#Redis-主从架构-哨兵集群实现高可用" class="headerlink" title="Redis 主从架构 哨兵集群实现高可用"></a>Redis 主从架构 哨兵集群实现高可用</h6><pre><code>一:主从架构   一主多从： 主负责写，并且将数据复制到从节点，从节点负责读</code></pre><h6 id="mysql-读写分离"><a href="#mysql-读写分离" class="headerlink" title="mysql 读写分离"></a>mysql 读写分离</h6><pre><code>主库将变更写到binlog中，当从库连接到主库后，从库有一个IO线程，将主库的binlog日志copy到自己本地，执行binlog中的日志内容，写入relay log，就是在自己本地再执行一遍sql。从库同步主库的数据过程是串行化的，也就是主库并行的操作，在从库会串行执行。高并发场景下，从库数据就会比主库慢，有延时如果主库突然宕机，数据还没同步到从库时，MySql有两个机制半同步复制和并行复制1:主库写入binlog后，强制立即将数据同步到从库，从库写入relay log后，从库会返回ask给主库，主库接收至少一个从库的ask才会认为写操作完成。2：从库开启多个线程，并行取relay log中不同库的数据，并行重放不同库的日志。</code></pre><h6 id="高并发系统设计"><a href="#高并发系统设计" class="headerlink" title="高并发系统设计"></a>高并发系统设计</h6><pre><code>1.系统拆分 2.缓存 3.MQ 4.分库分表 5.读写分离 6.ElasticSearch</code></pre><h6 id="说说一次-rpc-请求的流程？"><a href="#说说一次-rpc-请求的流程？" class="headerlink" title="说说一次 rpc 请求的流程？"></a>说说一次 rpc 请求的流程？</h6><pre><code>第一步：provider 向注册中心去注册第二步：consumer 从注册中心订阅服务，注册中心会通知 consumer 注册好的服务第三步：consumer 调用 provider第四步：consumer 和 provider 都异步通知监控中心Dubbo 传输协议：Dubbo缺省协议采用单一长连接和NIO异步通讯，</code></pre><p>注册中心挂了可以继续通信吗？</p><pre><code>可以，因为刚开始初始化的时候，消费者会将提供者的地址等信息拉取到本地缓存，所以注册中心挂了可以继续通信。    </code></pre><h6 id="说说对zk的理解？"><a href="#说说对zk的理解？" class="headerlink" title="说说对zk的理解？"></a>说说对zk的理解？</h6><h3 id="注解的理解"><a href="#注解的理解" class="headerlink" title="注解的理解"></a>注解的理解</h3>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h6 id=&quot;spring事务传播特性&quot;&gt;&lt;a href=&quot;#spring事务传播特性&quot; class=&quot;headerlink&quot; title=&quot;spring事务传播特性&quot;&gt;&lt;/a&gt;spring事务传播特性&lt;/h6&gt;&lt;pre&gt;&lt;code&gt;事务传播行为就是多个事务方法相互调用时，事务
-      
     
     </summary>
     
