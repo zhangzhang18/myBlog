@@ -159,22 +159,24 @@
 
 
 
-<meta name="description" content="快速排序123456789101112131415161718192021222324252627int a[10],n;void quickSort(int left,int right)&amp;#123;  int i,j,t,temp;  if(left &amp;gt;right)&amp;#123;    return;  &amp;#125;  temp=a[left];  i=left;  j=right;  w">
+<meta name="description" content="排序快速排序123456789101112131415161718192021222324252627int a[10],n;void quickSort(int left,int right)&amp;#123;  int i,j,t,temp;  if(left &amp;gt;right)&amp;#123;    return;  &amp;#125;  temp=a[left];  i=left;  j=right;">
 <meta name="keywords" content="JAVA,面试">
 <meta property="og:type" content="article">
 <meta property="og:title" content="面试常用手写代码">
 <meta property="og:url" content="https://zhangzhang18.github.io/myBlog/2017/10/12/面试常用手写代码/index.html">
 <meta property="og:site_name" content="萌">
-<meta property="og:description" content="快速排序123456789101112131415161718192021222324252627int a[10],n;void quickSort(int left,int right)&amp;#123;  int i,j,t,temp;  if(left &amp;gt;right)&amp;#123;    return;  &amp;#125;  temp=a[left];  i=left;  j=right;  w">
+<meta property="og:description" content="排序快速排序123456789101112131415161718192021222324252627int a[10],n;void quickSort(int left,int right)&amp;#123;  int i,j,t,temp;  if(left &amp;gt;right)&amp;#123;    return;  &amp;#125;  temp=a[left];  i=left;  j=right;">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://zhangzhang18.github.io/myBlog/2017/10/12/面试常用手写代码/ps.png">
 <meta property="og:image" content="https://zhangzhang18.github.io/myBlog/2017/10/12/面试常用手写代码/ps2.png">
+<meta property="og:image" content="https://zhangzhang18.github.io/myBlog/2017/10/12/面试常用手写代码/ms.jpg">
+<meta property="og:image" content="https://zhangzhang18.github.io/myBlog/2017/10/12/面试常用手写代码/allSort.png">
 <meta property="og:image" content="https://zhangzhang18.github.io/myBlog/2017/10/12/面试常用手写代码/single.jpg">
 <meta property="og:image" content="https://zhangzhang18.github.io/myBlog/2017/10/12/面试常用手写代码/compare.jpg">
-<meta property="og:updated_time" content="2019-10-12T05:30:15.914Z">
+<meta property="og:updated_time" content="2019-10-12T09:40:32.570Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="面试常用手写代码">
-<meta name="twitter:description" content="快速排序123456789101112131415161718192021222324252627int a[10],n;void quickSort(int left,int right)&amp;#123;  int i,j,t,temp;  if(left &amp;gt;right)&amp;#123;    return;  &amp;#125;  temp=a[left];  i=left;  j=right;  w">
+<meta name="twitter:description" content="排序快速排序123456789101112131415161718192021222324252627int a[10],n;void quickSort(int left,int right)&amp;#123;  int i,j,t,temp;  if(left &amp;gt;right)&amp;#123;    return;  &amp;#125;  temp=a[left];  i=left;  j=right;">
 <meta name="twitter:image" content="https://zhangzhang18.github.io/myBlog/2017/10/12/面试常用手写代码/ps.png">
 
 
@@ -476,7 +478,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-10-12T13:30:15+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2019-10-12T17:40:32+08:00">
                 2019-10-12
               </time>
             
@@ -536,7 +538,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  774
+                  1,134
                 </span>
               
 
@@ -561,30 +563,124 @@
       
 
       
-        <h2 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">int a[10],n;</span><br><span class="line">void quickSort(int left,int right)&#123;</span><br><span class="line">  int i,j,t,temp;</span><br><span class="line">  if(left &gt;right)&#123;</span><br><span class="line">    return;</span><br><span class="line">  &#125;</span><br><span class="line">  temp=a[left];</span><br><span class="line">  i=left;</span><br><span class="line">  j=right;</span><br><span class="line">  while(i!=j)&#123;</span><br><span class="line">    while(a[j]&gt;=temp&amp;&amp;i&lt;j)&#123;</span><br><span class="line">        j--;</span><br><span class="line">    &#125;</span><br><span class="line">    while(a[i]&gt;=temp&amp;&amp;i&lt;j)&#123;</span><br><span class="line">        i++;</span><br><span class="line">    &#125;</span><br><span class="line">    if(i&lt;j)&#123;</span><br><span class="line">        t=a[i];</span><br><span class="line">        a[i]=a[j];</span><br><span class="line">        a[j]=t;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  a[left]=a[i];</span><br><span class="line">  a[i]=temp;</span><br><span class="line">  quicpSort(left,i-1);</span><br><span class="line">  quickSort(i+1,right);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h1 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h1><h2 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">int a[10],n;</span><br><span class="line">void quickSort(int left,int right)&#123;</span><br><span class="line">  int i,j,t,temp;</span><br><span class="line">  if(left &gt;right)&#123;</span><br><span class="line">    return;</span><br><span class="line">  &#125;</span><br><span class="line">  temp=a[left];</span><br><span class="line">  i=left;</span><br><span class="line">  j=right;</span><br><span class="line">  while(i!=j)&#123;</span><br><span class="line">    while(a[j]&gt;=temp&amp;&amp;i&lt;j)&#123;</span><br><span class="line">        j--;</span><br><span class="line">    &#125;</span><br><span class="line">    while(a[i]&gt;=temp&amp;&amp;i&lt;j)&#123;</span><br><span class="line">        i++;</span><br><span class="line">    &#125;</span><br><span class="line">    if(i&lt;j)&#123;</span><br><span class="line">        t=a[i];</span><br><span class="line">        a[i]=a[j];</span><br><span class="line">        a[j]=t;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  a[left]=a[i];</span><br><span class="line">  a[i]=temp;</span><br><span class="line">  quicpSort(left,i-1);</span><br><span class="line">  quickSort(i+1,right);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
 <p><img src="/myBlog/2017/10/12/面试常用手写代码/ps.png" alt="快速排序步骤"><br><img src="/myBlog/2017/10/12/面试常用手写代码/ps2.png" alt="快速排序理解"></p>
-<h2 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h2><p>volatile 的一个语义禁止指令重排优化。在读取变量的时候直接从内存读取，保证所有线程看到的变量值都是相同的，<br>synchronized关键字锁住类<br>进入Synchronized 临界区以后，还要再做一次判空。因为当两个线程同时访问的时候，线程A构建完对象，线程B也已经通过了最初的判空验证，不做第二次判空的话，线程B还是会再次构建instance对象。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">static</span> Singleton instance=<span class="keyword">null</span>;</span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">  <span class="comment">//检查实例，如果不存在，就进入同步代码块</span></span><br><span class="line">      <span class="keyword">if</span> (instance==<span class="keyword">null</span>)&#123;<span class="comment">//  双重检测机制  </span></span><br><span class="line">          <span class="keyword">synchronized</span>(Singleton.class)&#123;<span class="comment">//1  同步锁 类对象加锁</span></span><br><span class="line">              <span class="keyword">if</span>(instance==<span class="keyword">null</span>)&#123;<span class="comment">//2  双重检测机制</span></span><br><span class="line">                  instance=<span class="keyword">new</span> Singleton();<span class="comment">//3  </span></span><br><span class="line">              &#125;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> instance;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="/myBlog/2017/10/12/面试常用手写代码/single.jpg" alt="single"><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//enum JVM会组织反射获取枚举类的私有构造方法</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> Singleton &#123;</span><br><span class="line">    INSTANCE;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">whateverMethod</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">void mergeSort(int[] arr, int start, int end) &#123;</span><br><span class="line">       if (start &lt; end) &#123;</span><br><span class="line">           //折半成两个小集合，分别进行递归</span><br><span class="line">           int mid = (start + end) / 2;</span><br><span class="line">           mergeSort(arr, start, mid);</span><br><span class="line">           mergeSort(arr, mid + 1, end);</span><br><span class="line">           //把有序小集合，归并成大集合</span><br><span class="line">           merge(arr, start, mid, end);</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   void merge(int[] arr, int start, int mid, int end) &#123;</span><br><span class="line">       //开辟额外大集合</span><br><span class="line">       int[] temp = new int[end - start + 1];</span><br><span class="line">       int p1 = start, p2 = mid + 1, p = 0;</span><br><span class="line">       //比较两个小集合放入大集合</span><br><span class="line">       while (p1 &lt; mid &amp;&amp; p2 &lt; end) &#123;</span><br><span class="line">           if (arr[p1] &lt;= arr[p2]) &#123;</span><br><span class="line">               temp[p++] = arr[p1++];</span><br><span class="line">           &#125; else &#123;</span><br><span class="line">               temp[p++] = arr[p2++];</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       //左侧有剩余</span><br><span class="line">       while (p1 &lt; mid) &#123;</span><br><span class="line">           temp[p++] = arr[p1++];</span><br><span class="line">       &#125;</span><br><span class="line">       //右侧有剩余</span><br><span class="line">       while (p2 &lt; end) &#123;</span><br><span class="line">           temp[p++] = arr[p2++];</span><br><span class="line">       &#125;</span><br><span class="line">       //复制回原数组</span><br><span class="line">       for (int i = 0; i &lt; temp.length; i++) &#123;</span><br><span class="line">           arr[i + start] = temp[i];</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/myBlog/2017/10/12/面试常用手写代码/ms.jpg" alt="归并图解"></p>
+<p><img src="/myBlog/2017/10/12/面试常用手写代码/allSort.png" alt="排序对比"></p>
+<h1 id="单例"><a href="#单例" class="headerlink" title="单例"></a>单例</h1><h2 id="双重校验锁"><a href="#双重校验锁" class="headerlink" title="双重校验锁"></a>双重校验锁</h2><p>volatile 的一个语义禁止指令重排优化。在读取变量的时候直接从内存读取，保证所有线程看到的变量值都是相同的，<br>synchronized关键字锁住类<br>进入Synchronized 临界区以后，还要再做一次判空。因为当两个线程同时访问的时候，线程A构建完对象，线程B也已经通过了最初的判空验证，不做第二次判空的话，线程B还是会再次构建instance对象。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">static</span> Singleton instance = <span class="keyword">null</span>;</span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">  <span class="comment">//检查实例，如果不存在，就进入同步代码块</span></span><br><span class="line">      <span class="keyword">if</span> (instance==<span class="keyword">null</span>)&#123;<span class="comment">//  双重检测机制  </span></span><br><span class="line">          <span class="keyword">synchronized</span>(Singleton.class)&#123;<span class="comment">//1  同步锁 类对象加锁</span></span><br><span class="line">              <span class="keyword">if</span>(instance == <span class="keyword">null</span>)&#123;<span class="comment">//2  双重检测机制</span></span><br><span class="line">                  instance = <span class="keyword">new</span> Singleton();<span class="comment">//3  </span></span><br><span class="line">              &#125;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> instance;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/myBlog/2017/10/12/面试常用手写代码/single.jpg" alt="single"></p>
+<h2 id="静态内部类"><a href="#静态内部类" class="headerlink" title="静态内部类"></a>静态内部类</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">LazyHolder</span></span>&#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Singleton INSTANCE = <span class="keyword">new</span> Singleton();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">      <span class="keyword">return</span> LazyHolder.INSTANCE;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="enum"><a href="#enum" class="headerlink" title="enum"></a>enum</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// JVM会组织反射获取枚举类的私有构造方法</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> Singleton &#123;</span><br><span class="line">    INSTANCE;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">whateverMethod</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><img src="/myBlog/2017/10/12/面试常用手写代码/compare.jpg" alt="compare"></p>
-<h2 id="非递归遍历二叉树"><a href="#非递归遍历二叉树" class="headerlink" title="非递归遍历二叉树"></a>非递归遍历二叉树</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public void preOrder(Node head) &#123;</span><br><span class="line">        if(head != null) &#123;</span><br><span class="line">            Stack&lt;Node&gt; stack = new Stack&lt;&gt;();</span><br><span class="line">            stack.push(head);</span><br><span class="line">            while(!stack.isEmpty()) &#123;</span><br><span class="line">                head = stack.pop();</span><br><span class="line">                System.out.print(head.val + &quot; &quot;);</span><br><span class="line">                if (head.right != null)</span><br><span class="line">                    stack.push(head.right);</span><br><span class="line">                if (head.left != null)</span><br><span class="line">                    stack.push(head.left);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<h2 id="二叉树的深度"><a href="#二叉树的深度" class="headerlink" title="二叉树的深度"></a>二叉树的深度</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">  public int findDeep(BiTree root)  </span><br><span class="line">  &#123;  </span><br><span class="line">      int deep = 0;  </span><br><span class="line">      if(root != null)  </span><br><span class="line">      &#123;  </span><br><span class="line">          int lchilddeep = findDeep(root.left);  </span><br><span class="line">          int rchilddeep = findDeep(root.right);  </span><br><span class="line">          deep = lchilddeep &gt; rchilddeep ? lchilddeep + 1 : rchilddeep + 1;  </span><br><span class="line">      &#125;  </span><br><span class="line">      return deep;  </span><br><span class="line">  &#125;  </span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## 判断链表是否有环</span><br></pre></td></tr></table></figure>
-<p>typedef struct node{<br>    char data ;<br>    node <em> next ;<br>}Node;<br>bool exitLoop(Node </em>head)<br>{<br>    Node <em>fast, </em>slow ;<br>    slow = fast = head ;  </p>
-<pre><code>while (slow != NULL &amp;&amp; fast -&gt; next != NULL)  
-{  
-    slow = slow -&gt; next ;  
-    fast = fast -&gt; next -&gt; next ;  
-    if (slow == fast)  
-        return true ;  
-}  
-return false ;  
-</code></pre><p>}  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 单链表反转</span><br></pre></td></tr></table></figure>
-<p>public Node reverse(Node node) {<br>    Node prev = null;<br>    Node now = node;<br>    while (now != null) {<br>      Node next = now.next;<br>      now.next = prev;<br>      prev = now;<br>      now = next;<br>    }</p>
-<pre><code>return prev;
-</code></pre><p>  }<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### 合并两个有序数据，结果任然有序</span><br></pre></td></tr></table></figure></p>
-<pre><code>public static int[] merge(int[] a, int[] b) {
+<h1 id="二叉树"><a href="#二叉树" class="headerlink" title="二叉树"></a>二叉树</h1><h2 id="非递归遍历二叉树"><a href="#非递归遍历二叉树" class="headerlink" title="非递归遍历二叉树"></a>非递归遍历二叉树</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">void preOrder(Node head) &#123;</span><br><span class="line">       if(head != null) &#123;</span><br><span class="line">           Stack&lt;Node&gt; stack = new Stack&lt;&gt;();</span><br><span class="line">           stack.push(head);</span><br><span class="line">           while(!stack.isEmpty()) &#123;</span><br><span class="line">               head = stack.pop();</span><br><span class="line">               System.out.print(head.val + &quot; &quot;);</span><br><span class="line">               if (head.right != null)</span><br><span class="line">                   stack.push(head.right);</span><br><span class="line">               if (head.left != null)</span><br><span class="line">                   stack.push(head.left);</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="二叉树的深度"><a href="#二叉树的深度" class="headerlink" title="二叉树的深度"></a>二叉树的深度</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">   int findDeep(BiTree root)  </span><br><span class="line">  &#123;  </span><br><span class="line">      int deep = 0;  </span><br><span class="line">      if(root != null)  </span><br><span class="line">      &#123;  </span><br><span class="line">          int lchilddeep = findDeep(root.left);  </span><br><span class="line">          int rchilddeep = findDeep(root.right);  </span><br><span class="line">          deep = lchilddeep &gt; rchilddeep ? lchilddeep + 1 : rchilddeep + 1;  </span><br><span class="line">      &#125;  </span><br><span class="line">      return deep;  </span><br><span class="line">  &#125;  </span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line"># 链表</span><br><span class="line">## 单链表反转</span><br></pre></td></tr></table></figure>
+<pre><code> Node reverse(Node head) {
+    if (head == null) {
+        return null;
+    }
+    Node prev = null;
+    Node now = head;
+    while (now != null) {
+        Node next = now.next;
+        now.next = prev;
+        prev = now;
+        now = next;
+    }
+    return prev;
+}
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">### 删除重复值</span><br></pre></td></tr></table></figure>
+<pre><code>  Node deleteRepeat(Node head) {
+    if (null == head || null == head.next) {
+        return head;
+    }
+    Node pre = head;
+    Node cur = head.next;
+
+    while (cur != null) {
+        if (cur.val == pre.val) {
+            pre.next = cur.next;
+        } else {
+            pre = cur;
+        }
+        if (cur.next == null) {
+            return head;
+        }
+        cur = cur.next;
+    }
+    return cur;
+}
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">## 判断链表是否有环</span><br></pre></td></tr></table></figure>
+<pre><code>Node meetingNode(Node head) {
+    if (head == null) {
+        return null;
+    }
+    Node slow = head.next;
+    if (slow == null) {
+        return null;
+    }
+    Node fast = slow.next;
+    while (slow != null &amp;&amp; fast != null) {
+        if (slow == fast) {
+            return fast;
+        }
+        slow = slow.next;
+        fast = fast.next;
+        if (fast != null) {
+            fast = fast.next;
+        }
+    }
+    return null;
+}
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">## 链表中环入口节点</span><br></pre></td></tr></table></figure>
+<pre><code>Node nodeOfLoop(Node head) {
+    if (head == null) {
+        return null;
+    }
+    //得到相遇节点
+    Node meetingNode = meetingNode(head);
+    if (meetingNode == null) {
+        return null;
+    }
+    //得到环节点数
+    int nodeInLoopNum = 1;
+    Node p1 = meetingNode;
+    while (p1.next != meetingNode) {
+        p1 = p1.next;
+        ++nodeInLoopNum;
+    }
+    p1 = head;
+    Node p2 = head;
+    //p1先移动环节点数nodeInLoopNum步
+    for (int i = 0; i &lt; nodeInLoopNum; i++) {
+        p1 = p1.next;
+    }
+    //然后p1,p2以相同速度移动
+    while (p1 != p2) {
+        p1 = p1.next;
+        p2 = p2.next;
+    }
+    return p1;
+}
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## 判断两个链表是否相交</span><br></pre></td></tr></table></figure>
+<pre><code>boolean isIntersert(Node h1, Node h2) {
+    if (h1 == null || h2 == null) {
+        return false;
+    }
+    Node tail = h1;
+    Node tail2 = h2;
+    while (tail.next != null) {
+        tail = tail.next;
+    }
+    while (tail2.next != null) {
+        tail2 = tail2.next;
+    }
+    return tail == tail2;
+}
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"># 数组</span><br><span class="line">### 合并两个有序数据，结果任然有序</span><br></pre></td></tr></table></figure>
+<pre><code> int[] merge(int[] a, int[] b) {
     int[] result;
     result = new int[a.length + b.length];
     int i = 0, j = 0, k = 0;
@@ -603,41 +699,21 @@ return false ;
     }
     return result;
 }
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### 删除重复值</span><br></pre></td></tr></table></figure>
-<pre><code>public static Node deleteRepeat(Node head) {
-    if (null == head || null == head.next) {
-        return head;
-    }
-    Node pre = head;
-    Node cur = head.next;
-
-    while (cur != null) {
-        if (cur.val == pre.val) {
-            pre.next = cur.next;
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">### 二分查找</span><br></pre></td></tr></table></figure>
+<p>   int binarySearch(int[] arr, int key) {<br>        int low = 0;<br>        int high = arr.length - 1;</p>
+<pre><code>    while (low &lt;= high) {
+        int mid = (low + high) / 2;
+        if (key == arr[mid]) {
+            return mid;
+        } else if (key &gt; arr[mid]) {
+            low = mid + 1;
         } else {
-            pre = cur;
+            high = mid - 1;
         }
-        if (cur.next==null) {
-            return head;
-        }
-        cur = cur.next;
     }
-    return cur;
+    return 0;
 }
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">### 二分查找</span><br></pre></td></tr></table></figure>
-<p>function binarySearch(arr, key) {<br>    var low = 0;<br>    var high = arr.length - 1;</p>
-<pre><code>while (low &lt;= high) {
-    var mid = parseInt((low + high) / 2);
-    if (key == arr[mid]) {
-        return mid;
-    } else if (key &gt; arr[mid]) {
-        low = mid + 1;
-    } else {
-        high = mid - 1;
-    }
-}
-</code></pre><p>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">## 判断两个链表是否相交</span><br></pre></td></tr></table></figure></p>
-<p>private boolean isIntersert(Node h1,Node h2){<br>    if(h1==null||h2==null)<br>        return false;<br>    Node tail =h1;<br>    Node tail2 =h2;<br>    while(tail.next!=null)<br>        tail=tail.next;<br>    while(tail2.next!=null)<br>        tail2=tail2.next;<br>    return tail==tail2;<br>}<br><code>`</code></p>
+</code></pre><p><code>`</code></p>
 
       
     </div>
@@ -904,7 +980,7 @@ return false ;
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#快速排序"><span class="nav-text">快速排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单例模式"><span class="nav-text">单例模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#非递归遍历二叉树"><span class="nav-text">非递归遍历二叉树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二叉树的深度"><span class="nav-text">二叉树的深度</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#排序"><span class="nav-text">排序</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#快速排序"><span class="nav-text">快速排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#归并排序"><span class="nav-text">归并排序</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#单例"><span class="nav-text">单例</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#双重校验锁"><span class="nav-text">双重校验锁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#静态内部类"><span class="nav-text">静态内部类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#enum"><span class="nav-text">enum</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二叉树"><span class="nav-text">二叉树</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#非递归遍历二叉树"><span class="nav-text">非递归遍历二叉树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二叉树的深度"><span class="nav-text">二叉树的深度</span></a></li></ol></li></ol></div>
             
 
           </div>
