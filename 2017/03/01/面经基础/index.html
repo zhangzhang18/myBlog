@@ -167,7 +167,7 @@
 <meta property="og:site_name" content="萌">
 <meta property="og:description" content="java内存区域, 各个模块的作用线程共享：堆，方法区，直接内存   线程私有的：程序计数器，虚拟机栈，本地方法栈    程序计数器：记录线程执行的位置行数，为了线程切换后能恢复正确的执行位置   虚拟机栈：存储局部变量表，常量池的引用，方法的出口等，一个方法的执行意味着一个栈帧入栈出栈的过程   本地方法栈：与栈类似，它用的是虚拟机的native方法 为保证线程中局部变量不被其他线程访问到，所以">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-10-11T10:55:03.615Z">
+<meta property="og:updated_time" content="2019-10-12T12:52:00.733Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="准备面试基础">
 <meta name="twitter:description" content="java内存区域, 各个模块的作用线程共享：堆，方法区，直接内存   线程私有的：程序计数器，虚拟机栈，本地方法栈    程序计数器：记录线程执行的位置行数，为了线程切换后能恢复正确的执行位置   虚拟机栈：存储局部变量表，常量池的引用，方法的出口等，一个方法的执行意味着一个栈帧入栈出栈的过程   本地方法栈：与栈类似，它用的是虚拟机的native方法 为保证线程中局部变量不被其他线程访问到，所以">
@@ -471,8 +471,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-10-11T18:55:03+08:00">
-                2019-10-11
+              <time title="更新于" itemprop="dateModified" datetime="2019-10-12T20:52:00+08:00">
+                2019-10-12
               </time>
             
           </span>
@@ -509,7 +509,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  4,349
+                  3,969
                 </span>
               
 
@@ -614,19 +614,6 @@ Java的内存模式：是从主存读取变量，线程吧变量保存在本地�
   同步异步：
    举例同步，你喊我吃饭，如果听见了，就一起去吃饭，如果没听见，你就不停喊，知道我听见才一起去吃饭，
    异步，你喊我吃饭，然后自己去吃饭，我听到消息可能立刻走也可能等下班才去吃饭。
-</code></pre><h6 id="java中的线程池-有哪些参数-每个参数的含义-如何创建线程池-项目中的线程池的作用"><a href="#java中的线程池-有哪些参数-每个参数的含义-如何创建线程池-项目中的线程池的作用" class="headerlink" title="java中的线程池, 有哪些参数,每个参数的含义, 如何创建线程池, 项目中的线程池的作用"></a>java中的线程池, 有哪些参数,每个参数的含义, 如何创建线程池, 项目中的线程池的作用</h6><p><code>ThreadPoolExecutor(int corePoolSize,int maximumPoolSize,long keepAliveTime,TimeUnit unit,BlockingQueue&lt;Runnable     workQueue)</code></p>
-<pre><code>corePoolSize： 线程池启动后，在池中保持的线程的最小数量  
-maxinumPoolSize： 线程池中能容纳的最大线程数量  
-unit： keepAliveTime的时间单位，可以是纳秒，毫秒，秒，分钟等   
-keepAliveTime： 线程的最大生命周期 
-workQueue：  任务队列  
-threadFactory： 定义如何启动一个线程，可以设置线程的名称，并且可以确定是否是后台线程等。   
-handler： 拒绝任务处理器。由于超出线程数量和队列容量而对继续增加的任务进行处理的程序。  
-**首先创建一个线程池，然后根据任务的数量逐步将线程增大到corePoolSize，如果此时仍有任务增加，则放置到workQueue中**，直到workQueue爆满为止，然后继续增加池中的线程数量（增强处理能力），**最终达到maxinumPoolSize**。
-
-降低资源消耗：事先创建若干个线程放在容器中，当使用的时候不需要自行创建，使用完不是去销毁而是归还到容器，减少了线程创建和销毁的时间     
-提高响应速度：不需要等待线程创建    
-提高线程的可管理性：无限制的创建线程，不仅消耗资源还降低系统稳定性，线程池可以进行统一分配，监控    
 </code></pre><h6 id="LRU原理-LinkedHashMap是如何实现的-LinkedHashMap数据结构源码"><a href="#LRU原理-LinkedHashMap是如何实现的-LinkedHashMap数据结构源码" class="headerlink" title="LRU原理, LinkedHashMap是如何实现的, LinkedHashMap数据结构源码"></a>LRU原理, LinkedHashMap是如何实现的, LinkedHashMap数据结构源码</h6><h6 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h6><pre><code>https://blog.csdn.net/ls5718/article/details/51896159   
 互斥条件，不剥夺条件，请求等待条件，循环等待
 </code></pre><h6 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h6><pre><code>索引就是个目录，字典的目录，有了目录就能更快的定位
@@ -879,7 +866,7 @@ GROUP BY 子句用来分组 WHERE 子句的输出。
               
                 <a href="/myBlog/archives/">
               
-                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-count">28</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -966,7 +953,7 @@ GROUP BY 子句用来分组 WHERE 子句的输出。
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#java内存区域-各个模块的作用"><span class="nav-text">java内存区域, 各个模块的作用</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#垃圾回收算法"><span class="nav-text">垃圾回收算法</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#堆溢出-栈溢出举例-内存溢出与泄漏的区别并举例"><span class="nav-text">堆溢出,栈溢出举例, 内存溢出与泄漏的区别并举例</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#双亲委派模型-java类加载过程-每个过程做了什么"><span class="nav-text">双亲委派模型, java类加载过程,每个过程做了什么</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#java中的锁-乐观锁-悲观锁-自旋锁等等"><span class="nav-text">java中的锁, 乐观锁,悲观锁, 自旋锁等等</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#ReentrantLock与synchronized"><span class="nav-text">ReentrantLock与synchronized</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#volatile的作用-CAS的原理-在java中哪些地方有用到"><span class="nav-text">volatile的作用, CAS的原理, 在java中哪些地方有用到</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#线程同步的方式"><span class="nav-text">线程同步的方式</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#ConcurrentHashMap的原理-是如何保证多线程安全的"><span class="nav-text">ConcurrentHashMap的原理,是如何保证多线程安全的</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#多线程的应用，理解"><span class="nav-text">多线程的应用，理解</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#java中的线程池-有哪些参数-每个参数的含义-如何创建线程池-项目中的线程池的作用"><span class="nav-text">java中的线程池, 有哪些参数,每个参数的含义, 如何创建线程池, 项目中的线程池的作用</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#LRU原理-LinkedHashMap是如何实现的-LinkedHashMap数据结构源码"><span class="nav-text">LRU原理, LinkedHashMap是如何实现的, LinkedHashMap数据结构源码</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#死锁"><span class="nav-text">死锁</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#索引"><span class="nav-text">索引</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#联合索引查询优化-什么情况会失效-a-b-c分别建索引失效情况"><span class="nav-text">联合索引查询优化, 什么情况会失效, a,b,c分别建索引失效情况</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#mysql存储引擎的对比-为什么用B-树实现"><span class="nav-text">mysql存储引擎的对比, 为什么用B+树实现</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#事物的隔离级别，事物的实际应用"><span class="nav-text">事物的隔离级别，事物的实际应用</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#HAVING-用法，join用法"><span class="nav-text">HAVING 用法，join用法</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#TCP可靠传输"><span class="nav-text">TCP可靠传输</span></a></li></ol></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#java内存区域-各个模块的作用"><span class="nav-text">java内存区域, 各个模块的作用</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#垃圾回收算法"><span class="nav-text">垃圾回收算法</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#堆溢出-栈溢出举例-内存溢出与泄漏的区别并举例"><span class="nav-text">堆溢出,栈溢出举例, 内存溢出与泄漏的区别并举例</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#双亲委派模型-java类加载过程-每个过程做了什么"><span class="nav-text">双亲委派模型, java类加载过程,每个过程做了什么</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#java中的锁-乐观锁-悲观锁-自旋锁等等"><span class="nav-text">java中的锁, 乐观锁,悲观锁, 自旋锁等等</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#ReentrantLock与synchronized"><span class="nav-text">ReentrantLock与synchronized</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#volatile的作用-CAS的原理-在java中哪些地方有用到"><span class="nav-text">volatile的作用, CAS的原理, 在java中哪些地方有用到</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#线程同步的方式"><span class="nav-text">线程同步的方式</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#ConcurrentHashMap的原理-是如何保证多线程安全的"><span class="nav-text">ConcurrentHashMap的原理,是如何保证多线程安全的</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#多线程的应用，理解"><span class="nav-text">多线程的应用，理解</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#LRU原理-LinkedHashMap是如何实现的-LinkedHashMap数据结构源码"><span class="nav-text">LRU原理, LinkedHashMap是如何实现的, LinkedHashMap数据结构源码</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#死锁"><span class="nav-text">死锁</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#索引"><span class="nav-text">索引</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#联合索引查询优化-什么情况会失效-a-b-c分别建索引失效情况"><span class="nav-text">联合索引查询优化, 什么情况会失效, a,b,c分别建索引失效情况</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#mysql存储引擎的对比-为什么用B-树实现"><span class="nav-text">mysql存储引擎的对比, 为什么用B+树实现</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#事物的隔离级别，事物的实际应用"><span class="nav-text">事物的隔离级别，事物的实际应用</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#HAVING-用法，join用法"><span class="nav-text">HAVING 用法，join用法</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#TCP可靠传输"><span class="nav-text">TCP可靠传输</span></a></li></ol></li></ol></li></ol></li></ol></div>
             
 
           </div>
