@@ -168,7 +168,8 @@
 <meta property="og:description" content="线程私有的：  程序计数器  虚拟机栈  本地方法栈  线程共享的：    堆  方法区  直接内存">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://zhangzhang18.github.io/myBlog/2017/07/13/JVM内存分配/jvm.jpg">
-<meta property="og:updated_time" content="2019-03-01T03:30:01.097Z">
+<meta property="og:image" content="https://zhangzhang18.github.io/myBlog/2017/07/13/JVM内存分配/java内存.png">
+<meta property="og:updated_time" content="2019-10-15T05:59:51.501Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JVM内存分配">
 <meta name="twitter:description" content="线程私有的：  程序计数器  虚拟机栈  本地方法栈  线程共享的：    堆  方法区  直接内存">
@@ -473,8 +474,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-03-01T11:30:01+08:00">
-                2019-03-01
+              <time title="更新于" itemprop="dateModified" datetime="2019-10-15T13:59:51+08:00">
+                2019-10-15
               </time>
             
           </span>
@@ -533,7 +534,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  658
+                  912
                 </span>
               
 
@@ -566,15 +567,15 @@
 <blockquote>
 <p>  堆  方法区  直接内存<br><a id="more"></a></p>
 </blockquote>
-<h2 id="1-程序计数器（PCR）"><a href="#1-程序计数器（PCR）" class="headerlink" title="1.程序计数器（PCR）"></a>1.程序计数器（PCR）</h2><p>可以看做当前线程所执行的字节码的行号指示器。<br>为了线程切换后能够恢复到正确执行位置，每条线程都需要独立的程序计数器。</p>
-<h2 id="2-栈（JVM-stack）"><a href="#2-栈（JVM-stack）" class="headerlink" title="2.栈（JVM stack）"></a>2.栈（JVM stack）</h2><p>线程私有，生命周期与线程相同。<br>描述的事Java方法执行的内存模型：每个方法执行的同时都会创建一个栈帧用于存储局部变量表，操作数栈，动态链接方法出口。<br>每个方法执行到完成，对应着一个栈帧在虚拟机栈中入栈到出栈的过程。</p>
-<h2 id="3-本地方法栈（Native-Method-Stack）"><a href="#3-本地方法栈（Native-Method-Stack）" class="headerlink" title="3.本地方法栈（Native Method Stack）"></a>3.本地方法栈（Native Method Stack）</h2><p>与JVM栈相似，本地方法栈是用的是虚拟机的native方法</p>
-<h2 id="4-堆（heap"><a href="#4-堆（heap" class="headerlink" title="4.堆（heap)"></a>4.堆（heap)</h2><p>是Java虚拟机管理内存中最大的一块。<br>是被所有线程共享的一块内存区域，次内存区域唯一目的是存放对象实例，几乎所有的对象及数组都要在这里分配内存。<br>是垃圾回收器管理的主要区域，因此很多时候也被称作“GC堆”。<br>现在收集器采用分代收集算法，所以Java堆还可以细分为：新生代，老年代；</p>
-<h2 id="5-方法区（Method）"><a href="#5-方法区（Method）" class="headerlink" title="5.方法区（Method）"></a>5.方法区（Method）</h2><p>域Java堆一样。是各个线程共享的内存区域，<br>用于存储虚拟机加载的类信息，常量，静态变量，即时编译器编译后的代码等数据。</p>
-<h2 id="6-运行时常量池（Runtime-Constant-Pool）"><a href="#6-运行时常量池（Runtime-Constant-Pool）" class="headerlink" title="6.运行时常量池（Runtime Constant Pool）"></a>6.运行时常量池（Runtime Constant Pool）</h2><p>是方法区的一部分。<br>Class文件不仅有类的版本，字段，方法，接口描述信息外，还有一项信息是常量池，<br>用于存放编译期生成的各种字面量和符号引用。</p>
-<h2 id="7-直接内存（Direct-Memory）"><a href="#7-直接内存（Direct-Memory）" class="headerlink" title="7.直接内存（Direct Memory）"></a>7.直接内存（Direct Memory）</h2><p>不是虚拟机运行数据区的一部分。<br>NIO（New Input/Output）类，引入一种基于通道（Channel）与缓冲区（Buffer）的I/O方式，可以使用Native函数库直接分配堆外内存。通过一个Java堆DirectByteBuffer对象作为这块内存的引用进行操作。<br>显著提高性能，因为避免了Java堆和Native堆来回复制数据。</p>
+<h2 id="1-程序计数器（PCR）【线程私有】"><a href="#1-程序计数器（PCR）【线程私有】" class="headerlink" title="1.程序计数器（PCR）【线程私有】"></a>1.程序计数器（PCR）【线程私有】</h2><p>可以看做当前线程所执行的<strong>字节码的行号指示器</strong>。(通过计数器得值选取下一条需要执行得字节码指令)<br>为了线程切换后能够恢复到正确执行位置，每条线程都需要独立的程序计数器，独立存储。  </p>
+<h2 id="2-栈（JVM-stack）【线程私有】"><a href="#2-栈（JVM-stack）【线程私有】" class="headerlink" title="2.栈（JVM stack）【线程私有】"></a>2.栈（JVM stack）【线程私有】</h2><p>生命周期与线程相同。<br>描述的是<strong>Java方法</strong>执行的内存模型：每个方法执行的同时都会创建一个栈帧用于存储<strong>局部变量表，操作数栈，动态链接方法出口</strong>。<br>局部变量表存放了编译期可知得各种基本数据类型（boolean，byte，char，short，int，float，long，double），对象引用和returnAddress类型。<br>每个方法执行到完成，对应着一个栈帧在虚拟机栈中入栈到出栈的过程。  </p>
+<ul>
+<li>StackOverflowError异常：如果线程请求得栈深度大于虚拟机允许得深度，抛出该异常。  </li>
+<li>OutOfMemoryError异常：如果拓展时无法申请到足够内存，抛出该异常。  <h2 id="3-本地方法栈（Native-Method-Stack）【线程私有】"><a href="#3-本地方法栈（Native-Method-Stack）【线程私有】" class="headerlink" title="3.本地方法栈（Native Method Stack）【线程私有】"></a>3.本地方法栈（Native Method Stack）【线程私有】</h2>与JVM栈相似，本地方法栈是用的是虚拟机的native方法<br>与JVM栈一样会抛出StackOverflowError，OutOfMemoryError异常  <h2 id="4-堆（heap-【线程共享】"><a href="#4-堆（heap-【线程共享】" class="headerlink" title="4.堆（heap)【线程共享】"></a>4.堆（heap)【线程共享】</h2>是Java虚拟机管理内存中最大的一块。<br>是被所有线程共享的一块内存区域，此内存区域唯一目的是存放对象实例，几乎所有的对象及数组都要在这里分配内存。<br>是垃圾回收器管理的主要区域，因此很多时候也被称作“GC堆”。<br>现在收集器采用分代收集算法，所以Java堆还可以细分为：新生代，老年代；在细分（Eden空间，From Survivor空间，To Survivor空间），从内存分配角度来看，线程共享的Java堆可能划分出多个线程私有的分配缓存区（Thread Local Allocation Buffer, TLAB）。<br>Java堆可以位于物理上不连续的空间，但是逻辑上要连续。  </li>
+<li>OutOfMemoryError：如果堆中没有内存完成实例分配，并且堆也无法再扩展时，抛出该异常。<h2 id="5-方法区（Method）【线程共享】"><a href="#5-方法区（Method）【线程共享】" class="headerlink" title="5.方法区（Method）【线程共享】"></a>5.方法区（Method）【线程共享】</h2>域Java堆一样。是各个线程共享的内存区域，用于存储虚拟机加载的类信息，常量，静态变量，即时编译器编译后的代码等数据。<h2 id="6-运行时常量池（Runtime-Constant-Pool）"><a href="#6-运行时常量池（Runtime-Constant-Pool）" class="headerlink" title="6.运行时常量池（Runtime Constant Pool）"></a>6.运行时常量池（Runtime Constant Pool）</h2>是方法区的一部分。<br>Class文件不仅有类的版本，字段，方法，接口描述信息外，还有一项信息是常量池，用于存放编译期生成的各种字面量和符号引用。<h2 id="7-直接内存（Direct-Memory）"><a href="#7-直接内存（Direct-Memory）" class="headerlink" title="7.直接内存（Direct Memory）"></a>7.直接内存（Direct Memory）</h2>不是虚拟机运行数据区的一部分。<br>NIO（New Input/Output）类，引入一种基于通道（Channel）与缓冲区（Buffer）的I/O方式，可以使用Native函数库直接分配堆外内存。通过一个Java堆DirectByteBuffer对象作为这块内存的引用进行操作。<br>显著提高性能，因为避免了Java堆和Native堆来回复制数据。<h2 id="8、永久代、方法区和元空间之间的关系"><a href="#8、永久代、方法区和元空间之间的关系" class="headerlink" title="8、永久代、方法区和元空间之间的关系"></a>8、永久代、方法区和元空间之间的关系</h2> 《Java虚拟机规范》只是规定了有方法区这么个概念和它的作用，并没有规定如何去实现它。<br> 在1.7之前在(JDK1.2 ~ JDK6)的实现中，HotSpot 使用永久代实现方法区。<br> 在JDK1.8中，元空间取代了永久代，来实现方法区。</li>
+</ul>
 <hr>
-<p>栈区：每次方法的执行都会有一次栈帧的生成，并且其中有局部变量表。<br>堆区：每次new出来的对象都保存在这儿。<br>本地方法栈：通过C/C++调用系统接口的一些方法。<br>方法区：类的信息 静态变量都在这儿，还有程序计数器</p>
+<p><img src="/myBlog/2017/07/13/JVM内存分配/java内存.png" alt="java内存梳理图"></p>
 
       
     </div>
@@ -754,7 +755,7 @@
               
                 <a href="/myBlog/archives/">
               
-                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-count">30</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -841,7 +842,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#线程私有的："><span class="nav-text">线程私有的：</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-程序计数器（PCR）"><span class="nav-text">1.程序计数器（PCR）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-栈（JVM-stack）"><span class="nav-text">2.栈（JVM stack）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-本地方法栈（Native-Method-Stack）"><span class="nav-text">3.本地方法栈（Native Method Stack）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-堆（heap"><span class="nav-text">4.堆（heap)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-方法区（Method）"><span class="nav-text">5.方法区（Method）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-运行时常量池（Runtime-Constant-Pool）"><span class="nav-text">6.运行时常量池（Runtime Constant Pool）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-直接内存（Direct-Memory）"><span class="nav-text">7.直接内存（Direct Memory）</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#线程私有的："><span class="nav-text">线程私有的：</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-程序计数器（PCR）【线程私有】"><span class="nav-text">1.程序计数器（PCR）【线程私有】</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-栈（JVM-stack）【线程私有】"><span class="nav-text">2.栈（JVM stack）【线程私有】</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-本地方法栈（Native-Method-Stack）【线程私有】"><span class="nav-text">3.本地方法栈（Native Method Stack）【线程私有】</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-堆（heap-【线程共享】"><span class="nav-text">4.堆（heap)【线程共享】</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-方法区（Method）【线程共享】"><span class="nav-text">5.方法区（Method）【线程共享】</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-运行时常量池（Runtime-Constant-Pool）"><span class="nav-text">6.运行时常量池（Runtime Constant Pool）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-直接内存（Direct-Memory）"><span class="nav-text">7.直接内存（Direct Memory）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8、永久代、方法区和元空间之间的关系"><span class="nav-text">8、永久代、方法区和元空间之间的关系</span></a></li></ol></li></ol></div>
             
 
           </div>
