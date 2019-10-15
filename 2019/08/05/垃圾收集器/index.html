@@ -175,7 +175,7 @@
 <meta property="og:image" content="https://zhangzhang18.github.io/myBlog/2019/08/05/垃圾收集器/cms.png">
 <meta property="og:image" content="https://zhangzhang18.github.io/myBlog/2019/08/05/垃圾收集器/G1.jpg">
 <meta property="og:image" content="https://zhangzhang18.github.io/myBlog/2019/08/05/垃圾收集器/memory.jpg">
-<meta property="og:updated_time" content="2019-10-15T06:31:20.510Z">
+<meta property="og:updated_time" content="2019-10-15T06:39:15.403Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="垃圾收集器 ">
 <meta name="twitter:description" content="两个收集器之间存在连线，说明它们可以搭配使用。">
@@ -480,7 +480,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-10-15T14:31:20+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2019-10-15T14:39:15+08:00">
                 2019-10-15
               </time>
             
@@ -518,7 +518,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,509
+                  1,637
                 </span>
               
 
@@ -586,9 +586,9 @@
 <h1 id="内存分配策略"><a href="#内存分配策略" class="headerlink" title="内存分配策略"></a>内存分配策略</h1><ul>
 <li>对象优先在Eden分配</li>
 <li>大对象直接进入老年代：避免Eden区及两个Survivor区之间发生大量的内存复制</li>
-<li>长期存活的对象将进入老年代：在Eden出生，经历过一次GC仍然存活，并且能被Survivor容纳，将被移动到Survivor空间，设置对象年龄为1，每熬过一次GC年龄增加一岁，年龄增加到一定程度（通常15岁），就会晋升老年代。</li>
-<li>动态对象年龄判定：</li>
-<li>空间分配担保<br><img src="/myBlog/2019/08/05/垃圾收集器/memory.jpg" alt="堆内存模型"><br>选择server模式的VM。服务端常使用<br>-Xms2g<br>  设置堆内存最小值2G<br>-Xmx2g<br>  设置堆内存最大值2G<br>-Xmn1g<br>  设置新生代大小1G<br>-Xss1024K<br>  设置单线程栈空间大小1024K<br>-XX:PermSize=256m<br>  设置永久代初始大小256m。JDK8中已移除<br>-XX:MaxPermSize=512m<br>  设置永久代最大值512m。JDK8中已移除<br>-XX:ParallelGCThreads=8<br>  设置并行收集器收集时使用的CPU数。并行收集线程数 8。<br>-XX:+UseConcMarkSweepGC<br>  开启CMS收集器，默认新生代收集器 UseParNewGC。<br>-XX:+UseParNewGC<br>  开启ParNew收集器。<br>-XX:+UseCMSCompactAtFullCollection<br>  开启对老年代空间进行压缩整理（默认开启）。<br>-XX:SurvivorRatio=4<br>  Eden与一个Surivivor的比值大小。默认为8:1:1，即Eden占8/10。<br>-XX:MaxTenuringThreshold=10<br>  晋升老年代的最大年龄。默认为15，比如设为10，则对象在10次普通GC后将会被放入年老代。<br>-XX:CMSInitiatingOccupancyFraction=80<br>  触发CMS收集器的内存比例。比如80%的意思就是说，当内存达到80%，就会开始进行CMS并发收集。<br>-XX:NewRatio<br>  表示新生代与老年代所占的比值为1:4，Xms=Xmx并且设置了Xmn的情况下，该参数不需要进行设置。</li>
+<li>长期存活的对象将进入老年代：在Eden出生，经历过一次GC仍然存活，并且能被Survivor容纳，将被移动到Survivor空间，设置对象年龄为1，每熬过一次GC年龄增加一岁，年龄增加到一定程度（通常15岁），就会晋升老年代。MaxTenuringThreshold配置。</li>
+<li>动态对象年龄判定：如果在Survivor空间相同年龄所有对象的大小总和打于Survivor空间大小的一半，年龄大于或者等于该对象年龄可以直接进入老年代，无需等到MaxTenuringThreshold。</li>
+<li>空间分配担保：发生GC之前，虚拟机会检查老年代最大可用的连续空间是否打于新生代所有对象总空间，如果这个条件成立，就可以确保是安全的。（老年代能容纳Survivor晋升到老年代的对象）<br><img src="/myBlog/2019/08/05/垃圾收集器/memory.jpg" alt="堆内存模型"><br>选择server模式的VM。服务端常使用<br>-Xms2g<br>  设置堆内存最小值2G<br>-Xmx2g<br>  设置堆内存最大值2G<br>-Xmn1g<br>  设置新生代大小1G<br>-Xss1024K<br>  设置单线程栈空间大小1024K<br>-XX:PermSize=256m<br>  设置永久代初始大小256m。JDK8中已移除<br>-XX:MaxPermSize=512m<br>  设置永久代最大值512m。JDK8中已移除<br>-XX:ParallelGCThreads=8<br>  设置并行收集器收集时使用的CPU数。并行收集线程数 8。<br>-XX:+UseConcMarkSweepGC<br>  开启CMS收集器，默认新生代收集器 UseParNewGC。<br>-XX:+UseParNewGC<br>  开启ParNew收集器。<br>-XX:+UseCMSCompactAtFullCollection<br>  开启对老年代空间进行压缩整理（默认开启）。<br>-XX:SurvivorRatio=4<br>  Eden与一个Surivivor的比值大小。默认为8:1:1，即Eden占8/10。<br>-XX:MaxTenuringThreshold=10<br>  晋升老年代的最大年龄。默认为15，比如设为10，则对象在10次普通GC后将会被放入年老代。<br>-XX:CMSInitiatingOccupancyFraction=80<br>  触发CMS收集器的内存比例。比如80%的意思就是说，当内存达到80%，就会开始进行CMS并发收集。<br>-XX:NewRatio<br>  表示新生代与老年代所占的比值为1:4，Xms=Xmx并且设置了Xmn的情况下，该参数不需要进行设置。</li>
 </ul>
 <p>参考：<br><a href="https://www.jianshu.com/p/293eb2f1f74a" target="_blank" rel="noopener">java常用命令</a><br><a href="https://www.cnblogs.com/furaywww/p/8576682.html" target="_blank" rel="noopener">gc发生场景</a><br><a href="https://my.oschina.net/dslcode/blog/3007693" target="_blank" rel="noopener">jvm参数大全</a><br><a href="https://www.jianshu.com/p/088d71f20a47" target="_blank" rel="noopener">内存区域垃圾收集</a><br><a href="https://www.cnblogs.com/zhangfengshi/p/11343102.html" target="_blank" rel="noopener">JVM内存设置多大合适？</a><br><a href="https://www.jianshu.com/p/5946c0a414b5" target="_blank" rel="noopener">JVM 内存区域大小参数设置</a>   </p>
 <p>​     </p>
