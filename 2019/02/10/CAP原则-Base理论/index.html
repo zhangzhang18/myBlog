@@ -167,12 +167,10 @@
 <meta property="og:site_name" content="萌">
 <meta property="og:description" content="CAP原则：分布式的三个指标， 这三个指标不可能同时做到。这个结论就叫做 CAP 定理。   Consistency（一致性）： 写操作之后的读操作，必须返回该值   Availability（可用性）： 意思是只要收到用户的请求，服务器就必须给出回应   Partition tolerance（分区容错）： 大多数分布式系统都分布在多个子网络。每个子网络就叫做一个区（partition）。分区容">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://zhangzhang18.github.io/myBlog/2019/02/10/CAP原则-Base理论/compare.png">
-<meta property="og:updated_time" content="2019-10-14T11:27:50.111Z">
+<meta property="og:updated_time" content="2019-10-15T07:37:39.466Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CAP原则-Base理论 ">
 <meta name="twitter:description" content="CAP原则：分布式的三个指标， 这三个指标不可能同时做到。这个结论就叫做 CAP 定理。   Consistency（一致性）： 写操作之后的读操作，必须返回该值   Availability（可用性）： 意思是只要收到用户的请求，服务器就必须给出回应   Partition tolerance（分区容错）： 大多数分布式系统都分布在多个子网络。每个子网络就叫做一个区（partition）。分区容">
-<meta name="twitter:image" content="https://zhangzhang18.github.io/myBlog/2019/02/10/CAP原则-Base理论/compare.png">
 
 
 
@@ -473,8 +471,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-10-14T19:27:50+08:00">
-                2019-10-14
+              <time title="更新于" itemprop="dateModified" datetime="2019-10-15T15:37:39+08:00">
+                2019-10-15
               </time>
             
           </span>
@@ -533,7 +531,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  746
+                  923
                 </span>
               
 
@@ -578,8 +576,97 @@
 </li>
 </ul>
 <p><a href="http://raft.taillog.cn//" target="_blank" rel="noopener">聊聊分布式存储——轻松理解Raft</a></p>
-<p> <img src="/myBlog/2019/02/10/CAP原则-Base理论/compare.png" alt="注册中心对比"></p>
-<p> Eureka 典型的 AP,作为分布式场景下的服务发现的产品较为合适，服务发现场景的可用性优先级较高，一致性并不是特别致命。其次 CA 类型的场景 Consul,也能提供较高的可用性，并能 k-v store 服务保证一致性。 而Zookeeper,Etcd则是CP类型 牺牲可用性，在服务发现场景并没太大优势；</p>
+<h3 id="一：Eureka"><a href="#一：Eureka" class="headerlink" title="一：Eureka"></a>一：Eureka</h3><h3 id="二：Zookeeper"><a href="#二：Zookeeper" class="headerlink" title="二：Zookeeper"></a>二：Zookeeper</h3><h3 id="三：Consul"><a href="#三：Consul" class="headerlink" title="三：Consul"></a>三：Consul</h3><p> Eureka 典型的 AP,作为分布式场景下的服务发现的产品较为合适，服务发现场景的可用性优先级较高，一致性并不是特别致命。其次 CA 类型的场景 Consul,也能提供较高的可用性，并能 k-v store 服务保证一致性。 而Zookeeper,Etcd则是CP类型 牺牲可用性，在服务发现场景并没太大优势；</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th style="text-align:left">Eureka</th>
+<th style="text-align:left">Zookeeper</th>
+<th>Consul</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GitHub</td>
+<td style="text-align:left"><a href="https://github.com/apache/zookeeper" target="_blank" rel="noopener">https:/</a><a href="https://github.com/Netflix/eureka" target="_blank" rel="noopener">/github.com/Netflix/eureka</a></td>
+<td style="text-align:left"><a href="https://github.com/apache/zookeeper" target="_blank" rel="noopener">https://github.com/apache/zookeeper</a></td>
+<td><a href="https://github.com/hashicorp/consul" target="_blank" rel="noopener">https://github.com/hashicorp/consul</a></td>
+</tr>
+<tr>
+<td>服务健康度检查</td>
+<td style="text-align:left">服务状态，内存，硬盘等</td>
+<td style="text-align:left">(弱)长连接，keepalive</td>
+<td>连接心跳</td>
+</tr>
+<tr>
+<td>多数据中心</td>
+<td style="text-align:left">—</td>
+<td style="text-align:left">支持</td>
+<td>支持</td>
+</tr>
+<tr>
+<td>k-v存储服务</td>
+<td style="text-align:left">—</td>
+<td style="text-align:left">支持</td>
+<td>支持</td>
+</tr>
+<tr>
+<td>一致性</td>
+<td style="text-align:left">—</td>
+<td style="text-align:left">paxos（Paxos算法是保证在分布式系统中写操作能够顺利进行，保证系统中大多数状态是一致的，没有机会看到不一致，因此，Paxos算法的特点是一致性&gt;可用性。）</td>
+<td>raft<a href="http://raft.taillog.cn/" target="_blank" rel="noopener">http://raft.taillog.cn/</a></td>
+</tr>
+<tr>
+<td>cap</td>
+<td style="text-align:left">ap</td>
+<td style="text-align:left">cp</td>
+<td>ca</td>
+</tr>
+<tr>
+<td>多语言能力</td>
+<td style="text-align:left">http（sidecar）</td>
+<td style="text-align:left">客户端</td>
+<td>支持http和dns</td>
+</tr>
+<tr>
+<td>watch支持</td>
+<td style="text-align:left">支持 long polling/大部分增量</td>
+<td style="text-align:left">—</td>
+<td>metrics</td>
+</tr>
+<tr>
+<td>自身监控</td>
+<td style="text-align:left">metrics</td>
+<td style="text-align:left">—</td>
+<td>metrics</td>
+</tr>
+<tr>
+<td>安全</td>
+<td style="text-align:left">—</td>
+<td style="text-align:left">acl</td>
+<td>acl /https</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>SpringCloud集成</th>
+<th>以支持</th>
+<th>以支持</th>
+<th>以支持</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
 
       
     </div>
@@ -722,8 +809,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -819,6 +915,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一：Eureka"><span class="nav-text">一：Eureka</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二：Zookeeper"><span class="nav-text">二：Zookeeper</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三：Consul"><span class="nav-text">三：Consul</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

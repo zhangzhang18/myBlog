@@ -162,14 +162,14 @@
 <meta name="description" content="为什么使用多线程 降低资源消耗  -事先创建若干个线程放在容器中，当使用的时候不需要自行创建，使用完不是去销毁而是归还到容器，减少了线程创建和销毁的时间    提高线程的可管理性  -无限制的创建线程，不仅消耗资源还降低系统稳定性，线程池可以进行统一分配，监控   提高相应速度  -不需要等待线程创建##　参数说明ThreadPoolExecutor(int corePoolSize,int ma">
 <meta name="keywords" content="JAVA">
 <meta property="og:type" content="article">
-<meta property="og:title" content="AB测技术 ">
+<meta property="og:title" content="线程池 ">
 <meta property="og:url" content="https://zhangzhang18.github.io/myBlog/2019/05/01/线程池/index.html">
 <meta property="og:site_name" content="萌">
 <meta property="og:description" content="为什么使用多线程 降低资源消耗  -事先创建若干个线程放在容器中，当使用的时候不需要自行创建，使用完不是去销毁而是归还到容器，减少了线程创建和销毁的时间    提高线程的可管理性  -无限制的创建线程，不仅消耗资源还降低系统稳定性，线程池可以进行统一分配，监控   提高相应速度  -不需要等待线程创建##　参数说明ThreadPoolExecutor(int corePoolSize,int ma">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-10-12T13:14:00.723Z">
+<meta property="og:updated_time" content="2019-10-15T09:11:17.978Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="AB测技术 ">
+<meta name="twitter:title" content="线程池 ">
 <meta name="twitter:description" content="为什么使用多线程 降低资源消耗  -事先创建若干个线程放在容器中，当使用的时候不需要自行创建，使用完不是去销毁而是归还到容器，减少了线程创建和销毁的时间    提高线程的可管理性  -无限制的创建线程，不仅消耗资源还降低系统稳定性，线程池可以进行统一分配，监控   提高相应速度  -不需要等待线程创建##　参数说明ThreadPoolExecutor(int corePoolSize,int ma">
 
 
@@ -221,7 +221,7 @@
 
 
 
-  <title>AB测技术  | 萌</title>
+  <title>线程池  | 萌</title>
   
 
 
@@ -443,7 +443,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">AB测技术 </h1>
+          <h1 class="post-title" itemprop="name headline">线程池 </h1>
         
 
         <div class="post-meta">
@@ -471,8 +471,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-10-12T21:14:00+08:00">
-                2019-10-12
+              <time title="更新于" itemprop="dateModified" datetime="2019-10-15T17:11:17+08:00">
+                2019-10-15
               </time>
             
           </span>
@@ -507,7 +507,7 @@
 
           
           
-             <span id="/myBlog/2019/05/01/线程池/" class="leancloud_visitors" data-flag-title="AB测技术 ">
+             <span id="/myBlog/2019/05/01/线程池/" class="leancloud_visitors" data-flag-title="线程池 ">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -559,9 +559,9 @@
         <h2 id="为什么使用多线程"><a href="#为什么使用多线程" class="headerlink" title="为什么使用多线程"></a>为什么使用多线程</h2><ol>
 <li>降低资源消耗  -事先创建若干个线程放在容器中，当使用的时候不需要自行创建，使用完不是去销毁而是归还到容器，减少了线程创建和销毁的时间   </li>
 <li>提高线程的可管理性  -无限制的创建线程，不仅消耗资源还降低系统稳定性，线程池可以进行统一分配，监控  </li>
-<li>提高相应速度  -不需要等待线程创建<br>##　参数说明<br><code>ThreadPoolExecutor(int corePoolSize,int maximumPoolSize,long keepAliveTime,TimeUnit unit,BlockingQueue&lt;Runnable     workQueue)</code></li>
+<li>提高相应速度  -不需要等待线程创建<br>##　参数说明<br><code>ThreadPoolExecutor(int corePoolSize,int maximumPoolSize,long keepAliveTime,TimeUnit unit,BlockingQueue&lt;Runnable     workQueue)</code><a id="more"></a>  
+<strong>corePoolSize（最大核心线程数）：</strong> 线程池启动后，在池中保持的线程的最小数量<br><strong>maxinumPoolSize（线程池能容纳的最大线程数量）：</strong> 核心线程数 + 非核心线程数 = 最大线程数量<br><strong>unit：</strong> keepAliveTime的时间单位，可以是纳秒，毫秒，秒，分钟等<br><strong>keepAliveTime：</strong> 线程的最大生命周期<br><strong>workQueue：</strong>  任务队列<br><strong>threadFactory：</strong> 定义如何启动一个线程，可以设置线程的名称，并且可以确定是否是后台线程等。 <code>new ThreadFactoryBuilder().setNameFormat(&quot;XX-task-%d&quot;).build();</code><br><strong>RejectedExecutionHandler：</strong> 拒绝任务处理器。由于超出线程数量和队列容量而对继续增加的任务进行处理的程序。  </li>
 </ol>
-<p><strong>corePoolSize（最大核心线程数）：</strong> 线程池启动后，在池中保持的线程的最小数量<br><strong>maxinumPoolSize（线程池能容纳的最大线程数量）：</strong> 核心线程数 + 非核心线程数 = 最大线程数量<br><strong>unit：</strong> keepAliveTime的时间单位，可以是纳秒，毫秒，秒，分钟等<br><strong>keepAliveTime：</strong> 线程的最大生命周期<br><strong>workQueue：</strong>  任务队列<br><strong>threadFactory：</strong> 定义如何启动一个线程，可以设置线程的名称，并且可以确定是否是后台线程等。 <code>new ThreadFactoryBuilder().setNameFormat(&quot;XX-task-%d&quot;).build();</code><br><strong>RejectedExecutionHandler：</strong> 拒绝任务处理器。由于超出线程数量和队列容量而对继续增加的任务进行处理的程序。  </p>
 <p><strong>workQueue：</strong><br>　- ArrayBlockingQueue：基于数组结构的<strong>有界队列</strong>，先进先出（FIFO）原则对元素排序<br>　- LinkedBlockingQueue：基于链表结构的阻塞队列，先进先出排序元素，吞吐量高于数组结构。<code>Executors.newFixedThreadPool()</code> 使用这个队列<br>　- SynchronousQueue：不存储元素的阻塞队列，每个插入操作必须等到下一个线程调用一处操作，否则插入操作一直处于阻塞状态，吞吐量高于2，<code>Executors.newCachedThreadPool()</code>使用这个队列</p>
 <ul>
 <li>PriorityBlockQueue：具有优先级的无线阻塞队列<br>　- DelayQueue（延时队列）：任务到来时，首先先加入到队列中，只有达到了指定的延时时间，才会执行任务<br><strong>RejectedExecutionHandler：</strong> </li>
@@ -623,7 +623,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://zhangzhang18.github.io/myBlog/2019/05/01/线程池/" title="AB测技术 ">https://zhangzhang18.github.io/myBlog/2019/05/01/线程池/</a>
+    <a href="https://zhangzhang18.github.io/myBlog/2019/05/01/线程池/" title="线程池 ">https://zhangzhang18.github.io/myBlog/2019/05/01/线程池/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
