@@ -1505,6 +1505,220 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://zhangzhang18.github.io/myBlog/myBlog/2019/10/16/Optional/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="萌">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/myBlog/images/header.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="萌">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/myBlog/2019/10/16/Optional/" itemprop="url">未命名</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-16T17:27:05+08:00">
+                2019-10-16
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-10-16T17:28:17+08:00">
+                2019-10-16
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/myBlog/2019/10/16/Optional/" class="leancloud_visitors" data-flag-title="">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count">|</span>
+             </span>
+          
+
+
+
+          
+              
+                
+                <span class="post-meta-item-icon">|
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  878
+                </span>
+              
+
+              
+
+              
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>title: 优雅的处理NullPointerExcepter<br>copyright: true<br>abbrlink: c664e20c<br>date: 2019-10-16 09:50:56<br>categories:</p>
+<ul>
+<li>NoteBook<br>tags:</li>
+<li>JAVA<br>top: </li>
+</ul>
+<p>Optional是Java8提供的为了解决null安全问题的一个API。</p>
+<h2 id="一：Optional类方法"><a href="#一：Optional类方法" class="headerlink" title="一：Optional类方法"></a>一：Optional类方法</h2><p><img src="/myBlog/2019/10/16/Optional/method.jpg" alt="Optional类方法"></p>
+<h3 id="1-创建-Optional-相关方法"><a href="#1-创建-Optional-相关方法" class="headerlink" title="1. 创建 Optional 相关方法"></a><strong>1. 创建 Optional 相关方法</strong></h3><p>方法：Optional.of、Optional.ofNullable、Optional.empty()：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`Optional emptyOptional = Optional.empty(); Optional nonEmptyOptional = Optional.of(&quot;name&quot;); Optional nonEmptyOptional = Optional.ofNullable(null); `</span><br></pre></td></tr></table></figure>
+<h3 id="2-检查-Optional-值"><a href="#2-检查-Optional-值" class="headerlink" title="2. 检查 Optional 值"></a><strong>2. 检查 Optional 值</strong></h3><p>方法：Optional.isPresent()、Optional.ifPresent()</p>
+<ul>
+<li>如果 Optional有值，isPresent() 返回 true</li>
+<li>ifPresent() 如果值存在，则执行代码块</li>
+</ul>
+<h3 id="3-通过-Optional-取值"><a href="#3-通过-Optional-取值" class="headerlink" title="3. 通过 Optional 取值"></a><strong>3. 通过 Optional 取值</strong></h3><ul>
+<li>get() 返回值包含在 Optional 中返回，（建议配合isPresent() 使用，假如 Optional 不包含一个值, get() 将会抛出一个异常）</li>
+<li>orElse() 如果值不存在，则返回默认值  </li>
+<li>orElseGet() 与 orElse() 类似，如果 Optional 不包含值，用函数作为返回值</li>
+<li>orElseThrow() 与 orElseGet() 类似，监测到值为 null 时抛出异常</li>
+</ul>
+<h3 id="4-map转换值：Stream和Optional-的map方法对比图"><a href="#4-map转换值：Stream和Optional-的map方法对比图" class="headerlink" title="4. map转换值：Stream和Optional 的map方法对比图"></a>4. map转换值：Stream和Optional 的map方法对比图</h3><ul>
+<li>Stream和optional的fiatMap方法对比图<br><img src="/myBlog/2019/10/16/Optional/Map.png" alt="Optional-Map"><br><img src="/myBlog/2019/10/16/Optional/FlatMap.png" alt="Optional-FlatMap"><br><img src="/myBlog/2019/10/16/Optional/UseMap.png" alt="Optional-Use-Map"><br>可以把Optional看成包含一个元素的Stream对象。<h3 id="5-filter"><a href="#5-filter" class="headerlink" title="5. filter"></a>5. filter</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`String name = &quot;Aa&quot;; Optional optionalName = Optional.of(name).filter(str -&gt; str.length() &gt; 2);`</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h2><ul>
+<li><h3 id="无法序列化"><a href="#无法序列化" class="headerlink" title="无法序列化"></a>无法序列化</h3><p>由于Optional 类设计时就没特别考虑将其作为类的字段使用，所以它也并未实现Serializable；<br>把 Optional 类型用作属性或是方法参数在 IntelliJ IDEA 中更是强力不推荐的<br>用Optional 声明域模型中某些类型是不错的主意。<br>如果非要实现序列化的模型域，可以参考下例  </p>
+</li>
+<li><h3 id="基于值的类（说明：这是一个基于值的class类，对于同一性（特性）敏感的操作-（包含引用的相等性如-）-同一性的hashcode或者同步等等、对optional实例可能会产生不可预料的结果，这种结果应该被避免。）"><a href="#基于值的类（说明：这是一个基于值的class类，对于同一性（特性）敏感的操作-（包含引用的相等性如-）-同一性的hashcode或者同步等等、对optional实例可能会产生不可预料的结果，这种结果应该被避免。）" class="headerlink" title="基于值的类（说明：这是一个基于值的class类，对于同一性（特性）敏感的操作 （包含引用的相等性如:==）,同一性的hashcode或者同步等等、对optional实例可能会产生不可预料的结果，这种结果应该被避免。）"></a>基于值的类（说明：这是一个基于值的class类，对于同一性（特性）敏感的操作 （包含引用的相等性如:==）,同一性的hashcode或者同步等等、对optional实例可能会产生不可预料的结果，这种结果应该被避免。）</h3><p><a href="https://docs.oracle.com/javase/8/docs/api/java/lang/doc-files/ValueBased.html" target="_blank" rel="noopener">https://docs.oracle.com/javase/8/docs/api/java/lang/doc-files/ValueBased.html</a></p>
+<p>这里说的是基于值的类需要满足以下几点：<br>1、 final类型和不可变的（可能会包含可变对象的引用）<br>2、 有equals、hashCode、toString方法的实现，它是通过实例的状态计算出来的，而并不会通过其它的对象或变量去计算。<br>3、 不会使用身份敏感的操作，比如在二个实例之间引用相等性、hashCode或者内在的锁。<br>4、 判断二个值相等仅仅通过equal方法，而不会通过==去判断。<br>5、 它不提供构造方法，它通过工厂方法创建它的实例，这不保证返回实例的一致性。<br>6、 当它们相等时，它是可以自由替换的。如果x和y 调用equal方法返回true，那么可以将x和y任意交换，它的结果不会产生任何变化。  </p>
+</li>
+</ul>
+<h2 id="二：实战示例"><a href="#二：实战示例" class="headerlink" title="二：实战示例"></a>二：实战示例</h2><h3 id="1-用Optional封装可能为Null的值"><a href="#1-用Optional封装可能为Null的值" class="headerlink" title="1. 用Optional封装可能为Null的值"></a>1. 用Optional封装可能为Null的值</h3><ul>
+<li><p>假设有一个Map&lt;String,Object&gt;方法； 如果map 没有关联的key，就会返回null。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Object value = map.get(&quot;key&quot;);</span><br></pre></td></tr></table></figure>
+<p>可以替换成</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Optional&lt;Object&gt; value = Optional.ofNullable(map.get(&quot;key&quot;));</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="2-作为返回值（不建议作为参数）"><a href="#2-作为返回值（不建议作为参数）" class="headerlink" title="2. 作为返回值（不建议作为参数）"></a>2. 作为返回值（不建议作为参数）</h3><h3 id="3-把所有内容整合起来"><a href="#3-把所有内容整合起来" class="headerlink" title="3. 把所有内容整合起来"></a>3. 把所有内容整合起来</h3><h2 id="三：增强"><a href="#三：增强" class="headerlink" title="三：增强"></a>三：增强</h2><ul>
+<li><strong>Java 9</strong></li>
+<li>or()：如果值存在，返回包含该值的 Optional 对象；否则，返回 or() 函数生成的 Optional 对象。</li>
+<li>ifPresentOrElse(Consumer&lt;? super T&gt;action, Runnable emptyAction)：如果值存在，使用该值执行指定调用，否则使用空值执行调用。</li>
+<li>stream()：如果值存在，返回该值的顺序流（Stream）；否则返回空流。</li>
+<li><strong>Java 10</strong></li>
+<li>orElseThrow()：如果值存在，返回该值；否则抛出NoSuchElementException。注意：与 Java 8 不同，不接受任何参数。</li>
+<li><strong>Java 11</strong></li>
+<li>isEmpty()：如果值不存在，返回 true；否则返回 false。</li>
+<li></li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+	<div>
+  
+</div>
+<div>
+
+</div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://zhangzhang18.github.io/myBlog/myBlog/2019/09/18/MQ归纳/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2242,213 +2456,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://zhangzhang18.github.io/myBlog/myBlog/2019/03/11/Spring-Boot/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="萌">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/myBlog/images/header.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="萌">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/myBlog/2019/03/11/Spring-Boot/" itemprop="url">Spring-Boot</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-11T09:24:22+08:00">
-                2019-03-11
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2019-10-11T19:04:37+08:00">
-                2019-10-11
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/myBlog/categories/NoteBook/" itemprop="url" rel="index">
-                    <span itemprop="name">NoteBook</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/myBlog/2019/03/11/Spring-Boot/" class="leancloud_visitors" data-flag-title="Spring-Boot">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count">|</span>
-             </span>
-          
-
-
-
-          
-              
-                
-                <span class="post-meta-item-icon">|
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  95
-                </span>
-              
-
-              
-
-              
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Spring Boot解决得问题</p>
-<blockquote>
-<p>配置、部署、监控变得简单。</p>
-</blockquote>
-<blockquote>
-<p>Boot只需要很少得配置（@Configuration），项目快速搭建，主流框架无配置集成。</p>
-</blockquote>
-<h2 id="核心功能"><a href="#核心功能" class="headerlink" title="核心功能"></a>核心功能</h2><ol>
-<li>独立运行Spring项目</li>
-<li>内嵌servlet容器 - SpringApplication.run()</li>
-<li>提供starter简化maven配置</li>
-<li>自动装配Spring</li>
-<li>准生产的应用监控</li>
-<li>无代码生产和xml配置</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-	<div>
-  
-</div>
-<div>
-
-</div>
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/myBlog/page/2/">2</a><a class="page-number" href="/myBlog/page/3/">3</a><a class="extend next" rel="next" href="/myBlog/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/myBlog/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/myBlog/page/4/">4</a><a class="extend next" rel="next" href="/myBlog/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2498,7 +2510,7 @@
               
                 <a href="/myBlog/archives/">
               
-                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-count">31</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
