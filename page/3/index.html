@@ -663,8 +663,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-10-16T20:33:03+08:00">
-                2019-10-16
+              <time title="更新于" itemprop="dateModified" datetime="2019-10-17T19:06:38+08:00">
+                2019-10-17
               </time>
             
           </span>
@@ -723,7 +723,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,776
+                  1,893
                 </span>
               
 
@@ -855,8 +855,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-10-15T17:15:21+08:00">
-                2019-10-15
+              <time title="更新于" itemprop="dateModified" datetime="2019-10-17T14:05:53+08:00">
+                2019-10-17
               </time>
             
           </span>
@@ -915,7 +915,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  4,869
+                  5,576
                 </span>
               
 
@@ -942,7 +942,21 @@
       
         
           
-            <h1 id="编程规约"><a href="#编程规约" class="headerlink" title="编程规约"></a>编程规约</h1><h2 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h2><ol start="7">
+            <h1 id="编程规约"><a href="#编程规约" class="headerlink" title="编程规约"></a>编程规约</h1><h2 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h2><ol>
+<li>【强制】关于 hashCode 和 equals 的处理，遵循如下规则：<br>1） 只要重写 equals，就必须重写 hashCode。 2） 因为 Set 存储的是不重复的对象，依据 hashCode 和 equals 进行判断，所以 Set 存储的对象必须重写这两个方法。<br>3） 如果自定义对象作为 Map 的键，那么必须重写 hashCode 和 equals。<br>说明：String 重写了 hashCode 和 equals 方法，所以我们可以非常愉快地使用 String 对象作为 key 来使用。  </li>
+<li>【强制】ArrayList的subList结果不可强转成ArrayList，否则会抛出ClassCastException<br>异常，即 java.util.RandomAccessSubList cannot be cast to java.util.ArrayList。<br>说明：subList 返回的是 ArrayList 的内部类 SubList，并不是 ArrayList 而是 ArrayList  的一个视图，对于 SubList 子列表的所有操作最终会反映到原列表上。  </li>
+<li>【强制】在 subList 场景中，高度注意对原集合元素的增加或删除，均会导致子列表的遍历、增加、删除产生 ConcurrentModificationException 异常。  </li>
+<li>【强制】使用集合转数组的方法，必须使用集合的 toArray(T[] array)，传入的是类型完全一样的数组，大小就是 list.size()。<br>说明：使用 toArray 带参方法，入参分配的数组空间不够大时，toArray 方法内部将重新分配内存空间，并返回新数组地址；如果数组元素个数大于实际所需，下标为[ list.size() ]的数组元素将被置为 null，其它数组元素保持原值，因此最好将方法入参数组大小定义与集合元素个数一致。<br> 正例：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;String&gt;(<span class="number">2</span>); </span><br><span class="line">list.add(<span class="string">"guan"</span>); </span><br><span class="line">list.add(<span class="string">"bao"</span>); </span><br><span class="line">String[] array = <span class="keyword">new</span> String[list.size()]; </span><br><span class="line">array = list.toArray(array);</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>反例：直接使用 toArray 无参方法存在问题，此方法返回值只能是 Object[]类，若强转其它类型数组将出现 ClassCastException 错误。  </p>
+<ol start="5">
+<li>【强制】使用工具类 Arrays.asList()把数组转换成集合时，不能使用其修改集合相关的方法，它的 add/remove/clear 方法会抛出 UnsupportedOperationException 异常。<br>说明：asList 的返回对象是一个 Arrays 内部类，并没有实现集合的修改方法。Arrays.asList体现的是适配器模式，只是转换接口，后台的数据仍是数组。   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String[] str = <span class="keyword">new</span> String[] &#123; <span class="string">"you"</span>, <span class="string">"wu"</span> &#125;;</span><br><span class="line">List list = Arrays.asList(str);</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>第一种情况：list.add(“yangguanbao”); 运行时异常。<br>第二种情况：str[0] = “gujin”; 那么 list.get(0)也会随之修改。  </p>
+<ol start="6">
+<li>【强制】泛型通配符&lt;? extends T&gt;来接收返回的数据，此写法的泛型集合不能使用 add 方 法，而&lt;? super T&gt;不能使用 get 方法，作为接口调用赋值时易出错。<br>说明：扩展说一下 PECS(Producer Extends Consumer Super)原则：第一、频繁往外读取内容的，适合用&lt;? extends T&gt;。第二、经常往里插入的，适合用&lt;? super T&gt;。  </li>
 <li>【强制】不要在 foreach 循环里进行元素的 remove/add 操作。remove 元素请使用 Iterator<br>方式，如果并发操作，需要对 Iterator 对象加锁。<br>正例：  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">      list.add(<span class="string">"1"</span>);</span><br><span class="line">      list.add(<span class="string">"2"</span>);</span><br><span class="line">      Iterator&lt;String&gt; iterator = list.iterator();</span><br><span class="line">      <span class="keyword">while</span> (iterator.hasNext()) &#123;</span><br><span class="line">          String item = iterator.next();</span><br><span class="line">          <span class="keyword">if</span> (删除元素的条件) &#123;</span><br><span class="line">              iterator.remove();</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
