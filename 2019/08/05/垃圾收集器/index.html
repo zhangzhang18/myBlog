@@ -175,7 +175,7 @@
 <meta property="og:image" content="https://zhangzhang18.github.io/myBlog/2019/08/05/垃圾收集器/cms.png">
 <meta property="og:image" content="https://zhangzhang18.github.io/myBlog/2019/08/05/垃圾收集器/G1.jpg">
 <meta property="og:image" content="https://zhangzhang18.github.io/myBlog/2019/08/05/垃圾收集器/memory.jpg">
-<meta property="og:updated_time" content="2019-10-15T09:12:35.701Z">
+<meta property="og:updated_time" content="2019-10-18T02:21:48.923Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="垃圾收集器 ">
 <meta name="twitter:description" content="两个收集器之间存在连线，说明它们可以搭配使用。">
@@ -480,8 +480,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-10-15T17:12:35+08:00">
-                2019-10-15
+              <time title="更新于" itemprop="dateModified" datetime="2019-10-18T10:21:48+08:00">
+                2019-10-18
               </time>
             
           </span>
@@ -518,7 +518,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,644
+                  1,763
                 </span>
               
 
@@ -571,10 +571,10 @@
 <li>对CPU资源非常敏感。并发设计都对CPU资源敏感，并发阶段虽然不会导致用户线程变慢，但是会因为占用一部分线程而导致应用程序变慢，总吞吐量会降低。</li>
 <li>无法处理浮动垃圾。由于并发清理阶段用户线程还在运行，伴随程序运行就会有新的垃圾不断产生，这部分垃圾出现在标记过程之后，CMS午发在当次收集中处理掉它们，只好下次GC时清理，这部分垃圾称为“浮动垃圾”。</li>
 <li>基于标记-清除算法实现的，就意味着收集结束会有大量的空间碎片，空间碎片多，会给大对象分配带来很大麻烦，往往会出现老年代空间还有很大空间剩余，但是无法找到足够大的空间来分配当前对象，不得不触发Full GC。<h2 id="7-G1-面向服务端引用，未来可以替代CMS的收集器"><a href="#7-G1-面向服务端引用，未来可以替代CMS的收集器" class="headerlink" title="7.G1 面向服务端引用，未来可以替代CMS的收集器"></a>7.G1 面向服务端引用，未来可以替代CMS的收集器</h2><h3 id="与其他GC收集器比较，特点"><a href="#与其他GC收集器比较，特点" class="headerlink" title="与其他GC收集器比较，特点"></a>与其他GC收集器比较，特点</h3></li>
-<li>并行和并发</li>
-<li>分代收集</li>
-<li>空间整合</li>
-<li>可预测的停顿<h2 id="运作步骤"><a href="#运作步骤" class="headerlink" title="运作步骤"></a>运作步骤</h2></li>
+<li>并行和并发：缩短Stop The World 停顿时间，其他收集器原本需要停顿Java线程执行GC堆，G1仍然可以通过并发的方式让Java程序继续执行。</li>
+<li>分代收集：与其他收集器相同，分代概念在G1依然得以保留。但是采用不同方式处理。</li>
+<li>空间整合：与CMS使用‘标记-清除’不同，G1使用的谁‘标记-整理’实现。G1的运作期间不会产生空间碎片。</li>
+<li>可预测的停顿：这是相对于CMS的优势。<h2 id="运作步骤"><a href="#运作步骤" class="headerlink" title="运作步骤"></a>运作步骤</h2></li>
 <li>初始标记(Initial Marking)</li>
 <li>并发标记(Concurrent Marking)</li>
 <li>最终标记(Final Marking)</li>

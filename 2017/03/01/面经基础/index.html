@@ -167,7 +167,7 @@
 <meta property="og:site_name" content="萌">
 <meta property="og:description" content="java内存区域, 各个模块的作用线程共享：堆，方法区，直接内存   线程私有的：程序计数器，虚拟机栈，本地方法栈    程序计数器：记录线程执行的位置行数，为了线程切换后能恢复正确的执行位置   虚拟机栈：存储局部变量表，常量池的引用，方法的出口等，一个方法的执行意味着一个栈帧入栈出栈的过程   本地方法栈：与栈类似，它用的是虚拟机的native方法 为保证线程中局部变量不被其他线程访问到，所以">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-10-15T08:15:10.716Z">
+<meta property="og:updated_time" content="2019-10-19T07:39:06.065Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="准备面试基础">
 <meta name="twitter:description" content="java内存区域, 各个模块的作用线程共享：堆，方法区，直接内存   线程私有的：程序计数器，虚拟机栈，本地方法栈    程序计数器：记录线程执行的位置行数，为了线程切换后能恢复正确的执行位置   虚拟机栈：存储局部变量表，常量池的引用，方法的出口等，一个方法的执行意味着一个栈帧入栈出栈的过程   本地方法栈：与栈类似，它用的是虚拟机的native方法 为保证线程中局部变量不被其他线程访问到，所以">
@@ -471,8 +471,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-10-15T16:15:10+08:00">
-                2019-10-15
+              <time title="更新于" itemprop="dateModified" datetime="2019-10-19T15:39:06+08:00">
+                2019-10-19
               </time>
             
           </span>
@@ -509,7 +509,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  3,967
+                  4,040
                 </span>
               
 
@@ -653,7 +653,10 @@ GROUP BY 子句用来分组 WHERE 子句的输出。
          每次接受请求进行判断，比如订单已支付，数据库存在数据就不在处理了
 
          redis请求加锁 乐观悲观锁
-</code></pre><p>######　表单的重复提交</p>
+</code></pre><h6 id="http请求header都包含什么？"><a href="#http请求header都包含什么？" class="headerlink" title="http请求header都包含什么？"></a>http请求header都包含什么？</h6><p>content-type、accept、host、user-agent</p>
+<h6 id="5XX错误码"><a href="#5XX错误码" class="headerlink" title="5XX错误码"></a>5XX错误码</h6><p>500 Internal Server Error：<br>502 Bad Gateway：<br>504 Gateway Timeout：</p>
+<h6 id="跨域问题解决"><a href="#跨域问题解决" class="headerlink" title="跨域问题解决"></a>跨域问题解决</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">String origin = request.getHeader(<span class="string">"origin"</span>);</span><br><span class="line">response.setHeader(<span class="string">"Access-Control-Allow-Credentials"</span>, <span class="string">"true"</span>);</span><br><span class="line">response.setHeader(<span class="string">"Access-Control-Allow-Headers"</span>, <span class="string">"*"</span>);</span><br><span class="line">response.setHeader(<span class="string">"Access-Control-Allow-Methods"</span>, <span class="string">"POST,GET,OPTIONS"</span>);</span><br><span class="line">response.setHeader(<span class="string">"Access-Control-Allow-Origin"</span>, origin);</span><br></pre></td></tr></table></figure>
+<p>######　表单的重复提交</p>
 <pre><code>在服务器端生成一个唯一的随机标识号，专业术语称为Token(令牌)，同时在当前用户的Session域中保存这个Token。然后将Token发送到客户端的Form表单中，在Form表单中使用隐藏域来存储这个Token，表单提交的时候连同这个Token一起提交到服务器端，然后在服务器端判断客户端提交上来的Token与服务器端生成的Token是否一致，如果不一致，那就是重复提交了，此时服务器端就可以不处理重复提交的表单。如果相同则处理表单提交，处理完后清除当前用户的Session域中存储的标识号。              
 </code></pre><p>######　过滤器拦截器应用，区别</p>
 <pre><code>filter-&gt;servlet-&gt;intercept-&gt;controller
@@ -952,7 +955,7 @@ GROUP BY 子句用来分组 WHERE 子句的输出。
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#java内存区域-各个模块的作用"><span class="nav-text">java内存区域, 各个模块的作用</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#垃圾回收算法"><span class="nav-text">垃圾回收算法</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#堆溢出-栈溢出举例-内存溢出与泄漏的区别并举例"><span class="nav-text">堆溢出,栈溢出举例, 内存溢出与泄漏的区别并举例</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#双亲委派模型-java类加载过程-每个过程做了什么"><span class="nav-text">双亲委派模型, java类加载过程,每个过程做了什么</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#java中的锁-乐观锁-悲观锁-自旋锁等等"><span class="nav-text">java中的锁, 乐观锁,悲观锁, 自旋锁等等</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#ReentrantLock与synchronized"><span class="nav-text">ReentrantLock与synchronized</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#volatile的作用-CAS的原理-在java中哪些地方有用到"><span class="nav-text">volatile的作用, CAS的原理, 在java中哪些地方有用到</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#线程同步的方式"><span class="nav-text">线程同步的方式</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#ConcurrentHashMap的原理-是如何保证多线程安全的"><span class="nav-text">ConcurrentHashMap的原理,是如何保证多线程安全的</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#多线程的应用，理解"><span class="nav-text">多线程的应用，理解</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#LRU原理-LinkedHashMap是如何实现的-LinkedHashMap数据结构源码"><span class="nav-text">LRU原理, LinkedHashMap是如何实现的, LinkedHashMap数据结构源码</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#死锁"><span class="nav-text">死锁</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#索引"><span class="nav-text">索引</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#联合索引查询优化-什么情况会失效-a-b-c分别建索引失效情况"><span class="nav-text">联合索引查询优化, 什么情况会失效, a,b,c分别建索引失效情况</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#mysql存储引擎的对比-为什么用B-树实现"><span class="nav-text">mysql存储引擎的对比, 为什么用B+树实现</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#事物的隔离级别，事物的实际应用"><span class="nav-text">事物的隔离级别，事物的实际应用</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#HAVING-用法，join用法"><span class="nav-text">HAVING 用法，join用法</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#TCP可靠传输"><span class="nav-text">TCP可靠传输</span></a></li></ol></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#java内存区域-各个模块的作用"><span class="nav-text">java内存区域, 各个模块的作用</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#垃圾回收算法"><span class="nav-text">垃圾回收算法</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#堆溢出-栈溢出举例-内存溢出与泄漏的区别并举例"><span class="nav-text">堆溢出,栈溢出举例, 内存溢出与泄漏的区别并举例</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#双亲委派模型-java类加载过程-每个过程做了什么"><span class="nav-text">双亲委派模型, java类加载过程,每个过程做了什么</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#java中的锁-乐观锁-悲观锁-自旋锁等等"><span class="nav-text">java中的锁, 乐观锁,悲观锁, 自旋锁等等</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#ReentrantLock与synchronized"><span class="nav-text">ReentrantLock与synchronized</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#volatile的作用-CAS的原理-在java中哪些地方有用到"><span class="nav-text">volatile的作用, CAS的原理, 在java中哪些地方有用到</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#线程同步的方式"><span class="nav-text">线程同步的方式</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#ConcurrentHashMap的原理-是如何保证多线程安全的"><span class="nav-text">ConcurrentHashMap的原理,是如何保证多线程安全的</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#多线程的应用，理解"><span class="nav-text">多线程的应用，理解</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#LRU原理-LinkedHashMap是如何实现的-LinkedHashMap数据结构源码"><span class="nav-text">LRU原理, LinkedHashMap是如何实现的, LinkedHashMap数据结构源码</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#死锁"><span class="nav-text">死锁</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#索引"><span class="nav-text">索引</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#联合索引查询优化-什么情况会失效-a-b-c分别建索引失效情况"><span class="nav-text">联合索引查询优化, 什么情况会失效, a,b,c分别建索引失效情况</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#mysql存储引擎的对比-为什么用B-树实现"><span class="nav-text">mysql存储引擎的对比, 为什么用B+树实现</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#事物的隔离级别，事物的实际应用"><span class="nav-text">事物的隔离级别，事物的实际应用</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#HAVING-用法，join用法"><span class="nav-text">HAVING 用法，join用法</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#TCP可靠传输"><span class="nav-text">TCP可靠传输</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#http请求header都包含什么？"><span class="nav-text">http请求header都包含什么？</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#5XX错误码"><span class="nav-text">5XX错误码</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#跨域问题解决"><span class="nav-text">跨域问题解决</span></a></li></ol></li></ol></li></ol></li></ol></div>
             
 
           </div>
