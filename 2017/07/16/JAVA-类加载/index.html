@@ -159,21 +159,21 @@
 
 
 
-<meta name="description" content="Java虚拟机加载类的全过程包括，加载，验证，准备，解析和初始化。">
+<meta name="description" content="Java虚拟机加载类的全过程包括，加载，验证，准备，解析和初始化。  加载：根据路径找到对应的class文件，导入  验证：确保class字节流中包含信息符合当前虚拟机要求，不会危害虚拟机安全。  准备：准备阶段是正式为类变量分配内存并设置类变量初始值的阶段，这些变量所使用的内存都将在方法区中进行分配。-类变量（static）、不包含实例对象。 ​    public static value">
 <meta name="keywords" content="JAVA,JVM">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java类加载">
 <meta property="og:url" content="https://zhangzhang18.github.io/myBlog/2017/07/16/JAVA-类加载/index.html">
 <meta property="og:site_name" content="萌">
-<meta property="og:description" content="Java虚拟机加载类的全过程包括，加载，验证，准备，解析和初始化。">
+<meta property="og:description" content="Java虚拟机加载类的全过程包括，加载，验证，准备，解析和初始化。  加载：根据路径找到对应的class文件，导入  验证：确保class字节流中包含信息符合当前虚拟机要求，不会危害虚拟机安全。  准备：准备阶段是正式为类变量分配内存并设置类变量初始值的阶段，这些变量所使用的内存都将在方法区中进行分配。-类变量（static）、不包含实例对象。 ​    public static value">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://zhangzhang18.github.io/myBlog/2017/07/16/JAVA-类加载/load.jpg">
 <meta property="og:image" content="https://zhangzhang18.github.io/myBlog/2017/07/16/JAVA-类加载/parents.jpg">
 <meta property="og:image" content="https://zhangzhang18.github.io/myBlog/2017/07/16/JAVA-类加载/parents1.jpg">
-<meta property="og:updated_time" content="2019-10-19T11:43:33.947Z">
+<meta property="og:updated_time" content="2019-10-20T07:06:57.957Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java类加载">
-<meta name="twitter:description" content="Java虚拟机加载类的全过程包括，加载，验证，准备，解析和初始化。">
+<meta name="twitter:description" content="Java虚拟机加载类的全过程包括，加载，验证，准备，解析和初始化。  加载：根据路径找到对应的class文件，导入  验证：确保class字节流中包含信息符合当前虚拟机要求，不会危害虚拟机安全。  准备：准备阶段是正式为类变量分配内存并设置类变量初始值的阶段，这些变量所使用的内存都将在方法区中进行分配。-类变量（static）、不包含实例对象。 ​    public static value">
 <meta name="twitter:image" content="https://zhangzhang18.github.io/myBlog/2017/07/16/JAVA-类加载/load.jpg">
 
 
@@ -475,8 +475,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-10-19T19:43:33+08:00">
-                2019-10-19
+              <time title="更新于" itemprop="dateModified" datetime="2019-10-20T15:06:57+08:00">
+                2019-10-20
               </time>
             
           </span>
@@ -535,7 +535,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,136
+                  1,538
                 </span>
               
 
@@ -561,13 +561,21 @@
 
       
         <p><img src="/myBlog/2017/07/16/JAVA-类加载/load.jpg" alt="类加载"></p>
-<p>Java虚拟机加载类的全过程包括，加载，验证，准备，解析和初始化。<br><a id="more"></a></p>
+<p>Java虚拟机加载类的全过程包括，加载，验证，准备，解析和初始化。</p>
 <ul>
-<li>加载：根据路径找到对应的class文件，导入</li>
-<li>验证：确保class字节流中包含信息符合当前虚拟机要求，不会危害虚拟机安全。</li>
-<li>准备：准备阶段是正式为<strong>类变量分配内存</strong>并设置<strong>类变量初始值</strong>的阶段，这些变量所使用的内存都将在<strong>方法区</strong>中进行分配。-类变量（static）、不包含实例对象。</li>
-<li>解析：给符号引用转换为直接引用(解析动作主要针对类或接口、字段、类方法、接口方法、方法类型、方法句柄和调用点限定符7类符号引用进行。)</li>
-<li>初始化：对静态变量和静态代码块执行初始化工作  </li>
+<li><p>加载：根据路径找到对应的class文件，导入</p>
+</li>
+<li><p>验证：确保class字节流中包含信息符合当前虚拟机要求，不会危害虚拟机安全。</p>
+</li>
+<li><p>准备：准备阶段是正式为<strong>类变量分配内存</strong>并设置<strong>类变量初始值</strong>的阶段，这些变量所使用的内存都将在<strong>方法区</strong>中进行分配。-类变量（static）、不包含实例对象。</p>
+<p>​    <code>public static value =123</code> ，设置初始值为0。</p>
+<p>​    <code>public static final value =123</code> ，设置初始值为123。</p>
+</li>
+<li><p>解析：虚拟机将常量区<strong>符号引用转换为直接引用</strong>(解析动作主要针对类或接口、字段、类方法、接口方法、方法类型、方法句柄和调用点限定符7类符号引用进行。)</p>
+</li>
+<li><p>初始化：对静态变量和静态代码块执行初始化工作  </p>
+<a id="more"></a>
+</li>
 </ul>
 <p>何时触发初始化</p>
 <ol>
@@ -575,17 +583,34 @@
 <li>使用<code>java.lang.reflect</code>包的方法对类进行反射调用的时候。</li>
 <li>当初始化一个类，如果它的父类没有进行初始化的时候，先出发父类的初始化。</li>
 <li>当虚拟机启动时，用户需要指定一个要执行的子类（包含main方法的类），虚拟机会先初始化这个类。</li>
-<li>当使用JDK1.7动态语言支持时，如果一个<code>java.lang.invoke.MethodHandle</code>实例，对应类没有进行初始化，则先触发其初始化。</li>
+<li><p>当使用JDK1.7动态语言支持时，如果一个<code>java.lang.invoke.MethodHandle</code>实例，对应类没有进行初始化，则先触发其初始化。</p>
+<pre><code>对于静态字段，只有直接定义这个字段得类才会被初始化，通过子类引用父类定义得静态字段，只会出发父类得初始化。
+数组类不通过类加载器创建，是由虚拟机直接创建。
+一个类必须与类加载器一起确定唯一性。
+</code></pre></li>
 </ol>
-<h2 id="类加载器："><a href="#类加载器：" class="headerlink" title="类加载器："></a>类加载器：</h2><ul>
-<li>Bootstrap ClassLoader(启动类加载器):负责加载系统类(jre/lib/rt.jar)</li>
-<li>Extension ClassLoader(扩展类加载器):负责加载扩展类(jre/lib/ext/*.jar)</li>
-<li>Applicaiton ClassLoader(应用程序类加载器):用于加载自己定义编写的类(classpath指定目录或jar中类)</li>
-<li>User ClassLoader （用户自己实现的加载器）</li>
+<h2 id="类加载器："><a href="#类加载器：" class="headerlink" title="类加载器："></a>类加载器：</h2><p>通过类的全限定名来获取描述此类的二进制字节流，这个动作放在Java虚拟机外部去实现，以便让应用程序自己决定如何去获取所需要的类。实现这个动作的代码模块就是“类加载器”。</p>
+<ul>
+<li><p>Bootstrap ClassLoader(启动类加载器):负责加载系统类(jre/lib/rt.jar)</p>
+</li>
+<li><p>Extension ClassLoader(扩展类加载器):负责加载扩展类(jre/lib/ext/*.jar)</p>
+</li>
+<li><p>Applicaiton ClassLoader(应用程序类加载器):用于加载自己定义编写的类(classpath指定目录或jar中类)</p>
+</li>
+<li><p>User ClassLoader （用户自己实现的加载器）</p>
+<p>​    </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">比较两个类是否相等，只有这两个类是同一个类加载器加载的前提才有意义。</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
-<h2 id="“双亲委派模型”简单来说就是："><a href="#“双亲委派模型”简单来说就是：" class="headerlink" title="“双亲委派模型”简单来说就是："></a>“双亲委派模型”简单来说就是：</h2><ol>
-<li>先检查需要加载的类是否已经被加载，如果没有被加载，则委托父加载器加载，父类继续检查，尝试请父类加载，这个过程是从下——-&gt; 上;</li>
-<li>如果走到顶层发现类没有被加载过，那么会从顶层开始往下逐层尝试加载，这个过程是从上 ——&gt; 下;<br>这种设计有个好处是，如果有人想替换系统级别的类：String.java。篡改它的实现，但是在这种机制下这些系统的类已经被Bootstrap classLoader加载过了，所以并不会再去加载，从一定程度上防止了危险代码的植入。<br><img src="/myBlog/2017/07/16/JAVA-类加载/parents.jpg" alt="parents"><br><img src="/myBlog/2017/07/16/JAVA-类加载/parents1.jpg" alt="parents1"><h2 id="双亲委派模型的破坏"><a href="#双亲委派模型的破坏" class="headerlink" title="双亲委派模型的破坏"></a>双亲委派模型的破坏</h2></li>
+<h2 id="“双亲委派模型”："><a href="#“双亲委派模型”：" class="headerlink" title="“双亲委派模型”："></a>“双亲委派模型”：</h2><p>从Java虚拟机角度来讲，只存在两个不通的类加载器，一种是启动类加载器（Bootstrap ClassLoader），这个类加载器使用的是C++语言实现，是虚拟机自身的一部分，另一种就是所有其他的加载器，是由Java语言实现，独立于虚拟机外部，并且全部继承自抽象类<code>Java.lang.ClassLoader</code></p>
+<h3 id="工作过程"><a href="#工作过程" class="headerlink" title="工作过程"></a>工作过程</h3><p>如果一类加载器收到了类加载请求，它首先不会自己尝试加载这个类，而是把请求委派给父类加载器去完成。   </p>
+<p>只有在父类反馈自己无法完成这个加载任务时，子类加载器才会尝试自己加载。 </p>
+<ol>
+<li><p>先检查需要加载的类是否已经被加载，如果没有被加载，则委托父加载器加载，父类继续检查，尝试请父类加载，这个过程是从下——-&gt; 上;</p>
+</li>
+<li><p>如果走到顶层发现类没有被加载过，那么会从顶层开始往下逐层尝试加载，这个过程是从上 ——&gt; 下;<br>这种设计有个好处是，如果有人想替换系统级别的类：String.java。篡改它的实现，但是在这种机制下这些系统的类已经被Bootstrap classLoader加载过了，所以并不会再去加载，从一定程度上防止了危险代码的植入。</p>
+<p><img src="/myBlog/2017/07/16/JAVA-类加载/parents.jpg" alt="parents"><br><img src="/myBlog/2017/07/16/JAVA-类加载/parents1.jpg" alt="parents1"></p>
+<h2 id="双亲委派模型的破坏"><a href="#双亲委派模型的破坏" class="headerlink" title="双亲委派模型的破坏"></a>双亲委派模型的破坏</h2></li>
 </ol>
 <p>JAVA热部署实现<br>首先谈一下何为热部署（hotswap），热部署是在不重启 Java 虚拟机的前提下，能自动侦测到 class 文件的变化，更新运行时 class 的行为。Java 类是通过 Java 虚拟机加载的，某个类的 class 文件在被 classloader 加载后，会生成对应的 Class 对象，之后就可以创建该类的实例。默认的虚拟机行为只会在启动时加载类，如果后期有一个类需要更新的话，单纯替换编译的 class 文件，Java 虚拟机是不会更新正在运行的 class。如果要实现热部署，最根本的方式是修改虚拟机的源代码，改变 classloader 的加载行为，使虚拟机能监听 class 文件的更新，重新加载 class 文件，这样的行为破坏性很大，为后续的 JVM 升级埋下了一个大坑。</p>
 <p>另一种友好的方法是创建自己的 classloader 来加载需要监听的 class，这样就能控制类加载的时机，从而实现热部署。 </p>
@@ -593,7 +618,8 @@
 <p>1、销毁自定义classloader(被该加载器加载的class也会自动卸载)；</p>
 <p>2、更新class</p>
 <p>3、使用新的ClassLoader去加载class </p>
-<p>JVM中的Class只有满足以下三个条件，才能被GC回收，也就是该Class被卸载（unload）：</p>
+<p>OSGi</p>
+<h2 id="Class回收"><a href="#Class回收" class="headerlink" title="Class回收"></a>Class回收</h2><p>JVM中的Class只有满足以下三个条件，才能被GC回收，也就是该Class被卸载（unload）：</p>
 <ul>
 <li>该类所有的实例都已经被GC，也就是JVM中不存在该Class的任何实例。</li>
 <li>加载该类的ClassLoader已经被GC。</li>
@@ -866,7 +892,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#类加载器："><span class="nav-text">类加载器：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#“双亲委派模型”简单来说就是："><span class="nav-text">“双亲委派模型”简单来说就是：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#双亲委派模型的破坏"><span class="nav-text">双亲委派模型的破坏</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#类加载器："><span class="nav-text">类加载器：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#“双亲委派模型”："><span class="nav-text">“双亲委派模型”：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#工作过程"><span class="nav-text">工作过程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#双亲委派模型的破坏"><span class="nav-text">双亲委派模型的破坏</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Class回收"><span class="nav-text">Class回收</span></a></li></ol></div>
             
 
           </div>

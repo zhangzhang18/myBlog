@@ -1131,8 +1131,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-10-15T14:09:51+08:00">
-                2019-10-15
+              <time title="更新于" itemprop="dateModified" datetime="2019-10-20T20:38:20+08:00">
+                2019-10-20
               </time>
             
           </span>
@@ -1191,7 +1191,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  459
+                  995
                 </span>
               
 
@@ -1217,7 +1217,8 @@
 
       
         
-          <h2 id="1-标记-清除算法"><a href="#1-标记-清除算法" class="headerlink" title="1.标记-清除算法"></a>1.标记-清除算法</h2><p>最基础的收集算法。<br>分为两个阶段：标记出所有需要回收的对象，标记完成后统一回收所有被标记的对象。<br>不足：效率，空间，标记清除后会产生大量不连续的内存碎片。<br><img src="/myBlog/2017/07/20/垃圾收集算法/ms.jpg" alt="标记-清除"><br></p>
+          <h2 id="1-标记-清除算法"><a href="#1-标记-清除算法" class="headerlink" title="1.标记-清除算法"></a>1.标记-清除算法</h2><p>最基础的收集算法。<br>分为两个阶段：标记出所有需要回收的对象，标记完成后统一回收所有被标记的对象。<br>不足：效率，空间，标记清除后会产生大量不连续的内存碎片。<br><img src="/myBlog/2017/07/20/垃圾收集算法/ms.jpg" alt="标记-清除"></p>
+<p>不足：1. 效率问题，标记和请求两个操作效率都不高；2.空间问题，会产生大量不连续的空间碎片。</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/myBlog/2017/07/20/垃圾收集算法/#more" rel="contents">
@@ -1323,8 +1324,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-10-19T19:43:33+08:00">
-                2019-10-19
+              <time title="更新于" itemprop="dateModified" datetime="2019-10-20T15:06:57+08:00">
+                2019-10-20
               </time>
             
           </span>
@@ -1383,7 +1384,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,136
+                  1,538
                 </span>
               
 
@@ -1410,7 +1411,19 @@
       
         
           <p><img src="/myBlog/2017/07/16/JAVA-类加载/load.jpg" alt="类加载"></p>
-<p>Java虚拟机加载类的全过程包括，加载，验证，准备，解析和初始化。<br></p>
+<p>Java虚拟机加载类的全过程包括，加载，验证，准备，解析和初始化。</p>
+<ul>
+<li><p>加载：根据路径找到对应的class文件，导入</p>
+</li>
+<li><p>验证：确保class字节流中包含信息符合当前虚拟机要求，不会危害虚拟机安全。</p>
+</li>
+<li><p>准备：准备阶段是正式为<strong>类变量分配内存</strong>并设置<strong>类变量初始值</strong>的阶段，这些变量所使用的内存都将在<strong>方法区</strong>中进行分配。-类变量（static）、不包含实例对象。</p>
+<p>​    <code>public static value =123</code> ，设置初始值为0。</p>
+<p>​    <code>public static final value =123</code> ，设置初始值为123。</p>
+</li>
+<li><p>解析：虚拟机将常量区<strong>符号引用转换为直接引用</strong>(解析动作主要针对类或接口、字段、类方法、接口方法、方法类型、方法句柄和调用点限定符7类符号引用进行。)</p>
+</li>
+<li><p>初始化：对静态变量和静态代码块执行初始化工作  </p></li></ul>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/myBlog/2017/07/16/JAVA-类加载/#more" rel="contents">
@@ -1859,6 +1872,185 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://zhangzhang18.github.io/myBlog/myBlog/2017/03/01/面经基础/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="萌">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/myBlog/images/header.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="萌">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/myBlog/2017/03/01/面经基础/" itemprop="url">准备面试基础</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-01T11:14:08+08:00">
+                2017-03-01
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-10-19T15:39:06+08:00">
+                2019-10-19
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/myBlog/2017/03/01/面经基础/" class="leancloud_visitors" data-flag-title="准备面试基础">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count">|</span>
+             </span>
+          
+
+
+
+          
+              
+                
+                <span class="post-meta-item-icon">|
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  4,040
+                </span>
+              
+
+              
+
+              
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="java内存区域-各个模块的作用"><a href="#java内存区域-各个模块的作用" class="headerlink" title="java内存区域, 各个模块的作用"></a>java内存区域, 各个模块的作用</h3><pre><code>线程共享：堆，方法区，直接内存  
+线程私有的：程序计数器，虚拟机栈，本地方法栈  
+
+程序计数器：记录线程执行的位置行数，为了线程切换后能恢复正确的执行位置  
+虚拟机栈：存储局部变量表，常量池的引用，方法的出口等，一个方法的执行意味着一个栈帧入栈出栈的过程  
+本地方法栈：与栈类似，它用的是虚拟机的native方法
+为保证线程中局部变量不被其他线程访问到，所以虚拟机栈和本地方法栈是线程私有的
+堆：是java虚拟机管理内存最大的一块，存储实例对象和数组，是垃圾回收管理主要区域  
+方法区：存储类信息，常量和静态变量，接口，变量，方法名等描述信息  
+</code></pre>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/myBlog/2017/03/01/面经基础/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+	<div>
+  
+</div>
+<div>
+
+</div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://zhangzhang18.github.io/myBlog/myBlog/2017/03/01/面经升级/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2038,185 +2230,6 @@ Dubbo 传输协议：Dubbo缺省协议采用单一长连接和NIO异步通讯，
 <pre><code>可以，因为刚开始初始化的时候，消费者会将提供者的地址等信息拉取到本地缓存，所以注册中心挂了可以继续通信。    
 </code></pre><h6 id="说说对zk的理解？"><a href="#说说对zk的理解？" class="headerlink" title="说说对zk的理解？"></a>说说对zk的理解？</h6><h5 id="注解的理解"><a href="#注解的理解" class="headerlink" title="注解的理解"></a>注解的理解</h5>
           
-        
-      
-    </div>
-    
-    
-    
-	<div>
-  
-</div>
-<div>
-
-</div>
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://zhangzhang18.github.io/myBlog/myBlog/2017/03/01/面经基础/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="萌">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/myBlog/images/header.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="萌">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/myBlog/2017/03/01/面经基础/" itemprop="url">准备面试基础</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-01T11:14:08+08:00">
-                2017-03-01
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2019-10-19T15:39:06+08:00">
-                2019-10-19
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/myBlog/2017/03/01/面经基础/" class="leancloud_visitors" data-flag-title="准备面试基础">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count">|</span>
-             </span>
-          
-
-
-
-          
-              
-                
-                <span class="post-meta-item-icon">|
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  4,040
-                </span>
-              
-
-              
-
-              
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="java内存区域-各个模块的作用"><a href="#java内存区域-各个模块的作用" class="headerlink" title="java内存区域, 各个模块的作用"></a>java内存区域, 各个模块的作用</h3><pre><code>线程共享：堆，方法区，直接内存  
-线程私有的：程序计数器，虚拟机栈，本地方法栈  
-
-程序计数器：记录线程执行的位置行数，为了线程切换后能恢复正确的执行位置  
-虚拟机栈：存储局部变量表，常量池的引用，方法的出口等，一个方法的执行意味着一个栈帧入栈出栈的过程  
-本地方法栈：与栈类似，它用的是虚拟机的native方法
-为保证线程中局部变量不被其他线程访问到，所以虚拟机栈和本地方法栈是线程私有的
-堆：是java虚拟机管理内存最大的一块，存储实例对象和数组，是垃圾回收管理主要区域  
-方法区：存储类信息，常量和静态变量，接口，变量，方法名等描述信息  
-</code></pre>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/myBlog/2017/03/01/面经基础/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
         
       
     </div>

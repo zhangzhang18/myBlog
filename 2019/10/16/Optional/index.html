@@ -171,7 +171,7 @@
 <meta property="og:image" content="https://zhangzhang18.github.io/myBlog/2019/10/16/Optional/Map.png">
 <meta property="og:image" content="https://zhangzhang18.github.io/myBlog/2019/10/16/Optional/FlatMap.png">
 <meta property="og:image" content="https://zhangzhang18.github.io/myBlog/2019/10/16/Optional/UseMap.png">
-<meta property="og:updated_time" content="2019-10-17T05:14:03.125Z">
+<meta property="og:updated_time" content="2019-10-20T12:48:53.683Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="优雅的处理NullPointerExcepter">
 <meta name="twitter:description" content="Optional是Java8提供的为了解决null安全问题的一个API。 阿里巴巴编码规约-异常处理 12345678910说明：本手册明确防止 NPE 是调用者的责任。  10. 【推荐】防止 NPE，是程序员的基本修养，注意 NPE 产生的场景：   	1）返回类型为基本数据类型，return 包装数据类型的对象时，自动拆箱有可能产生 NPE。       	反例：`public int f(">
@@ -476,8 +476,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-10-17T13:14:03+08:00">
-                2019-10-17
+              <time title="更新于" itemprop="dateModified" datetime="2019-10-20T20:48:53+08:00">
+                2019-10-20
               </time>
             
           </span>
@@ -586,7 +586,8 @@
 <li><h3 id="无法序列化"><a href="#无法序列化" class="headerlink" title="无法序列化"></a>无法序列化</h3><p>由于Optional 类设计时就没特别考虑将其作为类的字段使用，所以它也并未实现Serializable；<br>把 Optional 类型用作属性或是方法参数在 IntelliJ IDEA 中更是强力不推荐的<br>用Optional 声明域模型中某些类型是不错的主意。<br>如果非要实现序列化的模型域，可以参考下例  </p>
 </li>
 <li><h3 id="基于值的类（说明：这是一个基于值的class类，对于同一性（特性）敏感的操作-（包含引用的相等性如-）-同一性的hashcode或者同步等等、对optional实例可能会产生不可预料的结果，这种结果应该被避免。）"><a href="#基于值的类（说明：这是一个基于值的class类，对于同一性（特性）敏感的操作-（包含引用的相等性如-）-同一性的hashcode或者同步等等、对optional实例可能会产生不可预料的结果，这种结果应该被避免。）" class="headerlink" title="基于值的类（说明：这是一个基于值的class类，对于同一性（特性）敏感的操作 （包含引用的相等性如:==）,同一性的hashcode或者同步等等、对optional实例可能会产生不可预料的结果，这种结果应该被避免。）"></a>基于值的类（说明：这是一个基于值的class类，对于同一性（特性）敏感的操作 （包含引用的相等性如:==）,同一性的hashcode或者同步等等、对optional实例可能会产生不可预料的结果，这种结果应该被避免。）</h3><p><a href="https://docs.oracle.com/javase/8/docs/api/java/lang/doc-files/ValueBased.html" target="_blank" rel="noopener">https://docs.oracle.com/javase/8/docs/api/java/lang/doc-files/ValueBased.html</a></p>
-<p>这里说的是基于值的类需要满足以下几点：<br>1、 final类型和不可变的（可能会包含可变对象的引用）<br>2、 有equals、hashCode、toString方法的实现，它是通过实例的状态计算出来的，而并不会通过其它的对象或变量去计算。<br>3、 不会使用身份敏感的操作，比如在二个实例之间引用相等性、hashCode或者内在的锁。<br>4、 判断二个值相等仅仅通过equal方法，而不会通过==去判断。<br>5、 它不提供构造方法，它通过工厂方法创建它的实例，这不保证返回实例的一致性。<br>6、 当它们相等时，它是可以自由替换的。如果x和y 调用equal方法返回true，那么可以将x和y任意交换，它的结果不会产生任何变化。  </p>
+<p>这里说的是基于值的类需要满足以下几点：</p>
+<p>1、 final类型和不可变的（可能会包含可变对象的引用）<br>2、 有equals、hashCode、toString方法的实现，它是通过实例的状态计算出来的，而并不会通过其它的对象或变量去计算。<br>3、 不会使用身份敏感的操作，比如在二个实例之间引用相等性、hashCode或者内在的锁。<br>4、 判断二个值相等仅仅通过equal方法，而不会通过==去判断。<br>5、 它不提供构造方法，它通过工厂方法创建它的实例，这不保证返回实例的一致性。<br>6、 当它们相等时，它是可以自由替换的。如果x和y 调用equal方法返回true，那么可以将x和y任意交换，它的结果不会产生任何变化。  </p>
 </li>
 </ul>
 <h2 id="二：实战示例"><a href="#二：实战示例" class="headerlink" title="二：实战示例"></a>二：实战示例</h2><h3 id="1-用Optional封装可能为Null的值"><a href="#1-用Optional封装可能为Null的值" class="headerlink" title="1. 用Optional封装可能为Null的值"></a>1. 用Optional封装可能为Null的值</h3><ul>
