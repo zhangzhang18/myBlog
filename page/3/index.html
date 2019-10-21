@@ -1242,8 +1242,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-10-17T14:05:53+08:00">
-                2019-10-17
+              <time title="更新于" itemprop="dateModified" datetime="2019-10-21T13:47:58+08:00">
+                2019-10-21
               </time>
             
           </span>
@@ -1328,8 +1328,7 @@
 
       
         
-          
-            <h1 id="编程规约"><a href="#编程规约" class="headerlink" title="编程规约"></a>编程规约</h1><h2 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h2><ol>
+          <h1 id="编程规约"><a href="#编程规约" class="headerlink" title="编程规约"></a>编程规约</h1><h2 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h2><ol>
 <li>【强制】关于 hashCode 和 equals 的处理，遵循如下规则：<br>1） 只要重写 equals，就必须重写 hashCode。 2） 因为 Set 存储的是不重复的对象，依据 hashCode 和 equals 进行判断，所以 Set 存储的对象必须重写这两个方法。<br>3） 如果自定义对象作为 Map 的键，那么必须重写 hashCode 和 equals。<br>说明：String 重写了 hashCode 和 equals 方法，所以我们可以非常愉快地使用 String 对象作为 key 来使用。  </li>
 <li>【强制】ArrayList的subList结果不可强转成ArrayList，否则会抛出ClassCastException<br>异常，即 java.util.RandomAccessSubList cannot be cast to java.util.ArrayList。<br>说明：subList 返回的是 ArrayList 的内部类 SubList，并不是 ArrayList 而是 ArrayList  的一个视图，对于 SubList 子列表的所有操作最终会反映到原列表上。  </li>
 <li>【强制】在 subList 场景中，高度注意对原集合元素的增加或删除，均会导致子列表的遍历、增加、删除产生 ConcurrentModificationException 异常。  </li>
@@ -1347,79 +1346,13 @@
 <li>【强制】不要在 foreach 循环里进行元素的 remove/add 操作。remove 元素请使用 Iterator<br>方式，如果并发操作，需要对 Iterator 对象加锁。<br>正例：  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">      list.add(<span class="string">"1"</span>);</span><br><span class="line">      list.add(<span class="string">"2"</span>);</span><br><span class="line">      Iterator&lt;String&gt; iterator = list.iterator();</span><br><span class="line">      <span class="keyword">while</span> (iterator.hasNext()) &#123;</span><br><span class="line">          String item = iterator.next();</span><br><span class="line">          <span class="keyword">if</span> (删除元素的条件) &#123;</span><br><span class="line">              iterator.remove();</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<p>##　OOP规约</p>
-<ol start="18">
-<li><p>【推荐】循环体内，字符串的连接方式，使用 StringBuilder 的 append 方法进行扩展。<br>说明：下例中，反编译出的字节码文件显示每次循环都会 new 出一个 StringBuilder 对象，<br>然后进行 append 操作，最后通过 toString 方法返回 String 对象，造成内存资源浪费。<br>反例：  </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">String str = <span class="string">"start"</span>; </span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">100</span>; i++) &#123; </span><br><span class="line">        str = str + <span class="string">"hello"</span>; </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>【推荐】final 可以声明类、成员变量、方法、以及本地变量，下列情况使用 final 关键字：  </p>
-<ul>
-<li>不允许被继承的类，如：String 类。  </li>
-<li>不允许修改引用的域对象。  </li>
-<li>不允许被重写的方法，如：POJO 类的 setter 方法。  </li>
-<li>不允许运行过程中重新赋值的局部变量。  </li>
-<li>避免上下文重复使用一个变量，使用 final 描述可以强制重新定义一个变量，方便更好地进行重构。  </li>
-</ul>
-<h2 id="控制语句"><a href="#控制语句" class="headerlink" title="控制语句"></a>控制语句</h2><ol start="3">
-<li>【强制】在高并发场景中，避免使用”等于”判断作为中断或退出的条件。<br>说明：如果并发控制没有处理好，容易产生等值判断被“击穿”的情况，使用大于或小于的区间判断条件来代替。<br>反例：判断剩余奖品数量等于 0 时，终止发放奖品，但因为并发处理错误导致奖品数量瞬间变成了负数，这样的话，活动无法终止。<h2 id="注释规约"><a href="#注释规约" class="headerlink" title="注释规约"></a>注释规约</h2></li>
-</ol>
-</li>
-<li>【强制】类、类属性、类方法的注释必须使用 Javadoc 规范，使用/*<em>内容</em>/格式，不得使用// xxx 方式。<br> 说明：在 IDE 编辑窗口中，Javadoc 方式会提示相关注释，生成 Javadoc 可以正确输出相应注释；在 IDE 中，工程调用方法时，不进入方法即可悬浮提示方法、参数、返回值的意义，提高阅读效率。   </li>
-<li>【强制】所有的抽象方法（包括接口中的方法）必须要用 Javadoc 注释、除了返回值、参数、异常说明外，还必须指出该方法做什么事情，实现什么功能。<br> 说明：对子类的实现要求，或者调用注意事项，请一并说明。</li>
-<li>【强制】所有的类都必须添加创建者和创建日期。  </li>
-<li>【强制】所有的枚举类型字段必须要有注释，说明每个数据项的用途。  <h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2></li>
-<li>【强制】注意 Math.random() 这个方法返回是 double 类型，注意取值的范围 0≤x&lt;1（能够取到零值，注意除零异常），如果想获取整数类型的随机数，不要将 x 放大 10 的若干倍然后取整，直接使用 Random 对象的 nextInt 或者 nextLong 方法。</li>
-<li>【推荐】及时清理不再使用的代码段或配置信息。<br>说明：对于垃圾代码或过时配置，坚决清理干净，避免程序过度臃肿，代码冗余。<br>正例：对于暂时被注释掉，后续可能恢复使用的代码片断，在注释代码上方，统一规定使用三个斜杠(///)来说明注释掉代码的理由。   <h2 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h2></li>
-<li>【强制】有 try 块放到了事务代码中，catch 异常后，如果需要回滚事务，一定要注意手动回滚事务。   </li>
-<li>【推荐】方法的返回值可以为 null，不强制返回空集合，或者空对象等，必须添加注释充分说明什么情况下会返回 null 值。<br>说明：本手册明确防止 NPE 是调用者的责任。   </li>
-<li>【推荐】防止 NPE，是程序员的基本修养，注意 NPE 产生的场景：<br>1）返回类型为基本数据类型，return 包装数据类型的对象时，自动拆箱有可能产生 NPE。<br>反例：<code>public int f() { return Integer 对象}</code>， 如果为 null，自动解箱抛 NPE。<br>2） 数据库的查询结果可能为 null。<br>3） 集合里的元素即使 isNotEmpty，取出的数据元素也可能为 null。<br>4） 远程调用返回对象时，一律要求进行空指针判断，防止 NPE。<br>5） 对于 Session 中获取的数据，建议 NPE 检查，避免空指针。<br>6） 级联调用 <code>obj.getA().getB().getC()；</code>一连串调用，易产生 NPE。<br>正例：使用 JDK8 的 Optional 类来防止 NPE 问题。  </li>
-<li>【参考】对于公司外的 http/api 开放接口必须使用“错误码”；而应用内部推荐异常抛出；<br>跨应用间 RPC 调用优先考虑使用 Result 方式，封装 isSuccess()方法、“错误码”、“错误简短信息”。<br>说明：关于 RPC 方法返回方式使用 Result 方式的理由：<br>1）使用抛异常返回方式，调用方如果没有捕获到就会产生运行时错误。<br>2）如果不加栈信息，只是 new 自定义异常，加入自己的理解的 error message，对于调用端解决问题的帮助不会太多。如果加了栈信息，在频繁调用出错的情况下，数据序列化和传输的性能损耗也是问题。  </li>
-<li>【参考】避免出现重复的代码（Don’t Repeat Yourself），即 DRY 原则。<br>说明：随意复制和粘贴代码，必然会导致代码的重复，在以后需要修改时，需要修改所有的副本，容易遗漏。必要时抽取共性方法，或者抽象公共类，甚至是组件化。<br>正例：一个类中有多个 public 方法，都需要进行数行相同的参数校验操作，这个时候请抽取：<br><code>private boolean checkParam(DTO dto) {...}</code>  <h2 id="日志规约"><a href="#日志规约" class="headerlink" title="日志规约"></a>日志规约</h2></li>
-<li>【强制】日志文件至少保存 15 天，因为有些异常具备以“周”为频次发生的特点。  </li>
-<li>【强制】应用中的扩展日志（如打点、临时监控、访问日志等）命名方式：<br><code>appName_logType_logName.log</code>。<br>logType:日志类型，如 <code>stats/monitor/access</code> 等；logName:日志描述。这种命名的好处：<br>通过文件名就可知道日志文件属于什么应用，什么类型，什么目的，也有利于归类查找。<br>正例：mppserver 应用中单独监控时区转换异常，如：<br><code>mppserver_monitor_timeZoneConvert.log</code><br>说明：推荐对日志进行分类，如将错误日志和业务日志分开存放，便于开发人员查看，也便于通过日志对系统进行及时监控。   </li>
-<li>【强制】避免重复打印日志，浪费磁盘空间，务必在 <code>log4j.xml</code> 中设置 <code>additivity=false</code>。<br>正例：<code>&lt;logger name=&quot;com.taobao.dubbo.config&quot; additivity=&quot;false&quot;&gt;</code>  </li>
-<li>【强制】异常信息应该包括两类信息：案发现场信息和异常堆栈信息。如果不处理，那么通过关键字 throws 往上抛出。<br>正例：<code>logger.error(各类参数或者对象 toString() + &quot;_&quot; + e.getMessage(), e);</code>  <h2 id="安全"><a href="#安全" class="headerlink" title="安全"></a>安全</h2></li>
-<li>【强制】表单、AJAX 提交必须执行 CSRF 安全验证。<br>说明：CSRF(Cross-site request forgery)跨站请求伪造是一类常见编程漏洞。对于存在CSRF 漏洞的应用/网站，攻击者可以事先构造好 URL，只要受害者用户一访问，后台便在用户不知情的情况下对数据库中用户参数进行相应修改。  </li>
-<li>【强制】在使用平台资源，譬如短信、邮件、电话、下单、支付，必须实现正确的防重放的机制，如数量限制、疲劳度控制、验证码校验，避免被滥刷而导致资损。<br>说明：如注册时发送验证码到手机，如果没有限制次数和频率，那么可以利用此功能骚扰到其它用户，并造成短信平台资源浪费。  <h1 id="MySql数据库"><a href="#MySql数据库" class="headerlink" title="MySql数据库"></a>MySql数据库</h1><h2 id="建表"><a href="#建表" class="headerlink" title="建表"></a>建表</h2></li>
-<li>【强制】表达是与否概念的字段，必须使用 is_xxx 的方式命名，数据类型是 unsigned tinyint（1 表示是，0 表示否）。<br>说明：任何字段如果为非负数，必须是 unsigned。<br>注意：POJO 类中的任何布尔类型的变量，都不要加 is 前缀，所以，需要在<resultmap>设置从 is_xxx 到 Xxx 的映射关系。数据库表示是与否的值，使用 tinyint 类型，坚持 is_xxx 的命名方式是为了明确其取值含义与取值范围。<br>正例：表达逻辑删除的字段名 is_deleted，1 表示删除，0 表示未删除。   </resultmap></li>
-<li>【强制】禁用保留字，如 desc、range、match、delayed 等，请参考 MySQL 官方保留字。  </li>
-<li>【强制】主键索引名为 pk_字段名；唯一索引名为 uk_字段名；普通索引名则为 idx_字段名。<br>说明：pk_ 即 primary key；uk_ 即 unique key；idx_ 即 index 的简称。  </li>
-<li>【强制】小数类型为 decimal，禁止使用 float 和 double。<br>说明：float 和 double 在存储的时候，存在精度损失的问题，很可能在值的比较时，得到不正确的结果。如果存储的数据范围超过 decimal 的范围，建议将数据拆成整数和小数分开存储。  </li>
-<li>【强制】如果存储的字符串长度几乎相等，使用 char 定长字符串类型。  </li>
-<li>【强制】varchar 是可变长字符串，不预先分配存储空间，长度不要超过 5000，如果存储长度大于此值，定义字段类型为 text，独立出来一张表，用主键来对应，避免影响其它字段索引效率。   </li>
-<li>【强制】表必备三字段：id, gmt_create, gmt_modified。<br>说明：其中 id 必为主键，类型为 bigint unsigned、单表时自增、步长为 1。gmt_create, gmt_modified 的类型均为 datetime 类型，前者现在时表示主动创建，后者过去分词表示被动更新。   </li>
-<li>【推荐】单表行数超过 500 万行或者单表容量超过 2GB，才推荐进行分库分表。<br>说明：如果预计三年后的数据量根本达不到这个级别，请不要在创建表时就分库分表。  <h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2></li>
-<li>【强制】业务上具有唯一特性的字段，即使是多个字段的组合，也必须建成唯一索引。<br>说明：不要以为唯一索引影响了 insert 速度，这个速度损耗可以忽略，但提高查找速度是明显的；另外，即使在应用层做了非常完善的校验控制，只要没有唯一索引，根据墨菲定律，必然有脏数据产生。   </li>
-<li>【强制】超过三个表禁止 join。需要 join 的字段，数据类型必须绝对一致；多表关联查询时，保证被关联的字段需要有索引。<br>说明：即使双表 join 也要注意表索引、SQL 性能。  </li>
-<li>【强制】在 varchar 字段上建立索引时，必须指定索引长度，没必要对全字段建立索引，根据实际文本区分度决定索引长度即可。<br>说明：索引的长度与区分度是一对矛盾体，一般对字符串类型数据，长度为 20 的索引，区分度会高达 90%以上，可以使用 count(distinct left(列名, 索引长度))/count(*)的区分度来确定。  </li>
-<li>【强制】页面搜索严禁左模糊或者全模糊，如果需要请走搜索引擎来解决。<br>说明：索引文件具有 B-Tree 的最左前缀匹配特性，如果左边的值未确定，那么无法使用此索引。  </li>
-<li>【推荐】如果有 order by 的场景，请注意利用索引的有序性。order by 最后的字段是组合索引的一部分，并且放在索引组合顺序的最后，避免出现 file_sort 的情况，影响查询性能。<br>正例：where a=? and b=? order by c; 索引：a_b_c<br>反例：索引中有范围查找，那么索引有序性无法利用，如：WHERE a&gt;10 ORDER BY b; 索引a_b 无法排序。  </li>
-<li>【推荐】利用覆盖索引来进行查询操作，避免回表。<br>说明：如果一本书需要知道第 11 章是什么标题，会翻开第 11 章对应的那一页吗？目录浏览一下就好，这个目录就是起到覆盖索引的作用。<br>正例：能够建立索引的种类分为主键索引、唯一索引、普通索引三种，而覆盖索引只是一种查询的一种效果，用 explain 的结果，extra 列会出现：using index。  </li>
-<li>【推荐】利用延迟关联或者子查询优化超多分页场景。<br>说明：MySQL 并不是跳过 offset 行，而是取 offset+N 行，然后返回放弃前 offset 行，返回N 行，那当 offset 特别大的时候，效率就非常的低下，要么控制返回的总页数，要么对超过特定阈值的页数进行 SQL 改写。<br>正例：先快速定位需要获取的 id 段，然后再关联：SELECT a.* FROM 表 1 a, (select id from 表 1 where 条件 LIMIT 100000,20 ) b where a.id=b.id  </li>
-<li>【推荐】SQL 性能优化的目标：至少要达到 range 级别，要求是 ref 级别，如果可以是 consts最好。<br>说明：<br>1）<strong>consts</strong> 单表中最多只有一个匹配行（主键或者唯一索引），在优化阶段即可读取到数据。<br>2）<strong>ref</strong> 指的是使用普通的索引（normal index）。<br>3）range 对索引进行范围检索。<br>反例：explain 表的结果，type=index，索引物理文件全扫描，速度非常慢，这个 index 级别比较 range 还低，与全表扫描是小巫见大巫。  </li>
-<li>【推荐】建组合索引的时候，区分度最高的在最左边。<br>正例：如果 where a=? and b=? ，如果 a 列的几乎接近于唯一值，那么只需要单建 idx_a索引即可。<br>说明：存在非等号和等号混合时，在建索引时，请把等号条件的列前置。如：<code>where c&gt;? and d=?</code> 那么即使 c 的区分度更高，也必须把 d 放在索引的最前列，即索引 idx_d_c。  </li>
-</ol>
-<h2 id="SQL语句"><a href="#SQL语句" class="headerlink" title="SQL语句"></a>SQL语句</h2><ol>
-<li>【强制】不要使用 count(列名)或 count(常量)来替代 count(<em>)，count(</em>)是 SQL92 定义的标准统计行数的语法，跟数据库无关，跟 NULL 和非 NULL 无关。<br>说明：count(*)会统计值为 NULL 的行，而 count(列名)不会统计此列为 NULL 值的行。  </li>
-<li>【强制】count(distinct col) 计算该列除 NULL 之外的不重复行数，注意 <code>count(distinctcol1, col2)</code> 如果其中一列全为 NULL，那么即使另一列有不同的值，也返回为 0。  </li>
-<li>【强制】在代码中写分页查询逻辑时，若 count 为 0 应直接返回，避免执行后面的分页语句。  </li>
-<li>【推荐】in 操作能避免则避免，若实在避免不了，需要仔细评估 in 后边的集合元素数量，控制在 1000 个之内。  </li>
-<li>【强制】sql.xml 配置参数使用：#{}，#param# 不要使用${} 此种方式容易出现 SQL 注入。  </li>
-<li>【强制】不允许直接拿 HashMap 与 Hashtable 作为查询结果集的输出。<br>说明：resultClass=”Hashtable”，会置入字段名和属性值，但是值的类型不可控。  <h2 id="工程结构"><a href="#工程结构" class="headerlink" title="工程结构"></a>工程结构</h2></li>
-<li>【参考】分层领域模型规约：<br> DO（Data Object）：此对象与数据库表结构一一对应，通过 DAO 层向上传输数据源对象。  DTO（Data Transfer Object）：数据传输对象，Service 或 Manager 向外传输的对象。  BO（Business Object）：业务对象，由 Service 层输出的封装业务逻辑的对象。  AO（Application Object）：应用对象，在 Web 层与 Service 层之间抽象的复用对象模型，极为贴近展示层，复用度不高。  VO（View Object）：显示层对象，通常是 Web 向模板渲染引擎层传输的对象。<br> Query：数据查询对象，各层接收上层的查询请求。注意超过 2 个参数的查询封装，禁止使用 Map 类来传输。  </li>
-<li>【强制】定义 GAV 遵从以下规则：<br>1） GroupID 格式：com.{公司/BU }.业务线 [.子业务线]，最多 4 级。<br>说明：{公司/BU} 例如：alibaba/taobao/tmall/aliexpress 等 BU 一级；子业务线可选。<br>正例：com.taobao.jstorm 或 com.alibaba.dubbo.register<br>2） ArtifactID 格式：产品线名-模块名。语义不重复不遗漏，先到中央仓库去查证一下。<br>正例：dubbo-client / fastjson-api / jstorm-tool<br>3） Version：详细规定参考下方。  </li>
-<li>【强制】二方库版本号命名方式：主版本号.次版本号.修订号<br>1） 主版本号：产品方向改变，或者大规模 API 不兼容，或者架构不兼容升级。 2） 次版本号：保持相对兼容性，增加主要功能特性，影响范围极小的 API 不兼容修改。<br>3） 修订号：保持完全兼容性，修复 BUG、新增次要功能特性等。<br>说明：注意起始版本号必须为：1.0.0，而不是 0.0.1 正式发布的类库必须先去中央仓库进行查证，使版本号有延续性，正式版本号不允许覆盖升级。如当前版本：1.3.3，那么下一个合理的版本号：1.3.4 或 1.4.0 或 2.0.0  </li>
-<li>【强制】线上应用不要依赖 SNAPSHOT 版本（安全包除外）。<br>说明：不依赖 SNAPSHOT 版本是保证应用发布的幂等性。另外，也可以加快编译时的打包构建。  </li>
-<li>【强制】二方库的新增或升级，保持除功能点之外的其它 jar 包仲裁结果不变。如果有改变，必须明确评估和验证，建议进行 dependency:resolve 前后信息比对，如果仲裁结果完全不一致，那么通过 dependency:tree 命令，找出差异点，进行<excludes>排除 jar 包。  </excludes></li>
-<li>【强制】二方库里可以定义枚举类型，参数可以使用枚举类型，但是接口返回值不允许使用枚举类型或者包含枚举类型的 POJO 对象。  </li>
-<li>【强制】依赖于一个二方库群时，必须定义一个统一的版本变量，避免版本号不一致。<br>说明：依赖 springframework-core,-context,-beans，它们都是同一个版本，可以定义一个变量来保存版本：${spring.version}，定义依赖的时候，引用该版本。  </li>
-<li>【强制】禁止在子项目的 pom 依赖中出现相同的 GroupId，相同的 ArtifactId，但是不同的Version。<br>说明：在本地调试时会使用各子项目指定的版本号，但是合并成一个 war，只能有一个版本号出现在最后的 lib 目录中。可能出现线下调试是正确的，发布到线上却出故障的问题。  </li>
-<li>【推荐】所有 pom 文件中的依赖声明放在<dependencies>语句块中，所有版本仲裁放在<dependencymanagement>语句块中。<br>说明：<dependencymanagement>里只是声明版本，并不实现引入，因此子项目需要显式的声明依赖，version 和 scope 都读取自父 pom。而<dependencies>所有声明在主 pom 的 <dependencies>里的依赖都会自动引入，并默认被所有的子项目继承。  <h2 id="服务器"><a href="#服务器" class="headerlink" title="服务器"></a>服务器</h2></dependencies></dependencies></dependencymanagement></dependencymanagement></dependencies></li>
-<li>【推荐】给 JVM 环境参数设置-XX:+HeapDumpOnOutOfMemoryError 参数，让 JVM 碰到 OOM 场景时输出 dump 信息。<br>说明：OOM 的发生是有概率的，甚至相隔数月才出现一例，出错时的堆内信息对解决问题非常有帮助。  </li>
-<li>【推荐】在线上生产环境，JVM 的 Xms 和 Xmx 设置一样大小的内存容量，避免在 GC 后调整堆大小带来的压力。  </li>
-</ol>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/myBlog/2017/08/13/编码规约/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2306,8 +2239,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-10-15T17:22:54+08:00">
-                2019-10-15
+              <time title="更新于" itemprop="dateModified" datetime="2019-10-21T13:48:08+08:00">
+                2019-10-21
               </time>
             
           </span>
@@ -2370,8 +2303,7 @@
 
       
         
-          
-            <h6 id="spring事务传播特性"><a href="#spring事务传播特性" class="headerlink" title="spring事务传播特性"></a>spring事务传播特性</h6><pre><code>事务传播行为就是多个事务方法相互调用时，事务如何在这些方法间传播。   
+          <h6 id="spring事务传播特性"><a href="#spring事务传播特性" class="headerlink" title="spring事务传播特性"></a>spring事务传播特性</h6><pre><code>事务传播行为就是多个事务方法相互调用时，事务如何在这些方法间传播。   
 propagation_requierd：如果当前没有事务，就新建一个事务，如果已存在一个事务中，加入到这个事务中，这是最常见的选择。    
 propagation_supports：支持当前事务，如果没有当前事务，就以非事务方法执行。    
 propagation_mandatory：使用当前事务，如果没有当前事务，就抛出异常。     
@@ -2379,65 +2311,14 @@ propagation_required_new：新建事务，如果当前存在事务，把当前�
 propagation_not_supported：以非事务方式执行操作，如果当前存在事务，就把当前事务挂起。     
 propagation_never：以非事务方式执行操作，如果当前事务存在则抛出异常。     
 propagation_nested：如果当前存在事务，则在嵌套事务内执行。如果当前没有事务，则执行与propagation_required类似的操作 
-</code></pre><h6 id="了解Spring使用到的设计模式吗？"><a href="#了解Spring使用到的设计模式吗？" class="headerlink" title="了解Spring使用到的设计模式吗？"></a>了解Spring使用到的设计模式吗？</h6><h6 id="说说对MQ理解"><a href="#说说对MQ理解" class="headerlink" title="说说对MQ理解"></a>说说对MQ理解</h6><pre><code>https://github.com/doocs/advanced-java
-作用：解耦、消峰、异步、广播
-如果使用 MQ，A 系统产生一条数据，发送到 MQ 里面去，哪个系统需要数据自己去 MQ 里面消费。
-如果新系统需要数据，直接从 MQ 里消费即可；如果某个系统不需要这条数据了，就取消对 MQ 消息的消费即可。
-这样下来，A 系统压根儿不需要去考虑要给谁发送数据，不需要维护这个代码，也不需要考虑人家是否调用成功、失败超时等情况。
-
-保证消息消费幂等性（重复消费问题）
-   1.写库时，先跟进主键确认是否已存在 2.redis的set 
-处理消息丢失问题
- 生产者
-   1.使用事物，如果失败就回滚，重试发送消息，成功便提交事务
-   2.开启confirm模式，持久化queue元数据，将消息持久化到磁盘，消息被持久化到磁盘，再通知生产者，
-</code></pre><h6 id="了解MQ-底层吗"><a href="#了解MQ-底层吗" class="headerlink" title="了解MQ 底层吗"></a>了解MQ 底层吗</h6><h6 id="为什么要用缓存"><a href="#为什么要用缓存" class="headerlink" title="为什么要用缓存"></a>为什么要用缓存</h6><pre><code>用缓存，主要有两个用途：高性能、高并发。
-
-高性能：就是说对于一些需要复杂操作耗时查出来的结果，且确定后面不怎么变化，但是有很多读请求，那么直接将查询出来的结果放在缓存中，后面直接读缓存就好。
-高并发：缓存是走内存的，内存天然就支撑高并发。
-</code></pre><h6 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h6><pre><code>缓存雪崩：缓存挂了，所有请求都打到数据库
-    缓存雪崩的事前事中事后的解决方案如下。
-     事前：redis 高可用，主从+哨兵，redis cluster，避免全盘崩溃。
-     事中：本地 ehcache 缓存 + hystrix 限流&amp;降级，避免 MySQL 被打死。
-     事后：redis 持久化，一旦重启，自动从磁盘上加载数据，快速恢复缓存数据。
-缓存穿透：缓存中查不到，每次去数据库里查，也查不到。就会直接把数据库给打死
-    解决方式：从数据库中只要没查到，就写一个空值到缓存里去
-              然后设置一个过期时间，这样的话，下次有相同的 key 来访问的时候，在缓存失效之前，都可以直接从缓存中取数据。
-缓存击穿：就是说某个 key 非常热点，访问非常频繁，处于集中式高并发访问的情况，当这个 key 在失效的瞬间，大量的请求就击穿了缓存，直接请求数据库，就像是在一道屏障上凿开了一个洞。
-     解决方式：可以将热点数据设置为永远不过期；或者基于 redis or zookeeper 实现互斥锁，等待第一个请求构建完缓存之后，再释放锁，进而其它请求才能通过该 key 访问数据。
-</code></pre><h6 id="Redis-过期策略"><a href="#Redis-过期策略" class="headerlink" title="Redis 过期策略"></a>Redis 过期策略</h6><pre><code>1.定期删除+惰性删除。
-所谓定期删除，指的是 redis 默认是每隔 100ms 就随机抽取一些设置了过期时间的 key，检查其是否过期，如果过期就删除。
-惰性删除，获取 key 的时候，如果此时 key 已经过期，就删除，不会返回任何东西。
-2.走内存淘汰机制---在内存不足容纳新的数据的的时候
-    a).noeviction :    新写入数据报错
-    b).allkeys-lru：   在所有键中，删除最近最少使用的键
-    c).allkeys-random：在所有键中，随机删除某个键
-    d).volatile-lru：  在设置过期时间的键中，删除最近最少使用的键
-    e).volatile-random:在设置过期时间的键中，随机删除某个键
-    f).volatile-ttl：  在设置过期时间的键中，删除最早过期的键
-</code></pre><h6 id="Redis-主从架构-哨兵集群实现高可用"><a href="#Redis-主从架构-哨兵集群实现高可用" class="headerlink" title="Redis 主从架构 哨兵集群实现高可用"></a>Redis 主从架构 哨兵集群实现高可用</h6><pre><code>一:主从架构
-   一主多从： 主负责写，并且将数据复制到从节点，从节点负责读
-</code></pre><h6 id="mysql-读写分离"><a href="#mysql-读写分离" class="headerlink" title="mysql 读写分离"></a>mysql 读写分离</h6><pre><code>主库将变更写到binlog中，当从库连接到主库后，
-从库有一个IO线程，将主库的binlog日志copy到自己本地，执行binlog中的日志内容，写入relay log，就是在自己本地再执行一遍sql。
-
-从库同步主库的数据过程是串行化的，也就是主库并行的操作，在从库会串行执行。
-高并发场景下，从库数据就会比主库慢，有延时
-
-如果主库突然宕机，数据还没同步到从库时，MySql有两个机制
-半同步复制和并行复制
-1:主库写入binlog后，强制立即将数据同步到从库，从库写入relay log后，从库会返回ask给主库，主库接收至少一个从库的ask才会认为写操作完成。
-2：从库开启多个线程，并行取relay log中不同库的数据，并行重放不同库的日志。
-</code></pre><h6 id="高并发系统设计"><a href="#高并发系统设计" class="headerlink" title="高并发系统设计"></a>高并发系统设计</h6><pre><code>1.系统拆分 2.缓存 3.MQ 4.分库分表 5.读写分离 6.ElasticSearch
-</code></pre><h6 id="说说一次-rpc-请求的流程？"><a href="#说说一次-rpc-请求的流程？" class="headerlink" title="说说一次 rpc 请求的流程？"></a>说说一次 rpc 请求的流程？</h6><pre><code>第一步：provider 向注册中心去注册
-第二步：consumer 从注册中心订阅服务，注册中心会通知 consumer 注册好的服务
-第三步：consumer 调用 provider
-第四步：consumer 和 provider 都异步通知监控中心
-
-Dubbo 传输协议：Dubbo缺省协议采用单一长连接和NIO异步通讯，
-</code></pre><p>注册中心挂了可以继续通信吗？</p>
-<pre><code>可以，因为刚开始初始化的时候，消费者会将提供者的地址等信息拉取到本地缓存，所以注册中心挂了可以继续通信。    
-</code></pre><h6 id="说说对zk的理解？"><a href="#说说对zk的理解？" class="headerlink" title="说说对zk的理解？"></a>说说对zk的理解？</h6><h5 id="注解的理解"><a href="#注解的理解" class="headerlink" title="注解的理解"></a>注解的理解</h5>
-          
+</code></pre>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/myBlog/2017/03/01/面经升级/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>

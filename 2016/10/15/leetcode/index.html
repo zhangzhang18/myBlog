@@ -167,7 +167,7 @@
 <meta property="og:site_name" content="萌">
 <meta property="og:description" content="给定一个包括 n 个整数的数组 nums 和 一个目标值 target。找出 nums 中的三个整数，使得它们的和与 target 最接近。返回这三个数的和。假定每组输入只存在唯一答案。例如，给定数组 nums = [-1，2，1，-4], 和 target = 1.    与 target 最接近的三个数的和为 2. (-1 + 2 + 1 = 2).最接近的三数之和  12345678910">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-10-18T01:45:53.483Z">
+<meta property="og:updated_time" content="2019-10-21T05:48:45.954Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="leetcode">
 <meta name="twitter:description" content="给定一个包括 n 个整数的数组 nums 和 一个目标值 target。找出 nums 中的三个整数，使得它们的和与 target 最接近。返回这三个数的和。假定每组输入只存在唯一答案。例如，给定数组 nums = [-1，2，1，-4], 和 target = 1.    与 target 最接近的三个数的和为 2. (-1 + 2 + 1 = 2).最接近的三数之和  12345678910">
@@ -471,8 +471,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-10-18T09:45:53+08:00">
-                2019-10-18
+              <time title="更新于" itemprop="dateModified" datetime="2019-10-21T13:48:45+08:00">
+                2019-10-21
               </time>
             
           </span>
@@ -561,6 +561,7 @@
 与 target 最接近的三个数的和为 2. (-1 + 2 + 1 = 2).</code><br><a href="https://leetcode-cn.com/problems/3sum-closest" target="_blank" rel="noopener">最接近的三数之和</a></li>
 </ol>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">threeSumClosest</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">    Arrays.sort(nums);</span><br><span class="line">    <span class="keyword">int</span> closeNum = nums[<span class="number">0</span>] + nums[<span class="number">1</span>] + nums[<span class="number">2</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length - <span class="number">2</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> j = i + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> k = nums.length - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> (j &lt; k) &#123;</span><br><span class="line">            <span class="keyword">int</span> temp = nums[i] + nums[j] + nums[k];</span><br><span class="line">            <span class="keyword">if</span> (Math.abs(temp - target) &lt; Math.abs(closeNum - target)) &#123;</span><br><span class="line">                closeNum = temp;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (temp &lt; target) &#123;</span><br><span class="line">                j++;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (temp &gt; target) &#123;</span><br><span class="line">                k--;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> temp;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> closeNum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
 <ol start="515">
 <li>在每个树行中找最大值<br><a href="https://leetcode-cn.com/problems/find-largest-value-in-each-tree-row" target="_blank" rel="noopener">树行中找最大值</a>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">输入: </span><br><span class="line">          1  </span><br><span class="line">         / \</span><br><span class="line">        3   2</span><br><span class="line">       / \   \  </span><br><span class="line">      5   3   9 </span><br><span class="line"></span><br><span class="line">输出: [1, 3, 9]</span><br></pre></td></tr></table></figure>
 </li>

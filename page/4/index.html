@@ -649,8 +649,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-10-11T17:58:34+08:00">
-                2019-10-11
+              <time title="更新于" itemprop="dateModified" datetime="2019-10-21T13:49:13+08:00">
+                2019-10-21
               </time>
             
           </span>
@@ -735,65 +735,17 @@
 
       
         
-          
-            <a id="more"></a>
-<h2 id="常用指令"><a href="#常用指令" class="headerlink" title="常用指令"></a>常用指令</h2><p>ls　&ensp;&ensp;&ensp;&ensp;　        显示文件或目录</p>
+          <h2 id="常用指令"><a href="#常用指令" class="headerlink" title="常用指令"></a>常用指令</h2><p>ls　&ensp;&ensp;&ensp;&ensp;　        显示文件或目录</p>
 <pre><code>-l           列出文件详细信息l(list)
 -a          列出当前目录下所有文件及目录，包括隐藏的a(all)
-</code></pre><p>mkdir  &ensp;&ensp;&ensp;&ensp;　       创建目录</p>
-<pre><code>-p           创建目录，若无父目录，则创建p(parent)
-</code></pre><p>cd   &ensp;&ensp;&ensp;&ensp;　            切换目录</p>
-<p>touch   &ensp;&ensp;&ensp;&ensp;　       创建空文件</p>
-<p>echo   &ensp;&ensp;&ensp;&ensp;　         创建带有内容的文件。</p>
-<p>cat    &ensp;&ensp;&ensp;&ensp;　          查看文件内容</p>
-<p>cp     &ensp;&ensp;&ensp;&ensp;　           拷贝   cp [选项]… [-T] 源 目的</p>
-<p>mv    &ensp;&ensp;&ensp;&ensp;　           移动或重命名</p>
-<p>rm     &ensp;&ensp;&ensp;&ensp;　          删除文件</p>
-<pre><code>-r            递归删除，可删除子目录及文件
--f            强制删除
-</code></pre><p>find    &ensp;&ensp;&ensp;&ensp;　          在文件系统中搜索某文件</p>
-<p>wc      &ensp;&ensp;&ensp;&ensp;　          统计文本中行数、字数、字符数</p>
-<p>grep    &ensp;&ensp;&ensp;&ensp;　         在文本文件中查找某个字符串</p>
-<p>rmdir    &ensp;&ensp;&ensp;&ensp;　       删除空目录</p>
-<p>tree     &ensp;&ensp;&ensp;&ensp;　        树形结构显示目录，需要安装tree包</p>
-<p>pwd      &ensp;&ensp;&ensp;&ensp;　        显示当前目录</p>
-<p>ln      &ensp;&ensp;&ensp;&ensp;　            创建链接文件</p>
-<p>more、less &ensp;&ensp;&ensp;&ensp;　 分页显示文本文件内容</p>
-<p>head、tail   &ensp;&ensp;&ensp;&ensp;　 显示文件头、尾内容</p>
-<p>ctrl+alt+F1 &ensp;&ensp;&ensp;&ensp;　 命令行全屏模式</p>
-<p>##　打包压缩相关命令</p>
-<p>gzip：</p>
-<p>bzip2：</p>
-<p>tar:                打包压缩</p>
-<pre><code>-c              归档文件
--x              压缩文件
--z              gzip压缩文件
--j              bzip2压缩文件
--v              显示压缩或解压缩过程 v(view)
--f              使用档名
-</code></pre><p>例：<br>tar -cvf /home/abc.tar /home/abc              只打包，不压缩</p>
-<p>tar -zcvf /home/abc.tar.gz /home/abc        打包，并用gzip压缩</p>
-<p>tar -jcvf /home/abc.tar.bz2 /home/abc      打包，并用bzip2压缩</p>
-<p>当然，如果想解压缩，就直接替换上面的命令  tar -cvf  / tar -zcvf  / tar -jcvf 中的“c” 换成“x” 就可以了。</p>
-<p>##　系统管理命令</p>
-<p>stat    &ensp;&ensp;&ensp;&ensp;　          显示指定文件的详细信息，比ls更详细</p>
-<p>who     &ensp;&ensp;&ensp;&ensp;　          显示在线登陆用户</p>
-<p>whoami   &ensp;&ensp;&ensp;&ensp;　       显示当前操作用户</p>
-<p>hostname  &ensp;&ensp;&ensp;&ensp;　    显示主机名</p>
-<p>uname     &ensp;&ensp;&ensp;&ensp;　      显示系统信息</p>
-<p>top     &ensp;&ensp;&ensp;&ensp;　           动态显示当前耗费资源最多进程信息</p>
-<p>ps     &ensp;&ensp;&ensp;&ensp;　             显示瞬间进程状态 ps -aux</p>
-<p>du    &ensp;&ensp;&ensp;&ensp;　              查看目录大小 du -h /home带有单位显示目录信息</p>
-<p>df    &ensp;&ensp;&ensp;&ensp;　              查看磁盘大小 df -h 带有单位显示磁盘信息</p>
-<p>ifconfig   &ensp;&ensp;&ensp;&ensp;　       查看网络情况</p>
-<p>ping      &ensp;&ensp;&ensp;&ensp;　          测试网络连通</p>
-<p>netstat    &ensp;&ensp;&ensp;&ensp;　      显示网络状态信息</p>
-<p>man        &ensp;&ensp;&ensp;&ensp;　        命令不会用了，找男人  如：man ls</p>
-<p>clear      &ensp;&ensp;&ensp;&ensp;　        清屏</p>
-<p>alias     &ensp;&ensp;&ensp;&ensp;　          对命令重命名 如：alias showmeit=”ps -aux” ，另外解除使用unaliax showmeit</p>
-<p>kill      &ensp;&ensp;&ensp;&ensp;　           杀死进程，可以先用ps 或 top命令查看进程的id，然后再用kill命令杀死进程。</p>
-
-          
+</code></pre>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/myBlog/2017/01/16/常用Linux命令/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -892,8 +844,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-10-18T09:45:53+08:00">
-                2019-10-18
+              <time title="更新于" itemprop="dateModified" datetime="2019-10-21T13:48:45+08:00">
+                2019-10-21
               </time>
             
           </span>
@@ -978,18 +930,18 @@
 
       
         
-          
-            <ol start="16">
+          <ol start="16">
 <li>给定一个包括 n 个整数的数组 nums 和 一个目标值 target。找出 nums 中的三个整数，使得它们的和与 target 最接近。返回这三个数的和。假定每组输入只存在唯一答案。<br><code>例如，给定数组 nums = [-1，2，1，-4], 和 target = 1.   
 与 target 最接近的三个数的和为 2. (-1 + 2 + 1 = 2).</code><br><a href="https://leetcode-cn.com/problems/3sum-closest" target="_blank" rel="noopener">最接近的三数之和</a></li>
 </ol>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">threeSumClosest</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">    Arrays.sort(nums);</span><br><span class="line">    <span class="keyword">int</span> closeNum = nums[<span class="number">0</span>] + nums[<span class="number">1</span>] + nums[<span class="number">2</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length - <span class="number">2</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> j = i + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> k = nums.length - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> (j &lt; k) &#123;</span><br><span class="line">            <span class="keyword">int</span> temp = nums[i] + nums[j] + nums[k];</span><br><span class="line">            <span class="keyword">if</span> (Math.abs(temp - target) &lt; Math.abs(closeNum - target)) &#123;</span><br><span class="line">                closeNum = temp;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (temp &lt; target) &#123;</span><br><span class="line">                j++;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (temp &gt; target) &#123;</span><br><span class="line">                k--;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> temp;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> closeNum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ol start="515">
-<li>在每个树行中找最大值<br><a href="https://leetcode-cn.com/problems/find-largest-value-in-each-tree-row" target="_blank" rel="noopener">树行中找最大值</a>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">输入: </span><br><span class="line">          1  </span><br><span class="line">         / \</span><br><span class="line">        3   2</span><br><span class="line">       / \   \  </span><br><span class="line">      5   3   9 </span><br><span class="line"></span><br><span class="line">输出: [1, 3, 9]</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">List&lt;Integer&gt; <span class="title">largestValues</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">    List&lt;Integer&gt; result = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="keyword">if</span> (root != <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">int</span> nextLevel = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> toBePrint = <span class="number">1</span>;</span><br><span class="line">        Queue&lt;TreeNode&gt; queue = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">        queue.offer(root);</span><br><span class="line">        Integer max = root.val;</span><br><span class="line">        <span class="keyword">while</span> (!queue.isEmpty()) &#123;</span><br><span class="line">            TreeNode node = queue.poll();</span><br><span class="line">            <span class="keyword">if</span> (node.left != <span class="keyword">null</span>) &#123;</span><br><span class="line">                queue.offer(node.left);</span><br><span class="line">                nextLevel++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (node.right != <span class="keyword">null</span>) &#123;</span><br><span class="line">                queue.offer(node.right);</span><br><span class="line">                nextLevel++;</span><br><span class="line">            &#125;</span><br><span class="line">            toBePrint--;</span><br><span class="line">            <span class="keyword">if</span> (max == <span class="keyword">null</span>) &#123;</span><br><span class="line">                max = node.val;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (node.val &gt; max) &#123;</span><br><span class="line">                max = node.val;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (toBePrint == <span class="number">0</span>) &#123;</span><br><span class="line">                result.add(max);</span><br><span class="line">                max = <span class="keyword">null</span>;</span><br><span class="line">                toBePrint = nextLevel;</span><br><span class="line">                nextLevel = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/myBlog/2016/10/15/Leetcode/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>

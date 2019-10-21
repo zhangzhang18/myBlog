@@ -159,20 +159,20 @@
 
 
 
-<meta name="description" content="索引主要是基于Hash表和B+树。   一般来说，索引本身也很大，不可能全部存储在内存中，因此索引往往以索引文件的形式存储的磁盘上。 磁盘里的数据加载到内存的时候，是以页为单位加载的，节点与节点之间的数据是不联系的，所以不同的节点，很可能分布在不同磁盘页中， 磁盘的加载次数和树的高度是关联的。越矮加载次数越少。 二叉查找树：最坏的情况，磁盘IO次数等于索引树的高度。为了减少磁盘IO次数，把原本“">
+<meta name="description" content="索引主要是基于Hash表和B+树。   一般来说，索引本身也很大，不可能全部存储在内存中，因此索引往往以索引文件的形式存储的磁盘上。 磁盘里的数据加载到内存的时候，是以页为单位加载的，节点与节点之间的数据是不联系的，所以不同的节点，很可能分布在不同磁盘页中， 磁盘的加载次数和树的高度是关联的。越矮加载次数越少。">
 <meta name="keywords" content="萌">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数据库索引 ">
 <meta property="og:url" content="https://zhangzhang18.github.io/myBlog/2019/10/09/数据库索引/index.html">
 <meta property="og:site_name" content="萌">
-<meta property="og:description" content="索引主要是基于Hash表和B+树。   一般来说，索引本身也很大，不可能全部存储在内存中，因此索引往往以索引文件的形式存储的磁盘上。 磁盘里的数据加载到内存的时候，是以页为单位加载的，节点与节点之间的数据是不联系的，所以不同的节点，很可能分布在不同磁盘页中， 磁盘的加载次数和树的高度是关联的。越矮加载次数越少。 二叉查找树：最坏的情况，磁盘IO次数等于索引树的高度。为了减少磁盘IO次数，把原本“">
+<meta property="og:description" content="索引主要是基于Hash表和B+树。   一般来说，索引本身也很大，不可能全部存储在内存中，因此索引往往以索引文件的形式存储的磁盘上。 磁盘里的数据加载到内存的时候，是以页为单位加载的，节点与节点之间的数据是不联系的，所以不同的节点，很可能分布在不同磁盘页中， 磁盘的加载次数和树的高度是关联的。越矮加载次数越少。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://zhangzhang18.github.io/myBlog/2019/10/09/数据库索引/B.jpg">
 <meta property="og:image" content="https://zhangzhang18.github.io/myBlog/2019/10/09/数据库索引/B+.jpg">
-<meta property="og:updated_time" content="2019-10-21T05:38:35.526Z">
+<meta property="og:updated_time" content="2019-10-21T05:44:20.611Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据库索引 ">
-<meta name="twitter:description" content="索引主要是基于Hash表和B+树。   一般来说，索引本身也很大，不可能全部存储在内存中，因此索引往往以索引文件的形式存储的磁盘上。 磁盘里的数据加载到内存的时候，是以页为单位加载的，节点与节点之间的数据是不联系的，所以不同的节点，很可能分布在不同磁盘页中， 磁盘的加载次数和树的高度是关联的。越矮加载次数越少。 二叉查找树：最坏的情况，磁盘IO次数等于索引树的高度。为了减少磁盘IO次数，把原本“">
+<meta name="twitter:description" content="索引主要是基于Hash表和B+树。   一般来说，索引本身也很大，不可能全部存储在内存中，因此索引往往以索引文件的形式存储的磁盘上。 磁盘里的数据加载到内存的时候，是以页为单位加载的，节点与节点之间的数据是不联系的，所以不同的节点，很可能分布在不同磁盘页中， 磁盘的加载次数和树的高度是关联的。越矮加载次数越少。">
 <meta name="twitter:image" content="https://zhangzhang18.github.io/myBlog/2019/10/09/数据库索引/B.jpg">
 
 
@@ -474,7 +474,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-10-21T13:38:35+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2019-10-21T13:44:20+08:00">
                 2019-10-21
               </time>
             
@@ -564,6 +564,7 @@
 </blockquote>
 <p> 一般来说，索引本身也很大，不可能全部存储在内存中，因此索引往往以索引文件的形式存储的磁盘上。 磁盘里的数据加载到内存的时候，是以<strong>页</strong>为单位加载的，节点与节点之间的数据是不联系的，所以不同的节点，很可能分布在不同磁盘页中，</p>
 <p>磁盘的加载次数和<strong>树的高度</strong>是关联的。越矮加载次数越少。</p>
+<a id="more"></a>
 <p><strong>二叉查找树</strong>：最坏的情况，磁盘IO次数等于索引树的高度。为了减少磁盘IO次数，把原本“瘦高”的树变得“矮胖”，这是b-树的特征。</p>
 <p>##　b树</p>
 <p>是一种多路平衡查找树（多叉查找树），它的每一个节点最多包含K个子孩子，K被称为B树的阶，K的大小取决于磁盘页大小。</p>

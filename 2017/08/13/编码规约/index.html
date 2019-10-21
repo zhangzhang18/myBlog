@@ -167,7 +167,7 @@
 <meta property="og:site_name" content="萌">
 <meta property="og:description" content="编程规约集合 【强制】关于 hashCode 和 equals 的处理，遵循如下规则：1） 只要重写 equals，就必须重写 hashCode。 2） 因为 Set 存储的是不重复的对象，依据 hashCode 和 equals 进行判断，所以 Set 存储的对象必须重写这两个方法。3） 如果自定义对象作为 Map 的键，那么必须重写 hashCode 和 equals。说明：String 重写">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-10-17T06:05:53.461Z">
+<meta property="og:updated_time" content="2019-10-21T05:47:58.110Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="编程规约 ">
 <meta name="twitter:description" content="编程规约集合 【强制】关于 hashCode 和 equals 的处理，遵循如下规则：1） 只要重写 equals，就必须重写 hashCode。 2） 因为 Set 存储的是不重复的对象，依据 hashCode 和 equals 进行判断，所以 Set 存储的对象必须重写这两个方法。3） 如果自定义对象作为 Map 的键，那么必须重写 hashCode 和 equals。说明：String 重写">
@@ -471,8 +471,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-10-17T14:05:53+08:00">
-                2019-10-17
+              <time title="更新于" itemprop="dateModified" datetime="2019-10-21T13:47:58+08:00">
+                2019-10-21
               </time>
             
           </span>
@@ -574,6 +574,7 @@
 <li>【强制】不要在 foreach 循环里进行元素的 remove/add 操作。remove 元素请使用 Iterator<br>方式，如果并发操作，需要对 Iterator 对象加锁。<br>正例：  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">      list.add(<span class="string">"1"</span>);</span><br><span class="line">      list.add(<span class="string">"2"</span>);</span><br><span class="line">      Iterator&lt;String&gt; iterator = list.iterator();</span><br><span class="line">      <span class="keyword">while</span> (iterator.hasNext()) &#123;</span><br><span class="line">          String item = iterator.next();</span><br><span class="line">          <span class="keyword">if</span> (删除元素的条件) &#123;</span><br><span class="line">              iterator.remove();</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
+<a id="more"></a>
 <p>##　OOP规约</p>
 <ol start="18">
 <li><p>【推荐】循环体内，字符串的连接方式，使用 StringBuilder 的 append 方法进行扩展。<br>说明：下例中，反编译出的字节码文件显示每次循环都会 new 出一个 StringBuilder 对象，<br>然后进行 append 操作，最后通过 toString 方法返回 String 对象，造成内存资源浪费。<br>反例：  </p>

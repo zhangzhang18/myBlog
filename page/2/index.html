@@ -1054,8 +1054,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-10-14T13:04:18+08:00">
-                2019-10-14
+              <time title="更新于" itemprop="dateModified" datetime="2019-10-21T13:45:43+08:00">
+                2019-10-21
               </time>
             
           </span>
@@ -1140,8 +1140,7 @@
 
       
         
-          
-            <h1 id="Spring-Cloud简介"><a href="#Spring-Cloud简介" class="headerlink" title="Spring Cloud简介"></a>Spring Cloud简介</h1><blockquote>
+          <h1 id="Spring-Cloud简介"><a href="#Spring-Cloud简介" class="headerlink" title="Spring Cloud简介"></a>Spring Cloud简介</h1><blockquote>
 <p>Spring Cloud是一个基于Spring Boot实现的云应用开发工具，它为基于JVM的云应用开发中涉及的配置管理、服务发现、断路器、智能路由、微代理、控制总线、全局锁、决策竞选、分布式会话和集群状态管理等操作提供了一种简单的开发方式。</p>
 </blockquote>
 <h2 id="微服务"><a href="#微服务" class="headerlink" title="微服务"></a>微服务</h2><blockquote>
@@ -1157,19 +1156,13 @@
 <li>分布式系统的冗余问题</li>
 <li>分布式系统的复杂性</li>
 </ol>
-<h1 id="服务治理"><a href="#服务治理" class="headerlink" title="服务治理"></a>服务治理</h1><p><img src="/myBlog/2019/01/24/Spring-Cloud/register.png" alt="服务注册中心对比"></p>
-<ul>
-<li>Spring Cloud应用中可以支持多种不同的服务治理框架，比如：Netflix Eureka、Consul、Zookeeper</li>
-<li>Spring Cloud Eureka是Spring Cloud Netflix项目下的服务治理模块。</li>
-</ul>
-<ol start="2">
-<li><p>Spring Cloud Ribbon是基于Netflix Ribbon实现的一套客户端负载均衡的工具。它是一个基于HTTP和TCP的客户端负载均衡器。它可以通过在客户端中配置ribbonServerList来设置服务端列表去轮询访问以达到均衡负载的作用。</p>
-</li>
-<li><p>Spring Cloud Feign是一套基于Netflix Feign实现的声明式服务调用客户端。它使得编写Web服务客户端变得更加简单。我们只需要通过创建接口并用注解来配置它既可完成对Web服务接口的绑定。它具备可插拔的注解支持，包括Feign注解、JAX-RS注解。它也支持可插拔的编码器和解码器。Spring Cloud Feign还扩展了对Spring MVC注解的支持，同时还整合了Ribbon和Eureka来提供均衡负载的HTTP客户端实现。</p>
-</li>
-</ol>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/myBlog/2019/01/24/Spring-Cloud/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1860,7 +1853,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-10-21T10:36:08+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2019-10-21T13:46:26+08:00">
                 2019-10-21
               </time>
             
@@ -1946,8 +1939,7 @@
 
       
         
-          
-            <h1 id="一：慢查询原因"><a href="#一：慢查询原因" class="headerlink" title="一：慢查询原因"></a>一：慢查询原因</h1><ol>
+          <h1 id="一：慢查询原因"><a href="#一：慢查询原因" class="headerlink" title="一：慢查询原因"></a>一：慢查询原因</h1><ol>
 <li><p>查询语句中存在计算逻辑</p>
 </li>
 <li><p>全表查询没有命中索引，或者没有索引</p>
@@ -1961,29 +1953,13 @@
 <p>6.使用varchar/nvarchard代替char/nchar  -  变长字段的存储空间小</p>
 <p>7.能用Union All 就不用Union  - Union并集，会去除重复数据</p>
 <p>8.索引不是越多越好  - 会降低 Insert和Update效率</p>
-<h3 id="索引类型"><a href="#索引类型" class="headerlink" title="索引类型"></a>索引类型</h3><p>  A. 主键索引（PRIMARY KEY） 建表的时候同时创建主键索引</p>
-<p>  B.唯一索引（UNIQUE） 索引列的值必须唯一，允许为空ALTER  </p>
-<p>​     TABLE table_name ADD UNIQUE (column)</p>
-<p>  C.普通索引</p>
-<p>​     ALTER TABLE table_name ADD INDEX index_name (column)</p>
-<p>  D.组合索引 包含多个列</p>
-<p>​     ALTER TABLE table_name ADD INDEX index_name(column1, column2, column3)</p>
-<p>   E.全文索引 利用分词技术多种算法智能分析文本中关键词的频率和重要性</p>
-<p>​     ALTER TABLE table_name ADD FULLTEXT (column)</p>
-<h3 id="建索引原则"><a href="#建索引原则" class="headerlink" title="建索引原则"></a>建索引原则</h3><p>​     A. 最左匹配原则</p>
-<p>​      -多列索引。总是从最前面开始，接着往后，中间不能跳过。</p>
-<p>​      通常把使用最频繁的列放在最左边</p>
-<p>​     B.选择区分度高的列</p>
-<p>​     C.索引列不能参与计算</p>
-<p>​     D.尽量拓展索引，不要新建索引 -已经有a的索引，修改原来索引变成(a,b)即可</p>
-<h3 id="有索引但未被用到情况："><a href="#有索引但未被用到情况：" class="headerlink" title="有索引但未被用到情况："></a>有索引但未被用到情况：</h3><p>​     Like 以通配符开头 - ‘%abc’  ‘abc%’ 才用到索引</p>
-<p>​     Where条件不满足我最左匹配原则</p>
-<p>​     使用!=或&lt;&gt;操作符</p>
-<p>​     索引列参与计算</p>
-<p>​     对字段进行null判断 - is null 可以设置默认值0</p>
-<p>​     使用or链接条件  -使用Union All</p>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/myBlog/2018/09/13/慢查询优化/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>

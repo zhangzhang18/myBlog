@@ -167,7 +167,7 @@
 <meta property="og:site_name" content="萌">
 <meta property="og:description" content="spring事务传播特性事务传播行为就是多个事务方法相互调用时，事务如何在这些方法间传播。    propagation_requierd：如果当前没有事务，就新建一个事务，如果已存在一个事务中，加入到这个事务中，这是最常见的选择。     propagation_supports：支持当前事务，如果没有当前事务，就以非事务方法执行。     propagation_mandatory：使用当前事">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-10-15T09:22:54.466Z">
+<meta property="og:updated_time" content="2019-10-21T05:48:08.840Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="准备面试升级">
 <meta name="twitter:description" content="spring事务传播特性事务传播行为就是多个事务方法相互调用时，事务如何在这些方法间传播。    propagation_requierd：如果当前没有事务，就新建一个事务，如果已存在一个事务中，加入到这个事务中，这是最常见的选择。     propagation_supports：支持当前事务，如果没有当前事务，就以非事务方法执行。     propagation_mandatory：使用当前事">
@@ -471,8 +471,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-10-15T17:22:54+08:00">
-                2019-10-15
+              <time title="更新于" itemprop="dateModified" datetime="2019-10-21T13:48:08+08:00">
+                2019-10-21
               </time>
             
           </span>
@@ -542,7 +542,8 @@ propagation_required_new：新建事务，如果当前存在事务，把当前�
 propagation_not_supported：以非事务方式执行操作，如果当前存在事务，就把当前事务挂起。     
 propagation_never：以非事务方式执行操作，如果当前事务存在则抛出异常。     
 propagation_nested：如果当前存在事务，则在嵌套事务内执行。如果当前没有事务，则执行与propagation_required类似的操作 
-</code></pre><h6 id="了解Spring使用到的设计模式吗？"><a href="#了解Spring使用到的设计模式吗？" class="headerlink" title="了解Spring使用到的设计模式吗？"></a>了解Spring使用到的设计模式吗？</h6><h6 id="说说对MQ理解"><a href="#说说对MQ理解" class="headerlink" title="说说对MQ理解"></a>说说对MQ理解</h6><pre><code>https://github.com/doocs/advanced-java
+</code></pre><a id="more"></a>
+<h6 id="了解Spring使用到的设计模式吗？"><a href="#了解Spring使用到的设计模式吗？" class="headerlink" title="了解Spring使用到的设计模式吗？"></a>了解Spring使用到的设计模式吗？</h6><h6 id="说说对MQ理解"><a href="#说说对MQ理解" class="headerlink" title="说说对MQ理解"></a>说说对MQ理解</h6><pre><code>https://github.com/doocs/advanced-java
 作用：解耦、消峰、异步、广播
 如果使用 MQ，A 系统产生一条数据，发送到 MQ 里面去，哪个系统需要数据自己去 MQ 里面消费。
 如果新系统需要数据，直接从 MQ 里消费即可；如果某个系统不需要这条数据了，就取消对 MQ 消息的消费即可。

@@ -167,7 +167,7 @@
 <meta property="og:site_name" content="萌">
 <meta property="og:description" content="一：慢查询原因 查询语句中存在计算逻辑  全表查询没有命中索引，或者没有索引   二：慢查询通常解决方式1.检查是否正确使用并命中索引 2.避免使用select   -解析过程会将转换所有列名，消耗更多的时间 3.Order By语句优化 - 使用的列建立索引 避免使用计算表达式 4.Group By 优化  - 筛选条件在Group By之前过滤掉 5.使用Exists代替in  - in会导致">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-10-21T02:36:08.073Z">
+<meta property="og:updated_time" content="2019-10-21T05:46:26.168Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="慢查询优化 ">
 <meta name="twitter:description" content="一：慢查询原因 查询语句中存在计算逻辑  全表查询没有命中索引，或者没有索引   二：慢查询通常解决方式1.检查是否正确使用并命中索引 2.避免使用select   -解析过程会将转换所有列名，消耗更多的时间 3.Order By语句优化 - 使用的列建立索引 避免使用计算表达式 4.Group By 优化  - 筛选条件在Group By之前过滤掉 5.使用Exists代替in  - in会导致">
@@ -471,7 +471,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-10-21T10:36:08+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2019-10-21T13:46:26+08:00">
                 2019-10-21
               </time>
             
@@ -570,6 +570,7 @@
 <p>6.使用varchar/nvarchard代替char/nchar  -  变长字段的存储空间小</p>
 <p>7.能用Union All 就不用Union  - Union并集，会去除重复数据</p>
 <p>8.索引不是越多越好  - 会降低 Insert和Update效率</p>
+<a id="more"></a>
 <h3 id="索引类型"><a href="#索引类型" class="headerlink" title="索引类型"></a>索引类型</h3><p>  A. 主键索引（PRIMARY KEY） 建表的时候同时创建主键索引</p>
 <p>  B.唯一索引（UNIQUE） 索引列的值必须唯一，允许为空ALTER  </p>
 <p>​     TABLE table_name ADD UNIQUE (column)</p>
