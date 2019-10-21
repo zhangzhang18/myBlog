@@ -12,6 +12,14 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[数据库索引]]></title>
+    <url>%2FmyBlog%2F2019%2F10%2F09%2F%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B4%A2%E5%BC%95%2F</url>
+    <content type="text"><![CDATA[索引主要是基于Hash表和B+树。 一般来说，索引本身也很大，不可能全部存储在内存中，因此索引往往以索引文件的形式存储的磁盘上。 磁盘里的数据加载到内存的时候，是以页为单位加载的，节点与节点之间的数据是不联系的，所以不同的节点，很可能分布在不同磁盘页中， 磁盘的加载次数和树的高度是关联的。越矮加载次数越少。 二叉查找树：最坏的情况，磁盘IO次数等于索引树的高度。为了减少磁盘IO次数，把原本“瘦高”的树变得“矮胖”，这是b-树的特征。 ## b树 是一种多路平衡查找树（多叉查找树），它的每一个节点最多包含K个子孩子，K被称为B树的阶，K的大小取决于磁盘页大小。 首先从根节点进行二分查找，如果找到就返回对应节点数据，否则对相应区间的指针指向的节点进行递归进行查找，直到找到节点或者找到null。 M阶的B-树特征： 根节点至少有两个子节点。 每个中间节点都包含K-1个元素和K个孩子。m/2&lt;=k&lt;=m 每个叶子节点都包含K-1个元素。m/2&lt;=k&lt;=m 所有叶子节点都位于同一层。 每个节点中的元素从大到小排序，节点中K-1个元素正好是K个孩子包含的元素的值域分划。 应用：文件系统，数据库索引（MongoDB） B+树是基于B-树的变体，比B-树查询性能更高。 特点： 有K个子树的中间节点包含有K个元素（B树是K-1个元素），每个元素不保存数据，只用来索引，所有数据保存在叶子节点。 所有叶子节点中包含了全部元素信息，及指向含有这些元素的指针，且叶子节点本身依关键字的大小自小而大顺序链接。 所有的中间节点元素都同时存在于子节点，在子节点元素中是最大或者最小元素。 父节点元素都出现在子节点，所有叶子节点包含了全量元素信息。 每个子节点都带有指向下一个节点的信息，形成一个有序的链表。 B+树比B-树更加矮胖，因此查询时的IO次数更少。 B+树查询最终查找到叶子节点，B-树只要找到匹配元素即可。 B-树的查找性能会不稳定（最好时根节点，最差是叶子节点），B+每次查找都是稳定的。 对于范围查找B+优势更加明显。 相比较B-树B+树的优势有三个： IO次数更少 查询性能更稳定 范围查询简便 参考漫画：B-树 漫画：B+树 MySql索引实现原理]]></content>
+      <categories>
+        <category>NoteBook</category>
+      </categories>
+  </entry>
+  <entry>
     <title><![CDATA[MQ归纳]]></title>
     <url>%2FmyBlog%2F2019%2F09%2F18%2FMQ%E5%BD%92%E7%BA%B3%2F</url>
     <content type="text"><![CDATA[MQ]]></content>
@@ -86,7 +94,7 @@
   <entry>
     <title><![CDATA[CAP原则-Base理论]]></title>
     <url>%2FmyBlog%2F2019%2F02%2F10%2FCAP%E5%8E%9F%E5%88%99-Base%E7%90%86%E8%AE%BA%2F</url>
-    <content type="text"><![CDATA[CAP原则：分布式的三个指标， 这三个指标不可能同时做到。这个结论就叫做 CAP 定理。 Consistency（一致性）： 写操作之后的读操作，必须返回该值 Availability（可用性）： 意思是只要收到用户的请求，服务器就必须给出回应 Partition tolerance（分区容错）： 大多数分布式系统都分布在多个子网络。每个子网络就叫做一个区（partition）。分区容错的意思是，区间通信可能失败 一般来说，分区容错无法避免，因此可以认为 CAP 的 P 总是成立。CAP 定理告诉我们，剩下的 C 和 A 无法同时做到。 CA为什么不能同时成立？因为可能通信失败（分区容错） Base理论：BASE是Basically Available（基本可用）、Soft state（软状态）和Eventually consistent（最终一致性）的简写 基本可用： 指分布式系统在出现故障的时候，允许损失部分可用性（例如响应时间、功能上的可用性），允许损失部分可用性。需要注意的是，基本可用绝不等价于系统不可用。 最终一致性：最终一致性强调的是系统中所有的数据副本，在经过一段时间的同步后，最终能够达到一个一致的状态。因此，最终一致性的本质是需要系统保证最终数据能够达到一致，而不需要实时保证系统数据的强一致性 软状态：指允许系统存在中间状态，而该中间状态不会影响系统整体可用性。分布式存储中一般一份数据会有多个副本，允许不同副本同步的延时就是软状态的体现。mysql replication的异步复制也是一种体现。 总的来说，BASE理论面向的是大型高可用可扩展的分布式系统，和传统事务的ACID特性使相反的，它完全不同于ACID的强一致性模型，而是提出通过牺牲强一致性来获得可用性，并允许数据在一段时间内是不一致的，但最终达到一致状态。但同时，在实际的分布式场景中，不同业务单元和组件对数据一致性的要求是不同的，因此在具体的分布式系统架构设计过程中，ACID特性与BASE理论往往又会结合在一起使用。 聊聊分布式存储——轻松理解Raft 一：Eureka二：Zookeeper三：Consul Eureka 典型的 AP,作为分布式场景下的服务发现的产品较为合适，服务发现场景的可用性优先级较高，一致性并不是特别致命。其次 CA 类型的场景 Consul,也能提供较高的可用性，并能 k-v store 服务保证一致性。 而Zookeeper,Etcd则是CP类型 牺牲可用性，在服务发现场景并没太大优势； Eureka Zookeeper Consul GitHub https://github.com/Netflix/eureka https://github.com/apache/zookeeper https://github.com/hashicorp/consul 服务健康度检查 服务状态，内存，硬盘等 (弱)长连接，keepalive 连接心跳 多数据中心 — 支持 支持 k-v存储服务 — 支持 支持 一致性 — paxos（Paxos算法是保证在分布式系统中写操作能够顺利进行，保证系统中大多数状态是一致的，没有机会看到不一致，因此，Paxos算法的特点是一致性&gt;可用性。） rafthttp://raft.taillog.cn/ cap ap cp ca 多语言能力 http（sidecar） 客户端 支持http和dns watch支持 支持 long polling/大部分增量 — metrics 自身监控 metrics — metrics 安全 — acl acl /https SpringCloud集成 以支持 以支持 以支持]]></content>
+    <content type="text"><![CDATA[CAP原则：分布式的三个指标， 这三个指标不可能同时做到。这个结论就叫做 CAP 定理。 Consistency（一致性）： 写操作之后的读操作，必须返回该值 Availability（可用性）： 意思是只要收到用户的请求，服务器就必须给出回应 Partition tolerance（分区容错）： 大多数分布式系统都分布在多个子网络。每个子网络就叫做一个区（partition）。分区容错的意思是，区间通信可能失败 一般来说，分区容错无法避免，因此可以认为 CAP 的 P 总是成立。CAP 定理告诉我们，剩下的 C 和 A 无法同时做到。 CA为什么不能同时成立？因为可能通信失败（分区容错） Base理论：BASE是Basically Available（基本可用）、Soft state（软状态）和Eventually consistent（最终一致性）的简写 基本可用： 指分布式系统在出现故障的时候，允许损失部分可用性（例如响应时间、功能上的可用性），允许损失部分可用性。需要注意的是，基本可用绝不等价于系统不可用。 最终一致性：最终一致性强调的是系统中所有的数据副本，在经过一段时间的同步后，最终能够达到一个一致的状态。因此，最终一致性的本质是需要系统保证最终数据能够达到一致，而不需要实时保证系统数据的强一致性 软状态：指允许系统存在中间状态，而该中间状态不会影响系统整体可用性。分布式存储中一般一份数据会有多个副本，允许不同副本同步的延时就是软状态的体现。mysql replication的异步复制也是一种体现。 总的来说，BASE理论面向的是大型高可用可扩展的分布式系统，和传统事务的ACID特性使相反的，它完全不同于ACID的强一致性模型，而是提出通过牺牲强一致性来获得可用性，并允许数据在一段时间内是不一致的，但最终达到一致状态。但同时，在实际的分布式场景中，不同业务单元和组件对数据一致性的要求是不同的，因此在具体的分布式系统架构设计过程中，ACID特性与BASE理论往往又会结合在一起使用。 聊聊分布式存储——轻松理解Raft 一：Eureka二：Zookeeper三：Consul Eureka 典型的 AP,作为分布式场景下的服务发现的产品较为合适，服务发现场景的可用性优先级较高，一致性并不是特别致命。其次 CA 类型的场景 Consul,也能提供较高的可用性，并能 k-v store 服务保证一致性。 而Zookeeper,Etcd则是CP类型 牺牲可用性，在服务发现场景并没太大优势； Eureka Zookeeper Consul GitHub https://github.com/Netflix/eureka https://github.com/apache/zookeeper https://github.com/hashicorp/consul 服务健康度检查 服务状态，内存，硬盘等 (弱)长连接，keepalive 连接心跳 多数据中心 — 支持 支持 k-v存储服务 — 支持 支持 一致性 — paxos（Paxos算法是保证在分布式系统中写操作能够顺利进行，保证系统中大多数状态是一致的，没有机会看到不一致，因此，Paxos算法的特点是一致性&gt;可用性。） rafthttp://raft.taillog.cn/ cap ap cp ca 多语言能力 http（sidecar） 客户端 支持http和dns watch支持 支持 long polling/大部分增量 — metrics 自身监控 metrics — metrics 安全 — acl acl /https SpringCloud集成 已支持 已支持 已支持]]></content>
       <categories>
         <category>NoteBook</category>
       </categories>
@@ -148,6 +156,14 @@
         <tag>分布式</tag>
         <tag>Dubbo</tag>
       </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[慢查询优化]]></title>
+    <url>%2FmyBlog%2F2018%2F09%2F13%2F%E6%85%A2%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96%2F</url>
+    <content type="text"><![CDATA[一：慢查询原因 查询语句中存在计算逻辑 全表查询没有命中索引，或者没有索引 二：慢查询通常解决方式1.检查是否正确使用并命中索引 2.避免使用select -解析过程会将转换所有列名，消耗更多的时间 3.Order By语句优化 - 使用的列建立索引 避免使用计算表达式 4.Group By 优化 - 筛选条件在Group By之前过滤掉 5.使用Exists代替in - in会导致全表扫描，连续的数值可以用Between And 6.使用varchar/nvarchard代替char/nchar - 变长字段的存储空间小 7.能用Union All 就不用Union - Union并集，会去除重复数据 8.索引不是越多越好 - 会降低 Insert和Update效率 索引类型 A. 主键索引（PRIMARY KEY） 建表的时候同时创建主键索引 B.唯一索引（UNIQUE） 索引列的值必须唯一，允许为空ALTER ​ TABLE table_name ADD UNIQUE (column) C.普通索引 ​ ALTER TABLE table_name ADD INDEX index_name (column) D.组合索引 包含多个列 ​ ALTER TABLE table_name ADD INDEX index_name(column1, column2, column3) E.全文索引 利用分词技术多种算法智能分析文本中关键词的频率和重要性 ​ ALTER TABLE table_name ADD FULLTEXT (column) 建索引原则​ A. 最左匹配原则 ​ -多列索引。总是从最前面开始，接着往后，中间不能跳过。 ​ 通常把使用最频繁的列放在最左边 ​ B.选择区分度高的列 ​ C.索引列不能参与计算 ​ D.尽量拓展索引，不要新建索引 -已经有a的索引，修改原来索引变成(a,b)即可 有索引但未被用到情况：​ Like 以通配符开头 - ‘%abc’ ‘abc%’ 才用到索引 ​ Where条件不满足我最左匹配原则 ​ 使用!=或&lt;&gt;操作符 ​ 索引列参与计算 ​ 对字段进行null判断 - is null 可以设置默认值0 ​ 使用or链接条件 -使用Union All]]></content>
+      <categories>
+        <category>NoteBook</category>
+      </categories>
   </entry>
   <entry>
     <title><![CDATA[Spring+Shiro+Redis实践]]></title>

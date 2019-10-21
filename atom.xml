@@ -44,6 +44,32 @@
   </entry>
   
   <entry>
+    <title>数据库索引 </title>
+    <link href="https://zhangzhang18.github.io/myBlog/2019/10/09/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B4%A2%E5%BC%95/"/>
+    <id>https://zhangzhang18.github.io/myBlog/2019/10/09/数据库索引/</id>
+    <published>2019-10-09T03:09:18.000Z</published>
+    <updated>2019-10-21T05:38:35.526Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>索引主要是基于Hash表和B+树。</p></blockquote><p> 一般来说，索引本身也很大，不可能全部存储在内存中，因此索引往往以索引文件的形式存储的磁盘上。 磁盘里的数据加载到内存的时候，是以<strong>页</strong>为单位加载的，节点与节点之间的数据是不联系的，所以不同的节点，很可能分布在不同磁盘页中，</p><p>磁盘的加载次数和<strong>树的高度</strong>是关联的。越矮加载次数越少。</p><p><strong>二叉查找树</strong>：最坏的情况，磁盘IO次数等于索引树的高度。为了减少磁盘IO次数，把原本“瘦高”的树变得“矮胖”，这是b-树的特征。</p><p>##　b树</p><p>是一种多路平衡查找树（多叉查找树），它的每一个节点最多包含K个子孩子，K被称为B树的阶，K的大小取决于磁盘页大小。</p><p>首先从根节点进行二分查找，如果找到就返回对应节点数据，否则对相应区间的指针指向的节点进行递归进行查找，直到找到节点或者找到null。</p><p><img src="/myBlog/2019/10/09/数据库索引/B.jpg" alt="B树"></p><p>M阶的B-树特征：</p><ol><li>根节点至少有两个子节点。</li><li>每个中间节点都包含K-1个元素和K个孩子。m/2&lt;=k&lt;=m</li><li>每个叶子节点都包含K-1个元素。m/2&lt;=k&lt;=m</li><li>所有叶子节点都位于同一层。</li><li>每个节点中的元素从大到小排序，节点中K-1个元素正好是K个孩子包含的元素的值域分划。</li></ol><p>应用：文件系统，数据库索引（MongoDB）</p><h2 id="B-树"><a href="#B-树" class="headerlink" title="B+树"></a>B+树</h2><p>是基于B-树的变体，比B-树查询性能更高。<br><img src="/myBlog/2019/10/09/数据库索引/B+.jpg" alt="B+树"></p><p>特点：</p><ol><li>有K个子树的中间节点包含有K个元素（B树是K-1个元素），每个元素不保存数据，只用来索引，所有数据保存在叶子节点。</li><li>所有叶子节点中包含了全部元素信息，及指向含有这些元素的指针，且叶子节点本身依关键字的大小自小而大顺序链接。</li><li>所有的中间节点元素都同时存在于子节点，在子节点元素中是最大或者最小元素。</li></ol><p>父节点元素都出现在子节点，所有叶子节点包含了全量元素信息。</p><p>每个子节点都带有指向下一个节点的信息，形成一个有序的链表。</p><p>B+树比B-树更加矮胖，因此查询时的IO次数更少。</p><p>B+树查询最终查找到叶子节点，B-树只要找到匹配元素即可。</p><p>B-树的查找性能会不稳定（最好时根节点，最差是叶子节点），B+每次查找都是稳定的。</p><p>对于范围查找B+优势更加明显。</p><p>相比较B-树B+树的优势有三个：</p><ol><li>IO次数更少</li><li>查询性能更稳定</li><li>范围查询简便</li></ol><h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://mp.weixin.qq.com/s/rDCEFzoKHIjyHfI_bsz5Rw" target="_blank" rel="noopener">漫画：B-树</a></p><p><a href="https://mp.weixin.qq.com/s/jRZMMONW3QP43dsDKIV9VQ" target="_blank" rel="noopener">漫画：B+树</a></p><p><a href="https://blog.csdn.net/waeceo/article/details/78702584" target="_blank" rel="noopener">MySql索引实现原理</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;blockquote&gt;
+&lt;p&gt;索引主要是基于Hash表和B+树。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt; 一般来说，索引本身也很大，不可能全部存储在内存中，因此索引往往以索引文件的形式存储的磁盘上。 磁盘里的数据加载到内存的时候，是以&lt;strong&gt;页&lt;/strong&gt;为单
+      
+    
+    </summary>
+    
+      <category term="NoteBook" scheme="https://zhangzhang18.github.io/myBlog/categories/NoteBook/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>MQ归纳</title>
     <link href="https://zhangzhang18.github.io/myBlog/2019/09/18/MQ%E5%BD%92%E7%BA%B3/"/>
     <id>https://zhangzhang18.github.io/myBlog/2019/09/18/MQ归纳/</id>
@@ -222,9 +248,9 @@
     <link href="https://zhangzhang18.github.io/myBlog/2019/02/10/CAP%E5%8E%9F%E5%88%99-Base%E7%90%86%E8%AE%BA/"/>
     <id>https://zhangzhang18.github.io/myBlog/2019/02/10/CAP原则-Base理论/</id>
     <published>2019-02-10T07:57:16.000Z</published>
-    <updated>2019-10-15T07:37:39.466Z</updated>
+    <updated>2019-10-21T02:40:47.946Z</updated>
     
-    <content type="html"><![CDATA[<p>CAP原则：分布式的三个指标， 这三个指标不可能同时做到。这个结论就叫做 CAP 定理。 </p><ul><li><p>Consistency（一致性）： 写操作之后的读操作，必须返回该值 </p></li><li><p>Availability（可用性）： 意思是只要收到用户的请求，服务器就必须给出回应 </p></li><li><p>Partition tolerance（分区容错）： 大多数分布式系统都分布在多个子网络。每个子网络就叫做一个区（partition）。分区容错的意思是，区间通信可能失败   </p><p> 一般来说，分区容错无法避免，因此可以认为 CAP 的 P 总是成立。CAP 定理告诉我们，剩下的 C 和 A 无法同时做到。 </p><p>CA为什么不能同时成立？因为可能通信失败（分区容错）</p></li></ul><p>Base理论：BASE是Basically Available（基本可用）、Soft state（软状态）和Eventually consistent（最终一致性）的简写 </p><ul><li>基本可用： 指分布式系统在出现故障的时候，允许损失部分可用性（例如响应时间、功能上的可用性），允许损失部分可用性。需要注意的是，基本可用绝不等价于系统不可用。 </li><li>最终一致性：最终一致性强调的是系统中所有的数据副本，在经过一段时间的同步后，最终能够达到一个一致的状态。因此，最终一致性的本质是需要系统保证最终数据能够达到一致，而不需要实时保证系统数据的强一致性</li><li><p>软状态：指允许系统存在中间状态，而该中间状态不会影响系统整体可用性。分布式存储中一般一份数据会有多个副本，允许不同副本同步的延时就是软状态的体现。mysql replication的异步复制也是一种体现。</p><p>总的来说，BASE理论面向的是大型高可用可扩展的分布式系统，和传统事务的ACID特性使相反的，它完全不同于ACID的强一致性模型，而是提出通过牺牲强一致性来获得可用性，并允许数据在一段时间内是不一致的，但最终达到一致状态。但同时，在实际的分布式场景中，不同业务单元和组件对数据一致性的要求是不同的，因此在具体的分布式系统架构设计过程中，ACID特性与BASE理论往往又会结合在一起使用。</p></li></ul><p><a href="http://raft.taillog.cn//" target="_blank" rel="noopener">聊聊分布式存储——轻松理解Raft</a></p><h3 id="一：Eureka"><a href="#一：Eureka" class="headerlink" title="一：Eureka"></a>一：Eureka</h3><h3 id="二：Zookeeper"><a href="#二：Zookeeper" class="headerlink" title="二：Zookeeper"></a>二：Zookeeper</h3><h3 id="三：Consul"><a href="#三：Consul" class="headerlink" title="三：Consul"></a>三：Consul</h3><p> Eureka 典型的 AP,作为分布式场景下的服务发现的产品较为合适，服务发现场景的可用性优先级较高，一致性并不是特别致命。其次 CA 类型的场景 Consul,也能提供较高的可用性，并能 k-v store 服务保证一致性。 而Zookeeper,Etcd则是CP类型 牺牲可用性，在服务发现场景并没太大优势；</p><table><thead><tr><th></th><th style="text-align:left">Eureka</th><th style="text-align:left">Zookeeper</th><th>Consul</th></tr></thead><tbody><tr><td>GitHub</td><td style="text-align:left"><a href="https://github.com/apache/zookeeper" target="_blank" rel="noopener">https:/</a><a href="https://github.com/Netflix/eureka" target="_blank" rel="noopener">/github.com/Netflix/eureka</a></td><td style="text-align:left"><a href="https://github.com/apache/zookeeper" target="_blank" rel="noopener">https://github.com/apache/zookeeper</a></td><td><a href="https://github.com/hashicorp/consul" target="_blank" rel="noopener">https://github.com/hashicorp/consul</a></td></tr><tr><td>服务健康度检查</td><td style="text-align:left">服务状态，内存，硬盘等</td><td style="text-align:left">(弱)长连接，keepalive</td><td>连接心跳</td></tr><tr><td>多数据中心</td><td style="text-align:left">—</td><td style="text-align:left">支持</td><td>支持</td></tr><tr><td>k-v存储服务</td><td style="text-align:left">—</td><td style="text-align:left">支持</td><td>支持</td></tr><tr><td>一致性</td><td style="text-align:left">—</td><td style="text-align:left">paxos（Paxos算法是保证在分布式系统中写操作能够顺利进行，保证系统中大多数状态是一致的，没有机会看到不一致，因此，Paxos算法的特点是一致性&gt;可用性。）</td><td>raft<a href="http://raft.taillog.cn/" target="_blank" rel="noopener">http://raft.taillog.cn/</a></td></tr><tr><td>cap</td><td style="text-align:left">ap</td><td style="text-align:left">cp</td><td>ca</td></tr><tr><td>多语言能力</td><td style="text-align:left">http（sidecar）</td><td style="text-align:left">客户端</td><td>支持http和dns</td></tr><tr><td>watch支持</td><td style="text-align:left">支持 long polling/大部分增量</td><td style="text-align:left">—</td><td>metrics</td></tr><tr><td>自身监控</td><td style="text-align:left">metrics</td><td style="text-align:left">—</td><td>metrics</td></tr><tr><td>安全</td><td style="text-align:left">—</td><td style="text-align:left">acl</td><td>acl /https</td></tr></tbody></table><table><thead><tr><th>SpringCloud集成</th><th>以支持</th><th>以支持</th><th>以支持</th></tr></thead><tbody><tr><td></td><td></td><td></td><td></td></tr></tbody></table>]]></content>
+    <content type="html"><![CDATA[<p>CAP原则：分布式的三个指标， 这三个指标不可能同时做到。这个结论就叫做 CAP 定理。 </p><ul><li><p>Consistency（一致性）： 写操作之后的读操作，必须返回该值 </p></li><li><p>Availability（可用性）： 意思是只要收到用户的请求，服务器就必须给出回应 </p></li><li><p>Partition tolerance（分区容错）： 大多数分布式系统都分布在多个子网络。每个子网络就叫做一个区（partition）。分区容错的意思是，区间通信可能失败   </p><p> 一般来说，分区容错无法避免，因此可以认为 CAP 的 P 总是成立。CAP 定理告诉我们，剩下的 C 和 A 无法同时做到。 </p><p>CA为什么不能同时成立？因为可能通信失败（分区容错）</p></li></ul><p>Base理论：BASE是Basically Available（基本可用）、Soft state（软状态）和Eventually consistent（最终一致性）的简写 </p><ul><li>基本可用： 指分布式系统在出现故障的时候，允许损失部分可用性（例如响应时间、功能上的可用性），允许损失部分可用性。需要注意的是，基本可用绝不等价于系统不可用。 </li><li>最终一致性：最终一致性强调的是系统中所有的数据副本，在经过一段时间的同步后，最终能够达到一个一致的状态。因此，最终一致性的本质是需要系统保证最终数据能够达到一致，而不需要实时保证系统数据的强一致性</li><li><p>软状态：指允许系统存在中间状态，而该中间状态不会影响系统整体可用性。分布式存储中一般一份数据会有多个副本，允许不同副本同步的延时就是软状态的体现。mysql replication的异步复制也是一种体现。</p><p>总的来说，BASE理论面向的是大型高可用可扩展的分布式系统，和传统事务的ACID特性使相反的，它完全不同于ACID的强一致性模型，而是提出通过牺牲强一致性来获得可用性，并允许数据在一段时间内是不一致的，但最终达到一致状态。但同时，在实际的分布式场景中，不同业务单元和组件对数据一致性的要求是不同的，因此在具体的分布式系统架构设计过程中，ACID特性与BASE理论往往又会结合在一起使用。</p></li></ul><p><a href="http://raft.taillog.cn//" target="_blank" rel="noopener">聊聊分布式存储——轻松理解Raft</a></p><h3 id="一：Eureka"><a href="#一：Eureka" class="headerlink" title="一：Eureka"></a>一：Eureka</h3><h3 id="二：Zookeeper"><a href="#二：Zookeeper" class="headerlink" title="二：Zookeeper"></a>二：Zookeeper</h3><h3 id="三：Consul"><a href="#三：Consul" class="headerlink" title="三：Consul"></a>三：Consul</h3><p> Eureka 典型的 AP,作为分布式场景下的服务发现的产品较为合适，服务发现场景的可用性优先级较高，一致性并不是特别致命。其次 CA 类型的场景 Consul,也能提供较高的可用性，并能 k-v store 服务保证一致性。 而Zookeeper,Etcd则是CP类型 牺牲可用性，在服务发现场景并没太大优势；</p><table><thead><tr><th></th><th style="text-align:left">Eureka</th><th style="text-align:left">Zookeeper</th><th>Consul</th></tr></thead><tbody><tr><td>GitHub</td><td style="text-align:left"><a href="https://github.com/apache/zookeeper" target="_blank" rel="noopener">https:/</a><a href="https://github.com/Netflix/eureka" target="_blank" rel="noopener">/github.com/Netflix/eureka</a></td><td style="text-align:left"><a href="https://github.com/apache/zookeeper" target="_blank" rel="noopener">https://github.com/apache/zookeeper</a></td><td><a href="https://github.com/hashicorp/consul" target="_blank" rel="noopener">https://github.com/hashicorp/consul</a></td></tr><tr><td>服务健康度检查</td><td style="text-align:left">服务状态，内存，硬盘等</td><td style="text-align:left">(弱)长连接，keepalive</td><td>连接心跳</td></tr><tr><td>多数据中心</td><td style="text-align:left">—</td><td style="text-align:left">支持</td><td>支持</td></tr><tr><td>k-v存储服务</td><td style="text-align:left">—</td><td style="text-align:left">支持</td><td>支持</td></tr><tr><td>一致性</td><td style="text-align:left">—</td><td style="text-align:left">paxos（Paxos算法是保证在分布式系统中写操作能够顺利进行，保证系统中大多数状态是一致的，没有机会看到不一致，因此，Paxos算法的特点是一致性&gt;可用性。）</td><td>raft<a href="http://raft.taillog.cn/" target="_blank" rel="noopener">http://raft.taillog.cn/</a></td></tr><tr><td>cap</td><td style="text-align:left">ap</td><td style="text-align:left">cp</td><td>ca</td></tr><tr><td>多语言能力</td><td style="text-align:left">http（sidecar）</td><td style="text-align:left">客户端</td><td>支持http和dns</td></tr><tr><td>watch支持</td><td style="text-align:left">支持 long polling/大部分增量</td><td style="text-align:left">—</td><td>metrics</td></tr><tr><td>自身监控</td><td style="text-align:left">metrics</td><td style="text-align:left">—</td><td>metrics</td></tr><tr><td>安全</td><td style="text-align:left">—</td><td style="text-align:left">acl</td><td>acl /https</td></tr><tr><td>SpringCloud集成</td><td style="text-align:left">已支持</td><td style="text-align:left">已支持</td><td>已支持</td></tr></tbody></table>]]></content>
     
     <summary type="html">
     
@@ -378,6 +404,32 @@
       <category term="分布式" scheme="https://zhangzhang18.github.io/myBlog/tags/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
     
       <category term="Dubbo" scheme="https://zhangzhang18.github.io/myBlog/tags/Dubbo/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>慢查询优化 </title>
+    <link href="https://zhangzhang18.github.io/myBlog/2018/09/13/%E6%85%A2%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96/"/>
+    <id>https://zhangzhang18.github.io/myBlog/2018/09/13/慢查询优化/</id>
+    <published>2018-09-13T01:40:26.000Z</published>
+    <updated>2019-10-21T02:36:08.073Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="一：慢查询原因"><a href="#一：慢查询原因" class="headerlink" title="一：慢查询原因"></a>一：慢查询原因</h1><ol><li><p>查询语句中存在计算逻辑</p></li><li><p>全表查询没有命中索引，或者没有索引</p></li></ol><h1 id="二：慢查询通常解决方式"><a href="#二：慢查询通常解决方式" class="headerlink" title="二：慢查询通常解决方式"></a>二：慢查询通常解决方式</h1><p>1.检查是否正确使用并命中索引</p><p>2.避免使用select <em>  -解析过程会将</em>转换所有列名，消耗更多的时间</p><p>3.Order By语句优化 - 使用的列建立索引 避免使用计算表达式</p><p>4.Group By 优化  - 筛选条件在Group By之前过滤掉</p><p>5.使用Exists代替in  - in会导致全表扫描，连续的数值可以用Between And</p><p>6.使用varchar/nvarchard代替char/nchar  -  变长字段的存储空间小</p><p>7.能用Union All 就不用Union  - Union并集，会去除重复数据</p><p>8.索引不是越多越好  - 会降低 Insert和Update效率</p><h3 id="索引类型"><a href="#索引类型" class="headerlink" title="索引类型"></a>索引类型</h3><p>  A. 主键索引（PRIMARY KEY） 建表的时候同时创建主键索引</p><p>  B.唯一索引（UNIQUE） 索引列的值必须唯一，允许为空ALTER  </p><p>​     TABLE table_name ADD UNIQUE (column)</p><p>  C.普通索引</p><p>​     ALTER TABLE table_name ADD INDEX index_name (column)</p><p>  D.组合索引 包含多个列</p><p>​     ALTER TABLE table_name ADD INDEX index_name(column1, column2, column3)</p><p>   E.全文索引 利用分词技术多种算法智能分析文本中关键词的频率和重要性</p><p>​     ALTER TABLE table_name ADD FULLTEXT (column)</p><h3 id="建索引原则"><a href="#建索引原则" class="headerlink" title="建索引原则"></a>建索引原则</h3><p>​     A. 最左匹配原则</p><p>​      -多列索引。总是从最前面开始，接着往后，中间不能跳过。</p><p>​      通常把使用最频繁的列放在最左边</p><p>​     B.选择区分度高的列</p><p>​     C.索引列不能参与计算</p><p>​     D.尽量拓展索引，不要新建索引 -已经有a的索引，修改原来索引变成(a,b)即可</p><h3 id="有索引但未被用到情况："><a href="#有索引但未被用到情况：" class="headerlink" title="有索引但未被用到情况："></a>有索引但未被用到情况：</h3><p>​     Like 以通配符开头 - ‘%abc’  ‘abc%’ 才用到索引</p><p>​     Where条件不满足我最左匹配原则</p><p>​     使用!=或&lt;&gt;操作符</p><p>​     索引列参与计算</p><p>​     对字段进行null判断 - is null 可以设置默认值0</p><p>​     使用or链接条件  -使用Union All</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;一：慢查询原因&quot;&gt;&lt;a href=&quot;#一：慢查询原因&quot; class=&quot;headerlink&quot; title=&quot;一：慢查询原因&quot;&gt;&lt;/a&gt;一：慢查询原因&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;查询语句中存在计算逻辑&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;全表查询没有命中索引，或
+      
+    
+    </summary>
+    
+      <category term="NoteBook" scheme="https://zhangzhang18.github.io/myBlog/categories/NoteBook/"/>
+    
     
   </entry>
   
@@ -733,6 +785,31 @@
   </entry>
   
   <entry>
+    <title>准备面试升级</title>
+    <link href="https://zhangzhang18.github.io/myBlog/2017/03/01/%E9%9D%A2%E7%BB%8F%E5%8D%87%E7%BA%A7/"/>
+    <id>https://zhangzhang18.github.io/myBlog/2017/03/01/面经升级/</id>
+    <published>2017-03-01T03:14:08.000Z</published>
+    <updated>2019-10-15T09:22:54.466Z</updated>
+    
+    <content type="html"><![CDATA[<h6 id="spring事务传播特性"><a href="#spring事务传播特性" class="headerlink" title="spring事务传播特性"></a>spring事务传播特性</h6><pre><code>事务传播行为就是多个事务方法相互调用时，事务如何在这些方法间传播。   propagation_requierd：如果当前没有事务，就新建一个事务，如果已存在一个事务中，加入到这个事务中，这是最常见的选择。    propagation_supports：支持当前事务，如果没有当前事务，就以非事务方法执行。    propagation_mandatory：使用当前事务，如果没有当前事务，就抛出异常。     propagation_required_new：新建事务，如果当前存在事务，把当前事务挂起。    propagation_not_supported：以非事务方式执行操作，如果当前存在事务，就把当前事务挂起。     propagation_never：以非事务方式执行操作，如果当前事务存在则抛出异常。     propagation_nested：如果当前存在事务，则在嵌套事务内执行。如果当前没有事务，则执行与propagation_required类似的操作 </code></pre><h6 id="了解Spring使用到的设计模式吗？"><a href="#了解Spring使用到的设计模式吗？" class="headerlink" title="了解Spring使用到的设计模式吗？"></a>了解Spring使用到的设计模式吗？</h6><h6 id="说说对MQ理解"><a href="#说说对MQ理解" class="headerlink" title="说说对MQ理解"></a>说说对MQ理解</h6><pre><code>https://github.com/doocs/advanced-java作用：解耦、消峰、异步、广播如果使用 MQ，A 系统产生一条数据，发送到 MQ 里面去，哪个系统需要数据自己去 MQ 里面消费。如果新系统需要数据，直接从 MQ 里消费即可；如果某个系统不需要这条数据了，就取消对 MQ 消息的消费即可。这样下来，A 系统压根儿不需要去考虑要给谁发送数据，不需要维护这个代码，也不需要考虑人家是否调用成功、失败超时等情况。保证消息消费幂等性（重复消费问题）   1.写库时，先跟进主键确认是否已存在 2.redis的set 处理消息丢失问题 生产者   1.使用事物，如果失败就回滚，重试发送消息，成功便提交事务   2.开启confirm模式，持久化queue元数据，将消息持久化到磁盘，消息被持久化到磁盘，再通知生产者，</code></pre><h6 id="了解MQ-底层吗"><a href="#了解MQ-底层吗" class="headerlink" title="了解MQ 底层吗"></a>了解MQ 底层吗</h6><h6 id="为什么要用缓存"><a href="#为什么要用缓存" class="headerlink" title="为什么要用缓存"></a>为什么要用缓存</h6><pre><code>用缓存，主要有两个用途：高性能、高并发。高性能：就是说对于一些需要复杂操作耗时查出来的结果，且确定后面不怎么变化，但是有很多读请求，那么直接将查询出来的结果放在缓存中，后面直接读缓存就好。高并发：缓存是走内存的，内存天然就支撑高并发。</code></pre><h6 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h6><pre><code>缓存雪崩：缓存挂了，所有请求都打到数据库    缓存雪崩的事前事中事后的解决方案如下。     事前：redis 高可用，主从+哨兵，redis cluster，避免全盘崩溃。     事中：本地 ehcache 缓存 + hystrix 限流&amp;降级，避免 MySQL 被打死。     事后：redis 持久化，一旦重启，自动从磁盘上加载数据，快速恢复缓存数据。缓存穿透：缓存中查不到，每次去数据库里查，也查不到。就会直接把数据库给打死    解决方式：从数据库中只要没查到，就写一个空值到缓存里去              然后设置一个过期时间，这样的话，下次有相同的 key 来访问的时候，在缓存失效之前，都可以直接从缓存中取数据。缓存击穿：就是说某个 key 非常热点，访问非常频繁，处于集中式高并发访问的情况，当这个 key 在失效的瞬间，大量的请求就击穿了缓存，直接请求数据库，就像是在一道屏障上凿开了一个洞。     解决方式：可以将热点数据设置为永远不过期；或者基于 redis or zookeeper 实现互斥锁，等待第一个请求构建完缓存之后，再释放锁，进而其它请求才能通过该 key 访问数据。</code></pre><h6 id="Redis-过期策略"><a href="#Redis-过期策略" class="headerlink" title="Redis 过期策略"></a>Redis 过期策略</h6><pre><code>1.定期删除+惰性删除。所谓定期删除，指的是 redis 默认是每隔 100ms 就随机抽取一些设置了过期时间的 key，检查其是否过期，如果过期就删除。惰性删除，获取 key 的时候，如果此时 key 已经过期，就删除，不会返回任何东西。2.走内存淘汰机制---在内存不足容纳新的数据的的时候    a).noeviction :    新写入数据报错    b).allkeys-lru：   在所有键中，删除最近最少使用的键    c).allkeys-random：在所有键中，随机删除某个键    d).volatile-lru：  在设置过期时间的键中，删除最近最少使用的键    e).volatile-random:在设置过期时间的键中，随机删除某个键    f).volatile-ttl：  在设置过期时间的键中，删除最早过期的键</code></pre><h6 id="Redis-主从架构-哨兵集群实现高可用"><a href="#Redis-主从架构-哨兵集群实现高可用" class="headerlink" title="Redis 主从架构 哨兵集群实现高可用"></a>Redis 主从架构 哨兵集群实现高可用</h6><pre><code>一:主从架构   一主多从： 主负责写，并且将数据复制到从节点，从节点负责读</code></pre><h6 id="mysql-读写分离"><a href="#mysql-读写分离" class="headerlink" title="mysql 读写分离"></a>mysql 读写分离</h6><pre><code>主库将变更写到binlog中，当从库连接到主库后，从库有一个IO线程，将主库的binlog日志copy到自己本地，执行binlog中的日志内容，写入relay log，就是在自己本地再执行一遍sql。从库同步主库的数据过程是串行化的，也就是主库并行的操作，在从库会串行执行。高并发场景下，从库数据就会比主库慢，有延时如果主库突然宕机，数据还没同步到从库时，MySql有两个机制半同步复制和并行复制1:主库写入binlog后，强制立即将数据同步到从库，从库写入relay log后，从库会返回ask给主库，主库接收至少一个从库的ask才会认为写操作完成。2：从库开启多个线程，并行取relay log中不同库的数据，并行重放不同库的日志。</code></pre><h6 id="高并发系统设计"><a href="#高并发系统设计" class="headerlink" title="高并发系统设计"></a>高并发系统设计</h6><pre><code>1.系统拆分 2.缓存 3.MQ 4.分库分表 5.读写分离 6.ElasticSearch</code></pre><h6 id="说说一次-rpc-请求的流程？"><a href="#说说一次-rpc-请求的流程？" class="headerlink" title="说说一次 rpc 请求的流程？"></a>说说一次 rpc 请求的流程？</h6><pre><code>第一步：provider 向注册中心去注册第二步：consumer 从注册中心订阅服务，注册中心会通知 consumer 注册好的服务第三步：consumer 调用 provider第四步：consumer 和 provider 都异步通知监控中心Dubbo 传输协议：Dubbo缺省协议采用单一长连接和NIO异步通讯，</code></pre><p>注册中心挂了可以继续通信吗？</p><pre><code>可以，因为刚开始初始化的时候，消费者会将提供者的地址等信息拉取到本地缓存，所以注册中心挂了可以继续通信。    </code></pre><h6 id="说说对zk的理解？"><a href="#说说对zk的理解？" class="headerlink" title="说说对zk的理解？"></a>说说对zk的理解？</h6><h5 id="注解的理解"><a href="#注解的理解" class="headerlink" title="注解的理解"></a>注解的理解</h5>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h6 id=&quot;spring事务传播特性&quot;&gt;&lt;a href=&quot;#spring事务传播特性&quot; class=&quot;headerlink&quot; title=&quot;spring事务传播特性&quot;&gt;&lt;/a&gt;spring事务传播特性&lt;/h6&gt;&lt;pre&gt;&lt;code&gt;事务传播行为就是多个事务方法相互调用时，事务
+      
+    
+    </summary>
+    
+    
+      <category term="JAVA" scheme="https://zhangzhang18.github.io/myBlog/tags/JAVA/"/>
+    
+      <category term="面试" scheme="https://zhangzhang18.github.io/myBlog/tags/%E9%9D%A2%E8%AF%95/"/>
+    
+  </entry>
+  
+  <entry>
     <title>准备面试基础</title>
     <link href="https://zhangzhang18.github.io/myBlog/2017/03/01/%E9%9D%A2%E7%BB%8F%E5%9F%BA%E7%A1%80/"/>
     <id>https://zhangzhang18.github.io/myBlog/2017/03/01/面经基础/</id>
@@ -753,31 +830,6 @@
 堆：是java虚拟机管理内存最大的一块，存储实例对象和数组，是垃圾回收管理主要区域  
 方法区：存储类信息，常量和静态变量，接口，变量，方法名等描述信息  
 &lt;/code&gt;&lt;/pre&gt;
-    
-    </summary>
-    
-    
-      <category term="JAVA" scheme="https://zhangzhang18.github.io/myBlog/tags/JAVA/"/>
-    
-      <category term="面试" scheme="https://zhangzhang18.github.io/myBlog/tags/%E9%9D%A2%E8%AF%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>准备面试升级</title>
-    <link href="https://zhangzhang18.github.io/myBlog/2017/03/01/%E9%9D%A2%E7%BB%8F%E5%8D%87%E7%BA%A7/"/>
-    <id>https://zhangzhang18.github.io/myBlog/2017/03/01/面经升级/</id>
-    <published>2017-03-01T03:14:08.000Z</published>
-    <updated>2019-10-15T09:22:54.466Z</updated>
-    
-    <content type="html"><![CDATA[<h6 id="spring事务传播特性"><a href="#spring事务传播特性" class="headerlink" title="spring事务传播特性"></a>spring事务传播特性</h6><pre><code>事务传播行为就是多个事务方法相互调用时，事务如何在这些方法间传播。   propagation_requierd：如果当前没有事务，就新建一个事务，如果已存在一个事务中，加入到这个事务中，这是最常见的选择。    propagation_supports：支持当前事务，如果没有当前事务，就以非事务方法执行。    propagation_mandatory：使用当前事务，如果没有当前事务，就抛出异常。     propagation_required_new：新建事务，如果当前存在事务，把当前事务挂起。    propagation_not_supported：以非事务方式执行操作，如果当前存在事务，就把当前事务挂起。     propagation_never：以非事务方式执行操作，如果当前事务存在则抛出异常。     propagation_nested：如果当前存在事务，则在嵌套事务内执行。如果当前没有事务，则执行与propagation_required类似的操作 </code></pre><h6 id="了解Spring使用到的设计模式吗？"><a href="#了解Spring使用到的设计模式吗？" class="headerlink" title="了解Spring使用到的设计模式吗？"></a>了解Spring使用到的设计模式吗？</h6><h6 id="说说对MQ理解"><a href="#说说对MQ理解" class="headerlink" title="说说对MQ理解"></a>说说对MQ理解</h6><pre><code>https://github.com/doocs/advanced-java作用：解耦、消峰、异步、广播如果使用 MQ，A 系统产生一条数据，发送到 MQ 里面去，哪个系统需要数据自己去 MQ 里面消费。如果新系统需要数据，直接从 MQ 里消费即可；如果某个系统不需要这条数据了，就取消对 MQ 消息的消费即可。这样下来，A 系统压根儿不需要去考虑要给谁发送数据，不需要维护这个代码，也不需要考虑人家是否调用成功、失败超时等情况。保证消息消费幂等性（重复消费问题）   1.写库时，先跟进主键确认是否已存在 2.redis的set 处理消息丢失问题 生产者   1.使用事物，如果失败就回滚，重试发送消息，成功便提交事务   2.开启confirm模式，持久化queue元数据，将消息持久化到磁盘，消息被持久化到磁盘，再通知生产者，</code></pre><h6 id="了解MQ-底层吗"><a href="#了解MQ-底层吗" class="headerlink" title="了解MQ 底层吗"></a>了解MQ 底层吗</h6><h6 id="为什么要用缓存"><a href="#为什么要用缓存" class="headerlink" title="为什么要用缓存"></a>为什么要用缓存</h6><pre><code>用缓存，主要有两个用途：高性能、高并发。高性能：就是说对于一些需要复杂操作耗时查出来的结果，且确定后面不怎么变化，但是有很多读请求，那么直接将查询出来的结果放在缓存中，后面直接读缓存就好。高并发：缓存是走内存的，内存天然就支撑高并发。</code></pre><h6 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h6><pre><code>缓存雪崩：缓存挂了，所有请求都打到数据库    缓存雪崩的事前事中事后的解决方案如下。     事前：redis 高可用，主从+哨兵，redis cluster，避免全盘崩溃。     事中：本地 ehcache 缓存 + hystrix 限流&amp;降级，避免 MySQL 被打死。     事后：redis 持久化，一旦重启，自动从磁盘上加载数据，快速恢复缓存数据。缓存穿透：缓存中查不到，每次去数据库里查，也查不到。就会直接把数据库给打死    解决方式：从数据库中只要没查到，就写一个空值到缓存里去              然后设置一个过期时间，这样的话，下次有相同的 key 来访问的时候，在缓存失效之前，都可以直接从缓存中取数据。缓存击穿：就是说某个 key 非常热点，访问非常频繁，处于集中式高并发访问的情况，当这个 key 在失效的瞬间，大量的请求就击穿了缓存，直接请求数据库，就像是在一道屏障上凿开了一个洞。     解决方式：可以将热点数据设置为永远不过期；或者基于 redis or zookeeper 实现互斥锁，等待第一个请求构建完缓存之后，再释放锁，进而其它请求才能通过该 key 访问数据。</code></pre><h6 id="Redis-过期策略"><a href="#Redis-过期策略" class="headerlink" title="Redis 过期策略"></a>Redis 过期策略</h6><pre><code>1.定期删除+惰性删除。所谓定期删除，指的是 redis 默认是每隔 100ms 就随机抽取一些设置了过期时间的 key，检查其是否过期，如果过期就删除。惰性删除，获取 key 的时候，如果此时 key 已经过期，就删除，不会返回任何东西。2.走内存淘汰机制---在内存不足容纳新的数据的的时候    a).noeviction :    新写入数据报错    b).allkeys-lru：   在所有键中，删除最近最少使用的键    c).allkeys-random：在所有键中，随机删除某个键    d).volatile-lru：  在设置过期时间的键中，删除最近最少使用的键    e).volatile-random:在设置过期时间的键中，随机删除某个键    f).volatile-ttl：  在设置过期时间的键中，删除最早过期的键</code></pre><h6 id="Redis-主从架构-哨兵集群实现高可用"><a href="#Redis-主从架构-哨兵集群实现高可用" class="headerlink" title="Redis 主从架构 哨兵集群实现高可用"></a>Redis 主从架构 哨兵集群实现高可用</h6><pre><code>一:主从架构   一主多从： 主负责写，并且将数据复制到从节点，从节点负责读</code></pre><h6 id="mysql-读写分离"><a href="#mysql-读写分离" class="headerlink" title="mysql 读写分离"></a>mysql 读写分离</h6><pre><code>主库将变更写到binlog中，当从库连接到主库后，从库有一个IO线程，将主库的binlog日志copy到自己本地，执行binlog中的日志内容，写入relay log，就是在自己本地再执行一遍sql。从库同步主库的数据过程是串行化的，也就是主库并行的操作，在从库会串行执行。高并发场景下，从库数据就会比主库慢，有延时如果主库突然宕机，数据还没同步到从库时，MySql有两个机制半同步复制和并行复制1:主库写入binlog后，强制立即将数据同步到从库，从库写入relay log后，从库会返回ask给主库，主库接收至少一个从库的ask才会认为写操作完成。2：从库开启多个线程，并行取relay log中不同库的数据，并行重放不同库的日志。</code></pre><h6 id="高并发系统设计"><a href="#高并发系统设计" class="headerlink" title="高并发系统设计"></a>高并发系统设计</h6><pre><code>1.系统拆分 2.缓存 3.MQ 4.分库分表 5.读写分离 6.ElasticSearch</code></pre><h6 id="说说一次-rpc-请求的流程？"><a href="#说说一次-rpc-请求的流程？" class="headerlink" title="说说一次 rpc 请求的流程？"></a>说说一次 rpc 请求的流程？</h6><pre><code>第一步：provider 向注册中心去注册第二步：consumer 从注册中心订阅服务，注册中心会通知 consumer 注册好的服务第三步：consumer 调用 provider第四步：consumer 和 provider 都异步通知监控中心Dubbo 传输协议：Dubbo缺省协议采用单一长连接和NIO异步通讯，</code></pre><p>注册中心挂了可以继续通信吗？</p><pre><code>可以，因为刚开始初始化的时候，消费者会将提供者的地址等信息拉取到本地缓存，所以注册中心挂了可以继续通信。    </code></pre><h6 id="说说对zk的理解？"><a href="#说说对zk的理解？" class="headerlink" title="说说对zk的理解？"></a>说说对zk的理解？</h6><h5 id="注解的理解"><a href="#注解的理解" class="headerlink" title="注解的理解"></a>注解的理解</h5>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h6 id=&quot;spring事务传播特性&quot;&gt;&lt;a href=&quot;#spring事务传播特性&quot; class=&quot;headerlink&quot; title=&quot;spring事务传播特性&quot;&gt;&lt;/a&gt;spring事务传播特性&lt;/h6&gt;&lt;pre&gt;&lt;code&gt;事务传播行为就是多个事务方法相互调用时，事务
-      
     
     </summary>
     
