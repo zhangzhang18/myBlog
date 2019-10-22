@@ -1341,8 +1341,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-10-15T15:19:57+08:00">
-                2019-10-15
+              <time title="更新于" itemprop="dateModified" datetime="2019-10-21T21:08:20+08:00">
+                2019-10-21
               </time>
             
           </span>
@@ -1401,7 +1401,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  821
+                  1,407
                 </span>
               
 
@@ -1432,7 +1432,7 @@
 <blockquote>
 <p> volatile的两大特性：禁止重排序、内存可见性。</p>
 </blockquote>
-<pre><code>1）保证了不同线程对这个变量进行操作时的可见性，即一个线程修改了某个变量的值，新值对其他线程来说是立即可见的。
+<pre><code>1）保证了不同线程对这个变量进行操作时的可见性，即一个线程修改了某个变量的值，新值对其他线程来说是立即得知的。
 2）禁止进行指令重排序。
 </code></pre>
           <!--noindex-->
@@ -1773,7 +1773,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-10-21T13:44:20+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2019-10-21T18:48:57+08:00">
                 2019-10-21
               </time>
             
@@ -1833,7 +1833,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  772
+                  947
                 </span>
               
 
@@ -1860,9 +1860,14 @@
       
         
           <blockquote>
+<p> <strong>索引</strong>，用于提升数据库的查找速度。 </p>
 <p>索引主要是基于Hash表和B+树。</p>
 </blockquote>
-<p> 一般来说，索引本身也很大，不可能全部存储在内存中，因此索引往往以索引文件的形式存储的磁盘上。 磁盘里的数据加载到内存的时候，是以<strong>页</strong>为单位加载的，节点与节点之间的数据是不联系的，所以不同的节点，很可能分布在不同磁盘页中，</p>
+<p>加速查找速度的数据结构，常见的有两类：</p>
+<p>(1)<strong>哈希</strong>，例如HashMap，查询/插入/修改/删除的平均时间复杂度都是O(1)；</p>
+<p>(2)<strong>树</strong>，例如平衡二叉搜索树，查询/插入/修改/删除的平均时间复杂度都是O(lg(n))；</p>
+<p>如果是单行查询确实是哈希索引更快。对于group by 、order by 、比较&lt;&gt;哈希索引时间复杂度会退化成O(n)，而树的有序性，依旧能保持O(logn)的高效率。</p>
+<p>一般来说，索引本身也很大，不可能全部存储在内存中，因此索引往往以索引文件的形式存储的磁盘上。 磁盘里的数据加载到内存的时候，是以<strong>页</strong>为单位加载的，节点与节点之间的数据是不联系的，所以不同的节点，很可能分布在不同磁盘页中，</p>
 <p>磁盘的加载次数和<strong>树的高度</strong>是关联的。越矮加载次数越少。</p>
           <!--noindex-->
           <div class="post-button text-center">
@@ -2357,8 +2362,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-10-18T10:21:48+08:00">
-                2019-10-18
+              <time title="更新于" itemprop="dateModified" datetime="2019-10-21T19:44:20+08:00">
+                2019-10-21
               </time>
             
           </span>
@@ -2395,7 +2400,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,763
+                  1,989
                 </span>
               
 

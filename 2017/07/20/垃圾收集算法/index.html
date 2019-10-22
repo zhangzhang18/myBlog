@@ -171,7 +171,7 @@
 <meta property="og:image" content="https://zhangzhang18.github.io/myBlog/2017/07/20/垃圾收集算法/copy.jpg">
 <meta property="og:image" content="https://zhangzhang18.github.io/myBlog/2017/07/20/垃圾收集算法/mc.jpg">
 <meta property="og:image" content="https://zhangzhang18.github.io/myBlog/2017/07/20/垃圾收集算法/root.jpg">
-<meta property="og:updated_time" content="2019-10-20T12:38:20.233Z">
+<meta property="og:updated_time" content="2019-10-21T11:35:10.559Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="垃圾收集算法">
 <meta name="twitter:description" content="1.标记-清除算法最基础的收集算法。分为两个阶段：标记出所有需要回收的对象，标记完成后统一回收所有被标记的对象。不足：效率，空间，标记清除后会产生大量不连续的内存碎片。 不足：1. 效率问题，标记和请求两个操作效率都不高；2.空间问题，会产生大量不连续的空间碎片。">
@@ -476,8 +476,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-10-20T20:38:20+08:00">
-                2019-10-20
+              <time title="更新于" itemprop="dateModified" datetime="2019-10-21T19:35:10+08:00">
+                2019-10-21
               </time>
             
           </span>
@@ -576,14 +576,12 @@
 <p>GC ROOTS可达性分析算法，GC ROOTS作为起点，从这个节点向下搜索，搜索所有走过的路径称为引用链，当一个对象到GC ROOTS没有任何引用链相连时，就是GC ROOTS对这个对象不可达，则证明这个对象不可用。</p>
 <p>可以作为GC ROOTS的对象有以下四种：</p>
 <ol>
-<li><p>虚拟机栈（栈帧中的本地变量表）中引用的对象</p>
+<li><p><strong>虚拟机栈</strong>（栈帧中的本地变量表）中引用的对象</p>
 </li>
-<li><p>方法区中类静态属性引用的对象</p>
+<li><p>方法区中<strong>类静态属性引用</strong>的对象</p>
 </li>
-<li><p>方法区中常量引用的对象</p>
-</li>
-<li><p>本地变量栈中JNI（一般说的Native方法）引用的对象</p>
-</li>
+<li>方法区中<strong>常量</strong>引用的对象</li>
+<li>本地变量栈中JNI（一般说的Native方法）引用的对象</li>
 </ol>
 <h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><p>引用分为强引用、软引用、弱引用、虚引用。</p>
 <p>强引用：指在车光绪代码中最普遍的存在<code>Object obj = new Object()</code>，这类引用，只要强引用存在，垃圾收集器就不会回收。</p>

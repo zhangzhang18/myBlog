@@ -170,7 +170,7 @@
 <meta property="og:image" content="https://zhangzhang18.github.io/myBlog/2017/07/16/JAVA-类加载/load.jpg">
 <meta property="og:image" content="https://zhangzhang18.github.io/myBlog/2017/07/16/JAVA-类加载/parents.jpg">
 <meta property="og:image" content="https://zhangzhang18.github.io/myBlog/2017/07/16/JAVA-类加载/parents1.jpg">
-<meta property="og:updated_time" content="2019-10-20T07:06:57.957Z">
+<meta property="og:updated_time" content="2019-10-21T11:48:56.015Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java类加载">
 <meta name="twitter:description" content="Java虚拟机加载类的全过程包括，加载，验证，准备，解析和初始化。  加载：根据路径找到对应的class文件，导入  验证：确保class字节流中包含信息符合当前虚拟机要求，不会危害虚拟机安全。  准备：准备阶段是正式为类变量分配内存并设置类变量初始值的阶段，这些变量所使用的内存都将在方法区中进行分配。-类变量（static）、不包含实例对象。 ​    public static value">
@@ -475,8 +475,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-10-20T15:06:57+08:00">
-                2019-10-20
+              <time title="更新于" itemprop="dateModified" datetime="2019-10-21T19:48:56+08:00">
+                2019-10-21
               </time>
             
           </span>
@@ -608,7 +608,7 @@
 <ol>
 <li><p>先检查需要加载的类是否已经被加载，如果没有被加载，则委托父加载器加载，父类继续检查，尝试请父类加载，这个过程是从下——-&gt; 上;</p>
 </li>
-<li><p>如果走到顶层发现类没有被加载过，那么会从顶层开始往下逐层尝试加载，这个过程是从上 ——&gt; 下;<br>这种设计有个好处是，如果有人想替换系统级别的类：String.java。篡改它的实现，但是在这种机制下这些系统的类已经被Bootstrap classLoader加载过了，所以并不会再去加载，从一定程度上防止了危险代码的植入。</p>
+<li><p>如果走到顶层发现类没有被加载过，那么会从顶层开始往下逐层尝试加载，这个过程是从上 ——&gt; 下;<br> 这种设计有个好处是，如果有人想替换系统级别的类：String.java。篡改它的实现，但是在这种机制下这些系统的类已经被Bootstrap classLoader加载过了，所以并不会再去加载，从一定程度上防止了危险代码的植入。</p>
 <p><img src="/myBlog/2017/07/16/JAVA-类加载/parents.jpg" alt="parents"><br><img src="/myBlog/2017/07/16/JAVA-类加载/parents1.jpg" alt="parents1"></p>
 <h2 id="双亲委派模型的破坏"><a href="#双亲委派模型的破坏" class="headerlink" title="双亲委派模型的破坏"></a>双亲委派模型的破坏</h2></li>
 </ol>
@@ -621,9 +621,9 @@
 <p>OSGi</p>
 <h2 id="Class回收"><a href="#Class回收" class="headerlink" title="Class回收"></a>Class回收</h2><p>JVM中的Class只有满足以下三个条件，才能被GC回收，也就是该Class被卸载（unload）：</p>
 <ul>
-<li>该类所有的实例都已经被GC，也就是JVM中不存在该Class的任何实例。</li>
-<li>加载该类的ClassLoader已经被GC。</li>
-<li>该类的java.lang.Class 对象没有在任何地方被引用，如不能在任何地方通过反射访问该类的方法</li>
+<li>该<strong>类所有的实例都已经被GC</strong>，也就是JVM中不存在该Class的任何实例。</li>
+<li>加载该类的<strong>ClassLoader</strong>已经被GC。</li>
+<li>该类的java.lang.<strong>Class 对象</strong>没有在任何地方被引用，如不能在任何地方通过<strong>反射</strong>访问该类的方法</li>
 </ul>
 <p>参考<br><a href="https://www.cnblogs.com/lanxuezaipiao/p/4138511.html" target="_blank" rel="noopener">https://www.cnblogs.com/lanxuezaipiao/p/4138511.html</a><br><a href="https://juejin.im/post/57c66f386be3ff005851de05" target="_blank" rel="noopener">https://juejin.im/post/57c66f386be3ff005851de05</a><br><a href="https://juejin.im/post/5a1fad585188252ae93ab953" target="_blank" rel="noopener">https://juejin.im/post/5a1fad585188252ae93ab953</a><br><a href="https://www.cnblogs.com/aspirant/p/7200523.html" target="_blank" rel="noopener">https://www.cnblogs.com/aspirant/p/7200523.html</a></p>
 

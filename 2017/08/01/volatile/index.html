@@ -159,19 +159,19 @@
 
 
 
-<meta name="description" content="Volatile 能够保证可见性。   volatile的两大特性：禁止重排序、内存可见性。  1）保证了不同线程对这个变量进行操作时的可见性，即一个线程修改了某个变量的值，新值对其他线程来说是立即可见的。 2）禁止进行指令重排序。">
+<meta name="description" content="Volatile 能够保证可见性。   volatile的两大特性：禁止重排序、内存可见性。  1）保证了不同线程对这个变量进行操作时的可见性，即一个线程修改了某个变量的值，新值对其他线程来说是立即得知的。 2）禁止进行指令重排序。">
 <meta name="keywords" content="JAVA,基础,多线程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Volatile关键字">
 <meta property="og:url" content="https://zhangzhang18.github.io/myBlog/2017/08/01/volatile/index.html">
 <meta property="og:site_name" content="萌">
-<meta property="og:description" content="Volatile 能够保证可见性。   volatile的两大特性：禁止重排序、内存可见性。  1）保证了不同线程对这个变量进行操作时的可见性，即一个线程修改了某个变量的值，新值对其他线程来说是立即可见的。 2）禁止进行指令重排序。">
+<meta property="og:description" content="Volatile 能够保证可见性。   volatile的两大特性：禁止重排序、内存可见性。  1）保证了不同线程对这个变量进行操作时的可见性，即一个线程修改了某个变量的值，新值对其他线程来说是立即得知的。 2）禁止进行指令重排序。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://zhangzhang18.github.io/myBlog/2017/08/01/volatile/vol.jpg">
-<meta property="og:updated_time" content="2019-10-15T07:19:57.459Z">
+<meta property="og:updated_time" content="2019-10-21T13:08:20.912Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Volatile关键字">
-<meta name="twitter:description" content="Volatile 能够保证可见性。   volatile的两大特性：禁止重排序、内存可见性。  1）保证了不同线程对这个变量进行操作时的可见性，即一个线程修改了某个变量的值，新值对其他线程来说是立即可见的。 2）禁止进行指令重排序。">
+<meta name="twitter:description" content="Volatile 能够保证可见性。   volatile的两大特性：禁止重排序、内存可见性。  1）保证了不同线程对这个变量进行操作时的可见性，即一个线程修改了某个变量的值，新值对其他线程来说是立即得知的。 2）禁止进行指令重排序。">
 <meta name="twitter:image" content="https://zhangzhang18.github.io/myBlog/2017/08/01/volatile/vol.jpg">
 
 
@@ -473,8 +473,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-10-15T15:19:57+08:00">
-                2019-10-15
+              <time title="更新于" itemprop="dateModified" datetime="2019-10-21T21:08:20+08:00">
+                2019-10-21
               </time>
             
           </span>
@@ -533,7 +533,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  821
+                  1,407
                 </span>
               
 
@@ -563,7 +563,7 @@
 <blockquote>
 <p> volatile的两大特性：禁止重排序、内存可见性。</p>
 </blockquote>
-<pre><code>1）保证了不同线程对这个变量进行操作时的可见性，即一个线程修改了某个变量的值，新值对其他线程来说是立即可见的。
+<pre><code>1）保证了不同线程对这个变量进行操作时的可见性，即一个线程修改了某个变量的值，新值对其他线程来说是立即得知的。
 2）禁止进行指令重排序。
 </code></pre><a id="more"></a>
 <p>并发编程中三大概念：<strong>原子性，有序性，可见性。</strong></p>
@@ -585,11 +585,43 @@
 <p>指令重排序不会影响单个线程的执行，会影响到线程并发执行的正确性。</p>
 <p>Java中允许编译器和处理器对指令进行重排序，volatile、和synchronized都可以保证有序性，</p>
 <h3 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h3><p>1.状态标记量</p>
-<h2 id="2-double-check"><a href="#2-double-check" class="headerlink" title="2.double check"></a>2.double check</h2><p>volatile实现原理</p>
+<p>2.double check</p>
+<p>###　volatile实现原理</p>
 <p>happen-before （先行发生原则）：判断数据是否存在竞争，线程是否安全的主要依据。</p>
 <p>如果操作A先行发生于B，发生操作B之前，操作A产生的影响能被B观察到。</p>
-<p>插入内存屏障：如果一个操作的执行结果对另一个操作可见，那么这两个操作之间必须要存在内存屏障(写之前StoreStore ，写之后StoreLoad)</p>
-<p>volatile读操作性能消耗和普通变量几乎没差别，写操作可能会慢一些，因为它需要在本地代码中插入许多内存屏障指令保证处理器不会发生乱序执行。</p>
+<h4 id="内存间相互操作"><a href="#内存间相互操作" class="headerlink" title="内存间相互操作"></a>内存间相互操作</h4><ol>
+<li><p>lock：<strong>主内存</strong>，把变量标识为一条<strong>线程独占</strong>状态</p>
+</li>
+<li><p>unlock：<strong>主内存</strong>，把一个处于锁定状态的变量<strong>释放</strong>出来，变量才可以被其他线程锁定</p>
+</li>
+<li><p>read：<strong>主内存</strong>，把一个变量从<strong>主内存</strong>传输到<strong>线程的工作内存</strong>，以便之后的<strong>load</strong>操作使用</p>
+</li>
+<li><p>load：<strong>工作内存</strong>，把 <strong>read</strong>操作从<strong>主内存</strong>中得到的变量放入<strong>工作内存</strong>的<strong>变量副本</strong>中</p>
+</li>
+<li><p>use：<strong>工作内存</strong>，把<strong>工作内存</strong>的变量值传递给执行引擎，每当虚拟机遇到一个需要<strong>使用到变量</strong>的值的字节码指令时，将会执行此操作</p>
+</li>
+<li><p>assign：<strong>工作内存</strong>，把一个执行引擎护接收到的值<strong>赋值给工作内存中变量</strong>，每当虚拟机遇到一个需要给<strong>变量赋值</strong>的指令时执行此操作</p>
+</li>
+<li><p>store：<strong>工作内存</strong>，把<strong>工作内存</strong>中的一个变量值传送到<strong>主内存</strong>，以便之后的 <strong>write</strong>使用</p>
+</li>
+<li><p>write：<strong>主内存</strong>，把<strong>store</strong>操作在从<strong>工作内存</strong>得到的变量值放入<strong>主内存</strong>中</p>
+<p>如果要把一个变量的从主内存复制到工作内存<strong>【read load】</strong></p>
+<p>如果要把一个变量从工作内存同步到主内存<strong>【store write】</strong></p>
+<p>java内存模型只要求上述两个操作必须按<strong>顺序执行</strong></p>
+</li>
+</ol>
+<p>这8个操作必须满足的规则</p>
+<ol>
+<li>不允许<strong>read和load</strong>、<strong>store和write</strong>单独使用</li>
+<li>不允许一个线程丢弃assign</li>
+<li>不允许一个线程无原因的（未发生过任何<strong>assign</strong>）把数据从线程的工作内存同步主内存</li>
+<li>一个新变量之能从 <strong>主内存</strong>诞生，不允许在工作线程中直接使用一个未被初始化（<strong>load，assign</strong>）的变量</li>
+<li>一个变量同一时刻只允许一条线程对其进行<strong>lock操作</strong>，lock可以被同一个线程重复多次执行，多次lock，只有执行相同次数的unlock，变量才会被解锁</li>
+<li>如果对一个变量执行lock操作，将清空工作内存中此变量的值，在执行引擎使用这个变量时，需要重新执行 <strong>load</strong> 或<strong>assign</strong></li>
+<li>如果没有执行过lock，不允许对它执行unlock，也不允许去unlock一个被其他线程锁住的对象</li>
+<li>进行<strong>unlock</strong>之前，必须将此变量 <strong>同步主存</strong>（<strong>store，write</strong>）</li>
+</ol>
+<h3 id="Java-内存模型对Volatile定义的特殊规则"><a href="#Java-内存模型对Volatile定义的特殊规则" class="headerlink" title="Java 内存模型对Volatile定义的特殊规则"></a>Java 内存模型对Volatile定义的特殊规则</h3><p>volatile读操作性能消耗和普通变量几乎没差别，写操作可能会慢一些，因为它需要在本地代码中插入许多内存屏障指令保证处理器不会发生乱序执行。</p>
 <p>大多数场景下volatile总开销要比锁低。</p>
 
       
@@ -859,7 +891,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-原子性"><span class="nav-text">1.原子性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-可见性"><span class="nav-text">2.可见性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-有序性"><span class="nav-text">3.有序性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用场景"><span class="nav-text">应用场景</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-double-check"><span class="nav-text">2.double check</span></a></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-原子性"><span class="nav-text">1.原子性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-可见性"><span class="nav-text">2.可见性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-有序性"><span class="nav-text">3.有序性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用场景"><span class="nav-text">应用场景</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#内存间相互操作"><span class="nav-text">内存间相互操作</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java-内存模型对Volatile定义的特殊规则"><span class="nav-text">Java 内存模型对Volatile定义的特殊规则</span></a></li></ol></div>
             
 
           </div>
