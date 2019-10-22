@@ -170,7 +170,7 @@
 <meta property="og:image" content="https://zhangzhang18.github.io/myBlog/2017/05/12/HashMap归纳总结/ConcurrentHashMap.png">
 <meta property="og:image" content="https://zhangzhang18.github.io/myBlog/2017/05/12/HashMap归纳总结/HashMap.jpg">
 <meta property="og:image" content="https://zhangzhang18.github.io/myBlog/2017/05/12/HashMap归纳总结/ConcurrentHashMap.jpg">
-<meta property="og:updated_time" content="2019-10-12T13:19:03.173Z">
+<meta property="og:updated_time" content="2019-10-22T11:53:05.163Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HashMap归纳总结">
 <meta name="twitter:image" content="https://zhangzhang18.github.io/myBlog/2017/05/12/HashMap归纳总结/hashMap.jpg">
@@ -474,8 +474,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-10-12T21:19:03+08:00">
-                2019-10-12
+              <time title="更新于" itemprop="dateModified" datetime="2019-10-22T19:53:05+08:00">
+                2019-10-22
               </time>
             
           </span>
@@ -534,7 +534,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  906
+                  1,610
                 </span>
               
 
@@ -638,10 +638,21 @@
 <p>Hash公式：index = HashCode（Key） &amp; （Length - 1）</p>
 <p><img src="/myBlog/2017/05/12/HashMap归纳总结/ConcurrentHashMap.png" alt="ConcurrentHashMap"></p>
 <h2 id=""><a href="#" class="headerlink" title=""></a><img src="/myBlog/2017/05/12/HashMap归纳总结/HashMap.jpg" alt="HashMap"></h2><h2 id="ConcurrentHashMap"><a href="#ConcurrentHashMap" class="headerlink" title="ConcurrentHashMap"></a>ConcurrentHashMap</h2><blockquote>
-<p>需要线程安全，那么就使用ConcurrentHashMap。</p>
+<p>需要线程安全，那么就使用ConcurrentHashMap。分段锁+CAS</p>
 </blockquote>
 <p>HashTable是使用synchronized来锁住整张Hash表来实现线程安全。</p>
-<p>一个 ConcurrentHashMap 由一个个 Segment 组成，Segment代表”部分“或”一段“的意思，所以很多地方都会将其描述为分段锁。<br>Segment 内部是由 数组+链表 组成的。<br>(读操作不加锁，由于HashEntry的value变量是 volatile的，也能保证读取到最新的值。)<br><img src="/myBlog/2017/05/12/HashMap归纳总结/ConcurrentHashMap.jpg" alt="ConcurrentHashMap"></p>
+<p>JDK1.7:一个 ConcurrentHashMap 由一个个 Segment 组成，Segment代表”部分“或”一段“的意思，所以很多地方都会将其描述为分段锁。<br>Segment 内部是由 数组+链表 组成的。<br>(读操作不加锁，由于HashEntry的value变量是 volatile的，也能保证读取到最新的值。)<br><img src="/myBlog/2017/05/12/HashMap归纳总结/ConcurrentHashMap.jpg" alt="ConcurrentHashMap"></p>
+<p>JDK1.8: HashMap类似的数组+链表+红黑树的方式实现，而加锁则采用CAS和synchronized实现。 </p>
+<p><strong>CAS：</strong>内存中的值V ，旧值A，要修改的值B</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">if(A==V)&#123;</span><br><span class="line">	V=B;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> 修改失败重新获取内存地址V的当前值，并重新计算想要修改的值。这个重新尝试的过程被称为<strong>自旋</strong>。 </p>
+<p> 从思想上来说，synchronized属于悲观锁，悲观的认为程序中的并发情况严重，所以严防死守，<strong>CAS属于乐观锁</strong>，乐观地认为程序中的并发情况不那么严重，所以让线程不断去重试更新。 </p>
+<p> 链表结构中的数据大于8，则将数据结构升级为TreeBin类型的<strong>红黑树结构</strong> </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line">final V putVal(K key, V value, boolean onlyIfAbsent) &#123;</span><br><span class="line">      if (key == null || value == null) throw new NullPointerException();</span><br><span class="line">       //1. 计算key的hash值</span><br><span class="line">      int hash = spread(key.hashCode());</span><br><span class="line">      int binCount = 0;</span><br><span class="line">      //一个死循环</span><br><span class="line">      for (Node&lt;K,V&gt;[] tab = table;;) &#123;</span><br><span class="line">          Node&lt;K,V&gt; f; int n, i, fh;</span><br><span class="line">          if (tab == null || (n = tab.length) == 0)</span><br><span class="line">        	    //2. 如果当前table还没有初始化先调用initTable方法将tab进行初始化</span><br><span class="line">              tab = initTable();</span><br><span class="line">          else if ((f = tabAt(tab, i = (n - 1) &amp; hash)) == null) &#123;</span><br><span class="line">          	//3. tab[i]为null，则直接使用CAS原子操作将值插入即可</span><br><span class="line">              if (casTabAt(tab, i, null,</span><br><span class="line">                           new Node&lt;K,V&gt;(hash, key, value, null)))</span><br><span class="line">                  break;                   // no lock when adding to empty bin</span><br><span class="line">          &#125;</span><br><span class="line">          else if ((fh = f.hash) == MOVED)//Node头结点的hash值为MOVED(-1)，则表示需要扩容，此时调用helpTransfer()方法进行扩容；</span><br><span class="line">        	    //4. 当前正在扩容</span><br><span class="line">              tab = helpTransfer(tab, f);</span><br><span class="line">          else &#123;</span><br><span class="line">              V oldVal = null;</span><br><span class="line">              synchronized (f) &#123;//对这个Node链表或红黑树通过synchronized加锁</span><br><span class="line">                  if (tabAt(tab, i) == f) &#123;</span><br><span class="line">                       //5. 当前为链表，在链表中插入新的键值对</span><br><span class="line">                      if (fh &gt;= 0) &#123;</span><br><span class="line">                          binCount = 1;</span><br><span class="line">                          for (Node&lt;K,V&gt; e = f;; ++binCount) &#123;</span><br><span class="line">                              K ek;</span><br><span class="line">                              if (e.hash == hash &amp;&amp;</span><br><span class="line">                                  ((ek = e.key) == key ||</span><br><span class="line">                                   (ek != null &amp;&amp; key.equals(ek)))) &#123;</span><br><span class="line">                                  oldVal = e.val;</span><br><span class="line">                                  if (!onlyIfAbsent)</span><br><span class="line">                                      e.val = value;</span><br><span class="line">                                  break;</span><br><span class="line">                              &#125;</span><br><span class="line">                              Node&lt;K,V&gt; pred = e;</span><br><span class="line">                              if ((e = e.next) == null) &#123;</span><br><span class="line">                                  pred.next = new Node&lt;K,V&gt;(hash, key,</span><br><span class="line">                                                            value, null);</span><br><span class="line">                                  break;</span><br><span class="line">                              &#125;</span><br><span class="line">                          &#125;</span><br><span class="line">                      &#125;</span><br><span class="line">                      // 6.当前为红黑树，将新的键值对插入到红黑树中</span><br><span class="line">                      else if (f instanceof TreeBin) &#123;</span><br><span class="line">                          Node&lt;K,V&gt; p;</span><br><span class="line">                          binCount = 2;</span><br><span class="line">                          if ((p = ((TreeBin&lt;K,V&gt;)f).putTreeVal(hash, key,</span><br><span class="line">                                                         value)) != null) &#123;</span><br><span class="line">                              oldVal = p.val;</span><br><span class="line">                              if (!onlyIfAbsent)</span><br><span class="line">                                  p.val = value;</span><br><span class="line">                          &#125;</span><br><span class="line">                      &#125;</span><br><span class="line">                  &#125;</span><br><span class="line">              &#125;</span><br><span class="line">              // 7.插入完键值对后再根据实际大小看是否需要转换成红黑树</span><br><span class="line">              if (binCount != 0) &#123;</span><br><span class="line">                  if (binCount &gt;= TREEIFY_THRESHOLD)</span><br><span class="line">                      treeifyBin(tab, i);</span><br><span class="line">                  if (oldVal != null)</span><br><span class="line">                      return oldVal;</span><br><span class="line">                  break;</span><br><span class="line">              &#125;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">       //8.对当前容量大小进行检查，如果超过了临界值（实际大小*加载因子）就需要扩容 </span><br><span class="line">      addCount(1L, binCount);</span><br><span class="line">      return null;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p> helpTransfer() 中 sizeCtl</p>
+<p><strong>ABA问题</strong> </p>
+<p>​    <a href="https://blog.csdn.net/qq_32998153/article/details/79529704" target="_blank" rel="noopener">CAS理解</a></p>
+<p> 怎么解决呢？加个版本号就可以了。 </p>
 <blockquote>
 <p>（1）ArrayList以数组形式实现，顺序插入、查找快，插入、删除较慢</p>
 <p>（2）LinkedList以链表形式实现，顺序插入、查找较慢，插入、删除方便</p>
@@ -649,6 +660,7 @@
 <p><a href="https://mp.weixin.qq.com/s/SyKckwLfV2ypJOzTFA7R_g" target="_blank" rel="noopener">https://mp.weixin.qq.com/s/SyKckwLfV2ypJOzTFA7R_g</a></p>
 <p><a href="https://mp.weixin.qq.com/s/__ZnkPAF6ucUqN8CVSVQeA" target="_blank" rel="noopener">https://mp.weixin.qq.com/s/__ZnkPAF6ucUqN8CVSVQeA</a></p>
 <p><a href="https://juejin.im/post/5a224e1551882535c56cb940" target="_blank" rel="noopener">https://juejin.im/post/5a224e1551882535c56cb940</a></p>
+<p><a href="https://www.jianshu.com/p/5dbaa6707017" target="_blank" rel="noopener">https://www.jianshu.com/p/5dbaa6707017</a></p>
 
       
     </div>
@@ -726,8 +738,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/myBlog/2017/03/01/面经升级/" rel="next" title="准备面试升级">
-                <i class="fa fa-chevron-left"></i> 准备面试升级
+              <a href="/myBlog/2017/03/01/面经基础/" rel="next" title="准备面试基础">
+                <i class="fa fa-chevron-left"></i> 准备面试基础
               </a>
             
           </div>

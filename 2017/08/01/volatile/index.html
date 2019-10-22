@@ -168,7 +168,8 @@
 <meta property="og:description" content="Volatile 能够保证可见性。   volatile的两大特性：禁止重排序、内存可见性。  1）保证了不同线程对这个变量进行操作时的可见性，即一个线程修改了某个变量的值，新值对其他线程来说是立即得知的。 2）禁止进行指令重排序。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://zhangzhang18.github.io/myBlog/2017/08/01/volatile/vol.jpg">
-<meta property="og:updated_time" content="2019-10-21T13:08:20.912Z">
+<meta property="og:image" content="https://zhangzhang18.github.io/myBlog/2017/08/01/volatile/storeload.jpg">
+<meta property="og:updated_time" content="2019-10-22T11:45:02.950Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Volatile关键字">
 <meta name="twitter:description" content="Volatile 能够保证可见性。   volatile的两大特性：禁止重排序、内存可见性。  1）保证了不同线程对这个变量进行操作时的可见性，即一个线程修改了某个变量的值，新值对其他线程来说是立即得知的。 2）禁止进行指令重排序。">
@@ -473,8 +474,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-10-21T21:08:20+08:00">
-                2019-10-21
+              <time title="更新于" itemprop="dateModified" datetime="2019-10-22T19:45:02+08:00">
+                2019-10-22
               </time>
             
           </span>
@@ -533,7 +534,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,407
+                  1,645
                 </span>
               
 
@@ -612,16 +613,33 @@
 </ol>
 <p>这8个操作必须满足的规则</p>
 <ol>
-<li>不允许<strong>read和load</strong>、<strong>store和write</strong>单独使用</li>
-<li>不允许一个线程丢弃assign</li>
-<li>不允许一个线程无原因的（未发生过任何<strong>assign</strong>）把数据从线程的工作内存同步主内存</li>
-<li>一个新变量之能从 <strong>主内存</strong>诞生，不允许在工作线程中直接使用一个未被初始化（<strong>load，assign</strong>）的变量</li>
-<li>一个变量同一时刻只允许一条线程对其进行<strong>lock操作</strong>，lock可以被同一个线程重复多次执行，多次lock，只有执行相同次数的unlock，变量才会被解锁</li>
-<li>如果对一个变量执行lock操作，将清空工作内存中此变量的值，在执行引擎使用这个变量时，需要重新执行 <strong>load</strong> 或<strong>assign</strong></li>
-<li>如果没有执行过lock，不允许对它执行unlock，也不允许去unlock一个被其他线程锁住的对象</li>
-<li>进行<strong>unlock</strong>之前，必须将此变量 <strong>同步主存</strong>（<strong>store，write</strong>）</li>
+<li><p>不允许<strong>read和load</strong>、<strong>store和write</strong>单独使用</p>
+</li>
+<li><p>不允许一个线程丢弃assign</p>
+</li>
+<li><p>不允许一个线程无原因的（未发生过任何<strong>assign</strong>）把数据从线程的工作内存同步主内存</p>
+</li>
+<li><p>一个新变量之能从 <strong>主内存</strong>诞生，不允许在工作线程中直接使用一个未被初始化（<strong>load，assign</strong>）的变量</p>
+</li>
+<li><p>一个变量同一时刻只允许一条线程对其进行<strong>lock操作</strong>，lock可以被同一个线程重复多次执行，多次lock，只有执行相同次数的unlock，变量才会被解锁</p>
+</li>
+<li><p>如果对一个变量执行lock操作，将清空工作内存中此变量的值，在执行引擎使用这个变量时，需要重新执行 <strong>load</strong> 或<strong>assign</strong></p>
+</li>
+<li><p>如果没有执行过lock，不允许对它执行unlock，也不允许去unlock一个被其他线程锁住的对象</p>
+</li>
+<li><p>进行<strong>unlock</strong>之前，必须将此变量 <strong>同步主存</strong>（<strong>store，write</strong>）</p>
+<p><img src="/myBlog/2017/08/01/volatile/storeload.jpg" alt="流程图解"></p>
+</li>
 </ol>
-<h3 id="Java-内存模型对Volatile定义的特殊规则"><a href="#Java-内存模型对Volatile定义的特殊规则" class="headerlink" title="Java 内存模型对Volatile定义的特殊规则"></a>Java 内存模型对Volatile定义的特殊规则</h3><p>volatile读操作性能消耗和普通变量几乎没差别，写操作可能会慢一些，因为它需要在本地代码中插入许多内存屏障指令保证处理器不会发生乱序执行。</p>
+<h3 id="Java-内存模型对Volatile定义的特殊规则"><a href="#Java-内存模型对Volatile定义的特殊规则" class="headerlink" title="Java 内存模型对Volatile定义的特殊规则"></a>Java 内存模型对Volatile定义的特殊规则</h3><p>定义变量V、W被volatile修饰，线程T会操作变量V和W。下面用浅显的语言解释Java内存模型对其的特殊规则： </p>
+<ul>
+<li><strong>每次使用前从主内存读取</strong><br>read、load、use必须顺序整体出现。前一个操作是load时才能use，后一个操作时use时才能load。 </li>
+<li><strong>每次修改后立即同步回主内存</strong><br>assign、store、write必须顺序整体出现。前一个操作是assign时才能store，后一个操作时store时才能assign。 </li>
+<li><p><strong>避免指令重排序 </strong><br>如果T对V的use或者assign先于T对W的use或者assign，那么T对V的load或者write必须先于T对W的load或者assign。</p>
+<p>加了volatile关键字的代码生成的汇编代码发现，会多出一个lock前缀指令。Lock指令对Intel平台的CPU，早期是锁总线，这样代价太高了，后面提出了缓存一致性协议，MESI，来保证了多核之间数据不一致性问题。 </p>
+</li>
+</ul>
+<p>volatile读操作性能消耗和普通变量几乎没差别，写操作可能会慢一些，因为它需要在本地代码中插入许多内存屏障指令保证处理器不会发生乱序执行。</p>
 <p>大多数场景下volatile总开销要比锁低。</p>
 
       

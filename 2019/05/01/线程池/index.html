@@ -167,7 +167,7 @@
 <meta property="og:site_name" content="萌">
 <meta property="og:description" content="为什么使用多线程 降低资源消耗  -事先创建若干个线程放在容器中，当使用的时候不需要自行创建，使用完不是去销毁而是归还到容器，减少了线程创建和销毁的时间    提高线程的可管理性  -无限制的创建线程，不仅消耗资源还降低系统稳定性，线程池可以进行统一分配，监控   提高相应速度  -不需要等待线程创建 参数说明ThreadPoolExecutor(int corePoolSize,int maxi">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-10-17T02:52:15.177Z">
+<meta property="og:updated_time" content="2019-10-22T12:35:52.097Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="线程池 ">
 <meta name="twitter:description" content="为什么使用多线程 降低资源消耗  -事先创建若干个线程放在容器中，当使用的时候不需要自行创建，使用完不是去销毁而是归还到容器，减少了线程创建和销毁的时间    提高线程的可管理性  -无限制的创建线程，不仅消耗资源还降低系统稳定性，线程池可以进行统一分配，监控   提高相应速度  -不需要等待线程创建 参数说明ThreadPoolExecutor(int corePoolSize,int maxi">
@@ -471,8 +471,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-10-17T10:52:15+08:00">
-                2019-10-17
+              <time title="更新于" itemprop="dateModified" datetime="2019-10-22T20:35:52+08:00">
+                2019-10-22
               </time>
             
           </span>
@@ -562,13 +562,30 @@
 <li>提高相应速度  -不需要等待线程创建 <h2 id="参数说明"><a href="#参数说明" class="headerlink" title="参数说明"></a>参数说明</h2><code>ThreadPoolExecutor(int corePoolSize,int maximumPoolSize,long keepAliveTime,TimeUnit unit,BlockingQueue&lt;Runnable     workQueue)</code><a id="more"></a>  
 <strong>corePoolSize（最大核心线程数）：</strong> 线程池启动后，在池中保持的线程的最小数量<br><strong>maxinumPoolSize（线程池能容纳的最大线程数量）：</strong> 核心线程数 + 非核心线程数 = 最大线程数量<br><strong>unit：</strong> keepAliveTime的时间单位，可以是纳秒，毫秒，秒，分钟等<br><strong>keepAliveTime：</strong> 线程的最大生命周期<br><strong>workQueue：</strong>  任务队列<br><strong>threadFactory：</strong> 定义如何启动一个线程，可以设置线程的名称，并且可以确定是否是后台线程等。 <code>new ThreadFactoryBuilder().setNameFormat(&quot;XX-task-%d&quot;).build();</code><br><strong>RejectedExecutionHandler：</strong> 拒绝任务处理器。由于超出线程数量和队列容量而对继续增加的任务进行处理的程序。  </li>
 </ol>
-<p><strong>workQueue：</strong><br>　- ArrayBlockingQueue：基于数组结构的<strong>有界队列</strong>，先进先出（FIFO）原则对元素排序<br>　- LinkedBlockingQueue：基于链表结构的阻塞队列，先进先出排序元素，吞吐量高于数组结构。<code>Executors.newFixedThreadPool()</code> 使用这个队列<br>　- SynchronousQueue：不存储元素的阻塞队列，每个插入操作必须等到下一个线程调用一处操作，否则插入操作一直处于阻塞状态，吞吐量高于2，<code>Executors.newCachedThreadPool()</code>使用这个队列</p>
+<p><strong>workQueue：</strong>  </p>
 <ul>
-<li>PriorityBlockQueue：具有优先级的无线阻塞队列<br>　- DelayQueue（延时队列）：任务到来时，首先先加入到队列中，只有达到了指定的延时时间，才会执行任务<br><strong>RejectedExecutionHandler：</strong> </li>
-<li>AbortPolicy（默认策略）:直接拒绝抛异常（RejectedExecutionException）</li>
-<li>CallerRunsPolicy:不抛弃任务，只有调用者所在线程来运行任务</li>
-<li>DiscardOldestPolicy:丢弃队列最近的任务，并执行当前任务</li>
-<li>DiscardPolicy:不处理，丢弃掉，不抛异常<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
+<li><p>ArrayBlockingQueue：基于数组结构的<strong>有界队列</strong>，先进先出（FIFO）原则对元素排序</p>
+</li>
+<li><p>LinkedBlockingQueue：基于链表结构的阻塞队列，先进先出排序元素，吞吐量高于数组结构。<code>Executors.newFixedThreadPool()</code> 使用这个队列</p>
+</li>
+<li><p>SynchronousQueue：不存储元素的阻塞队列，每个插入操作必须等到下一个线程调用一处操作，否则插入操作一直处于阻塞状态，吞吐量高于2，<code>Executors.newCachedThreadPool()</code>使用这个队列</p>
+<ul>
+<li>PriorityBlockQueue：具有优先级的无线阻塞队列</li>
+</ul>
+</li>
+<li><p>DelayQueue（延时队列）：任务到来时，首先先加入到队列中，只有达到了指定的延时时间，才会执行任务</p>
+</li>
+</ul>
+<p>　- RejectedExecutionHandler：** </p>
+<ul>
+<li><p>AbortPolicy（默认策略）:直接拒绝抛异常（RejectedExecutionException）</p>
+</li>
+<li><p>CallerRunsPolicy:不抛弃任务，只有调用者所在线程来运行任务</p>
+</li>
+<li><p>DiscardOldestPolicy:丢弃队列最近的任务，并执行当前任务</p>
+</li>
+<li><p>DiscardPolicy:不处理，丢弃掉，不抛异常</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
 <li>线程数量未达到 corePoolSize，则新建一个线程（核心线程）执行任务。</li>
 <li>线程数量达到了 corePoolsSize，则将任务移入队列等待。</li>
 <li>队列已满，新建非核心线程（先进先出）执行任务。</li>

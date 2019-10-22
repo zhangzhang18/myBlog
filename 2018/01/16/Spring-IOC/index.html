@@ -169,7 +169,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://zhangzhang18.github.io/myBlog/2018/01/16/Spring-IOC/core.jpg">
 <meta property="og:image" content="https://zhangzhang18.github.io/myBlog/2018/01/16/Spring-IOC/ioc.png">
-<meta property="og:updated_time" content="2019-10-18T14:24:12.417Z">
+<meta property="og:updated_time" content="2019-10-22T11:00:11.104Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring-IOC">
 <meta name="twitter:description" content="1.Spring框架简介Spring框架是基于Java平台的，它为开发Java应用提供了全方位的基础设施支持，并且它很好地处理了这些基础设施，所以你只需要关注你的应用本身即可。 Spring可以使用POJO（普通的Java对象，plain old java objects）创建应用，并且可以将企业服务非侵入式地应用到POJO。这项功能适用于Java SE编程模型以及全部或部分的Java EE。">
@@ -474,8 +474,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-10-18T22:24:12+08:00">
-                2019-10-18
+              <time title="更新于" itemprop="dateModified" datetime="2019-10-22T19:00:11+08:00">
+                2019-10-22
               </time>
             
           </span>
@@ -534,7 +534,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,504
+                  1,503
                 </span>
               
 
@@ -582,7 +582,7 @@
 <h2 id="IOC容器设计"><a href="#IOC容器设计" class="headerlink" title="IOC容器设计"></a>IOC容器设计</h2><blockquote>
 <p>是基于BeanFactory和ApplicationContext两个接口。<br>  ApplicationContext是BeanFactory的子接口之一。<br>  BeanFactory是IOC容器定义的最底层接口，ApplicationContext是其中高级接口之一，并且做了许多的拓展。</p>
 </blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ApplicationContext context = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">"applicationContext.xml"</span>);</span><br><span class="line">BeanFactory factory = (BeanFactory) context;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ApplicationContext context = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">"applicationContext.xml"</span>);</span><br><span class="line">BeanFactory factory =  context;</span><br></pre></td></tr></table></figure>
 <h4 id="BeanFactory和ApplicationContext有什么区别"><a href="#BeanFactory和ApplicationContext有什么区别" class="headerlink" title="BeanFactory和ApplicationContext有什么区别"></a>BeanFactory和ApplicationContext有什么区别</h4><p>BeanFactory可以理解为含有Bean集合的工厂类。<br>BeanFactory 包含了Bean的定义，以便在接收到客户端请求时将对应的Bean实例化。<br>BeanFactory还能在实例化对象时生成协作类之间的关系。此举将Bean自身从Bean客户端的配置中解放出来。BeanFactory还包含Bean生命周期的控制，调用客户端的初始化方法（Initialization Method）和销毁方法（Destruction Method）。 </p>
 <p>从表面上看，ApplicationContext如同BeanFactory一样具有Bean定义、Bean关联关系的设置及根据请求分发Bean的功能。</p>
 <p>但ApplicationContext在此基础上还提供了其他功能。 </p>
