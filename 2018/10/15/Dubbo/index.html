@@ -159,20 +159,20 @@
 
 
 
-<meta name="description" content="Dubbo 工作原理：服务注册、注册中心、消费者、代理通信、负载均衡； Dubbo Dubbo集群容错 一般的mvc项目 包含 Controller、Servicei、ServiceImpl、dao三层使用doubbo我们可以把项目拆分：Controller 作为 “消费着” 一个项目ServiceImpl +dao 作为 “提供者” 一个项目 Service “接口” 可以作为一个项目 http">
+<meta name="description" content="Dubbo 工作原理：服务注册、注册中心、消费者、代理通信、负载均衡； Dubbo Dubbo集群容错 RPC 一般的mvc项目 包含 Controller、Servicei、ServiceImpl、dao三层使用doubbo我们可以把项目拆分：Controller 作为 “消费着” 一个项目ServiceImpl +dao 作为 “提供者” 一个项目 Service “接口” 可以作为一个项目">
 <meta name="keywords" content="分布式,Dubbo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Dubbo">
 <meta property="og:url" content="https://zhangzhang18.github.io/myBlog/2018/10/15/Dubbo/index.html">
 <meta property="og:site_name" content="萌">
-<meta property="og:description" content="Dubbo 工作原理：服务注册、注册中心、消费者、代理通信、负载均衡； Dubbo Dubbo集群容错 一般的mvc项目 包含 Controller、Servicei、ServiceImpl、dao三层使用doubbo我们可以把项目拆分：Controller 作为 “消费着” 一个项目ServiceImpl +dao 作为 “提供者” 一个项目 Service “接口” 可以作为一个项目 http">
+<meta property="og:description" content="Dubbo 工作原理：服务注册、注册中心、消费者、代理通信、负载均衡； Dubbo Dubbo集群容错 RPC 一般的mvc项目 包含 Controller、Servicei、ServiceImpl、dao三层使用doubbo我们可以把项目拆分：Controller 作为 “消费着” 一个项目ServiceImpl +dao 作为 “提供者” 一个项目 Service “接口” 可以作为一个项目">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://zhangzhang18.github.io/myBlog/2018/10/15/Dubbo/dubbo-operating-principle.png">
 <meta property="og:image" content="https://zhangzhang18.github.io/myBlog/2018/10/15/Dubbo/dubbo.jpg">
-<meta property="og:updated_time" content="2019-10-19T13:02:05.606Z">
+<meta property="og:updated_time" content="2019-10-23T11:42:05.449Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Dubbo">
-<meta name="twitter:description" content="Dubbo 工作原理：服务注册、注册中心、消费者、代理通信、负载均衡； Dubbo Dubbo集群容错 一般的mvc项目 包含 Controller、Servicei、ServiceImpl、dao三层使用doubbo我们可以把项目拆分：Controller 作为 “消费着” 一个项目ServiceImpl +dao 作为 “提供者” 一个项目 Service “接口” 可以作为一个项目 http">
+<meta name="twitter:description" content="Dubbo 工作原理：服务注册、注册中心、消费者、代理通信、负载均衡； Dubbo Dubbo集群容错 RPC 一般的mvc项目 包含 Controller、Servicei、ServiceImpl、dao三层使用doubbo我们可以把项目拆分：Controller 作为 “消费着” 一个项目ServiceImpl +dao 作为 “提供者” 一个项目 Service “接口” 可以作为一个项目">
 <meta name="twitter:image" content="https://zhangzhang18.github.io/myBlog/2018/10/15/Dubbo/dubbo-operating-principle.png">
 
 
@@ -474,8 +474,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-10-19T21:02:05+08:00">
-                2019-10-19
+              <time title="更新于" itemprop="dateModified" datetime="2019-10-23T19:42:05+08:00">
+                2019-10-23
               </time>
             
           </span>
@@ -534,7 +534,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2,091
+                  2,092
                 </span>
               
 
@@ -562,6 +562,7 @@
         <p>Dubbo 工作原理：服务注册、注册中心、消费者、代理通信、负载均衡；</p>
 <p><a href="http://dubbo.apache.org/zh-cn/docs/user/quick-start.html" target="_blank" rel="noopener">Dubbo</a></p>
 <p><a href="https://www.cnblogs.com/hd3013779515/p/6896942.html" target="_blank" rel="noopener">Dubbo集群容错</a></p>
+<p><a href="https://www.cnblogs.com/LBSer/p/4853234.html" target="_blank" rel="noopener">RPC</a></p>
 <p>一般的mvc项目 包含 Controller、Servicei、ServiceImpl、dao三层<br>使用doubbo我们可以把项目拆分：<br>Controller 作为 “消费着” 一个项目<br>ServiceImpl +dao 作为 “提供者” 一个项目</p>
 <p>Service “接口” 可以作为一个项目</p>
 <p><a href="https://github.com/doocs/advanced-java/blob/master/docs/distributed-system/dubbo-operating-principle.md" target="_blank" rel="noopener">https://github.com/doocs/advanced-java/blob/master/docs/distributed-system/dubbo-operating-principle.md</a></p>
@@ -586,8 +587,14 @@
 * 注册中心返回服务提供者地址列表给消费者，如果有变更，注册中心将基于长连接推送变更数据给消费者。
 * 服务消费者，从提供者地址列表中，基于软负载均衡算法，选一台提供者进行调用，如果调用失败，再选另一台调用。
 * 服务消费者和提供者，在内存中累计调用次数和调用时间，定时每分钟发送一次统计数据到监控中心。
-</code></pre><h3 id="Dubbo-负载均衡策略"><a href="#Dubbo-负载均衡策略" class="headerlink" title="Dubbo 负载均衡策略"></a><strong>Dubbo 负载均衡策略</strong></h3><p>  1.random load balance：<strong>随机</strong>调用实现负载均衡，可以对 provider不同实例<strong>设置不同的权重</strong>，会按照权重来负载均衡，权重越大分配流量越高。<br>  2.roundrobin loadbalance:<strong>均匀</strong>的打到各个机器，可以将性能差的机器权重小一点。<br>  3.leastactive loadbalance：<strong>自动感知</strong>，如果某个机器性能越差，那么接收的请求越少，越不活跃，此时就会给<strong>不活跃的性能差的机器更少的请求</strong>。<br>  4.consistanthash loadbalance：一致性 Hash 算法，<strong>相同参数的请求</strong>一定分发到一个 provider 上去，provider 挂掉的时候，会基于虚拟节点均匀分配剩余的流量，抖动不会太大。如果需要的不是随机负载均衡，是要一类请求都到一个节点，那就走这个一致性 Hash 策略。</p>
-<h3 id="Dubbo-集群容错策略"><a href="#Dubbo-集群容错策略" class="headerlink" title="Dubbo 集群容错策略"></a><strong>Dubbo 集群容错策略</strong></h3><p>  1.failover cluster ：<strong>失败自动切换</strong>，自动重试其他机器，默认就是这个，常见于<strong>读操作</strong>。（失败重试其它机器）<code>&lt;dubbo:service retries=&quot;2&quot; /&gt;</code><br>  2.failfast cluster ：一次调用失败就立即失败，常见于<strong>幂等性写操作</strong>。（调用失败就立即失败）<br>  3.failsafe cluster ：出现异常时忽略掉，常用于不重要的接口调用，比如<strong>记录日志</strong>。<br>  4.failback cluster ：失败了后台自动记录请求，然后定时重发，比较适合于<strong>写消息队列</strong>这种。<br>  5.forking  cluster ：并行调用多个 provider，只要一个成功就立即返回。常用于<strong>实时性要求比较高的读操作</strong>，但是会浪费资源。<br>  6.broadcast cluster：逐个调用所有的 provider。通常用于<strong>通知</strong>所有提供者更新缓存或日志等本地资源信息。</p>
+</code></pre><h3 id="Dubbo-负载均衡策略"><a href="#Dubbo-负载均衡策略" class="headerlink" title="Dubbo 负载均衡策略"></a><strong>Dubbo 负载均衡策略</strong></h3><p>  1.random load balance：<strong>随机</strong>调用实现负载均衡，可以对 provider不同实例<strong>设置不同的权重</strong>，会按照权重来负载均衡，权重越大分配流量越高。</p>
+<p>  2.roundrobin loadbalance:<strong>均匀</strong>的打到各个机器，可以将性能差的机器权重小一点。</p>
+<p>3.leastactive loadbalance：<strong>自动感知</strong>，如果某个机器性能越差，那么接收的请求越少，越不活跃，此时就会给<strong>不活跃的性能差的机器更少的请求</strong>。</p>
+<p> 4.consistanthash loadbalance：一致性 Hash 算法，<strong>相同参数的请求</strong>一定分发到一个 provider 上去，provider 挂掉的时候，会基于虚拟节点均匀分配剩余的流量，抖动不会太大。如果需要的不是随机负载均衡，是要一类请求都到一个节点，那就走这个一致性 Hash 策略。</p>
+<h3 id="Dubbo-集群容错策略"><a href="#Dubbo-集群容错策略" class="headerlink" title="Dubbo 集群容错策略"></a><strong>Dubbo 集群容错策略</strong></h3><p>  1.failover cluster ：<strong>失败自动切换</strong>，自动重试其他机器，默认就是这个，常见于<strong>读操作</strong>。（失败重试其它机器）<code>&lt;dubbo:service retries=&quot;2&quot; /&gt;</code></p>
+<p>2.failfast cluster ：一次调用失败就立即失败，常见于<strong>幂等性写操作</strong>。（调用失败就立即失败）<br>  3.failsafe cluster ：出现异常时忽略掉，常用于不重要的接口调用，比如<strong>记录日志</strong>。</p>
+<p>  4.failback cluster ：失败了后台自动记录请求，然后定时重发，比较适合于<strong>写消息队列</strong>这种。</p>
+<p>  5.forking  cluster ：并行调用多个 provider，只要一个成功就立即返回。常用于<strong>实时性要求比较高的读操作</strong>，但是会浪费资源。<br>  6.broadcast cluster：逐个调用所有的 provider。通常用于<strong>通知</strong>所有提供者更新缓存或日志等本地资源信息。</p>
 <h3 id="序列化与反序列化"><a href="#序列化与反序列化" class="headerlink" title="序列化与反序列化"></a>序列化与反序列化</h3><pre><code>序列化：把对象转换为字节序列的过程称为对象的序列化。 
 反序列化：把字节序列恢复为对象的过程称为对象的反序列化。  
 </code></pre><p>序列化对于远程调用的<strong>响应速度、吞吐量、网络带宽</strong>消耗等同样也起着至关重要的作用，是我们提升分布式系统性能的最关键因素之一。 </p>
