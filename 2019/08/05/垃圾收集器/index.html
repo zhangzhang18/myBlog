@@ -175,7 +175,7 @@
 <meta property="og:image" content="https://zhangzhang18.github.io/myBlog/2019/08/05/垃圾收集器/cms.png">
 <meta property="og:image" content="https://zhangzhang18.github.io/myBlog/2019/08/05/垃圾收集器/G1.jpg">
 <meta property="og:image" content="https://zhangzhang18.github.io/myBlog/2019/08/05/垃圾收集器/memory.jpg">
-<meta property="og:updated_time" content="2019-10-21T11:44:20.946Z">
+<meta property="og:updated_time" content="2019-10-22T12:55:41.384Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="垃圾收集器 ">
 <meta name="twitter:description" content="两个收集器之间存在连线，说明它们可以搭配使用。">
@@ -480,8 +480,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-10-21T19:44:20+08:00">
-                2019-10-21
+              <time title="更新于" itemprop="dateModified" datetime="2019-10-22T20:55:41+08:00">
+                2019-10-22
               </time>
             
           </span>
@@ -518,7 +518,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,989
+                  2,122
                 </span>
               
 
@@ -568,9 +568,18 @@
 <li>并发清除：与用户线程同时运行。<br>由于整个过程耗时最长的并发标记和并发清楚过程收集器线程可以与用户线程一起工作，所以，总体上来说CMS收集器的内存回收过程是与用户线程一起并发执行的。<br><img src="/myBlog/2019/08/05/垃圾收集器/cms.png" alt="CMS"></li>
 </ul>
 <h3 id="三个明显缺点"><a href="#三个明显缺点" class="headerlink" title="三个明显缺点"></a>三个明显缺点</h3><ul>
-<li>对CPU资源非常敏感。并发设计都对CPU资源敏感，并发阶段虽然不会导致用户线程变慢，但是会因为占用一部分线程而导致应用程序变慢，总吞吐量会降低。</li>
-<li>无法处理<strong>浮动垃圾。</strong>由于<strong>并发清理</strong>阶段用户线程还在运行，伴随程序运行就会有新的垃圾不断产生，这部分垃圾出现在标记过程之后，CMS午发在当次收集中处理掉它们，只好下次GC时清理，这部分垃圾称为“浮动垃圾”。</li>
-<li>基于标记-清除算法实现的，就意味着收集结束会有大量的<strong>空间碎片</strong>，空间碎片多，会给大对象分配带来很大麻烦，往往会出现老年代空间还有很大空间剩余，但是无法找到足够大的空间来分配当前对象，不得不触发Full GC。<h2 id="7-G1-面向服务端引用，未来可以替代CMS的收集器"><a href="#7-G1-面向服务端引用，未来可以替代CMS的收集器" class="headerlink" title="7.G1 面向服务端引用，未来可以替代CMS的收集器"></a>7.G1 面向服务端引用，未来可以替代CMS的收集器</h2><h3 id="与其他GC收集器比较，特点"><a href="#与其他GC收集器比较，特点" class="headerlink" title="与其他GC收集器比较，特点"></a>与其他GC收集器比较，特点</h3></li>
+<li><p>对CPU资源非常敏感。并发设计都对CPU资源敏感，并发阶段虽然不会导致用户线程变慢，但是会因为占用一部分线程而导致应用程序变慢，总吞吐量会降低。</p>
+</li>
+<li><p>无法处理<strong>浮动垃圾。</strong>由于<strong>并发清理</strong>阶段用户线程还在运行，伴随程序运行就会有新的垃圾不断产生，这部分垃圾出现在标记过程之后，CMS午发在当次收集中处理掉它们，只好下次GC时清理，这部分垃圾称为“浮动垃圾”。</p>
+</li>
+</ul>
+<ul>
+<li><p>基于标记-清除算法实现的，就意味着收集结束会有大量的<strong>空间碎片</strong>，空间碎片多，会给大对象分配带来很大麻烦，往往会出现老年代空间还有很大空间剩余，但是无法找到足够大的空间来分配当前对象，不得不触发Full GC。</p>
+<p><strong>CMS：采用标记清除算法</strong></p>
+<p>解决这个问题的办法就是可以让CMS在进行一定次数的Full GC（标记清除）的时候进行一次<strong>标记整理算法</strong>，CMS提供了以下参数来控制：</p>
+<p>-XX:UseCMSCompactAtFullCollection -XX:CMSFullGCBeforeCompaction=5</p>
+<p>也就是CMS在进行5次Full GC（标记清除）之后进行一次标记整理算法，从而可以控制老年带的碎片在一定的数量以内，甚至可以配置CMS在每次Full GC的时候都进行内存的整理。</p>
+<h2 id="7-G1-面向服务端引用，未来可以替代CMS的收集器"><a href="#7-G1-面向服务端引用，未来可以替代CMS的收集器" class="headerlink" title="7.G1 面向服务端引用，未来可以替代CMS的收集器"></a>7.G1 面向服务端引用，未来可以替代CMS的收集器</h2><h3 id="与其他GC收集器比较，特点"><a href="#与其他GC收集器比较，特点" class="headerlink" title="与其他GC收集器比较，特点"></a>与其他GC收集器比较，特点</h3></li>
 <li>并行和并发：缩短Stop The World 停顿时间，其他收集器原本需要停顿Java线程执行GC堆，G1仍然可以通过并发的方式让Java程序继续执行。</li>
 <li>分代收集：与其他收集器相同，分代概念在G1依然得以保留。但是采用不同方式处理。</li>
 <li>空间整合：与CMS使用‘标记-清除’不同，G1从整体来看使用的是<strong>“标记-整理”</strong>实现。从局部（两个Region之间）使用的是<strong>“复制”</strong>实现，G1的运作期间不会产生空间碎片。</li>

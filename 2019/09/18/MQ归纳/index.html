@@ -168,7 +168,7 @@
 <meta property="og:description" content="MQ">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://zhangzhang18.github.io/myBlog/2019/09/18/MQ归纳/mq.png">
-<meta property="og:updated_time" content="2019-10-11T05:30:42.970Z">
+<meta property="og:updated_time" content="2019-10-23T06:20:23.313Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MQ归纳">
 <meta name="twitter:description" content="MQ">
@@ -473,8 +473,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-10-11T13:30:42+08:00">
-                2019-10-11
+              <time title="更新于" itemprop="dateModified" datetime="2019-10-23T14:20:23+08:00">
+                2019-10-23
               </time>
             
           </span>
@@ -533,7 +533,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1
+                  188
                 </span>
               
 
@@ -560,6 +560,9 @@
       
         <h2 id="MQ"><a href="#MQ" class="headerlink" title="MQ"></a>MQ</h2><p><img src="/myBlog/2019/09/18/MQ归纳/mq.png" alt="Kafka"></p>
 <a id="more"></a>
+<p>每一个Topic，Kafka都保存了一个分区Log，每一个分区都是一个提交日志，一系列有序不可变顺序的消息连续的追加到日志尾部。使用分区使得kafka可以在单个服务器上拓展，承载大量的数据。</p>
+<p>这些分区分布在kafka集群上，每一个机器控制一组分区上数据和请求，可以并行接收请求，每个分区通过一定数量的服务器冗余提高容错率。</p>
+<p>每一个分区都有一个服务器作为Leader，多个服务器作为Follow。Leader控制所有的读写操作，Follow被动的冗余Leader。如果Leader发生故障，Follow中的一个会自动成为Leader。</p>
 
       
     </div>
